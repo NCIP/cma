@@ -8,12 +8,21 @@
 		<script type="text/javascript">
 			var process = function(sect)	{
 				//process when the use clicks a link on the spashpage
-				alert("go to " + sect + " page");
+				//alert("go to " + sect + " page");
 				var go="${createLinkTo(dir:'')}";
 				switch(sect)	{
 					case "analysis":
 					case "tools":
 						go = "${createLink(controller:'analysisTools')}";
+					break;
+					case "studyResults":
+						go = "${createLink(controller:'studyResults')}";
+					break;
+					case "gene":
+						go = "${createLink(controller:'geneView')}";
+					break;
+					case "genome":
+						go = "${createLink(controller:'genomeView')}";
 					break;
 					default:
 					break;
