@@ -2,7 +2,8 @@
     <head>
 		<meta name="layout" content="splashLayout" />
 		
-		<content tag="tabs">&nbsp;</content> 
+		<content tag="tabs">&nbsp;</content>
+		<content tag="side">&nbsp;</content> 
 		
 		<script type="text/javascript">
 			var process = function(sect)	{
@@ -11,6 +12,7 @@
 				var go="${createLinkTo(dir:'')}";
 				switch(sect)	{
 					case "analysis":
+					case "tools":
 						go = "${createLink(controller:'analysisTools')}";
 					break;
 					default:
@@ -89,7 +91,7 @@
 				<table border="0" cellspacing="0" cellpadding="0" style="width: 100%">
 					<tbody>
 						<tr>
-							<td class="splashMenu  splashCurrent" title="study">
+							<td class="splashMenu  splashCurrent" title="studyResults">
 								<h5>
 									Study Results
 								</h5>
@@ -173,7 +175,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="splashMenu" title="analysis" style="border-bottom: 1px solid #E0E0E0;">
+							<td class="splashMenu" title="tools" style="border-bottom: 1px solid #E0E0E0;">
 								<h5>Analysis Tools</h5>
 							</td>
 						</tr>
