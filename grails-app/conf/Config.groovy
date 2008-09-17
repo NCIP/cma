@@ -6,6 +6,9 @@
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
+grails.config.locations = ["file:C:/local/content/cma/config/cma.properties"]
+				
+
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
@@ -34,7 +37,8 @@ grails.enable.native2ascii = true
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://cma-dev.nci.nih.gov"
+	  grails.config.locations = ["file:/local/content/cma/config/cma.properties"]
     }
 }
 
@@ -43,14 +47,14 @@ log4j {
     appender.stdout = "org.apache.log4j.ConsoleAppender"
     appender.'stdout.layout'="org.apache.log4j.PatternLayout"
     appender.'stdout.layout.ConversionPattern'='[%r] %c{2} %m%n'
-    appender.stacktraceLog = "org.apache.log4j.FileAppender"
-    appender.'stacktraceLog.layout'="org.apache.log4j.PatternLayout"
-    appender.'stacktraceLog.layout.ConversionPattern'='[%r] %c{2} %m%n'
-    appender.'stacktraceLog.File'="stacktrace.log"
+    appender.errors = "org.apache.log4j.FileAppender"
+    appender.'errors.layout'="org.apache.log4j.PatternLayout"
+    appender.'errors.layout.ConversionPattern'='[%r] %c{2} %m%n'
+    appender.'errors.File'="stacktrace.log"
     rootLogger="error,stdout"
     logger {
         grails="error"
-        StackTrace="error,stacktraceLog"
+        StackTrace="error,errors"
         org {
             codehaus.groovy.grails.web.servlet="error"  //  controllers
             codehaus.groovy.grails.web.pages="error" //  GSP
