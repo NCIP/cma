@@ -1,0 +1,65 @@
+#top {
+	background-image: url(../images/cmaBanner900.png);
+	background-repeat:no-repeat;
+	background-position: top left;
+	background-color: #101431;
+}
+#middle	{
+	/* height:100%; */
+	background: #fff;
+}
+
+#content, #content td	{
+	font-size:12px;	
+}
+#bottom {
+	margin-bottom:10px;
+}
+#nav	{
+	background-color:#fff; /* #2B2D51; */
+}
+#superTop	{
+	background: #980000;
+	background-image: url(../images/nci_header.png);
+	background-repeat: no-repeat;
+	background-position: 10 0;
+	height:30px;
+	margin-top:10px;
+}
+
+.xbutton	{
+	border-top:1px solid #2B2D51;
+	border-left:1px solid #2B2D51;
+	border-bottom:2x solid #2B2D51;
+	border-right:2px solid #2B2D51;
+}
+
+fieldset	{
+	border-right:0px;
+	border-bottom:0px;
+	border-left:0px;
+	border-top:0px dashed #2B2D51;
+	/*width:70%;*/
+	padding:20px;
+	margin-top:20px;
+}
+.radio	{
+	margin-left:40px;
+}
+.button	{
+	width:100px;
+}
+legend	{
+	color: #2B2D51;
+	font-size:16px;
+}
+
+.sidebar	{
+	float:right; 
+	width:200px; 
+	/* height:90%; */ 
+	background-color:#e0e0e0; 
+	margin:20px; 
+	border:1px solid #999;
+	font-size: 11px;
+}
