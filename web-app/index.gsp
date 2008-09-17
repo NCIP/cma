@@ -8,7 +8,15 @@
 			var process = function(sect)	{
 				//process when the use clicks a link on the spashpage
 				alert("go to " + sect + " page");
-				location.href="${createLink(controller:'AnalysisTools')}";
+				var go="${createLinkTo(dir:'')}";
+				switch(sect)	{
+					case "analysis":
+						go = "${createLink(controller:'analysisTools')}";
+					break;
+					default:
+					break;
+				}
+				location.href=go;
 			}		
 
 			Event.observe(window, "load", function()	{
@@ -81,7 +89,7 @@
 				<table border="0" cellspacing="0" cellpadding="0" style="width: 100%">
 					<tbody>
 						<tr>
-							<td class="splashMenu  splashCurrent" title="studyResults">
+							<td class="splashMenu  splashCurrent" title="study">
 								<h5>
 									Study Results
 								</h5>
@@ -165,7 +173,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="splashMenu" title="tools" style="border-bottom: 1px solid #E0E0E0;">
+							<td class="splashMenu" title="analysis" style="border-bottom: 1px solid #E0E0E0;">
 								<h5>Analysis Tools</h5>
 							</td>
 						</tr>

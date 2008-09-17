@@ -38,7 +38,10 @@
 		
 		<div id="middle">
 			<!--  tabs  -->
-			<div id="myMenu"><g:pageProperty name="page.tabs" default="${render(template:'/tabs', model:[location:'home'])}"/></div>
+			<div id="myMenu">
+			<g:fixScript name="none">
+				<g:pageProperty name="page.tabs" default="${render(template:'/tabs', model:[location:'home'])}"/></div>
+			</g:fixScript>
 			
 			<!--  sidebar -->
 			<div id="content" style="padding:10px;">
