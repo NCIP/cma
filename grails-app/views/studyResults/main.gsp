@@ -3,6 +3,8 @@
 		<meta name="layout" content="splashLayout" />
 		
 		<content tag="tabs"><g:render template="/tabs" model="[location:'study']"/></content> 
+		
+		<g:javascript library="overlib_mini"/>
 	</head>
 	<body>
 		<h3>Study Results</h3>
