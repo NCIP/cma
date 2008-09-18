@@ -19,6 +19,8 @@ class List {
 	  String  name
 	  String  type
 	  String subtype
+	  String category
+	  String author
 	  String institution
 	  Date   creationDate
 	  String description
