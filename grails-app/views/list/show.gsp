@@ -56,7 +56,7 @@
                             <td  valign="top" style="text-align:left;" class="value">
                                 <ul>
                                 <g:each var="l" in="${list.listItems}">
-                                    <li><g:link controller="listItem" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
+                                    <li><g:link controller="listItem" action="show" id="${l?.id}">${l?.itemName}   desc=${l?.itemDescription}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>
