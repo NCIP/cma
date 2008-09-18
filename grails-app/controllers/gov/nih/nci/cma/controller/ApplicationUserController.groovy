@@ -5,6 +5,15 @@ import gov.nih.nci.security.AuthenticationManager;
 import gov.nih.nci.security.exceptions.CSException;
 import gov.nih.nci.cma.domain.ApplicationUser;
 
+import gov.nih.nci.caintegrator.application.lists.UserListBean
+import gov.nih.nci.caintegrator.application.lists.UserList
+import gov.nih.nci.caintegrator.application.lists.ListItem
+import gov.nih.nci.cma.CacheConstants
+import gov.nih.nci.caintegrator.application.lists.ListType
+import gov.nih.nci.caintegrator.application.lists.ListOrigin
+import gov.nih.nci.caintegrator.application.lists.ListSubType
+
+
 class ApplicationUserController extends BaseController {
 
     def beforeInterceptor = [action:this.&auth, except:['login', 'logout']]
@@ -142,7 +151,68 @@ class ApplicationUserController extends BaseController {
       			 redirect(redirectParams)    				    		
                  */
                  flash['message'] = 'Login Successful!'
-
+                 
+                 
+                 //Login is successful now load the lists
+                 // Load user lists if necessary (patient lists and their permissable values)
+                 //UserListBean userListBean = (UserListBean) presentationCacheManager.getNonPersistableObjectFromSessionCache(request.getSession().getId(), CacheConstants.USER_LISTS);
+      			 UserListBean userListBean = (UserListBean) session.getAttribute(CacheConstants.USER_LISTS);
+                 if (userListBean == null) {
+            	   userListBean = new UserListBean();
+            	   session.setAttribute(CacheConstants.USER_LISTS, userListBean);
+            	   //presentationCacheManager.addNonPersistableToSessionCache(request.getSession().getId(), CacheConstants.USER_LISTS, userListBean);
+            	   
+            	   
+            	   // load user lists 
+            	   // we are loading using grails and then converting to 
+            	   // list objects in application-commons so that we can reuse the list management 
+            	   // functionality w/o rewriting it in grail (for now).                   
+                   // List<UserList> userLists = (List<UserList>) listLoader.loadUserLists();
+                   def listObjs = gov.nih.nci.cma.domain.List.list()
+                   
+                   java.util.List<UserList> userLists = new ArrayList<UserList>();
+                   UserList ul;
+                   List<ListItem> items;
+                   
+                   listObjs.each{ gl ->
+                   
+                      def gItems = gl.listItems
+                      items = new ArrayList<ListItem>();
+                      gItems.each{ gi ->      
+                      ListItem i = new ListItem(gi.itemName, gi.listName)
+                    	  i.setId(gi.id);
+                    	  i.setRank(gi.rank)
+                    	  i.setNotes(gi.itemDescription)                    	                      	 
+                    	  items.add(i)
+                      }
+                                            
+                      ListType lt = ListType.valueOf(gl.type)
+                	  ul = new UserList(gl.name, lt, items, Collections.emptyList())
+                	  ul.setAuthor(gl.author)
+                	  ul.setCategory(gl.category)
+                	  ul.setInstitute(gl.institution)
+                	  ul.setDateCreated(gl.creationDate)
+                	  
+                	  if (gl.subtype != null) {
+                	    ListSubType lst = ListSubType.valueOf(gl.subtype)
+                	    ul.setListSubType(lst)
+                	  }
+                	  
+                	  ul.setId(gl.id)
+                	  
+                	  if (gl.origin != null) {
+                	    ListOrigin lo = ListOrigin.valueOf(gl.origin)
+                	    ul.setListOrigin(lo)
+                	  }
+                	  
+                	  userLists.add(ul)                	                   	  
+                   }
+                                                         
+                   for (UserList ulist: userLists) {
+                     userListBean.addList(ulist);
+                  }	
+                }                
+                System.out.println("Successfully stored UserListBean in the session")
     		}
     		else {
     		  //login failed
