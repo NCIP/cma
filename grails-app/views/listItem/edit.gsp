@@ -57,10 +57,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="listId">List Id:</label>
+                                    <label for="list">List:</label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean:listItem,field:'listId','errors')}">
-                                    <input type="text" id="listId" name="listId" value="${fieldValue(bean:listItem,field:'listId')}" />
+                                <td valign="top" class="value ${hasErrors(bean:listItem,field:'list','errors')}">
+                                    <g:select optionKey="id" from="${gov.nih.nci.cma.domain.List.list()}" name="list.id" value="${listItem?.list?.id}" ></g:select>
                                 </td>
                             </tr> 
                         

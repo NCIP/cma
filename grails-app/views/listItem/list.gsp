@@ -29,8 +29,8 @@
                         
                    	        <g:sortableColumn property="itemName" title="Item Name" />
                         
-                   	        <g:sortableColumn property="listId" title="List Id" />
-                        
+                   	        <th>List</th>
+                   	    
                    	        <g:sortableColumn property="listName" title="List Name" />
                         
                         </tr>
@@ -47,7 +47,7 @@
                         
                             <td>${fieldValue(bean:listItem, field:'itemName')}</td>
                         
-                            <td>${fieldValue(bean:listItem, field:'listId')}</td>
+                            <td>${fieldValue(bean:listItem, field:'list')}</td>
                         
                             <td>${fieldValue(bean:listItem, field:'listName')}</td>
                         

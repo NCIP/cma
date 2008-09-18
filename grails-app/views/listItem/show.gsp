@@ -51,9 +51,9 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name">List Id:</td>
+                            <td valign="top" class="name">List:</td>
                             
-                            <td valign="top" class="value">${fieldValue(bean:listItem, field:'listId')}</td>
+                            <td valign="top" class="value"><g:link controller="list" action="show" id="${listItem?.list?.id}">${listItem?.list?.encodeAsHTML()}</g:link></td>
                             
                         </tr>
                     

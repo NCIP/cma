@@ -1,5 +1,7 @@
 package gov.nih.nci.cma.domain
 
+import gov.nih.nci.cma.domain.List
+
 class ListItem {
 	
 	/*  LIST_ITEM table definition
@@ -15,8 +17,9 @@ class ListItem {
 	 */
 	 static belongsTo = List
 	 
+	 gov.nih.nci.cma.domain.List list
 	 String listName
-	 Integer listId
+	 //Integer listId
 	 String itemName
 	 Integer rank
 	 String itemDescription
