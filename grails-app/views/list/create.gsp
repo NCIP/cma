@@ -28,6 +28,24 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                    <label for="author">Author:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean:list,field:'author','errors')}">
+                                    <input type="text" id="author" name="author" value="${fieldValue(bean:list,field:'author')}"/>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="category">Category:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean:list,field:'category','errors')}">
+                                    <input type="text" id="category" name="category" value="${fieldValue(bean:list,field:'category')}"/>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                     <label for="creationDate">Creation Date:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean:list,field:'creationDate','errors')}">

@@ -1,18 +1,18 @@
 
-<%@ page import="gov.nih.nci.cma.domain.List" %>
+<%@ page import="gov.nih.nci.cma.domain.ClinicalNew" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>List List</title>
+        <title>ClinicalNew List</title>
     </head>
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-            <span class="menuButton"><g:link class="create" action="create">New List</g:link></span>
+            <span class="menuButton"><g:link class="create" action="create">New ClinicalNew</g:link></span>
         </div>
         <div class="body">
-            <h1>List List</h1>
+            <h1>ClinicalNew List</h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -23,33 +23,33 @@
                         
                    	        <g:sortableColumn property="id" title="Id" />
                         
-                   	        <g:sortableColumn property="author" title="Author" />
+                   	        <g:sortableColumn property="cfId" title="Cf Id" />
                         
-                   	        <g:sortableColumn property="category" title="Category" />
+                   	        <g:sortableColumn property="dob" title="Dob" />
                         
-                   	        <g:sortableColumn property="creationDate" title="Creation Date" />
+                   	        <g:sortableColumn property="dod" title="Dod" />
                         
-                   	        <g:sortableColumn property="description" title="Description" />
+                   	        <g:sortableColumn property="dodMinusDop" title="Dod Minus Dop" />
                         
-                   	        <g:sortableColumn property="institution" title="Institution" />
+                   	        <g:sortableColumn property="dodfuMinusDop" title="Dodfu Minus Dop" />
                         
                         </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${listList}" status="i" var="list">
+                    <g:each in="${clinicalNewList}" status="i" var="clinicalNew">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${list.id}">${fieldValue(bean:list, field:'id')}</g:link></td>
+                            <td><g:link action="show" id="${clinicalNew.id}">${fieldValue(bean:clinicalNew, field:'id')}</g:link></td>
                         
-                            <td>${fieldValue(bean:list, field:'author')}</td>
+                            <td>${fieldValue(bean:clinicalNew, field:'cfId')}</td>
                         
-                            <td>${fieldValue(bean:list, field:'category')}</td>
+                            <td>${fieldValue(bean:clinicalNew, field:'dob')}</td>
                         
-                            <td>${fieldValue(bean:list, field:'creationDate')}</td>
+                            <td>${fieldValue(bean:clinicalNew, field:'dod')}</td>
                         
-                            <td>${fieldValue(bean:list, field:'description')}</td>
+                            <td>${fieldValue(bean:clinicalNew, field:'dodMinusDop')}</td>
                         
-                            <td>${fieldValue(bean:list, field:'institution')}</td>
+                            <td>${fieldValue(bean:clinicalNew, field:'dodfuMinusDop')}</td>
                         
                         </tr>
                     </g:each>
@@ -57,7 +57,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${List.count()}" />
+                <g:paginate total="${ClinicalNew.count()}" />
             </div>
         </div>
     </body>

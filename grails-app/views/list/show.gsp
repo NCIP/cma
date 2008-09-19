@@ -30,6 +30,20 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name">Author:</td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean:list, field:'author')}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name">Category:</td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean:list, field:'category')}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name">Creation Date:</td>
                             
                             <td valign="top" class="value">${fieldValue(bean:list, field:'creationDate')}</td>
@@ -56,7 +70,7 @@
                             <td  valign="top" style="text-align:left;" class="value">
                                 <ul>
                                 <g:each var="l" in="${list.listItems}">
-                                    <li><g:link controller="listItem" action="show" id="${l?.id}">${l?.itemName}   desc=${l?.itemDescription}</g:link></li>
+                                    <li><g:link controller="listItem" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>
