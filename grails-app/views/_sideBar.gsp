@@ -4,10 +4,10 @@
 		<b>Administration:</b>
 		<ul>
 			<li>
-				<a href="viewResults.do" title="">View Results</a>
+				<a href="#" title="">View Results</a>
 			</li>
 			<li>
-				<a href="manageLists.do" title="">List Management</a>
+				<a href="#" title="">List Management</a>
 			</li>
 			<li>
 				<a href="http://tcga-data.nci.nih.gov/tcga" title="" target="_blank">Cancer
@@ -33,7 +33,7 @@
 		<div id="sidebar">
 
 			<div style="text-align: left; margin-top: 20px;">
-				<b>asdf Lists:</b>
+				<b>TEST Lists:</b>
 				<div id="sidebar________UL">
 					<img src="${createLinkTo(dir:'images',file:'indicator.gif')}" />
 				</div>
