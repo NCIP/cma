@@ -33,14 +33,14 @@
 			  		//document.getElementById("sampleGroupSelect").innerHTML = single;
 			  		$('sampleGroupNameId').multiple = false;
 			  		$('sampleGroupNameId').size = 1;
-					$('sampleGroupNameId').selectedIndex = 1;
+					$('sampleGroupNameId').selectedIndex = 0;
 			  		resetFields(false, 2);
 			  	}
 			  	else if (i == 3){
 			  		//document.getElementById("sampleGroupSelect").innerHTML = single;
 			  		$('sampleGroupNameId').multiple = false;
 			  		$('sampleGroupNameId').size = 1;
-			  		$('sampleGroupNameId').selectedIndex = 1;
+			  		$('sampleGroupNameId').selectedIndex = 0;
 			  		resetFields(true, 3);
 			  	}
 			  	else if (i == 4){
@@ -101,13 +101,11 @@
 						</td>
 						<td>
 							<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
-								<select name="sampleGroupNameMultiple" multiple="multiple"
-									size="5" id="sampleGroupNameId"
-									style="width: 200px; overflow: none;">
-									<option>group1</option>
-									<option>group1</option>
-									<option>group1</option>
-								</select>
+								<g:select name="sampleGroupNameMultiple" multiple="multiple" size="5" id="sampleGroupNameId" 
+								style="width: 200px; overflow: none;" 
+								noSelection="['ALL_PATIENTS': 'ALL_PATIENTS']" 
+								from="${gov.nih.nci.cma.domain.List.list()}" 
+								optionValue="name" optionKey="name"></g:select>
 							</div>
 
 						</td>
@@ -117,7 +115,7 @@
 			<br />
 			
 			Select Array Platform: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<g:select name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.list()}" optionValue="displayString" optionKey="platformName"></g:select>
+			<g:select name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.list()}" optionValue="displayString" optionKey="fileName"></g:select>
 			
 			
 			<div style="text-align:center; padding-top:10px;">
