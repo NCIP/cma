@@ -9,6 +9,7 @@ class GeneViewController {
     def index = { 
     	
     	
+    	//SAMPLE Call to the analysis server
     	ReporterGroup rg = new ReporterGroup()
     	rg.add("207848_at")
     	    	    	
@@ -30,6 +31,7 @@ class GeneViewController {
     	else {
     	  System.out.println("No data vectors returned")	
     	}
+    	//END SAMPLE CALL to the analysis server.
     	
     	render(view:'main')
     }
