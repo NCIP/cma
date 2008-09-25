@@ -2,6 +2,9 @@ package gov.nih.nci.cma.controller
 
 import gov.nih.nci.cma.domain.IdMapping
 
+import gov.nih.nci.caintegrator.util.idmapping.IdMappingManager;
+import gov.nih.nci.caintegrator.util.idmapping.IdMappingCriteria;
+
 class IdMappingController {
     
     def index = { redirect(action:list,params:params) }
@@ -10,6 +13,21 @@ class IdMappingController {
     def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
     def list = {
+    		
+    	IdMappingManager mgr = new IdMappingManager();
+    	IdMappingCriteria criteria = new IdMappingCriteria();
+    	Set patientIds = new HashSet();
+    	patientIds.add("0174");
+    	criteria.setPatientIds(patientIds);
+    	criteria.setPlatformName("AGILENT_HG")
+    	
+    	
+    	
+    	def rbinaryIds = mgr.getRbinaryIdsForPatientDIDs(criteria);
+    		
+    	rbinaryIds.each{id ->  System.out.println("Id=${id}") }
+    		
+    		
         if(!params.max) params.max = 10
         [ idMappingList: IdMapping.list( params ) ]
     }
