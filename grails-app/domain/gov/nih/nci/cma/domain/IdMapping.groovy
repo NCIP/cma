@@ -21,5 +21,12 @@ class IdMapping {
 	 String analysisFileId
 	 String aliquotbarcode
 	 Integer mappingId
+	 
+	 public Set getRbinaryIdsForPatientDIDs(Set patientDIDs) {
+		
+		
+		
+	}
+	 
 
 }
