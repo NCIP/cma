@@ -67,8 +67,11 @@ log4j {
             springframework="off"
             hibernate="off"
         }
+        gov {
+        	nih.nci.caintegrator="debug"       	
+        }
     }
-    additivity.StackTrace=false
+    additivity.StackTrace=true
 }
 
 
