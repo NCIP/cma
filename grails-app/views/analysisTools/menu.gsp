@@ -2,7 +2,8 @@
     <head>
 		<meta name="layout" content="splashLayout" />
 		
-		<content tag="tabs"><g:render template="/tabs" model="[location:'analysis']"/></content> 
+		<content tag="tabs"><g:render template="/tabs" model="[location:'analysis']"/></content>
+
 	</head>
 	<body>
 		<h3>High Order Analysis</h3>
