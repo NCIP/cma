@@ -2,7 +2,8 @@
     <head>
 		<meta name="layout" content="splashLayout" />
 		
-		<content tag="tabs"><g:render template="/tabs" model="[location:'study']"/></content> 
+		<content tag="tabs"><g:render template="/tabs" model="[location:'study']"/></content>
+        <content tag="side">&nbsp;</content> 
 		
 		<g:javascript library="overlib_mini"/>
 	</head>
