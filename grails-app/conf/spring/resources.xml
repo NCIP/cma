@@ -18,6 +18,7 @@
 	
 	<bean id="annotationManager"
 		class="gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManagerImpl">
+		<property name="sessionFactory" ref="sessionFactory" />	
 	</bean>
 	
 	<bean name="/geneView"
