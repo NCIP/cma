@@ -27,6 +27,8 @@ class HeatmapLinksService {
 			 result.dataset_type = it.dataset_type as String
 			 result.title = it.title as String
 			 result.launch_url = it.launch_url as String
+			 //may want to perform a context check here and search for only those w/ proper projects
+			 result.project = it.project as String
 			 resultsList << result
 		 }
         )
