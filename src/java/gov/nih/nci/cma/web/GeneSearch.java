@@ -7,6 +7,7 @@ import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter;
 import gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManager;
+import gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManagerImpl;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.util.CaIntegratorConstants;
 import gov.nih.nci.caintegrator.util.PlatformMapping;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class GeneSearch {
 
-	private AnnotationManager annotationManager;
+	private AnnotationManager annotationManager;// = new AnnotationManagerImpl();
 	private Map<GeneBiomarker, Collection<GeneExprReporter>> tempMap = null;
 	private IdMapper idMappingManager;
 	
@@ -36,7 +37,9 @@ public class GeneSearch {
 	private String binaryFileName;
 	private String arrayPlatformName;
 	
-	public GeneSearch()	{
+	public GeneSearch(AnnotationManager am, IdMapper idm)	{
+		annotationManager = am;
+		idMappingManager = idm;
 	}
 	
 	public void quickSearch(HttpServletRequest request)	{
@@ -45,6 +48,7 @@ public class GeneSearch {
     	chartType = request.getParameter("plot");
 		geneName = request.getParameter("geneSymbol");
 		binaryFileName = request.getParameter("geArrayPlatform");
+		System.out.println("binaryFileName: " + binaryFileName);
 		
 		if (geneName != null){
 			geneName = geneName.trim();
@@ -68,10 +72,13 @@ public class GeneSearch {
 			//This is for gene expression, not copy number
 			ac.setArrayPlatformName(arrayPlatformName);
 			try{
+				System.out.println("annotationManager: " + annotationManager);
+				System.out.println("geneName:  " + geneName + " arrayPlatformName: " + arrayPlatformName);
 				tempMap = annotationManager.getReportersForGenes(ac);
 			} catch (Exception e){
 				//logger.error("getReportersForGenes returns error: " + e.getMessage());
-				System.out.println("annotationManager bombed: " + e.getMessage());
+				System.out.println("annotationManager bombed: " );
+				e.printStackTrace();
 			}
 		}
 		
@@ -85,7 +92,7 @@ public class GeneSearch {
 
         System.out.println(chartType);
 		if (chartType.equalsIgnoreCase("geneExpPlot")) {
-			//genePlot(request);
+			genePlot(request);
 		}
         else    {
 
@@ -112,7 +119,8 @@ public class GeneSearch {
 				List<SampleGroup> sampleGroups = new ArrayList<SampleGroup>();
 				// ALL_PATIENTS, High_Survival, Med_Survival, Low_Survival
 				
-					
+				System.out.println("in genePlot");
+				
 			    UserListBeanHelper helper = new UserListBeanHelper(request.getSession().getId());
 			    IdMappingCriteria criteria = new IdMappingCriteria();
 			    	
@@ -147,10 +155,27 @@ public class GeneSearch {
 //				return mapping.findForward("histogram");
 			} catch (Exception e) {
                 System.out.println("caught ex");
+                e.printStackTrace();
 //				logger.error("Gene Expression Plot Flopped");
 //				logger.error(e);
 //				return mapping.findForward("error");
 			}
 		}
+
+	public AnnotationManager getAnnotationManager() {
+		return annotationManager;
+	}
+
+	public void setAnnotationManager(AnnotationManager annotationManager) {
+		this.annotationManager = annotationManager;
+	}
+
+	public IdMapper getIdMappingManager() {
+		return idMappingManager;
+	}
+
+	public void setIdMappingManager(IdMapper idMappingManager) {
+		this.idMappingManager = idMappingManager;
+	}
 	
 }
