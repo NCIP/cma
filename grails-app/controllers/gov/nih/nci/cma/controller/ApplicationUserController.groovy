@@ -4,14 +4,16 @@ import gov.nih.nci.security.SecurityServiceProvider;
 import gov.nih.nci.security.AuthenticationManager;
 import gov.nih.nci.security.exceptions.CSException;
 import gov.nih.nci.cma.domain.ApplicationUser;
-
-import gov.nih.nci.caintegrator.application.lists.UserListBean
-import gov.nih.nci.caintegrator.application.lists.UserList
-import gov.nih.nci.caintegrator.application.lists.ListItem
-import gov.nih.nci.cma.CacheConstants
-import gov.nih.nci.caintegrator.application.lists.ListType
-import gov.nih.nci.caintegrator.application.lists.ListOrigin
-import gov.nih.nci.caintegrator.application.lists.ListSubType
+import gov.nih.nci.caintegrator.application.lists.UserListBean;
+import gov.nih.nci.caintegrator.application.lists.UserList;
+import gov.nih.nci.caintegrator.application.lists.ListItem;
+import gov.nih.nci.cma.CacheConstants;
+import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
+import gov.nih.nci.caintegrator.application.lists.ListType;
+import gov.nih.nci.caintegrator.application.lists.ListOrigin;
+import gov.nih.nci.caintegrator.application.lists.ListSubType;
+import gov.nih.nci.caintegrator.application.cache.PresentationCacheManager;
+import gov.nih.nci.caintegrator.application.cache.PresentationTierCache;
 
 
 class ApplicationUserController extends BaseController {
@@ -152,16 +154,15 @@ class ApplicationUserController extends BaseController {
                  */
                  flash['message'] = 'Login Successful!'
                  
-                 
+                 PresentationTierCache presentationCacheManager = PresentationCacheManager.getInstance();
                  //Login is successful now load the lists
                  // Load user lists if necessary (patient lists and their permissable values)
                  //UserListBean userListBean = (UserListBean) presentationCacheManager.getNonPersistableObjectFromSessionCache(request.getSession().getId(), CacheConstants.USER_LISTS);
-      			 UserListBean userListBean = (UserListBean) session.getAttribute(CacheConstants.USER_LISTS);
+                 UserListBean userListBean = (UserListBean) session.getAttribute(CacheConstants.USER_LISTS);
                  if (userListBean == null) {
             	   userListBean = new UserListBean();
-            	   session.setAttribute(CacheConstants.USER_LISTS, userListBean);
+            	   //session.setAttribute(CacheConstants.USER_LISTS, userListBean);
             	   //presentationCacheManager.addNonPersistableToSessionCache(request.getSession().getId(), CacheConstants.USER_LISTS, userListBean);
-            	   
             	   
             	   // load user lists 
             	   // we are loading using grails and then converting to 
@@ -208,9 +209,23 @@ class ApplicationUserController extends BaseController {
                 	  userLists.add(ul)                	                   	  
                    }
                                                          
-                   for (UserList ulist: userLists) {
-                     userListBean.addList(ulist);
-                  }	
+//                   for (UserList ulist: userLists) {
+//                     userListBean.addList(ulist);
+//                   }	
+                   
+                   //orig way
+//                   UserListBean userListBean = new UserListBean();
+		           presentationCacheManager.addNonPersistableToSessionCache(request.getSession().getId(), 
+		        		   CacheConstants.USER_LISTS, userListBean);
+		            
+                   UserListBeanHelper userListBeanHelper = new UserListBeanHelper(request.getSession().getId());
+                   userListBeanHelper.addBean(request.getSession().getId(),CacheConstants.USER_LISTS,userListBean);            
+//                   List<UserList> userLists = (List<UserList>) listLoader.loadUserLists();
+                   for(UserList legacyul: userLists){
+                       userListBeanHelper.addList(legacyul);
+                   }
+                   //end orig
+                   
                 }                
                 System.out.println("Successfully stored UserListBean in the session")
     		}
@@ -218,6 +233,9 @@ class ApplicationUserController extends BaseController {
     		  //login failed
     		  flash['message'] = 'Please enter a valid user ID and password' 
     	    }
+
+            //always go back to home page
+            redirect(uri: "/index.gsp")
     	}    		
     }
     
@@ -246,7 +264,10 @@ class ApplicationUserController extends BaseController {
 
    def logout = {
 	session.userId = null
+	session.invalidate();
+    //need to clean the session entirely, lists, cache, temp files, ect....this is not enough
 	flash['message'] = 'Successfully logged out'
-	redirect(controller:'applicationUser', action:'login')
+	//redirect(controller:'applicationUser', action:'login')
+     redirect(uri: "/");
    }
 }
