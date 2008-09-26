@@ -7,12 +7,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 class BootStrap {
-	
-	def dwrconfig = { 			 
-            create(creator:'new', javascript:'JDate') { 
-                            param (name:'class') { 'java.util.Date' } 
-            }
-	}
 
     def init = { servletContext ->
     
@@ -66,4 +60,20 @@ class BootStrap {
      }
      def destroy = {
      }
+     
+      def dwrconfig = { 
+
+		create(creator:'new', javascript:'JDate') { 
+			param (name:'class') { 'java.util.Date' } 
+		}
+		
+		create(creator:'new', javascript:'DynamicListHelper')	{
+			param (name:'class') { 'gov.nih.nci.cma.web.ajax.DynamicListHelper' }
+		}
+		
+		create(creator:'new', javascript:'UserListHelper')	{
+			param (name:'class') { 'gov.nih.nci.caintegrator.application.lists.UserListBeanHelper' }
+		}
+	 }
+
 } 
