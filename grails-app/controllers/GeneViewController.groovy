@@ -1,3 +1,5 @@
+import gov.nih.nci.cma.web.GeneSearch;
+
 import gov.nih.nci.caintegrator.application.analysis.AnalysisHelper
 import gov.nih.nci.caintegrator.analysis.messaging.ReporterGroup
 import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup
@@ -35,4 +37,21 @@ class GeneViewController {
     	
     	render(view:'main')
     }
+    
+    def geneBasedView = {
+    	def geneExpPlot = params["plot"]
+    	//call the injected service passing validated params
+    	//render appropriate page or error message
+    	//render(view:'genePlot', model:[geneExpPlot:geneExpPlot])	
+    	
+    	//instantiate the pojo and call the quickSearch method passing req
+    	def gs = new GeneSearch()
+    	gs.quickSearch(request)
+        //render(view:'genePlot');
+
+    	//should have put the GPlot in the session, ready to display
+        redirect(controller:"geneView",action:"test")
+    }
+    
+    def test = { render(view:'geGraph_tile') }
 }
