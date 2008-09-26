@@ -90,7 +90,10 @@
 				background-image: url(resources/globeBG.gif);
 				background-position: -350 bottom;
 				background-repeat: no-repeat;
-			}	
+			}
+            .message {
+                color: red;
+            }
 		</style>
     </head>
     <body>
@@ -120,34 +123,45 @@
 										</div>
 										<div class="splashBoxContent">
 										<br />
-											<form name="loginForm" method="post" action="#">
-												<table>
-													<tr>
-														<td valign="middle">
-															user:
-														</td>
-														<td>
-															<input type="text" name="username" value="" id="username">
-														</td>
-													</tr>
-													<tr>
-														<td valign="middle">
-															pass:
-														</td>
-														<td>
-															<input type="password" name="password" value="" id="password">
-														</td>
-													</tr>
-													<tr>
-														<td>
-															&nbsp;
-														</td>
-														<td style="text-align: center; padding: 3px">
-															<input type="submit" value="login" />
-														</td>
-													</tr>
-												</table>
-											</form>
+                                            <g:if test="${flash.message}">
+                                                <div class="message">${flash.message}</div>
+                                            </g:if>
+                                            <g:if test="${session.userId == null }">
+                                                <g:form name="loginForm" id="loginForm" controller="applicationUser" action="login" method="post" >
+                                                    <table>
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                user:
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="userId" value="" id="username">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="middle">
+                                                                pass:
+                                                            </td>
+                                                            <td>
+                                                                <input type="password" name="password" value="" id="password">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                &nbsp;
+                                                            </td>
+                                                            <td style="text-align: center; padding: 3px">
+                                                                <input type="submit" value="login" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </g:form>
+                                            </g:if>
+                                            <g:else>
+                                                <br/>
+                                                Welcome, ${session.userId}<br/>
+                                                <a style="background-color:#fff;color:#000;" href="${createLink(controller:'applicationUser', action:'logout')}" title="">Logout</a>
+                                                <br/><br/>
+                                            </g:else>
 										</div>
 										<br />
 										<br />
@@ -198,9 +212,9 @@
 		<div id="contentHolder" style="display:none;">
 		
 			<div id="studyResultsContent">
-				<div class="splashBoxHeader"">Study Results</div>
+				<div class="splashBoxHeader">Study Results</div>
 				<div class="" style="padding:5px;" title="results">
-					Publication reference: </br></br> 
+					Publication reference: <br/><br/> 
 					Author, Author, Author. Comprehensive genomic characterization defines novel genes and core pathways in human glioblastoma. Nature 2008 Oct 3; 475(7501):553-63.
 					<br/><br/>
 					<div align="center">
@@ -210,7 +224,7 @@
 			</div>
 		
 			<div id="geneContent">
-				<div class="splashBoxHeader"">Gene View</div>
+				<div class="splashBoxHeader">Gene View</div>
 				<div class="" style="padding:5px;" title="geneView">
 					Visualize gene expression, copy number, SNP, and pathway data on a gene by gene basis.  Generate detailed study related reports for a given gene.
 					<br/><br/>
@@ -221,7 +235,7 @@
 				</div>
 			</div>
 			<div id="genomeContent">
-				<div class="splashBoxHeader"">Genome View</div>
+				<div class="splashBoxHeader">Genome View</div>
 				<div class="" style="padding:5px;" title="genomeView">
 					Explore all of the study data in one genome level visualization.  Investigate chromosomal regions of amplification, deletion and over expression.   Zoom in on a chromosomal region of interest for a more detailed view. 
 					<br/><br/>
@@ -233,7 +247,7 @@
 				</div>
 			</div>
 			<div id="clinicalContent">
-				<div class="splashBoxHeader"">Clinical View</div>
+				<div class="splashBoxHeader">Clinical View</div>
 				<div class="" style="padding:5px;" title="clinicalView">
 					Investigate the study clinical data.  Explore the relationships between clinical and molecular study data. 
 					<br/><br/>
@@ -246,7 +260,7 @@
 				</div>
 			</div>
 			<div id="toolsContent">
-				<div class="splashBoxHeader"">Analysis Tools</div>
+				<div class="splashBoxHeader">Analysis Tools</div>
 				<div class="" style="padding:5px;" title="analysisTools">
 					Analyze the study data using analysis tools such as Genepattern, Principal Component Analysis, and the Cancer Genome Workbench
 					<br/><br/>
