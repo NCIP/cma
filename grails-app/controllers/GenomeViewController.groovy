@@ -9,6 +9,6 @@ class GenomeViewController {
     def links = {
 	    def result = heatmapLinksService.fetchParseXml()
 	    render result as JSON
-	  }  
+	}  
 
 }
