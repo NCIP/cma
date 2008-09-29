@@ -18,27 +18,27 @@ class GeneViewController {
     	
     	
     	//SAMPLE Call to the analysis server
-    	ReporterGroup rg = new ReporterGroup()
-    	rg.add("207848_at")
-    	    	    	
-    	
-    	SampleGroup sg = new SampleGroup()
-    	sg.add("TCGA-02-0071-01A-01R-0202-01")
-    	sg.add("TCGA-12-0618-01A-01R-0306-01")
-    	
-    	String rbinaryFileName  = "TCGA.affyhg-u133a_4_3_08.Rda"
-    	    	    
+//    	ReporterGroup rg = new ReporterGroup()
+//    	rg.add("207848_at")
+//    	    	    	
+//    	
+//    	SampleGroup sg = new SampleGroup()
+//    	sg.add("TCGA-02-0071-01A-01R-0202-01")
+//    	sg.add("TCGA-12-0618-01A-01R-0306-01")
+//    	
+//    	String rbinaryFileName  = "TCGA.affyhg-u133a_4_3_08.Rda"
+//    	    	    
     	//try sending a request
-    	ExpressionLookupFinding finding = AnalysisHelper.getExpressionValuesForReporters(rg, rbinaryFileName, sg)
-    	    	
-    	List<DataPointVector> dataVectors = finding.getDataVectors()
-    	
-    	if (dataVectors != null) {
-    	  System.out.println("Call to getExprValues returned numResults=${dataVectors.size()}")
-    	}
-    	else {
-    	  System.out.println("No data vectors returned")	
-    	}
+//    	ExpressionLookupFinding finding = AnalysisHelper.getExpressionValuesForReporters(rg, rbinaryFileName, sg)
+//    	    	
+//    	List<DataPointVector> dataVectors = finding.getDataVectors()
+//    	
+//    	if (dataVectors != null) {
+//    	  System.out.println("Call to getExprValues returned numResults=${dataVectors.size()}")
+//    	}
+//    	else {
+//    	  System.out.println("No data vectors returned")	
+//    	}
     	//END SAMPLE CALL to the analysis server.
     	
     	render(view:'main')
@@ -55,16 +55,40 @@ class GeneViewController {
     	//get the bean from spring, injection wont work here
     	ApplicationContext ctx =
 			ServletContextHolder.getServletContext().getAttribute(GrailsApplicationAttributes.APPLICATION_CONTEXT)
-			def annotationManager = ctx.getBean('annotationManager') 
-			def idMappingManager = ctx.getBean('idMappingManager');
-    	def gs = new GeneSearch(annotationManager, idMappingManager)
-    	gs.quickSearch(request)
-        //render(view:'genePlot');
+		def annotationManager = ctx.getBean('annotationManager') 
+		def idMappingManager = ctx.getBean('idMappingManager');
+    	
+    	String geneSymbol = params['geneSymbol']
 
-    	//should have put the GPlot in the session, ready to display
-    	//if params['plot'] == genePlot (not KM)
-    	def geneSymbol = params['geneSymbol']
-        redirect(controller:"geneView",action:"genePlot")
+    	//    	return below otherwise you get illegalstateexceptions: committed ???, so always return after redirect?
+    	if(geneSymbol.length() == 0)	{
+    		flash.message = "Please Enter a Gene Symbol"
+            redirect(controller:"geneView")
+            return 
+    	}
+    	
+    	def gs = new GeneSearch(annotationManager, idMappingManager)
+    	def annotationsMap = gs.lookupReportersForQuickSearch(request)
+
+		if(annotationsMap == null || annotationsMap.size()==0)	{
+    		//no reporters, so dont plot anything
+    		flash.message = "No reporters for this gene and platform"
+            redirect(controller:"geneView")
+            return
+    	}
+    	
+    	
+    	
+    	if (params['plot'] == 'geneExpPlot' )	{
+	    	gs.genePlot(request)
+	    	
+	        redirect(controller:"geneView",action:"genePlot")
+	        return
+	    }
+    	else	{
+    		flash.message = "Please select a  valid plot type"
+            redirect(action:index)
+    	}
     }
     
     def genePlot = {
@@ -112,6 +136,28 @@ class GeneViewController {
     	        gmfilename:gmfilename, log2filename:log2filename, bwFilename:bwFilename,
     			gmgraphURL:gmgraphURL, log2graphURL:log2graphURL, bwgraphURL:bwgraphURL, 
     			defaultURL:defaultURL, defaultFilename:defaultFilename])
+    }
+    
+    def popCoinGraph = {
+    		String reporterName = params["reporter"]
+    		String geneSymbol = params["geneSymbol"]
+    		GEPlot gePlot = (GEPlot)request.getSession().getAttribute("gePlot");
+    		gePlot.setGeneSymbol(geneSymbol);
+    		gePlot.setReporterName(reporterName);
+    		
+    		StringWriter sw = new StringWriter()
+    		
+    		geneSymbol = gePlot.getGeneSymbol();
+    		reporterName = gePlot.getReporterName();
+
+    		String bwFilename = gePlot.generateBWLog2IntensityChart("Groups", 
+    				"Log2 Expression Intensity", request.getSession(), new PrintWriter(sw), true);
+
+    		String bwgraphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + bwFilename;
+    			
+    		render(view:"popCoinPlot", model:[sw:sw, bwgraphURL:bwgraphURL, bwFilename:bwFilename, geneSymbol:geneSymbol, reporterName:reporterName])
+
+    		
     }
     //pass gene symbol on model params['geneSymbol']
     def test = { render(view:'geGraph_tile') }
