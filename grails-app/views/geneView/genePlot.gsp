@@ -17,7 +17,7 @@
 			
 			function popCoin(gene,key)	{
 				//alert(gene + " : " + key + " : " + alg);
-				var url = "popCoinGraph.do?method=popCoinGraph&geneSymbol="+encodeURIComponent(gene)+"&reporter="+encodeURIComponent(key);
+				var url = "${createLink(controller:'geneView', action:'popCoinGraph')}?geneSymbol="+encodeURIComponent(gene)+"&reporter="+encodeURIComponent(key);
 				window.open( url, 'page2', 'status,resizable,scrollbars,width=700px,height=730px,screenX=100,screenY=100');
 			}
 
@@ -126,7 +126,7 @@
 				<a href="javascript:toggleGenePlot('${bwFilename}');" name="graphTypeLinks"  id="${bwFilename}_link">Box and Whisker Log2 Intensity</a><br/>
 		</div>
 		<br/>
-		<a class="message" style="text-decoration:underline" id="graphLink" 
+		<a class="" style="text-decoration:underline" id="graphLink" 
 			href="${defaultURL}" target="_blank">Click here to open plot in a new window</a>
 		<br/><br/>
 

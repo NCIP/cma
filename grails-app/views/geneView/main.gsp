@@ -70,9 +70,14 @@
 	</head>
 	<body>
 		<h3>Gene View</h3>
+		
 		<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm">
 		
 		<fieldset>
+			<g:if test="${flash.message}">
+	        	<div class="message">${flash.message}</div><br/>
+	        </g:if>
+            
 		 <div id="geneSearchHeader" style="padding:3px;background-color:#2B2D51; color:#fff;">
 			<h5>
 				Gene based views&nbsp;&nbsp;&nbsp;&nbsp;
