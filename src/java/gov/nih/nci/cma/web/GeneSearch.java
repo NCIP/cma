@@ -42,7 +42,7 @@ public class GeneSearch {
 		idMappingManager = idm;
 	}
 	
-	public void quickSearch(HttpServletRequest request)	{
+	public Map lookupReportersForQuickSearch(HttpServletRequest request)	{
 		System.out.println("running quickSearch.............");
 		
     	chartType = request.getParameter("plot");
@@ -87,18 +87,9 @@ public class GeneSearch {
 			System.out.println("geneName: " + geneName + "  tempMap: " + tempMap);
 		}
 
-		request.setAttribute("geneSymbol", geneName);
-		request.setAttribute("rbinaryFileName", binaryFileName);
-
         System.out.println(chartType);
-		if (chartType.equalsIgnoreCase("geneExpPlot")) {
-			genePlot(request);
-		}
-        else    {
-
-        }
 		
-		return;
+		return tempMap;
 	}
 	
 	public void genePlot(HttpServletRequest request)	{
