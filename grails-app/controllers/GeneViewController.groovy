@@ -11,6 +11,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.ReporterGroup
 import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup
 import gov.nih.nci.caintegrator.service.findings.ExpressionLookupFinding
 import gov.nih.nci.caintegrator.analysis.messaging.DataPointVector
+import gov.nih.nci.caintegrator.util.CaIntegratorConstants
 
 class GeneViewController {
 
@@ -57,6 +58,9 @@ class GeneViewController {
 			ServletContextHolder.getServletContext().getAttribute(GrailsApplicationAttributes.APPLICATION_CONTEXT)
 		def annotationManager = ctx.getBean('annotationManager') 
 		def idMappingManager = ctx.getBean('idMappingManager');
+    	//should be available via the km jar
+    	def kmReporterService = ctx.getBean('kmReporterService');
+    	
     	
     	String geneSymbol = params['geneSymbol']
 
@@ -67,7 +71,7 @@ class GeneViewController {
             return 
     	}
     	
-    	def gs = new GeneSearch(annotationManager, idMappingManager)
+    	def gs = new GeneSearch(annotationManager, idMappingManager, kmReporterService)
     	def annotationsMap = gs.lookupReportersForQuickSearch(request)
 
 		if(annotationsMap == null || annotationsMap.size()==0)	{
@@ -85,9 +89,34 @@ class GeneViewController {
 	        redirect(controller:"geneView",action:"genePlot")
 	        return
 	    }
+    	else if (params['plot'] == CaIntegratorConstants.GENE_EXP_KMPLOT )	{
+	    	gs.geneKMPlot(request)
+	    	def kmRequestMap = gs.getKmRequestMap()
+	    	if(kmRequestMap == null)	{
+	    		flash.message = "Error performing KM Plot.  Please select different parameters and retry."
+	            redirect(action:index)
+	            return
+	    	}
+	    	else	{
+	    		//redirect(controller:"geneView",action:"kmPlot")
+	    		//render view w/ plotType, reporter, taskId
+	    		// "taskId":"1222897098350","geArrayPlatform":"TCGA.affyhg-u133a_4_3_08.Rda","pathwayName":"h_RELAPathway","quickSearchType":"Gene Keyword HUGO","reporter":"211551_at","geneSymbol":"EGFR","plot":"GE_KM_PLOT","method":"quickSearch","sampleGroupNameMultiple":"Med_Survival"
+//	    		redirect(action:"kmPlot", params:[plot:kmRequestMap.get("plotType"), plotType:kmRequestMap.get("plotType"), 
+//	    		        reporter:kmRequestMap.get("reporter"), taskId:kmRequestMap.get("taskId"), geArrayPlatform:'',
+//	    		        pathwayName:'', quickSearchType:'', geneSymbol:'', sampleGroupNameMultiple:''])
+	    		
+	    		params.taskId = kmRequestMap.get("taskId")
+	    		params.plot = kmRequestMap.get("plotType")
+	    		params.plotType = kmRequestMap.get("plotType")
+	    		params.reporter = kmRequestMap.get("reporter")
+	    		redirect(action:'kmPlot', params:params)
+	    		return
+	    	}
+	    }
     	else	{
     		flash.message = "Please select a  valid plot type"
             redirect(action:index)
+            return
     	}
     }
     
@@ -158,6 +187,11 @@ class GeneViewController {
     		render(view:"popCoinPlot", model:[sw:sw, bwgraphURL:bwgraphURL, bwFilename:bwFilename, geneSymbol:geneSymbol, reporterName:reporterName])
 
     		
+    }
+    
+    def kmPlot = {
+    		System.out.println("KM plot for: " + params.taskId)
+    		render(view:"geneKmPlot", params:params)
     }
     //pass gene symbol on model params['geneSymbol']
     def test = { render(view:'geGraph_tile') }
