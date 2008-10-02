@@ -1,6 +1,6 @@
 import gov.nih.nci.cma.domain.ApplicationUser;
 import gov.nih.nci.caintegrator.application.analysis.AnalysisServerClientManager
-
+import gov.nih.nci.caintegrator.application.configuration.SpringContext
 import java.util.Properties
 import java.io.FileInputStream;
 import java.util.Iterator;
@@ -56,6 +56,10 @@ class BootStrap {
 	    if (!ApplicationUser.findByUserId(BACKUP_ADMIN)) {
 	     	new ApplicationUser(userId:BACKUP_ADMIN,password:"${backup_admin_pass}").save()
 	    }
+		
+		
+		//init the SpringContext helper - legacy code uses this to lookup some beans if outside of spring
+		SpringContext.initialize(servletContext);
      		     		     	     	    
      }
      def destroy = {
