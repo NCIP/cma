@@ -75,6 +75,7 @@
 		<servlet-name>DisplayChart</servlet-name>  
 		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>  
 	</servlet>
+	
 	<servlet>
 		<servlet-name>dwrspring</servlet-name>
 		<servlet-class>
@@ -84,6 +85,12 @@
 			<param-name>debug</param-name>
 			<param-value>true</param-value>
 		</init-param>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Captcha</servlet-name>
+		<display-name>Captcha</display-name>
+		<servlet-class>nl.captcha.servlet.CaptchaServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -99,6 +106,11 @@
         <servlet-name>gsp</servlet-name>
         <url-pattern>*.gsp</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+		<servlet-name>Captcha</servlet-name>
+		<url-pattern>/Captcha.jpg</url-pattern>
+	</servlet-mapping>
 
     <welcome-file-list>
         <!--
