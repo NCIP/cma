@@ -1,3 +1,4 @@
+import grails.converters.*
 import gov.nih.nci.cma.web.GeneSearch;
 import gov.nih.nci.cma.web.graphing.GEPlot
 import gov.nih.nci.cma.web.graphing.LegendCreator
@@ -12,6 +13,7 @@ import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup
 import gov.nih.nci.caintegrator.service.findings.ExpressionLookupFinding
 import gov.nih.nci.caintegrator.analysis.messaging.DataPointVector
 import gov.nih.nci.caintegrator.util.CaIntegratorConstants
+
 
 class GeneViewController {
 
@@ -185,13 +187,20 @@ class GeneViewController {
     		String bwgraphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + bwFilename;
     			
     		render(view:"popCoinPlot", model:[sw:sw, bwgraphURL:bwgraphURL, bwFilename:bwFilename, geneSymbol:geneSymbol, reporterName:reporterName])
-
-    		
     }
     
     def kmPlot = {
-    		System.out.println("KM plot for: " + params.taskId)
-    		render(view:"geneKmPlot", params:params)
+    	//set the params we need in the page - this comes from the legacy code
+    	def sreq = params as JSON
+    	def path = request.getContextPath()
+    	def sessionId = session.getId()
+
+    	// removing basePath and <base> tag caused problems wtih dwrspring path
+        def cc_NOT_INCLUDED = CaIntegratorConstants.NOT_INCLUDED
+        def cc_GENE_EXP_KMPLOT = CaIntegratorConstants.GENE_EXP_KMPLOT
+//    	render(view:"geneKmPlot", params:params)
+        render(view:"geneKmPlot_1", model:[plot:params.plot,listItems:sreq, sessionId:sessionId, 
+           cc_NOT_INCLUDED:cc_NOT_INCLUDED, cc_GENE_EXP_KMPLOT:cc_GENE_EXP_KMPLOT])
     }
     //pass gene symbol on model params['geneSymbol']
     def test = { render(view:'geGraph_tile') }

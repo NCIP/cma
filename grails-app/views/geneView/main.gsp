@@ -1,8 +1,9 @@
+<content tag="tabs"><g:render template="/tabs" model="[location:'gene']"/></content> 
+
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
 		
-		<content tag="tabs"><g:render template="/tabs" model="[location:'gene']"/></content> 
 		
 		<script type="text/javascript">
 			Event.observe(window, "load", function()	{
@@ -25,21 +26,21 @@
 		
 			  	if(i==0)	{
 			  		//document.getElementById("sampleGroupSelect").innerHTML = multiple;
-	//		  		$('sampleGroupNameId').multiple = "multiple";
-	//		  		$('sampleGroupNameId').size = 5;
+			  		$('sampleGroupNameId').multiple = "multiple";
+			  		$('sampleGroupNameId').size = 5;
 			  		resetFields(false, 0);
 			  	}
 			  	else if (i == 1 || i == 2 ){
 			  		//document.getElementById("sampleGroupSelect").innerHTML = single;
-	//		  		$('sampleGroupNameId').multiple = false;
-	//		  		$('sampleGroupNameId').size = 1;
+			  		$('sampleGroupNameId').multiple = false;
+			  		$('sampleGroupNameId').size = 1;
 					$('sampleGroupNameId').selectedIndex = 0;
 			  		resetFields(false, 2);
 			  	}
 			  	else if (i == 3){
 			  		//document.getElementById("sampleGroupSelect").innerHTML = single;
-//			  		$('sampleGroupNameId').multiple = false;
-//			  		$('sampleGroupNameId').size = 1;
+			  		$('sampleGroupNameId').multiple = false;
+			  		$('sampleGroupNameId').size = 1;
 			  		$('sampleGroupNameId').selectedIndex = 0;
 			  		resetFields(true, 3);
 			  	}
