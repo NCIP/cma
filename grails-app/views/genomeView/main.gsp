@@ -1,8 +1,8 @@
+<content tag="tabs"><g:render template="/tabs" model="[location:'genome']"/></content> 
+
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
-		
-		<content tag="tabs"><g:render template="/tabs" model="[location:'genome']"/></content> 
 		
 		<script type="text/javascript">
 			Event.observe(window, "load", function()	{

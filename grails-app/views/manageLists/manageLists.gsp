@@ -1,8 +1,9 @@
+<content tag="tabs"><g:render template="/tabs" model="[location:'']"/></content>
+
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
 		
-		<content tag="tabs"><g:render template="/tabs" model="[location:'']"/></content>
 		 <g:javascript library="overlib_mini"/>
          <script type='text/javascript' src='../dwr/engine.js'> </script>
          <script type='text/javascript' src='../dwr/util.js'> </script>

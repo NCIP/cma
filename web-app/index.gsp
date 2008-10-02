@@ -1,9 +1,9 @@
+<content tag="tabs">&nbsp;</content>
+<content tag="side">&nbsp;</content> 
+
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
-		
-		<content tag="tabs">&nbsp;</content>
-		<content tag="side">&nbsp;</content> 
 		
 		<script type="text/javascript">
 			var process = function(sect)	{
