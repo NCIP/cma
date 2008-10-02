@@ -8,6 +8,8 @@ import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneBiomarker;
 import gov.nih.nci.caintegrator.domain.annotation.gene.bean.GeneExprReporter;
 import gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManager;
 import gov.nih.nci.caintegrator.domain.annotation.service.AnnotationManagerImpl;
+import gov.nih.nci.caintegrator.plots.services.KMReporterService;
+import gov.nih.nci.caintegrator.service.findings.ExpressionLookupFinding;
 import gov.nih.nci.caintegrator.studyQueryService.dto.annotation.AnnotationCriteria;
 import gov.nih.nci.caintegrator.util.CaIntegratorConstants;
 import gov.nih.nci.caintegrator.util.PlatformMapping;
@@ -17,6 +19,7 @@ import gov.nih.nci.cma.web.graphing.GEPlot;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -26,20 +29,25 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 
+
 public class GeneSearch {
 
 	private AnnotationManager annotationManager;// = new AnnotationManagerImpl();
 	private Map<GeneBiomarker, Collection<GeneExprReporter>> tempMap = null;
 	private IdMapper idMappingManager;
+	private KMReporterService kmReporterService;;
 	
 	private String chartType;
 	private String geneName;
 	private String binaryFileName;
 	private String arrayPlatformName;
 	
-	public GeneSearch(AnnotationManager am, IdMapper idm)	{
+	private Map<String, String> kmRequestMap;
+	
+	public GeneSearch(AnnotationManager am, IdMapper idm, KMReporterService kms)	{
 		annotationManager = am;
 		idMappingManager = idm;
+		kmReporterService = kms;
 	}
 	
 	public Map lookupReportersForQuickSearch(HttpServletRequest request)	{
@@ -153,6 +161,38 @@ public class GeneSearch {
 			}
 		}
 
+	public void geneKMPlot(HttpServletRequest request)	{
+		//legacy code:  
+		//this is dependent on the KM code, which requires certain things to be in the request 
+		//these items are collected in kmRequestMap
+		
+		String[] sgnm = request.getParameterValues("sampleGroupNameMultiple");
+		if(sgnm!=null && sgnm.length > 0){
+			System.out.println("got sampleGroupNameMultiple");
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("plotType", CaIntegratorConstants.GENE_EXP_KMPLOT);
+			//ExpressionLookupFinding finding = kmReporterService.getExpressionFinding(geneName,gsForm.getGeArrayPlatform(), gsForm.getSampleGroupNameMultiple()[0], request.getSession().getId());
+
+			ExpressionLookupFinding finding = kmReporterService.getExpressionFinding(geneName,binaryFileName, 
+					sgnm[0], request.getSession().getId());
+			System.out.println("got finding");
+
+			if(finding!=null){
+			    m.put("reporter",finding.getDataVectors().get(0).getName());
+			    m.put("taskId",finding.getTaskId());
+			    kmRequestMap = m;
+			}
+			else	{
+				System.out.println("******************* Finding Null ********************");
+			}
+		}
+		else	{
+			System.out.println("******************* sampleGroupNameMultiple Null ********************");
+		}
+		//this far means error
+		return;
+	}
+	
 	public AnnotationManager getAnnotationManager() {
 		return annotationManager;
 	}
@@ -167,6 +207,18 @@ public class GeneSearch {
 
 	public void setIdMappingManager(IdMapper idMappingManager) {
 		this.idMappingManager = idMappingManager;
+	}
+
+	public KMReporterService getKmReporterService() {
+		return kmReporterService;
+	}
+
+	public void setKmReporterService(KMReporterService kmReporterService) {
+		this.kmReporterService = kmReporterService;
+	}
+
+	public Map<String, String> getKmRequestMap() {
+		return kmRequestMap;
 	}
 	
 }
