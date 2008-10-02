@@ -171,7 +171,7 @@
 										<div class="splashBoxContent">
 											<ul>
 												<li>
-													<a href="/cma/registration.do">Register</a>
+													<a href="/cma/registration.gsp">Register</a>
 												</li>
 												<li>
 													<a href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">Provide your feedback</a>
