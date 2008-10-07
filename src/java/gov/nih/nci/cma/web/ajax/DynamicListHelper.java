@@ -175,6 +175,7 @@ public class DynamicListHelper {
 		}
 		catch(Exception e) {
 			//most likely cant access the session
+			System.out.println("err: "+ e.getMessage());
 		}
 		return success;
 	}
