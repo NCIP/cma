@@ -4,7 +4,7 @@
 		<b>Administration:</b>
 		<ul>
 			<li>
-				<a href="#" title="">View Results</a>
+				<a href="${createLink(controller:'inbox')}" title="">View Results</a>
 			</li>
 			<li>
 				<a href="${createLink(controller:'manageLists')}" title="">List Management</a>
