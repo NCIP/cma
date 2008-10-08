@@ -15,7 +15,7 @@ class DefaultListLoaderService {
 
     boolean transactional = false
 
-    static scope = 'request'
+    static scope = 'prototype'
     
     def serviceMethod() {
 
@@ -89,4 +89,41 @@ class DefaultListLoaderService {
           }
         }
     }
+    
+    def areListsLoaded()	{
+    	def webRequest= RequestContextHolder.currentRequestAttributes()  
+    	def session = webRequest.session
+    	UserListBeanHelper helper = new UserListBeanHelper(session);
+    	if(helper == null || helper.getAllLists().isEmpty())	{
+    		return false;
+    	}
+    	else	{
+    		return true;
+    	}
+    }
+    
+    def getPatientLists = { sid, sortList ->
+		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);
+	    List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
+	    ArrayList patientCollection = new ArrayList();
+	    for(UserList l: lists){
+	        patientCollection.add(l.getName());
+	    }
+	    if(sortList)	{
+	    	Collections.sort(patientCollection);
+	    }
+	    return patientCollection;
+    }
+    def getGeneLists = { sid, sortList ->
+		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);
+	    List<UserList> lists = userListBeanHelper.getLists(ListType.Gene);
+	    ArrayList listCollection = new ArrayList();
+	    for(UserList l: lists){
+	    	listCollection.add(l.getName());
+	    }
+	    if(sortList)	{
+	    	Collections.sort(listCollection);
+	    }
+	    return listCollection;
+	}
 }
