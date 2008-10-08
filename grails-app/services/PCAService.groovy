@@ -35,6 +35,7 @@ class PCAService {
     	String[] sgroups = pcaForm.getParameterValues("selectedGroups");
     	
     	IdMapper idMappingManager = SpringContext.getBean("idMappingManager");
+    	AnnotationManager annotationManager = SpringContext.getBean("annotationManager");
     	
 //    	QueryDTO queryDTO = dtoBuilder.buildQueryDTO(form, request.getSession().getId());
     	
@@ -88,11 +89,14 @@ class PCAService {
 
 		String geneReporterName = pcaForm.getParameter("geneReporterName");
 		ReporterGroup reporterGroup = new ReporterGroup();
-		if (pcaForm.getParameter("adv") && geneReporterName != null && !geneReporterName.equalsIgnoreCase("none")){
-			int i = geneReporterName.lastIndexOf(ListType.Reporter.toString());
+		if (pcaForm.getParameter("adv") && geneReporterName != null && 
+				!geneReporterName.equalsIgnoreCase("none")){
+//currently only using Gene lists, so this block isnt needed
+//also, no need for the substring stuff since we're not appending listtype
+/*			int i = geneReporterName.lastIndexOf(ListType.Reporter.toString());
 			//it's a reporter filter
 			if (i > 0){
-				geneReporterName = geneReporterName.substring(0, i - 3);
+//				geneReporterName = geneReporterName.substring(0, i - 3);
 		    	List<ListItem> listItemts = helper.getUserList(geneReporterName).getListItems();
 		    	
 		    	List<String> reporterIdSet = new ArrayList<String>();
@@ -106,7 +110,8 @@ class PCAService {
 			//It's a gene
 			else{
 				i = geneReporterName.lastIndexOf(ListType.Gene.toString());
-				geneReporterName = geneReporterName.substring(0, i - 3);
+				*/
+//				geneReporterName = geneReporterName.substring(0, i - 3);
 		    	List<ListItem> listItemts = helper.getUserList(geneReporterName).getListItems();
 		    	
 		    	List<String> geneList = new ArrayList<String>();
@@ -122,9 +127,9 @@ class PCAService {
 				ac.setArrayPlatformName(pcaForm.getParameter("platformName"));
 				try{
 					tempMap = annotationManager.getReportersForGenes(ac);
-					logger.info("Have found " + tempMap.size() + " reporters.");
+//					logger.info("Have found " + tempMap.size() + " reporters.");
 				} catch (Exception e){
-					logger.error("getReportersForGenes returns error: " + e.getMessage());
+//					logger.error("getReportersForGenes returns error: " + e.getMessage());
 				}
 			
 				List<String> rGroup = new ArrayList<String>();
@@ -136,7 +141,7 @@ class PCAService {
 					}
 				}
 				reporterGroup.addAll(rGroup);
-			}
+			//}
 		}
 		if (!reporterGroup.isEmpty())
 			dto.setReporterGroup(reporterGroup);
