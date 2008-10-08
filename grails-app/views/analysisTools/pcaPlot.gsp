@@ -60,7 +60,7 @@
 		${sw}
 		<h3>PCA</h3>
 		
-		<!-- start div#header -->
+		<!-- start div#nav -->
 		<div id="nav">
 		<div id="modernbricksmenu2">
 			<ul>
@@ -77,7 +77,7 @@
 		</div>
 		<br style="clear: left" />
 		</div>
-		<!--  end div#header -->
+		<!--  end div#nav -->
 		<!--  start table  -->
 		<table>
 			<tr>
