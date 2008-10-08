@@ -109,9 +109,7 @@
 							<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
 								<g:select name="sampleGroupNameMultiple" multiple="multiple" size="5" id="sampleGroupNameId" 
 								style="width: 200px; overflow: none;" 
-								noSelection="['ALL_PATIENTS': 'ALL_PATIENTS']" 
-								from="${gov.nih.nci.cma.domain.List.list()}" 
-								optionValue="name" optionKey="name"></g:select>
+								from="${patLists}"></g:select>
 							</div>
 
 						</td>

@@ -17,6 +17,13 @@ import gov.nih.nci.caintegrator.util.CaIntegratorConstants
 
 class GeneViewController {
 
+	def defaultListLoaderService
+	def beforeInterceptor = {
+		if(!defaultListLoaderService.areListsLoaded())	{
+			defaultListLoaderService.loadDefaultLists()
+		}
+	}
+	
     def index = { 
     	
     	
@@ -44,7 +51,10 @@ class GeneViewController {
 //    	}
     	//END SAMPLE CALL to the analysis server.
     	
-    	render(view:'main')
+    	//fetch the patient lists to popupate the form
+    	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+    	
+    	render(view:'main', model:[patLists:patLists])
     }
     
     def geneBasedView = {

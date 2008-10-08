@@ -3,19 +3,6 @@
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
-		
-		<script language="javascript">
-		
-			function getGeneList(){
-		    	UserListHelper.getGeneSymbolListNames(createGeneList);
-			}
-			function createGeneList(data){    	
-		    	DWRUtil.removeAllOptions("geneList", data);
-		    	DWRUtil.addOptions("geneList", ['none']) 
-		    	DWRUtil.addOptions("geneList", data);
-		    	
-			}
-		</script>
 	</head>
 	<body>
 		<h3>Principal Component Analysis</h3>
@@ -25,9 +12,7 @@
 			<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
 				<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" 
 				style="width: 200px; overflow: none;" 
-				noSelection="['ALL_PATIENTS': 'ALL_PATIENTS']" 
-				from="${gov.nih.nci.cma.domain.List.list()}" 
-				optionValue="name" optionKey="name"></g:select>
+				from="${patLists}"></g:select>
 			</div>
 		</fieldset>
 		
@@ -43,9 +28,11 @@
 				<br/><br/>	
 			  	&nbsp;&nbsp;Use differentially expressed genes:
 				&nbsp;&nbsp;
-				<select name="geneReporterName" id="geneList" disabled="false" onfocus="javascript:getGeneList()">
-					<option>none</option>
-				</select>	
+
+				<g:select name="geneReporterName" id="geneList" 
+				style="width: 200px; overflow: none;"
+				noSelection="['':'none']"  
+				from="${geneLists}"></g:select>	
 				<br/><br/>	
 			</div>
 		</fieldset>

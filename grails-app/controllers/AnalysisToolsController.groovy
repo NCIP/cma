@@ -3,6 +3,13 @@ import gov.nih.nci.cma.web.graphing.PCAPlot;
 
 class AnalysisToolsController {
 
+	def defaultListLoaderService
+	def beforeInterceptor = {
+		if(!defaultListLoaderService.areListsLoaded())	{
+			defaultListLoaderService.loadDefaultLists()
+		}
+	}
+	
 	def pCAService;
 	
     def index = { redirect(action:menu)  }
@@ -12,8 +19,9 @@ class AnalysisToolsController {
     }
     
     def pcaSetup = {
-    	render(view:'pcaSetup')
-    		
+    	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+    	def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
+    	render(view:'pcaSetup', model:[patLists:patLists, geneLists:geneLists])
     }
     
     def pcaSubmit = {
