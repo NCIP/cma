@@ -11,6 +11,7 @@ class AnalysisToolsController {
 	}
 	
 	def pCAService;
+	def gPService;
 	
     def index = { redirect(action:menu)  }
     
@@ -18,9 +19,10 @@ class AnalysisToolsController {
     	render(view:'menu')
     }
     
-    def pcaSetup = {
+    def pcaSetup = { 
     	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
     	def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
+    	
     	render(view:'pcaSetup', model:[patLists:patLists, geneLists:geneLists])
     }
     
@@ -60,5 +62,28 @@ class AnalysisToolsController {
     	render(view: 'pcaPlot', model:[sw:sw, PC1vsPC2:PC1vsPC2, PC1vsPC3:PC1vsPC3,
     	      PC2vsPC3:PC2vsPC3, PC1vsPC2URL:PC1vsPC2URL, PC1vsPC3URL:PC1vsPC3URL, PC2vsPC3URL:PC2vsPC3URL,
     	      defaultFilename:defaultFilename, defaultURL:defaultURL]);
+    }
+    
+    def genePatternSetup = {
+        	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+        	def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
+        	
+        	def moduleList = ["Gene Expression", "Copy Number"]
+        	
+        	render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists, moduleList:moduleList])
+    }
+    
+    def genePatternSubmit = {
+        	println(params['analysisModuleName'])
+        	println(params['selectedGroups'])
+        	println(params['geneReporterName'])
+        	println(params['platformName'])
+        	println(params['chromosomeName'])
+        	println(params['analysisResultName'])
+        	
+    		gPService.generateGPSubmission(request)
+
+
+        	//render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists])        	
     }
 }
