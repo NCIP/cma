@@ -127,14 +127,25 @@ class GPService {
         	patientGroups = new String[1];
         	patientGroups[0] = "ALL_PATIENTS";
     	}
-		String geneReporterName = request.getParameterValues("geneReporterName");		// Optional
-		String gpModule = request.getParameterValues("analysisModuleName");				// Required
-		String platformName = request.getParameterValues("platformName");				// Required
-		String chromosome = request.getParameterValues("chromosomeName");				// Conditional on analysisModuleName (= 'Copy Number') 
-		String analysisResultName = request.getParameterValues("analysisResultName");	// Required
+			
+		String geneReporterName = request.getParameter("geneReporterName");		// Optional
+		String gpModule = request.getParameter("analysisModuleName");				// Required
+		String platformName = request.getParameter("platformName");				// Required
+		String chromosome = request.getParameter("chromosomeName");				// Conditional on analysisModuleName (= 'Copy Number') 
+		String analysisResultName = request.getParameter("analysisResultName");	// Required
 		if (analysisResultName == null || analysisResultName.equals("")) {
 			analysisResultName = "unnamed_task";
 		}
+
+//		 Remove printlns later:
+		println("******")
+		println(patientGroups[0])
+    	println(gpModule)
+    	println(geneReporterName)
+    	println(platformName)
+    	println(chromosome)
+    	println(analysisResultName)
+    	
 			
 		idMappingManager = SpringContext.getBean("idMappingManager");
 		annotationManager = SpringContext.getBean("annotationManager");
