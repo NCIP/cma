@@ -70,17 +70,17 @@ class BootStrap {
 		create(creator:'new', javascript:'JDate') { 
 			param (name:'class') { 'java.util.Date' } 
 		}
-		
 		create(creator:'new', javascript:'DynamicListHelper')	{
 			param (name:'class') { 'gov.nih.nci.cma.web.ajax.DynamicListHelper' }
 		}
-		
 		create(creator:'new', javascript:'UserListHelper')	{
 			param (name:'class') { 'gov.nih.nci.caintegrator.application.lists.UserListBeanHelper' }
 		}
-		
 		create(creator:'new', javascript:'RegHelper')	{
 			param (name:'class') { 'gov.nih.nci.cma.web.ajax.RegHelper' }
+		}
+		create(creator:'new', javascript:'GenePatternHelper')	{
+			param (name:'class') { 'gov.nih.nci.cma.web.ajax.GenePatternHelper' }
 		}
 				
 	 }
