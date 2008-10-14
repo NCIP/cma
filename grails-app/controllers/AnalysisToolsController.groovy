@@ -74,6 +74,7 @@ class AnalysisToolsController {
     }
     
     def genePatternSubmit = {
+    		// Remove printlns later:
         	println(params['analysisModuleName'])
         	println(params['selectedGroups'])
         	println(params['geneReporterName'])
@@ -81,9 +82,8 @@ class AnalysisToolsController {
         	println(params['chromosomeName'])
         	println(params['analysisResultName'])
         	
-    		gPService.generateGPSubmission(request)
+        	gPService.generateGPSubmission(request)
 
-
-        	//render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists])        	
+        	render(view:'genePatternJobView')        	     	
     }
 }
