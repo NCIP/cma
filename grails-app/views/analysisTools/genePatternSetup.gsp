@@ -99,8 +99,12 @@
 		<fieldset>
 			<legend>Select Array Platform</legend>
             <!-- sets the hidden field to the platformName - do not change -->
+            <!--
 			<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;" name="arrayPlatform" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" optionValue="platformName" optionKey="fileName"></g:select>
-			<input type="hidden" id="platformName" name="platformName" value=""/>
+			<input type="hidden" id="platformName" name="platformName" value=""/> -->
+			
+			<g:select name="platformName" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" optionValue="platformName" optionKey="fileName"></g:select>
+			
 		</fieldset>
 			
 		<fieldset>
