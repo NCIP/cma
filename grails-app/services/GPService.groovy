@@ -98,11 +98,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-//import org.apache.struts.action.ActionForm;
-//import org.apache.struts.action.ActionForward;
-//import org.apache.struts.action.ActionMapping;
-//import org.apache.struts.actions.DispatchAction;
-//import org.apache.struts.util.LabelValueBean;
 import org.genepattern.client.GPServer;
 import org.genepattern.webservice.Parameter;
 
@@ -110,7 +105,7 @@ import org.genepattern.webservice.Parameter;
 
 class GPService {
 	static scope = "request"
-	boolean transactional = false
+	boolean transactional = true
 	
     private static Logger logger = Logger.getLogger(GPService.class);
     private IdMapper idMappingManager;
@@ -126,32 +121,35 @@ class GPService {
     	if (patientGroups == null || patientGroups.length == 0) {
         	patientGroups = new String[1];
         	patientGroups[0] = "ALL_PATIENTS";
-    	}
-			
+    	}		
 		String geneReporterName = request.getParameter("geneReporterName");		// Optional
-		String gpModule = request.getParameter("analysisModuleName");				// Required
-		String platformName = request.getParameter("platformName");				// Required
+		String gpModule = request.getParameter("analysisModuleName");			// Required
+		String binaryFileName = request.getParameter("platformName");			// Required
 		String chromosome = request.getParameter("chromosomeName");				// Conditional on analysisModuleName (= 'Copy Number') 
 		String analysisResultName = request.getParameter("analysisResultName");	// Required
 		if (analysisResultName == null || analysisResultName.equals("")) {
 			analysisResultName = "unnamed_task";
 		}
-
+		// Get corresponding annotation file name for binaryFileName (platform.fileName)
+		def platform = gov.nih.nci.cma.domain.Platform.findByFileName(binaryFileName)
+		String annotationFileName = platform.annotationFileName
+		// Get corresponding platform name for binaryFileName (platform.fileName)
+		String arrayPlatformName = platform.platformName
+		
 //		 Remove printlns later:
 		println("******")
-		println(patientGroups[0])
-    	println(gpModule)
-    	println(geneReporterName)
-    	println(platformName)
-    	println(chromosome)
-    	println(analysisResultName)
-    	
+		println("patientGroups[0] = " + patientGroups[0])
+    	println("gpModule = " + gpModule)
+    	println("geneReporterName = " + geneReporterName)
+    	println("binaryFileName = " + binaryFileName)
+    	println("chromosome = " + chromosome)
+    	println("analysisResultName = " + analysisResultName)
+    	println("annotationFileName = " + annotationFileName)
+    	println("arrayPlatformName = " + arrayPlatformName)
 			
 		idMappingManager = SpringContext.getBean("idMappingManager");
 		annotationManager = SpringContext.getBean("annotationManager");
     	
-//    	HttpSession session = request.getSession();
-
         List<List<String>> allStringList = new ArrayList<List<String>>();
         List<String> fileNameList = new ArrayList<String>();
         List<String> idStringList = new ArrayList<String>();
@@ -167,14 +165,23 @@ class GPService {
 
 	    	List<ListItem> listItems = helper.getUserList(patientGroup).getListItems();
 	    	
+			println("### patientIdset ###")
+	    	
 	    	Set<String> patientIdset = new HashSet<String>();
 			for (Iterator i = listItems.iterator(); i.hasNext(); ) {
 				ListItem item = (ListItem)i.next();
 				patientIdset.add(item.getName());
+				
+				print(" " + item.getName())
 			}
+			
+			println(" END")
+			
 			criteria.setPatientIds(patientIdset);
-			criteria.setFileName(platformName);
+			criteria.setFileName(binaryFileName);
+			
 	    	idSet = idMappingManager.getRbinaryIdsForPatientDIDs(criteria);
+	    	
 	    	//IdSet to hold patient Id in a format recognized by the R module.
 	    	///	idSet.add("TCGA.06.119.01A.08D.00214.01");
 	    	//For copy number analysis, the patient group file requires special format
@@ -188,18 +195,18 @@ class GPService {
 		allStringList.add(idStringList);
 		fileNameList.add("labIdsFile");
 
-		List<PlatformMapping> platformMappings = 
-			(List)request.getSession().getAttribute(ProjectConstants.ARRAY_PLATFORM_MAPPING);
-		String annotationFileName = null;
-		String binaryFileName = platformName;
-		String arrayPlatformName = null;
-		for (PlatformMapping pmapping : platformMappings) {
-			if (pmapping.getFileName().equals(binaryFileName)) {
-				arrayPlatformName = pmapping.getPlatformName();
-				annotationFileName = pmapping.getAnnotationFileName();
-				break;
-			}
-		}
+		//List<PlatformMapping> platformMappings = 
+		//	(List)request.getSession().getAttribute(ProjectConstants.ARRAY_PLATFORM_MAPPING);
+		//String annotationFileName = null;
+		//String binaryFileName = platformName;
+		//String arrayPlatformName = null;
+//		for (PlatformMapping pmapping : platformMappings) {
+//			if (pmapping.getFileName().equals(binaryFileName)) {
+//				arrayPlatformName = pmapping.getPlatformName();
+//				annotationFileName = pmapping.getAnnotationFileName();
+//				break;
+//			}
+//		}
 		
 		// For reporter id file
 		Set<String> reporterGroup = new HashSet<String>();
@@ -278,7 +285,7 @@ class GPService {
 		//Now get the R-binary file name:
 		//SNP6.broad.Chromosome10.Rda
 		//to-do here for r-binary name used in copy number analysis
-		String r_fileName = platformName;
+		String r_fileName = binaryFileName;
 		if (gpModule.equalsIgnoreCase("Copy Number")) {
 			r_fileName = r_fileName + ".Chromosome" + chromosome + ".Rda";
 			logger.info("Chromosome file for copy number analysis: " + r_fileName);
