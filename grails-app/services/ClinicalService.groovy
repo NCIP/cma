@@ -1,13 +1,162 @@
+import gov.nih.nci.cma.domain.CmaRembClin
+import gov.nih.nci.cma.util.ClinParmsComparator
+import gov.nih.nci.cma.clinical.RembrandtClinicalKeys
+
 class ClinicalService {
 
     boolean transactional = true
+    
+    def cmaRembClin 
+    def parmsComparator = new ClinParmsComparator()
 
+    //def co = new CmaRembClin()
+    
     def serviceMethod() {
 
     }
     
     
+    def getClinicalData =  { request -> 
+    
+         //request is the http request
+         //request.getParameter()
+         //request.getParameterValues() array of strings
+    	
+    	
+    }
+    
+    
+    public List assembleClinicalData(List rawData) {
+    
+       Map sampleMap = new HashMap()
+       List sampleData
+    	
+       
+       rawData.each{ d -> 
+          //System.out.println(d.toString());
+          sampleData = sampleMap.get(d.sampleId)
+          if (sampleData == null) {
+             sampleData = new ArrayList()
+             sampleMap.put(d.sampleId, sampleData)
+          }   
+          sampleData.add(d)
+       }
+       
+       //order the lists by parm
+       for (sampleId in sampleMap.keySet()) {
+    	  sampleData = sampleMap.get(sampleId)
+    	  Collections.sort(sampleData, parmsComparator)    	   
+       }
+       
+       //now print out the data
+       System.out.println("==== RAW ORGANIZED DATA ===")
+       for (sampleId in sampleMap.keySet()) {
+    	  sampleData = sampleMap.get(sampleId)
+    	  sampleData.each { d -> 
+    	      System.out.println(d)
+    	  }    	       	   
+       }
+       
+       
+       
+       
+       
+       
+       
+       
+       return rawData
+    }
+    
+    
     public List getClinicalData(List patientIds) {
+    	
+    	/*
+    	List names = new ArrayList();
+    	names.add("Izi");
+    	names.add("Fritz");
+    	Query q = sess.createQuery("from DomesticCat cat where cat.name in (:namesList)");
+    	q.setParameterList("namesList", names);
+    	List cats = q.list();
+    	*/
+    	
+    	
+    	String queryStr = "From gov.nih.nci.cma.domain.CmaRembClin rc where rc.sampleId in (" 
+    	
+        int ind = 0;
+    	int numIds  = patientIds.size()
+    			
+    	patientIds.each { id -> 
+    	         
+    	         if (ind == (numIds-1))  {
+    	        	 queryStr += "'${id}')"
+    	         }
+    	         else {
+    	        	queryStr += "'${id}'," 
+    	         }
+                 ind++
+    	}
+    	
+    	
+    	System.out.println("QueryStr=${queryStr}")
+    	
+        List rawClinData = CmaRembClin.findAll(queryStr)
+        
+        System.out.println("Got back rawClinData numRows=${rawClinData?.size()}")
+        
+        List clinData = assembleClinicalData(rawClinData);
+    	
+    	
+    	
+    	
+    	//return the data.
+    	return clinData
+    	
+ 
+    	
+    }
+    
+    /**
+     * This method is hard coded for now with Rembrandt values.  This needs 
+     * to be refactored to read permissible values from the DB. 
+     */
+    public List<String> getPermissibleValues(String paramName) {
+    	
+    	List<String> values = new ArrayList<String>();
+    	     	 
+    	if (paramName.equals(RembrandtClinicalKeys.disease)) {
+    		values.add("ALL_GLIOMA");
+    		values.add("ASTROCYTOMA");
+    		values.add("CELL_LINE");
+    		values.add("GBM");
+    		values.add("MIXED");
+    		values.add("NON_TUMOR");
+    		values.add("OLIGODENDROGLIOMA");
+    		values.add("UNKNOWN");    	
+    	}
+    	else if (paramName.equals(RembrandtClinicalKeys.gender)) {
+    		values.add("Male");
+    		values.add("Female");
+    		values.add("Other");    		
+    	}
+    	else if (paramName.equals(RembrandtClinicalKeys.race)) {    		
+    		values.add("WHITE")
+    		values.add("BLACK")
+    		values.add("NATIVE HAWAIIAN")
+    		values.add("ASIAN NOS")
+    		values.add("OTHER")
+    		values.add("UNKNOWN")    		
+    	}
+    	else if (paramName.equals(RembrandtClinicalKeys.grade)) {
+    		values.add("I");
+    		values.add("II");
+    		values.add("III");
+    		values.add("IV");    		    		
+    	}
+    	
+    	return values;
+    }
+    
+    public List getClinicalDataDummy(List patientIds) {
     	List clinicalData = new ArrayList()
     	List r1 = new ArrayList() //row 1 of dummy data
     	List r2 = new ArrayList() //row 2 of dummy data
@@ -135,4 +284,7 @@ class ClinicalService {
     	columns.add("OnStudy Therapy Surgery Outcome")																															
     	return columns
     }
+    
+    
+    
 }
