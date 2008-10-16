@@ -39,7 +39,7 @@ class DefaultListLoaderService {
    	   // we are loading using grails and then converting to 
    	   // list objects in application-commons so that we can reuse the list management 
    	   // functionality w/o rewriting it in grail (for now).                   
-          def listObjs = gov.nih.nci.cma.domain.List.list()
+          def listObjs = gov.nih.nci.cma.domain.CmaList.list()
           
           java.util.List<UserList> userLists = new ArrayList<UserList>();
           UserList ul;
