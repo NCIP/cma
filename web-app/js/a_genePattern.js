@@ -50,7 +50,7 @@ function A_checkGenePatternStatus_cb(message){
 		if(curEl.innerHTML != "completed")	{
 			curEl.innerHTML = "completed";
 			//alert("message == 'completed' " + message);
-			curElImg.src = "images/check.png";
+			curElImg.src = "/cma/images/check.png";
 			curElLink.onclick = "";
 			curElLink.removeAttribute("onclick");
 		}
@@ -60,7 +60,7 @@ function A_checkGenePatternStatus_cb(message){
 		if(curEl.innerHTML.indexOf('error') == -1)	{
 			var comments = "Unspecified Error";	
 			curEl.innerHTML = showErrorHelp(comments, "error");
-			curElImg.src = "images/error.png";
+			curElImg.src = "/cma/images/error.png";
 			//curElLink.onclick = "";
 			//curElLink.removeAttribute("onclick");
 		}
