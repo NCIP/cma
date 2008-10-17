@@ -63,7 +63,7 @@
 					<td><a href="http://www.nih.gov/"><img width="46" height="31" border="0" alt="National Institutes of Health" src="${createLinkTo(dir:'images',file:'footer_nih.gif')}"/></a></td>
 					<td><a href="http://www.firstgov.gov/"><img width="91" height="31" border="0" alt="FirstGov.gov" src="${createLinkTo(dir:'images',file:'footer_firstgov.gif')}"/></a></td>
 					<td valign="center" style="color:LightSlateGray">&nbsp;&nbsp;<b>|</b></td>
-					<td valign="center"><a style="color:DarkGray;font-size:.8em" href="helpDocs/cmap_user_guide.pdf" target="_blank">User Guide</a></td>
+					<td valign="center"><a style="color:DarkGray;font-size:.8em" href="${createLinkTo(dir:'helpDocs',file:'cmap_user_guide.pdf')}" target="_blank">User Guide</a></td>
 				</tr>
 			</table>
 		</div>	    	
