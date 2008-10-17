@@ -5,7 +5,6 @@
 		<meta name="layout" content="splashLayout" />
 		
   <g:javascript src="project.js" />
-<!--  <g:javascript src="window.js" /> -->
 
   <script type="text/javascript">
   
@@ -35,7 +34,7 @@
        // }
     }
   }
-  
+
   </script>
   
 	</head>
@@ -87,13 +86,11 @@
 		
 		<fieldset>
 			<legend>Select Array Platform</legend>
-            <!-- sets the hidden field to the platformName - do not change -->
-            <!--
-			<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;" name="arrayPlatform" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" optionValue="platformName" optionKey="fileName"></g:select>
-			<input type="hidden" id="platformName" name="platformName" value=""/> -->
-			
-			<g:select name="platformName" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" optionValue="platformName" optionKey="fileName"></g:select>
-			
+			<g:select name="platformName" id="arrayPlatformId"
+			style="width: 200px; overflow: none;" 
+			noSelection="['': 'choose platform']" 
+			from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" 
+			optionValue="platformName" optionKey="fileName"></g:select>
 		</fieldset>
 			
 		<fieldset>
