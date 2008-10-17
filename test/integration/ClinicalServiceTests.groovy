@@ -16,13 +16,12 @@ class ClinicalServiceTests extends GroovyTestCase {
     	ids.add("E09358")
         List data = clinicalService.getClinicalData(ids)
         System.out.println("Got back numResults=${data?.size()}")
-        
+        System.out.println("==== CLINICAL REPORT ====")
     	data.each { d -> 
-    	        System.out.print(d)
-    	        System.out.print("\t")
+    	        System.out.println(d)    	        
     	}
+    	System.out.println("===== END CLINICAL REPORT ====")
     	System.out.println()
-    	
     	
     	List diseaseValues = clinicalService.getPermissibleValues("disease")
     	System.out.println("Got disease values:")
