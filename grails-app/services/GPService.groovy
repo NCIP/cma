@@ -123,6 +123,9 @@ class GPService {
         	patientGroups[0] = "ALL_PATIENTS";
     	}		
 		String geneReporterName = request.getParameter("geneReporterName");		// Optional
+		if (geneReporterName == null || geneReporterName.equals("")) {
+			geneReporterName = "none";
+		}
 		String gpModule = request.getParameter("analysisModuleName");			// Required
 		String binaryFileName = request.getParameter("platformName");			// Required
 		String chromosome = request.getParameter("chromosomeName");				// Conditional on analysisModuleName (= 'Copy Number') 
@@ -195,22 +198,27 @@ class GPService {
 		allStringList.add(idStringList);
 		fileNameList.add("labIdsFile");
 
-		//List<PlatformMapping> platformMappings = 
-		//	(List)request.getSession().getAttribute(ProjectConstants.ARRAY_PLATFORM_MAPPING);
-		//String annotationFileName = null;
-		//String binaryFileName = platformName;
-		//String arrayPlatformName = null;
-//		for (PlatformMapping pmapping : platformMappings) {
-//			if (pmapping.getFileName().equals(binaryFileName)) {
-//				arrayPlatformName = pmapping.getPlatformName();
-//				annotationFileName = pmapping.getAnnotationFileName();
-//				break;
-//			}
-//		}
+/*
+		List<PlatformMapping> platformMappings = 
+			(List)request.getSession().getAttribute(ProjectConstants.ARRAY_PLATFORM_MAPPING);
+		String annotationFileName = null;
+		String binaryFileName = platformName;
+		String arrayPlatformName = null;
+		for (PlatformMapping pmapping : platformMappings) {
+			if (pmapping.getFileName().equals(binaryFileName)) {
+				arrayPlatformName = pmapping.getPlatformName();
+				annotationFileName = pmapping.getAnnotationFileName();
+				break;
+			}
+		}
+*/
 		
 		// For reporter id file
 		Set<String> reporterGroup = new HashSet<String>();
 		if (geneReporterName != null && !geneReporterName.equalsIgnoreCase("none")) {
+// Currently only using Gene lists, so this block isnt needed
+// Also, no need for the substring stuff since we're not appending listtype
+/*
 			int i = geneReporterName.lastIndexOf(ListType.Reporter.toString());
 			//it's a reporter filter
 			if (i > 0) {
@@ -230,6 +238,7 @@ class GPService {
 			else {
 				i = geneReporterName.lastIndexOf(ListType.Gene.toString());
 				geneReporterName = geneReporterName.substring(0, i - 3);
+*/
 		    	List<ListItem> listItems = helper.getUserList(geneReporterName).getListItems();
 		    	
 		    	List<String> geneList = new ArrayList<String>();
@@ -257,7 +266,7 @@ class GPService {
 						reporterGroup.add(reporter.getName());
 					}
 				}
-			}
+			//}
 		}
 		
 		if (reporterGroup.isEmpty()) {
@@ -292,10 +301,14 @@ class GPService {
 		}
 
 		//*** RUN TASK ON THE GP SERVER
+		HttpSession session = request.getSession();
 		String tid = "209";
 
 		String gpserverURL = System.getProperty("gov.nih.nci.caintegrator.gp.server") !=null ? 
 				(String)System.getProperty("gov.nih.nci.caintegrator.gp.server") : "localhost:8080"; //default to localhost
+				
+		println("gpserverURL = ")
+				
 		try {
 		//*	
 			PresentationTierCache presentationTierCache = PresentationCacheManager.getInstance();
@@ -314,6 +327,10 @@ class GPService {
 			//temporary code
 			if (cmaUser == null)
 				cmaUser = publicUser;
+			
+			println("cmaUser = " + cmaUser)
+			println("password = " + password)
+			
 			GPServer gpServer = null;
 			if (cmaUser.equals(publicUser)) {
 				String gpUser = (String)session.getAttribute(GenePatternPublicUserPool.PUBLIC_USER_NAME);
@@ -322,13 +339,23 @@ class GPService {
 					gpUser = pool.borrowPublicUser();
 					session.setAttribute(GenePatternPublicUserPool.PUBLIC_USER_NAME, gpUser);
 					session.setAttribute(GenePatternPublicUserPool.PUBLIC_USER_POOL, pool);
+					
+					if (pool != null)
+						println("PublicUserPool not null")
+					else
+						println("gpUser = " + gpUser)
 				}
 				cmaUser = gpUser;
+				println("cmaUser now = " + cmaUser)
 			}
 			String encryptKey = System.getProperty("gov.nih.nci.caintegrator.gp.desencrypter.key");
-			String urlString = EncryptionUtil.encrypt(cmaUser+ gpPoolString, encryptKey);
+			println("encryptKey = " + encryptKey)
+			String urlString = EncryptionUtil.encrypt(cmaUser + gpPoolString, encryptKey);
+			println("urlString = " + urlString)
 			urlString = URLEncoder.encode(urlString, "UTF-8");
+			println("urlString after encoding = " + urlString)
 			String ticketString = gpserverURL + "gp?ticket=" + urlString;
+			println("Gene Pattern ticketString = " + ticketString)
 			
 			logger.info(ticketString);
 			URL url;
@@ -344,11 +371,18 @@ class GPService {
             
 			gpServer = new GPServer(gpserverURL, cmaUser, password);
 			
+			if (gpServer != null)
+				println("gpServer not null")
+			else
+				println("gpServer is null")
+			
 			//*/
 			//GPServer gpServer = new GPServer(gpserverURL, gpuname, password);
 			
 			int offset = 4;
 			String moduleName =  System.getProperty("gov.nih.nci.caintegrator.gp.modulename.geneexpression");
+			
+			println("moduleName = " + moduleName)
 			
 			Parameter[] par = null;
 			if (gpModule.equalsIgnoreCase("Copy Number")) {
@@ -358,6 +392,8 @@ class GPService {
 			}
 			else
 				par = new Parameter[filePathList.size() + offset + 2];
+			
+			// Store filenames
 			int currpos= 1;
 			for (int i = 0; i < filePathList.size(); i++) {
 				par[i] = new Parameter("input.filename" + currpos++, filePathList.get(i));
@@ -366,7 +402,7 @@ class GPService {
 
 			//r_fileName = "'/usr/local/genepattern/resources/DataMatrix_ISPY_306cDNA_17May07.Rda'";
 			par[++currpos] = new Parameter("array.filename", r_fileName);
-			if (gpModule.equals("1"))
+			if (gpModule.equals("Gene Expression"))
 				par[++currpos] = new Parameter("annotation.filename", annotationFileName);
 			
 			par[++currpos] = new Parameter("analysis.name", analysisResultName);
@@ -379,7 +415,13 @@ class GPService {
 			else 
 				par[++currpos] = new Parameter("output.cn.file",analysisResultName+".cn");
 			//JobResult preprocess = gpServer.runAnalysis(gpModule, par);
+			
+			println("Before gpServer.runAnalysisNoWait")
+			println("par = " + par)
+			
 			int nowait = gpServer.runAnalysisNoWait(moduleName, par);
+			
+			println("After gpServer.runAnalysisNoWait")
 
 			tid = String.valueOf(nowait);
 			//LSID = urn:lsid:8080.root.localhost:genepatternmodules:20:2.1.7
