@@ -91,7 +91,7 @@
 			</table>
 			<div style="text-align:center;">
 		        <input type="reset" value="clear"/>
-		        <input type="button" value="submit"/>
+		        <input type="button" value="submit" onclick="location.href='${createLink(action:'clinicalReport')}'"/>
 			</div>
 			</g:form>
 		</div>
