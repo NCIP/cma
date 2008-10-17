@@ -13,6 +13,18 @@ public class ClinParmsComparator implements Comparator {
 		CmaRembClin d2 = (CmaRembClin) o2;
 		String p1 = d1.getParm();
 		String p2 = d2.getParm();
+		
+		if (p1.equals(p2)) {
+		  Integer r1 = d1.getRepNum();
+		  Integer r2 = d2.getRepNum();
+		  		
+		  if ((r1 == null) || (r2 == null)) return 0;
+		  
+		  if ( r1 < r2) return -1;
+		  if (r2 > r1) return 1;
+		  if (r2 == r1) return 0;		
+		}
+		
 		return p1.compareTo(p2);
 	}
 
