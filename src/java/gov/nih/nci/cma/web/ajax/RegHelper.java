@@ -56,8 +56,7 @@ public class RegHelper {
 	        	mp.setMailTo(System.getProperty("cma.register.mailTo.support"));
 	        	mp.setMailFrom(System.getProperty("cma.feedback.mailFrom"));
 
-				// TODO UNCOMMENT!
-	    		//Mail.sendMail(mp);
+	    		Mail.sendMail(mp);
 	    		
 	    		//send the mail to the user
 	    		mp = new MailProps();
@@ -74,18 +73,15 @@ public class RegHelper {
 	        	mp.setMailTo(em.trim());
 	        	mp.setMailFrom(System.getProperty("cma.feedback.mailFrom"));
 
-	        	// TODO UNCOMMENT!
-	        	//Mail.sendMail(mp);
+	        	Mail.sendMail(mp);
 	    	}
-// TODO UNCOMMENT catch below when Mail.sendMail is uncommented!
 			
-//	    	catch (ValidationException e) {
-//System.out.println("In first catch. e = " + e.toString());
-//	    		logger.error("mail did not send from regHelper");
-//	    		logger.error(e);
-//	    		status = "failed";
-//	    		msg = "SEND_FAILED";
-//	    	}
+	    	catch (ValidationException e) {
+	    		logger.error("mail did not send from regHelper");
+	    		logger.error(e);
+	    		status = "failed";
+	    		msg = "SEND_FAILED";
+	    	}
 	    	catch (Exception e) {
 	    		logger.error("mail did not send from regHelper");
 	    		logger.error(e);
