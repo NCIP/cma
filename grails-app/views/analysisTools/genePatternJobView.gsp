@@ -3,10 +3,11 @@
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
-		
- 		<g:javascript src="a_genePattern.js" /> 		
+			
  		<script type='text/javascript' src='dwr/engine.js'></script>
 		<script type='text/javascript' src='dwr/interface/GenePatternHelper.js'> </script>
+		
+		<g:javascript src="a_genePattern.js" /> 	
 		 
 	</head>
 	
@@ -52,12 +53,12 @@
 					System.out.println("genePatternJobView.gsp - genePatternURL: " + gpUrl);
 					
 					if (currentStatus.equals("completed"))
-						currentStatus = "<b id=\"" + jobId + "_status\">completed</b>  <img src='images/check.png' alt='complete' id=\"" + jobId + "_image\"/>";
+						currentStatus = "<b id=\"" + jobId + "_status\">completed</b>  <img src=\"${createLinkTo(dir:'images',file:'check.png')}\" alt='complete' id=\"" + jobId + "_image\"/>";
 					else if (currentStatus.equals("running"))
-						currentStatus = "<b id=\"" + jobId + "_status\" >running</b> <img src='images/circle.gif' alt='running' id=\"" + jobId + "_image\" />";
+						currentStatus = "<b id=\"" + jobId + "_status\" >running</b> <img src=\"${createLinkTo(dir:'images',file:'circle.gif')}\" alt='running' id=\"" + jobId + "_image\" />";
 					else if (currentStatus.equals("error"))  {
 						String comments = "An error occured during sending your job request to GenePattern or during GenePattern processing";
-						currentStatus = "<b id=\"" + jobId + "_status\" ><script language=\"javascript\">document.write(showErrorHelp('"+comments+"','error'));</script></b> <img src='images/error.png' alt='error' id=\"" + jobId + "_image\" />";
+						currentStatus = "<b id=\"" + jobId + "_status\" ><script language=\"javascript\">document.write(showErrorHelp('"+comments+"','error'));</script></b> <img src=\"${createLinkTo(dir:'images',file:'error.png')}\" alt='error' id=\"" + jobId + "_image\" />";
 					}
 					
 					out.println("<span style='color:red; float:right'>" + currentStatus + "</span> ");
@@ -71,7 +72,7 @@
 					out.println("<br clear=\"all\" />");
 					out.println("<br clear=\"all\" />");
 				%>
-       				Please click the above link to lunch GenePattern.  If your task does not appear in 
+       				Please click the above link to launch GenePattern.  If your task does not appear in 
        				the sidebar, please wait a minute and refresh the GenePattern page to try again.
      			</tr>
      		</table>
