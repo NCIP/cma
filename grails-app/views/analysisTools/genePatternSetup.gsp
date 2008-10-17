@@ -68,6 +68,7 @@
 		
 		<fieldset>
 		<legend>Select Patient Group</legend>
+			Select 1 or more patient groups:
 			<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
 				<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" 
 				style="width: 200px; overflow: none;" 
@@ -77,23 +78,11 @@
 		
 		<fieldset>
 			<legend>Filter Genes/Reporters</legend>
-			Advanced Filter Settings? 
-			<g:checkBox onclick="document.getElementById('advY').toggle();" name="adv" id="adv"/><br/>
-			<div id="advY" style="display:none;">
-				<br/><br/>
-				&nbsp;&nbsp;Constrain reporters by variance (Gene Vector) percentile:&nbsp;&nbsp;&ge;			
-				<input type="text" name="variancePercentile" id="variancePercentile" size="4" value="70"/>&nbsp;&nbsp;%
-				
-				<br/><br/>	
-			  	&nbsp;&nbsp;Use differentially expressed genes:
-				&nbsp;&nbsp;
-
-				<g:select name="geneReporterName" id="geneList" 
-				style="width: 200px; overflow: none;"
-				noSelection="['':'none']"  
-				from="${geneLists}"></g:select>	
-				<br/><br/>	
-			</div>
+			Select a gene/reporter list: <br/>
+			<g:select name="geneReporterName" id="geneList" 
+			style="width: 200px; overflow: none;"
+			noSelection="['none':'none']"  
+			from="${geneLists}"></g:select>		
 		</fieldset>
 		
 		<fieldset>
