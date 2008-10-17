@@ -27,6 +27,9 @@ public class GenePatternHelper {
 		}
 		if (message == null)
 			message = done?"completed":"running";
+		
+		//System.out.println("checkGPStatus message = " + message);
+		
 		return message;
 	}
 }
