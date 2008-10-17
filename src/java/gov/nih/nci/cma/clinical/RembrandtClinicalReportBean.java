@@ -1,10 +1,14 @@
 package gov.nih.nci.cma.clinical;
 
 public class RembrandtClinicalReportBean {
+	
+	private String rptStr = null;
+	
 	private String sampleId;
 	private String ageAtDx;	 
 	private String gender;
 	private String survivalMonths;	 
+	private String survivalLengthRange;
 	private String disease;	 
 	private String grade;	 
 	private String race;	 
@@ -249,5 +253,61 @@ public class RembrandtClinicalReportBean {
 	}
 	public void setOnStudyTherapySurgeryOutcome(String onStudyTherapySurgeryOutcome) {
 		this.onStudyTherapySurgeryOutcome = onStudyTherapySurgeryOutcome;
+	}
+	public String getSurvivalLengthRange() {
+		return survivalLengthRange;
+	}
+	public void setSurvivalLengthRange(String survivalLengthRange) {
+		this.survivalLengthRange = survivalLengthRange;
 	}	
+	
+	public String toString() {
+		
+	 if (rptStr == null) {
+	
+		 StringBuffer sb = new StringBuffer();		 
+		 sb.append(sampleId).append(",");
+		 sb.append(ageAtDx).append(",");
+		 sb.append(gender).append(",");
+		 sb.append(survivalMonths).append(",");
+		 sb.append(survivalLengthRange).append(",");
+		 sb.append(disease).append(",");
+		 sb.append(grade).append(",");
+		 sb.append(race).append(",");
+		 sb.append(institution).append(",");
+		 sb.append(karnofsky).append(",");
+		 sb.append(neurologicalExamOutcome).append(",");
+		 sb.append(mriDesc).append(",");
+		 sb.append(followupMonth).append(",");
+		 sb.append(steroidDoseStatus).append(",");
+		 sb.append(antiConvulsantStatus).append(",");
+		 sb.append(priorTherapyRadiationSite).append(",");
+		 sb.append(priorTherapyRadiationFractionDose).append(",");
+		 sb.append(priorTherapyRadiationFractionNumber).append(",");
+		 sb.append(priorTherapyRadiationType).append(",");
+		 sb.append(priorTherapyChemoAgentName).append(",");
+		 sb.append(priorTherapyChemoCourseCount).append(",");
+		 sb.append(priorTherapySurgeryProcedureTitle).append(",");
+		 sb.append(priorTherapySurgeryTumorHistology).append(",");
+		 sb.append(priorTherapySurgeryOutcome).append(",");
+		 sb.append(onStudyTherapyRadiationSite).append(",");
+		 sb.append(onStudyTherapyRadiationNeurosisStatus).append(",");
+		 sb.append(onStudyTherapyRadiationFractionDose).append(",");
+		 sb.append(onStudyTherapyRadiationFractionNumber).append(",");
+		 sb.append(onStudyTherapyRadiationType).append(",");
+		 sb.append(onStudyTherapyChemoAgentName).append(",");
+		 sb.append(onStudyTherapyChemoCourseCount).append(",");
+		 sb.append(onStudyTherapySurgeryProcedureTitle).append(",");
+		 sb.append(onStudyTherapySurgeryIndication).append(",");
+		 sb.append(onStudyTherapySurgeryHistoDiagnosis).append(",");
+		 sb.append(onStudyTherapySurgeryOutcome);
+		 
+		 rptStr = sb.toString();
+		 
+	 }
+		
+	 return rptStr;
+		
+	}
+	
 }
