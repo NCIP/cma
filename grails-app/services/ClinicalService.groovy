@@ -1,6 +1,7 @@
 import gov.nih.nci.cma.domain.CmaRembClin
 import gov.nih.nci.cma.util.ClinParmsComparator
 import gov.nih.nci.cma.clinical.RembrandtClinicalKeys
+import gov.nih.nci.cma.clinical.RembrandtClinicalReportBean
 
 class ClinicalService {
 
@@ -26,10 +27,138 @@ class ClinicalService {
     }
     
     
+    private String getIntStr(Integer theValue) {
+      if (theValue == null) {
+         return null;
+      }
+      
+      return theValue.toString();
+      
+    }
+    
+    public RembrandtClinicalReportBean loadReportBean(List sampleData) {
+      
+    	//groovy switch statement
+    	String parm = null;
+    	RembrandtClinicalReportBean rb = new RembrandtClinicalReportBean()
+    	sampleData.each  { sd -> 
+    	  rb.setSampleId(sd.getSampleId())
+    	  parm = sd.getParm()
+    	  switch (parm) {    	  
+    	  case "AGE" :
+    		  rb.setAgeAtDx(getIntStr(sd.getParmNumValue()))
+    		  break
+    	  case 'INSTITUTION_NAME' :
+    		  rb.setInstitution(sd.getParmCharValue())
+    		  break
+    	  case 'FOLLOWUP_MONTH' :
+    	      rb.setFollowupMonth(sd.getParmCharValue())
+    	      break
+    	  case 'P_FRACTION_NUMBER' :
+    	      rb.setPriorTherapyRadiationFractionNumber(getIntStr(sd.getParmNumValue()))
+    	      break
+    	  case 'C_PROCEDURE_TITLE' :
+    	      rb.setPriorTherapySurgeryProcedureTitle(sd.getParmCharValue())
+    	      break
+    	  case 'DISEASE_TYPE' :
+    	      rb.setDisease(sd.getParmCharValue())
+    	      break    	      
+    	  case 'ANTI_CONVULSANT_STATUS' :
+    	      rb.setAntiConvulsantStatus(sd.getParmCharValue())
+    	      break    	      
+    	  case 'C_FRACTION_NUMBER' :
+    	     rb.setOnStudyTherapyRadiationFractionNumber(getIntStr(sd.getParmNumValue()))    	  
+    	     break
+    	  
+    	  case 'C_NEUROSIS_STATUS' :
+    	     rb.setOnStudyTherapyRadiationNeurosisStatus(sd.getParmCharValue())    	  
+    	     break
+    	  case 'P_COURSE_COUNT' :
+    	     rb.setPriorTherapyChemoCourseCount(getIntStr(sd.getParmNumValue()))
+    	     break
+    	  case 'C_HISTO_DIAGNOSIS' :
+    	     rb.setOnStudyTherapySurgeryHistoDiagnosis(sd.getParmCharValue())
+    	     break
+    	  case 'P_RADIATION_TYPE' :
+    	     rb.setPriorTherapyRadiationType(sd.getParmCharValue())
+    	     break    	     
+    	  case 'P_SURGERY_OUTCOME' :
+     	     rb.setPriorTherapySurgeryOutcome(sd.getParmCharValue())
+    	     break
+    	  case 'C_AGENT_NAME' :
+    	     rb.setOnStudyTherapyChemoAgentName(sd.getParmCharValue())
+    	     break    	     
+    	  case 'SURVIVAL_LENGTH' :
+    	     rb.setSurvivalMonths(getIntStr(sd.getParmNumValue()))
+    	     break
+    	  case 'RACE' :
+    	     rb.setRace(sd.getParmCharValue())
+    	     break    	     
+    	  case 'NEURO_EXAM_DESC' :
+    	    rb.setNeurologicalExamOutcome(sd.getParmCharValue())
+    	    break
+    	  case 'STEROID_DOSE_STATUS' :
+    	    rb.setSteroidDoseStatus(sd.getParmCharValue())
+    	    break
+    	  case 'C_FRACTION_DOSE' :
+    	    rb.setOnStudyTherapyRadiationFractionDose(sd.getParmCharValue())
+    	    break
+    	  case 'C_RADIATION_SITE' :
+    	    rb.setOnStudyTherapyRadiationSite(sd.getParmCharValue())
+    	    break
+    	  case 'C_RADIATION_TYPE' :
+    	    rb.setOnStudyTherapyRadiationType(sd.getParmCharValue())
+    	    break
+    	  case 'P_RADIATION_SITE' :
+    	    rb.setPriorTherapyRadiationSite(sd.getParmCharValue())
+    	    break
+    	  case 'P_TUMOR_HISTOLOGY' :
+    	    rb.setPriorTherapySurgeryTumorHistology(sd.getParmCharValue())
+    	    break    	      	      	      	      	      	      	      	      	      	      	      	
+    	  case 'C_COURSE_COUNT' :
+    	    rb.setOnStudyTherapyChemoCourseCount(getIntStr(sd.getParmNumValue()))
+    	  	break
+    	  case 'C_SURGERY_OUTCOME' :
+    	    rb.setOnStudyTherapySurgeryOutcome(sd.getParmCharValue())
+    	  	break
+    	  case 'AGE_GROUP' :
+    	  	break
+    	  case 'GENDER' :
+    	    rb.setGender(sd.getParmCharValue())
+    	  	break
+    	  case 'SURVIV_LENGTH_RANGE' :
+    	    rb.setSurvivalLengthRange(sd.getParmCharValue())
+    	  	break
+    	  case 'KARNOFSKY_SCORE' :
+    	    rb.setKarnofsky(getIntStr(sd.getParmNumValue()))
+    	  	break
+    	  case 'MRI_CT_SCORE_DESC' :
+    	    rb.setMriDesc(sd.getParmCharValue())
+    	  	break
+    	  case 'P_FRACTION_DOSE' :
+    	    rb.setPriorTherapyRadiationFractionDose(getIntStr(sd.getParmNumValue()))
+    	  	break
+    	  case 'P_AGENT_NAME' :
+    	    rb.setPriorTherapyChemoAgentName(sd.getParmCharValue())
+    	  	break
+    	  case 'P_PROCEDURE_TITLE' :
+    	    rb.setPriorTherapySurgeryProcedureTitle(sd.getParmCharValue())
+    	  	break
+    	  case 'C_INDICATION' :
+    	    rb.setOnStudyTherapySurgeryIndication(sd.getParmCharValue())
+    	  	break
+    	  default: 
+    		 System.out.println("Error: unrecognized clinical parm value")    		     		     	      	      	      	      	      	  
+    	  }    	
+    	}
+    	return rb
+    }
+    
     public List assembleClinicalData(List rawData) {
     
        Map sampleMap = new HashMap()
        List sampleData
+       List reportBeanList = new ArrayList()
     	
        
        rawData.each{ d -> 
@@ -57,14 +186,16 @@ class ClinicalService {
     	  }    	       	   
        }
        
+       //Create list of Rembrandt clinical report beans
+       RembrandtClinicalReportBean rptBean = null
+       for (sampleId in sampleMap.keySet()) {
+    	  sampleData = sampleMap.get(sampleId)
+    	  rptBean = loadReportBean(sampleData)
+    	  reportBeanList.add(rptBean)    	      	  
+       }
        
        
-       
-       
-       
-       
-       
-       return rawData
+       return reportBeanList;
     }
     
     
@@ -106,8 +237,7 @@ class ClinicalService {
         List clinData = assembleClinicalData(rawClinData);
     	
     	
-    	
-    	
+    	    	
     	//return the data.
     	return clinData
     	
