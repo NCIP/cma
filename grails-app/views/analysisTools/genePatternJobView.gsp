@@ -4,8 +4,8 @@
     <head>
 		<meta name="layout" content="splashLayout" />
 			
- 		<script type='text/javascript' src='dwr/engine.js'></script>
-		<script type='text/javascript' src='dwr/interface/GenePatternHelper.js'> </script>
+ 		<script type='text/javascript' src='../dwr/engine.js'></script>
+		<script type='text/javascript' src='../dwr/interface/GenePatternHelper.js'> </script>
 		
 		<g:javascript src="a_genePattern.js" /> 	
 		 
@@ -30,7 +30,7 @@
        				
 				<!-- to check if the gene pattern job is completed -->
 				<% String jobId = (String)request.getAttribute("jobId"); 
-						System.out.println("genePatternJobView.gsp - jobId: " + jobId);
+				   //System.out.println("genePatternJobView.gsp - jobId: " + jobId);
 				%>
 				
 				<%-- --%>
@@ -48,12 +48,12 @@
 				<%
 					//Check completion status
 					String currentStatus = (String)request.getAttribute("gpStatus");
-					System.out.println("genePatternJobView.gsp - gpStatus:  " + currentStatus);
+					//System.out.println("genePatternJobView.gsp - gpStatus:  " + currentStatus);
 					String gpUrl = (String)request.getAttribute("genePatternURL");
-					System.out.println("genePatternJobView.gsp - genePatternURL: " + gpUrl);
+					//System.out.println("genePatternJobView.gsp - genePatternURL: " + gpUrl);
 					
 					if (currentStatus.equals("completed"))
-						currentStatus = "<b id=\"" + jobId + "_status\">completed</b>  <img src=\"${createLinkTo(dir:'images',file:'check.png')}\" alt='complete' id=\"" + jobId + "_image\"/>";
+						currentStatus = "<b id=\"" + jobId + "_status\">completed</b> <img src=\"${createLinkTo(dir:'images',file:'check.png')}\" alt='complete' id=\"" + jobId + "_image\"/>";
 					else if (currentStatus.equals("running"))
 						currentStatus = "<b id=\"" + jobId + "_status\" >running</b> <img src=\"${createLinkTo(dir:'images',file:'circle.gif')}\" alt='running' id=\"" + jobId + "_image\" />";
 					else if (currentStatus.equals("error"))  {
