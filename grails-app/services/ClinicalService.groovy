@@ -172,7 +172,7 @@ class ClinicalService {
     	  groupNames.add("ALL_PATIENTS")
       }
       
-      List ids = getIdsForGroupNames(groupNames)
+      List ids = getIdsForSampleGroups(groupNames)
       
       Set idSet = new HashSet(ids)
 
