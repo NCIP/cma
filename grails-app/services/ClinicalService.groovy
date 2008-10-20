@@ -133,6 +133,21 @@ class ClinicalService {
     	
     	return idList
     }    
+    
+    public List getIdsForSurvival(Integer survivalLower, Integer survivalUpper) {
+    	def criteria = CmaRembClin.createCriteria()
+    	def results = criteria.list{
+    	  like('parm', 'SURVIVAL_LENGTH')
+    	  between('parmNumValue', survivalLower, survivalUpper)    		
+    	}
+    	
+    	List idList = new ArrayList()
+    	results.each { cr ->
+    	   idList.add(cr.getSampleId())
+    	}
+    	
+    	return idList
+    } 
         
     def getClinicalData =  { request -> 
     
@@ -147,17 +162,50 @@ class ClinicalService {
       String race = request.getParameter("race")
       
       //Set sampleIds = getSampleIds(sampleGroups)
+      List groupNames = new ArrayList()
+      if ((sampleGroups != null) && (sampleGroups.length > 0)) {
+    	  for (int i=0; i < sampleGroups.length ; i++) {
+    		 groupNames.add(sampleGroups[i])
+    	  }
+      }
+      else {
+    	  groupNames.add("ALL_PATIENTS")
+      }
       
-     
+      List ids = getIdsForGroupNames(groupNames)
       
-      System.out.println("==== Results of the Gender Query ====")
-      results.each { System.println(it) }
+      Set idSet = new HashSet(ids)
+
+      if (gender != null) {
+        List genderIds = getIdsForGender(gender)
+        idSet.retainAll(genderIds)
+      }
       
-    	
-      System.out.println("Get clinical data QueryStr=${queryStr}")
-    	      
+      if (race != null) {
+        List raceIds = getIdsForRace(race)
+        idSet.retainAll(raceIds)    	      	  
+      }
       
-        
+      if ((ageAtDxLower != null) && (ageAtDxUpper != null)) {
+        List ageIds = getIdsForAgeAtDx(ageAtDxLower, ageAtDxUpper)
+        idSet.retainAll(ageIds)
+      }
+      
+      if ((survivalLower != null) && (survivalUpper != null)) {
+          List survivalIds = getIdsForSurvival(survivalLower,survivalUpper)
+          idSet.retainAll(survivalIds)
+      }
+      
+      if (disease != null) {
+        List diseaseIds = getIdsForDiseaseType(disease)
+        idSet.retainAll(diseaseIds)
+      }
+      
+      List lookupIds = new ArrayList(idSet)
+      
+      
+      return getClinicalData(lookupIds)
+
     }
         
     private String getIntStr(Integer theValue) {
