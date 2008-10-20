@@ -158,7 +158,7 @@ class ClinicalService {
       String survivalLower = request.getParameter("survivalLower")
       String survivalUpper = request.getParameter("survivalUpper") 
       String disease = request.getParameter("disease")
-      String grade = request.getParameter("grade")
+      //String grade = request.getParameter("grade")
       String race = request.getParameter("race")
       
       //Set sampleIds = getSampleIds(sampleGroups)
@@ -176,12 +176,12 @@ class ClinicalService {
       
       Set idSet = new HashSet(ids)
 
-      if (gender != null) {
+      if ((gender != null) && (!gender.equals("ANY"))) {
         List genderIds = getIdsForGender(gender)
         idSet.retainAll(genderIds)
       }
       
-      if (race != null) {
+      if ((race != null) && (!race.equals("ANY"))) {
         List raceIds = getIdsForRace(race)
         idSet.retainAll(raceIds)    	      	  
       }
@@ -196,7 +196,7 @@ class ClinicalService {
           idSet.retainAll(survivalIds)
       }
       
-      if (disease != null) {
+      if ((disease != null) && (!disease.equals("ANY")) {
         List diseaseIds = getIdsForDiseaseType(disease)
         idSet.retainAll(diseaseIds)
       }
