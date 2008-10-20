@@ -17,16 +17,149 @@ class ClinicalService {
     }
     
     
-    def getClinicalData =  { request -> 
+    public List getIdsForSampleGroups(List sampleGroups) {
+    	Set idSet = new HashSet()
+    	if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
+            String queryStr = "From gov.nih.nci.cma.domain.CmaList lst where lst.name in (" 
+        	String listNames
+            int i = 0;
+        	int numIds  = sampleGroups.size()
+        		
+        	
+        	sampleGroups.each { sg ->
+        	  queryStr += "'${sg}'"
+              if (i==numIds-1) {
+                queryStr += ")"
+              }
+              else {
+            	queryStr += ","
+              }
+        	  i++
+        	}
+        	System.out.println()
+        	System.out.println("Executing query:   " + queryStr)
+        	System.out.println()
+        	def cmaLists = gov.nih.nci.cma.domain.CmaList.findAll(queryStr)
+    	    //throw all of the members of these lists into a set    	    
+    	    cmaLists.each { lst ->
+    	       idSet.addAll(lst.getListItems())
+    	    }        	
+    	}
+    	
+    	java.util.List idList = new ArrayList()
+    	idSet.each { lstId ->
+    	   idList.add(lstId.getItemName())
+    	}
+    	    	
+        return idList
+    }
     
-         //request is the http request
-         //request.getParameter()
-         //request.getParameterValues() array of strings
+    public List getIdsForDiseaseType(String diseaseType) {
+    	def criteria = CmaRembClin.createCriteria()
+    	def results = criteria.list{
+    	  like('parm', 'DISEASE_TYPE')
+    	  like('parmCharValue', diseaseType)    		
+    	}
     	
+    	List idList = new ArrayList()
+    	results.each { cr ->
+    	   idList.add(cr.getSampleId())
+    	}
     	
+    	return idList
+    }
+    
+    public List getIdsForGender(String gender) {
+    	def criteria = CmaRembClin.createCriteria()
+    	def results = criteria.list{
+    	  like('parm', 'GENDER')
+    	  like('parmCharValue', gender)    		
+    	}
+    	
+    	List idList = new ArrayList()
+    	results.each { cr ->
+    	   idList.add(cr.getSampleId())
+    	}
+    	
+    	return idList
     }
     
     
+    /**
+     * Not sure where to get grade from
+     */
+    public List getIdsForGrade(String gender) {
+    	
+    	def criteria = CmaRembClin.createCriteria()
+    	def results = criteria.list{
+    	  like('parm', 'GRADE')
+    	  like('parmCharValue', gender)    		
+    	}
+    	
+    	List idList = new ArrayList()
+    	results.each { cr ->
+    	   idList.add(cr.getSampleId())
+    	}
+    	
+    	return idList
+    }
+    
+    public List getIdsForRace(String race) {
+    	def criteria = CmaRembClin.createCriteria()
+    	def results = criteria.list{
+    	  like('parm', 'RACE')
+    	  like('parmCharValue', gender)    		
+    	}
+    	
+    	List idList = new ArrayList()
+    	results.each { cr ->
+    	   idList.add(cr.getSampleId())
+    	}
+    	
+    	return idList
+    }
+    
+    public List getIdsForAgeAtDx(Integer ageAtDxLower, Integer ageAtDxUpper) {
+    	def criteria = CmaRembClin.createCriteria()
+    	def results = criteria.list{
+    	  like('parm', 'AGE')
+    	  between('parmNumValue', ageAtDxLower, ageAtDxUpper)    		
+    	}
+    	
+    	List idList = new ArrayList()
+    	results.each { cr ->
+    	   idList.add(cr.getSampleId())
+    	}
+    	
+    	return idList
+    }    
+        
+    def getClinicalData =  { request -> 
+    
+      String[] sampleGroups = request.getParameterValues("sampleGroup")
+      Integer ageAtDxLower = request.getParameter("ageAtDxLower")
+      Integer ageAtDxUpper = request.getParameter("ageAtDxUpper")
+      String gender = request.getParameter("gender")
+      String survivalLower = request.getParameter("survivalLower")
+      String survivalUpper = request.getParameter("survivalUpper") 
+      String disease = request.getParameter("disease")
+      String grade = request.getParameter("grade")
+      String race = request.getParameter("race")
+      
+      //Set sampleIds = getSampleIds(sampleGroups)
+      
+     
+      
+      System.out.println("==== Results of the Gender Query ====")
+      results.each { System.println(it) }
+      
+    	
+      System.out.println("Get clinical data QueryStr=${queryStr}")
+    	      
+      
+        
+    }
+        
     private String getIntStr(Integer theValue) {
       if (theValue == null) {
          return null;
