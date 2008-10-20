@@ -161,6 +161,23 @@ class ClinicalService {
       //String grade = request.getParameter("grade")
       String race = (String)request.getParameter("race")
       
+      if (sampleGroups != null) {
+    	  for (int i=0; i < sampleGroups; i++) {    		  
+    	     String groupName = sampleGroups[i]
+    		 System.out.println("sampleGroup=${groupName}")    		  
+    	  }      
+      }
+      
+      System.out.println("ageAtDxLower=${ageAtDxLower}")
+      System.out.println("ageAtDxUpper=${ageAtDxUpper}")
+      System.out.println("gender=${gender}")
+      System.out.println("survivalLower=${survivalLower}")
+      System.out.println("survivalUpper=${survivalUpper}")
+      System.out.println("disease=${disease}")
+      System.out.println("race=${race}")
+      
+      
+      
       //Set sampleIds = getSampleIds(sampleGroups)
       List groupNames = new ArrayList()
       if ((sampleGroups != null) && (sampleGroups.length > 0)) {
