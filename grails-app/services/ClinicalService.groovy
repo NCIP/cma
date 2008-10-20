@@ -151,15 +151,15 @@ class ClinicalService {
         
     def getClinicalData =  { request -> 
     
-      String[] sampleGroups = request.getParameterValues("sampleGroup")
-      Integer ageAtDxLower = request.getParameter("ageAtDxLower")
-      Integer ageAtDxUpper = request.getParameter("ageAtDxUpper")
-      String gender = request.getParameter("gender")
-      String survivalLower = request.getParameter("survivalLower")
-      String survivalUpper = request.getParameter("survivalUpper") 
-      String disease = request.getParameter("disease")
+      String[] sampleGroups = (String[])request.getParameterValues("sampleGroup")
+      Integer ageAtDxLower = (Integer)request.getParameter("ageAtDxLower")
+      Integer ageAtDxUpper = (Integer)request.getParameter("ageAtDxUpper")
+      String gender = (String)request.getParameter("gender")
+      String survivalLower = (Integer)request.getParameter("survivalLower")
+      String survivalUpper = (Integer)request.getParameter("survivalUpper") 
+      String disease = (String)request.getParameter("disease")
       //String grade = request.getParameter("grade")
-      String race = request.getParameter("race")
+      String race = (String)request.getParameter("race")
       
       //Set sampleIds = getSampleIds(sampleGroups)
       List groupNames = new ArrayList()
