@@ -196,7 +196,7 @@ class ClinicalService {
           idSet.retainAll(survivalIds)
       }
       
-      if ((disease != null) && (!disease.equals("ANY")) {
+      if ((disease != null) && (!disease.equals("ANY"))) {
         List diseaseIds = getIdsForDiseaseType(disease)
         idSet.retainAll(diseaseIds)
       }
