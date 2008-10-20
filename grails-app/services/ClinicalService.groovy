@@ -36,9 +36,9 @@ class ClinicalService {
               }
         	  i++
         	}
-        	System.out.println()
-        	System.out.println("Executing query:   " + queryStr)
-        	System.out.println()
+        	//System.out.println()
+        	//System.out.println("Executing query:   " + queryStr)
+        	//System.out.println()
         	def cmaLists = gov.nih.nci.cma.domain.CmaList.findAll(queryStr)
     	    //throw all of the members of these lists into a set    	    
     	    cmaLists.each { lst ->
@@ -175,9 +175,7 @@ class ClinicalService {
       System.out.println("survivalUpper=${survivalUpper}")
       System.out.println("disease=${disease}")
       System.out.println("race=${race}")
-      
-      
-      
+            
       //Set sampleIds = getSampleIds(sampleGroups)
       List groupNames = new ArrayList()
       if ((sampleGroups != null) && (sampleGroups.length > 0)) {
@@ -376,13 +374,15 @@ class ClinicalService {
        }
        
        //now print out the data
+       /*
        System.out.println("==== RAW ORGANIZED DATA ===")
-       for (sampleId in sampleMap.keySet()) {
+       /for (sampleId in sampleMap.keySet()) {
     	  sampleData = sampleMap.get(sampleId)
     	  sampleData.each { d -> 
     	      System.out.println(d)
     	  }    	       	   
        }
+       */
        
        //Create list of Rembrandt clinical report beans
        RembrandtClinicalReportBean rptBean = null
@@ -426,11 +426,11 @@ class ClinicalService {
     	}
     	
     	
-    	System.out.println("QueryStr=${queryStr}")
+    	//System.out.println("QueryStr=${queryStr}")
     	
         List rawClinData = CmaRembClin.findAll(queryStr)
         
-        System.out.println("Got back rawClinData numRows=${rawClinData?.size()}")
+        //System.out.println("Got back rawClinData numRows=${rawClinData?.size()}")
         
         List clinData = assembleClinicalData(rawClinData);
     	
