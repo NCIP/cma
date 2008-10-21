@@ -2,6 +2,8 @@
 body {
 	margin:0px;
 	padding:0px;
+	background-image: url(../images/headerBG.gif);
+	background-repeat: repeat-x;
 }
 #top	{
 	height:150px;
@@ -11,14 +13,24 @@ body {
 }
 
 /*  from displaytag pagination */
-.pagebanner, .pagelinks	{
+.pagebanner, .pagelinks, caption	{
 	font: 14px verdana, arial, helvetica, sans-serif;	
 }
+.pagebanner, .pagelinks	{
+	color:gray;	
+}
+
 span.pagebanner	{
 	
 }
 span.pagelinks	{
 	
+}
+
+#reportTableDiv caption	{
+	text-align:left;
+	font-weight: bold;
+	font-size: 16px;
 }
 
 /*  from Grails */
