@@ -24,6 +24,9 @@
 					case "genome":
 						go = "${createLink(controller:'genomeView')}";
 					break;
+					case "clinical":
+						go = "${createLink(controller:'clinical')}";
+					break;
 					default:
 					break;
 				}
