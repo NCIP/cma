@@ -14,18 +14,22 @@
 				   	
 				    transport.responseJSON.each( function(el)	{
 				    	//quick - context double check
-				    	if(el.project!="TCGA GBM")
-				    		return;
+				    	if(el.project!="TCGA GBM")	{
+				    		if($('mutfs'))
+					    		$('mutfs').remove();
+				    	}
 				    		
 				    	switch(el.dataset_type)	{
 				    		//quick adaptor for legacy DIV Id to dataset_type from XML
 					    	case "copy_number":
+					    	case "copy number\n":  //RBT feed uses this instead of copy_number 
+					    	case "copy number":
 					    		makeLink(el, "genomeBasedCN");
 					    		break;
 					    	case "gene_expression":
 					    		makeLink(el, "genomeBased");
 					    		break;	
-					    		case "gene_methylation":
+				    		case "gene_methylation":
 					    		makeLink(el, "genomeBasedME");
 					    		break;	
 					    	default:
@@ -52,27 +56,27 @@
 	<body>
 		<h3>Genome View</h3>
 		
-		<fieldset>
+		<fieldset id="cnfs">
 			<legend>Genomic View of Copy Number Data</legend>
 			<div style="padding:5px;margin-left:40px;">
 				<div id="genomeBasedCN"></div>
 			</div>
 		</fieldset>
-		<fieldset>
+		<fieldset id="expfs">
 			<legend>Genomic View of Gene Expression Data</legend>
 			<div style="padding:5px;margin-left:40px;">
 				<div id="genomeBased"></div>
 			</div>
 		</fieldset>
 		
-		<fieldset>
+		<fieldset id="metfs">
 			<legend>Genomic View of Methylation Data</legend>
 			<div style="padding:5px;margin-left:40px;">
 				<div id="genomeBasedME"></div>
 			</div>
 		</fieldset>
 		
-		<fieldset>
+		<fieldset id="mutfs">
 			<legend>Genomic View of Mutation Data</legend>
 			<div style="padding:5px;margin-left:40px;">
 				<a href="http://cgwb.nci.nih.gov/cgi-bin/fwd?hint=tcga&hint2=genomic" target="_blank">Cancer Genome Workbench (Genomic View)</a>
