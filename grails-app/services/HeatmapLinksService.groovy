@@ -9,8 +9,8 @@ class HeatmapLinksService {
 
     }
     
-    def fetchParseXml(String iata) {
-        def base = "http://lpgws.nci.nih.gov/perl/heatmap?xml_dump=1"
+    def fetchParseXml(String base) {
+//        def base = "http://lpgws.nci.nih.gov/perl/heatmap?xml_dump=1"
         def url = new URL(base)
         def connection = url.openConnection()
 
