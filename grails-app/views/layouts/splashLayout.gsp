@@ -25,6 +25,10 @@
 				
 				$('contextDiv').observe('mouseover', function()	{$('contextOptions').setOpacity(0.8);} );
 				$('contextDiv').observe('mouseout', function()	{$('contextOptions').setOpacity(0.5);} );
+
+				$('contextDiv').observe('click', function()	{$('contextOptions').toggle();} );
+				
+				
 				
 				$('middle').observe('mouseover', function()	{
 					$('contextOptions').hide();
@@ -41,10 +45,10 @@
 		<div id="top">
 			<div id="contextDiv" style="float:right; width:210px;margin:0px;color:#fff;">
 				<div id="ccontextDiv">
-					<span id="ccontextText" onclick="$('contextOptions').toggle();return false;" >
+					<span id="ccontextText">
 						Rembrandt
 					</span>
-					<span id="ccontextArrow" onclick="$('contextOptions').toggle(); return false;">
+					<span id="ccontextArrow">
 						V
 					</span>
 				</div>
