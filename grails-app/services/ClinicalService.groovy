@@ -36,9 +36,9 @@ class ClinicalService {
               }
         	  i++
         	}
-        	//System.out.println()
-        	//System.out.println("Executing query:   " + queryStr)
-        	//System.out.println()
+        	System.out.println()
+        	System.out.println("Executing query:   " + queryStr)
+        	System.out.println()
         	def cmaLists = gov.nih.nci.cma.domain.CmaList.findAll(queryStr)
     	    //throw all of the members of these lists into a set    	    
     	    cmaLists.each { lst ->
@@ -149,21 +149,25 @@ class ClinicalService {
     	return idList
     } 
         
-    def getClinicalData =  { request -> 
+    def getClinicalData =  { clinicalForm -> 
     
-      String[] sampleGroups = (String[])request.getParameterValues("sampleGroup")
-      Integer ageAtDxLower = (Integer)request.getParameter("ageAtDxLower")
-      Integer ageAtDxUpper = (Integer)request.getParameter("ageAtDxUpper")
-      String gender = (String)request.getParameter("gender")
-      String survivalLower = (Integer)request.getParameter("survivalLower")
-      String survivalUpper = (Integer)request.getParameter("survivalUpper") 
-      String disease = (String)request.getParameter("disease")
+	    clinicalForm.getParameterNames().each	{
+	    	System.out.println(it + ": " + clinicalForm.getParameter(it))
+	    }
+
+      String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroup")
+      Integer ageAtDxLower = clinicalForm.getParameter("ageAtDxLower")!=null ? Integer.valueOf(clinicalForm.getParameter("ageAtDxLower")) : null
+      Integer ageAtDxUpper = clinicalForm.getParameter("ageAtDxUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("ageAtDxUpper")) : null
+      String gender = (String)clinicalForm.getParameter("gender")
+      Integer survivalLower = clinicalForm.getParameter("survivalLower")!=null ? Integer.valueOf(clinicalForm.getParameter("survivalLower")) : null
+      Integer survivalUpper = clinicalForm.getParameter("survivalUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("survivalUpper")) : null 
+      String disease = (String)clinicalForm.getParameter("disease")
       //String grade = request.getParameter("grade")
-      String race = (String)request.getParameter("race")
+      String race = (String)clinicalForm.getParameter("race")
       
       if (sampleGroups != null) {
-    	  for (int i=0; i < sampleGroups; i++) {    		  
-    	     String groupName = sampleGroups[i]
+    	  for (int i=0; i < sampleGroups.length; i++) {    		  
+    	     String groupName = (String) sampleGroups[i]
     		 System.out.println("sampleGroup=${groupName}")    		  
     	  }      
       }
@@ -175,7 +179,9 @@ class ClinicalService {
       System.out.println("survivalUpper=${survivalUpper}")
       System.out.println("disease=${disease}")
       System.out.println("race=${race}")
-            
+      
+      
+      
       //Set sampleIds = getSampleIds(sampleGroups)
       List groupNames = new ArrayList()
       if ((sampleGroups != null) && (sampleGroups.length > 0)) {
@@ -374,15 +380,13 @@ class ClinicalService {
        }
        
        //now print out the data
-       /*
        System.out.println("==== RAW ORGANIZED DATA ===")
-       /for (sampleId in sampleMap.keySet()) {
+       for (sampleId in sampleMap.keySet()) {
     	  sampleData = sampleMap.get(sampleId)
     	  sampleData.each { d -> 
-    	      System.out.println(d)
+//    	      System.out.println(d)
     	  }    	       	   
        }
-       */
        
        //Create list of Rembrandt clinical report beans
        RembrandtClinicalReportBean rptBean = null
@@ -426,11 +430,11 @@ class ClinicalService {
     	}
     	
     	
-    	//System.out.println("QueryStr=${queryStr}")
+    	System.out.println("QueryStr=${queryStr}")
     	
         List rawClinData = CmaRembClin.findAll(queryStr)
         
-        //System.out.println("Got back rawClinData numRows=${rawClinData?.size()}")
+        System.out.println("Got back rawClinData numRows=${rawClinData?.size()}")
         
         List clinData = assembleClinicalData(rawClinData);
     	

@@ -3,10 +3,15 @@
 
 <%
 	//get the reportBeansList
-	List rbl = (List) session.getAttribute("reportBeansList");
+	//read key from request or def to "reportBeansList" - get from cache or session?
+	String key = (String) request.getParameter("taskId");
+	List rbl = (List) session.getAttribute(key);
 	if(rbl == null)	{
 		out.println("rbl was null");
-		session.setAttribute("reportBeansList", new ArrayList());
+		request.setAttribute( "rbl", new ArrayList());
+	}
+	else	{
+		request.setAttribute( "rbl", rbl );
 	}
 	//request.setAttribute( "rbl", rbl );
 %>
@@ -19,15 +24,47 @@
 <body>
 	<div id="superTop"></div>
 	<div id="top"></div>
-	
-	<display:table name="sessionScope.reportBeansList" defaultsort="1" defaultorder="descending" requestURI="" pagesize="10">
+	<div class="list" id="reportTableDiv">
+	<display:table name="requestScope.rbl" defaultsort="1" defaultorder="descending" requestURI="" pagesize="50">
+	  <display:caption>Clinical Report: <%= gov.nih.nci.cma.util.SafeHTMLUtil.clean(key) %></display:caption>
 	  <display:column property="sampleId" title="ID" sortable="true" headerClass="sortable" />
 	  <display:column property="disease" sortable="true" headerClass="sortable" />
-	  <display:column property="grade" />
+	  <display:column property="ageAtDx" sortable="true" headerClass="sortable" />
+	  <display:column property="gender" sortable="true" headerClass="sortable" />
+	  <display:column property="grade" sortable="true" headerClass="sortable" />
 	  <display:column property="mriDesc"  title="MRI" />
-	  <display:column property="karnofsky"/>
+	  <display:column property="karnofsky" sortable="true" headerClass="sortable" />
+	  
+<display:column property="survivalMonths" sortable="true" headerClass="sortable" />
+<display:column property="survivalLengthRange" sortable="true" headerClass="sortable" />
+<display:column property="race" sortable="true" headerClass="sortable" />
+<display:column property="institution" sortable="true" headerClass="sortable" />
+<display:column property="neurologicalExamOutcome" />
+<display:column property="followupMonth" />
+<display:column property="steroidDoseStatus" />
+<display:column property="antiConvulsantStatus" />
+<display:column property="priorTherapyRadiationSite" />
+<display:column property="priorTherapyRadiationFractionDose" />
+<display:column property="priorTherapyRadiationFractionNumber" />
+<display:column property="priorTherapyRadiationType" />
+<display:column property="priorTherapyChemoAgentName" />
+<display:column property="priorTherapyChemoCourseCount" />
+<display:column property="priorTherapySurgeryProcedureTitle" />
+<display:column property="priorTherapySurgeryTumorHistology" />
+<display:column property="priorTherapySurgeryOutcome" />
+<display:column property="onStudyTherapyRadiationSite" />
+<display:column property="onStudyTherapyRadiationNeurosisStatus" />
+<display:column property="onStudyTherapyRadiationFractionDose" />
+<display:column property="onStudyTherapyRadiationFractionNumber" />
+<display:column property="onStudyTherapyRadiationType" />
+<display:column property="onStudyTherapyChemoAgentName" />
+<display:column property="onStudyTherapyChemoCourseCount" />
+<display:column property="onStudyTherapySurgeryProcedureTitle" />
+<display:column property="onStudyTherapySurgeryIndication" />
+<display:column property="onStudyTherapySurgeryHistoDiagnosis" />
+<display:column property="onStudyTherapySurgeryOutcome" />
 	</display:table>
-	
+	</div>
 	<div  id="bottom" align="center">
 		
 	</div>	  

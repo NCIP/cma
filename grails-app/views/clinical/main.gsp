@@ -23,6 +23,18 @@
 			}
 			
 		</style>
+		<script type="text/javascript">
+			var toggleDisable = function() {
+			    for (var i = 0; i < arguments.length; i++) {
+			      var element = $(arguments[i]);
+			      if (element.hasAttribute('disabled')) {
+					  element.enable();
+				  } else {
+					  element.disable();
+				  }
+			    }
+			  }
+		</script>
 	</head>
 	<body>
 		<h2>Clinical View</h2>
@@ -30,7 +42,7 @@
         	<div class="message">${flash.message}</div><br/>
         </g:if>
 		<div id="stylized" class="myform">
-			<g:form action="clinicalSubmit" method="post" name="clinicalForm">
+			<g:form action="clinicalReport" method="post" name="clinicalForm" target="_blank">
 			<table class="formTable">
 				<tr>
 			        <td class="label">Sample Group(s)
@@ -47,16 +59,18 @@
 						<span class="small">years range</span>
 					</td>
 					<td>
+						<input type="checkbox" onclick="toggleDisable('ageAtDxLower', 'ageAtDxUpper');"/>Restrict by Age
+						<br/><br/>					
 						between
-						<g:select name="ageAtDxLower" from="${(0..100).step(10)}" value="0"/> 
+						<g:select name="ageAtDxLower" from="${(0..100).step(10)}" value="0" id="ageAtDxLower" disabled="true"/> 
 						and
-						<g:select name="ageAtDxUpper" from="${(10..110).step(10)}" value="110"/>
+						<g:select name="ageAtDxUpper" from="${(10..110).step(10)}" value="110" id="ageAtDxUpper" disabled="true"/>
 			        </td>
 		        </tr>
 		        <tr>
 			        <td class="label">Gender</td>
 			        <td>
-			        	<g:select name="gender" from="${['Any', 'Male','Female', 'Other', 'Unknown']}" />
+			        	<g:select name="gender"  from="${genderList}" noSelection="${['ANY':'Any']}" />
 					</td>
 				</tr>
 				<tr>		        
@@ -64,34 +78,38 @@
 						<span class="small">months range</span>
 					</td>
 					<td>
+						<input type="checkbox" onclick="toggleDisable('survivalLower', 'survivalUpper');"/>Restrict by Survival
+						<br/><br/>
 						between
-						<g:select name="survivalLower" from="${(0..100).step(10)}" value="0"/> 
+						<g:select name="survivalLower" from="${(0..100).step(10)}" value="0" disabled="true" /> 
 						and
-						<g:select name="survivalUpper" from="${(10..110).step(10)}" value="110"/>
+						<g:select name="survivalUpper" from="${(10..110).step(10)}" value="110" disabled="true" />						
 			        </td>
 		        </tr>
 		        <tr>
 			        <td class="label">Disease</td>
 			        <td>
-			        	<g:select name="disease" from="${['Any', 'Disease1']}" />
-			        </td>
-		        </tr>
-		        <tr>
-			        <td class="label">Grade</td>
-			        <td>
-			        	<g:select name="grade" from="${['Any', 'Grade1']}" />
+			        	<g:select name="disease" from="${diseaseList}" noSelection="${['ANY':'Any']}" />
 			        </td>
 		        </tr>
 		        <tr>
 			        <td class="label">Race</td>
 			        <td>
-			        	<g:select name="race" from="${['Any', 'Race1']}" />
+			        	<g:select name="race"  from="${raceList}" noSelection="${['ANY':'Any']}" />
+			        </td>
+		        </tr>
+		         <tr>
+			        <td class="label">Query Name
+			        <span class="small">should be unique</span>
+			        </td>
+			        <td>
+			        	<input type="text" name="queryName"/>
 			        </td>
 		        </tr>
 			</table>
 			<div style="text-align:center;">
 		        <input type="reset" value="clear"/>
-		        <input type="button" value="submit" onclick="location.href='${createLink(action:'clinicalReport')}'"/>
+				<input type="submit" value="submit"/>
 			</div>
 			</g:form>
 		</div>
