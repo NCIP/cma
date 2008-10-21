@@ -43,7 +43,7 @@
         <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
 		<div id="superTop"></div>
 		<div id="top">
-			<div id="contextDiv" style="float:right; width:210px;margin:0px;color:#fff;">
+			<div id="contextDiv">
 				<div id="ccontextDiv">
 					<span id="ccontextText">
 						Rembrandt

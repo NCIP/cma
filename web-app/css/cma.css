@@ -65,6 +65,13 @@ legend	{
 }
 
 /* for context switching widget */
+#contextDiv	{
+	float:right; 
+	width:210px;
+	margin:0px;
+	color:#fff;	
+}
+
 #contextOptions a:hover	{
 	background-color:gray;
 	color:#fff;
@@ -80,22 +87,22 @@ legend	{
 	background-repeat:no-repeat;
 }
 #ccontextDiv	{
+	/* note the 2nd c */
 	width:200px;
 	height:30px;
 	text-align:right;
 	background-color:silver;	
+	cursor:pointer;
 }
 #ccontextText	{
 	padding:10px;
 	margin:10px; 
 	color:#fff; 
 	font-size:20px;
-	cursor:pointer;
 }
 #ccontextArrow	{
 	padding:5px; 
 	border-left:1px solid black;
-	cursor:pointer;
 }
 #contextOptions	{
 	margin-left:20px;
