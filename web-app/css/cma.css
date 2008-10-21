@@ -64,6 +64,52 @@ legend	{
 	font-size: 11px;
 }
 
+/* for context switching widget */
+#contextOptions a:hover	{
+	background-color:gray;
+	color:#fff;
+}
+#contextOptions a#tcgaContext	{
+	padding:5px;
+	background-image: url(../images/tcgaContext30.gif);
+	background-repeat:no-repeat;
+}
+#contextOptions a#rbtContext	{
+	padding:5px;
+	background-image: url(../images/rbtContext30.gif);
+	background-repeat:no-repeat;
+}
+#ccontextDiv	{
+	width:200px;
+	height:30px;
+	text-align:right;
+	background-color:silver;	
+}
+#ccontextText	{
+	padding:10px;
+	margin:10px; 
+	color:#fff; 
+	font-size:20px;
+	cursor:pointer;
+}
+#ccontextArrow	{
+	padding:5px; 
+	border-left:1px solid black;
+	cursor:pointer;
+}
+#contextOptions	{
+	margin-left:20px;
+	width:165px;
+	text-align:right;
+	background-color:silver;	
+}
+#contextOptions div	{
+	font-size:16px;
+	padding:5px; 
+	cursor:pointer;
+	color:#000;
+}
+
 /* MESSAGES AND ERRORS from main.css */
 
 .message {

@@ -15,9 +15,23 @@
 			 Event.observe(window, "load", function()	{
 				new Effect.Corner($('superTop'), 'top');
 				new Effect.Corner($('bottom'), 'bottom');
+				
+				new Effect.Corner($('ccontextDiv'), 'bl');
+				$('ccontextDiv').setOpacity(0.5);
+				$('contextOptions').setOpacity(0.5);
+				
+				$('contextDiv').observe('mouseover', function()	{$('ccontextDiv').setOpacity(0.8);} );
+				$('contextDiv').observe('mouseout', function()	{$('ccontextDiv').setOpacity(0.5);} );
+				
+				$('contextDiv').observe('mouseover', function()	{$('contextOptions').setOpacity(0.8);} );
+				$('contextDiv').observe('mouseout', function()	{$('contextOptions').setOpacity(0.5);} );
+				
+				$('middle').observe('mouseover', function()	{
+					$('contextOptions').hide();
+				}
+				);
 			 });
 		</script> 
-		
         <g:layoutHead />
 
     </head>
@@ -25,14 +39,28 @@
         <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
 		<div id="superTop"></div>
 		<div id="top">
-			<div style="padding:5px;color:#fff;text-align:right">
-				Context:
-				<form name="contextSwitchForm" id="contextSwitchForm" action="#" method="POST">
-					<select name="dataContext" id="dataContextSelect" onchange="">
-						<option value="tcgaDataContext">TCGA</option>
-						<option value="rembrandtDataContext">Rembrandt</option>
-					</select>
-			 	</form>
+			<div id="contextDiv" style="float:right; width:210px;margin:0px;color:#fff;">
+				<div id="ccontextDiv">
+					<span id="ccontextText" onclick="$('contextOptions').toggle();return false;" >
+						Rembrandt
+					</span>
+					<span id="ccontextArrow" onclick="$('contextOptions').toggle(); return false;">
+						V
+					</span>
+				</div>
+				<!--  end ccontext -->
+				<div id="contextOptions" style="display:none;">
+					<div>
+						Select Context
+					</div>
+					<div id="">
+						<a id="rbtContext" href="#" onclick="$('ccontextText').update(this.innerHTML);" style="display:block" onclick="return false;">Rembrandt</a>
+					</div>
+					<div id="">
+						<a id="tcgaContext" href="#" onclick="$('ccontextText').update(this.innerHTML);" style="display:block" onclick="return false;">TCGA</a>
+					</div>
+				</div>
+				<!--  end ccontextOptions -->
 			</div>
 		</div>
 		
