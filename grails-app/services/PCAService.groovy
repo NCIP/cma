@@ -24,7 +24,7 @@ import gov.nih.nci.cma.query.dto.ProjectPCAQueryDTO
 
 class PCAService {
 
-	static scope = "request"
+//	static scope = "request"
 	
     boolean transactional = false
 
@@ -90,7 +90,8 @@ class PCAService {
 		String geneReporterName = pcaForm.getParameter("geneReporterName");
 		ReporterGroup reporterGroup = new ReporterGroup();
 		if (pcaForm.getParameter("adv") && geneReporterName != null && 
-				!geneReporterName.equalsIgnoreCase("none")){
+				!geneReporterName.equalsIgnoreCase("none") && 
+				!geneReporterName.equalsIgnoreCase("")){
 //currently only using Gene lists, so this block isnt needed
 //also, no need for the substring stuff since we're not appending listtype
 /*			int i = geneReporterName.lastIndexOf(ListType.Reporter.toString());
