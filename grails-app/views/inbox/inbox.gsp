@@ -43,12 +43,12 @@
 					<span style='color:red; float:right'>
 					<g:if test="${task.getStatus() == gov.nih.nci.caintegrator.enumeration.FindingStatus.Completed}">					
 						<b id="${qname}_status">completed</b>  
-						<img src='images/check.png' alt='complete' id="${qname}_image" />
+						<img src='${createLinkTo(dir:'images',file:'check.png')}' alt='complete' id="${qname}_image" />
 					</g:if>
 					<g:elseif test="${task.getStatus() == gov.nih.nci.caintegrator.enumeration.FindingStatus.Running}">
 						<g:set var="onclick" value="javascript:alert('Analysis Not yet complete');return false;"/>
 						<b id="${qname}_status" >running</b> 
-						<img src='images/circle.gif' alt='running' id="${qname}_image" />
+						<img src='${createLinkTo(dir:'images',file:'circle.gif')}' alt='running' id="${qname}_image" />
 					</g:elseif>
 					<g:elseif test="${task.getStatus() == gov.nih.nci.caintegrator.enumeration.FindingStatus.Error}">
 						<b id="${qname}_status" >
@@ -56,7 +56,7 @@
 							document.write(showErrorHelp('${task.getStatus().getComment()}','error'));
 						</script>
 						</b> 
-						<img src='images/error.png' alt='error' id="${qname}_image" />
+						<img src='${createLinkTo(dir:'images',file:'error.png')}' alt='error' id="${qname}_image" />
 					</g:elseif>
 					</span>
 					
