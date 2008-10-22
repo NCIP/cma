@@ -1,13 +1,18 @@
 import gov.nih.nci.caintegrator.dto.query.QueryDTO;
 import gov.nih.nci.cma.web.graphing.PCAPlot;
+import gov.nih.nci.caintegrator.application.analysis.gp.GenePatternIntegrationHelper;
 
 class AnalysisToolsController {
 
+	String gpHomeURL = "";
 	def defaultListLoaderService
 	def beforeInterceptor = {
 		if(!defaultListLoaderService.areListsLoaded())	{
 			defaultListLoaderService.loadDefaultLists()
 		}
+		gpHomeURL = GenePatternIntegrationHelper.gpHomeURL(request);
+		gpHomeURL = gpHomeURL + "&target=new";
+		//println("gpHomeURL = " + gpHomeURL)
 	}
 	
 	def pCAService;
@@ -16,7 +21,8 @@ class AnalysisToolsController {
     def index = { redirect(action:menu)  }
     
     def menu =	{
-    	render(view:'menu')
+    	render(view:'menu', model:[gpHomeURL:gpHomeURL])
+    	//render(view:'menu')
     }
     
     def pcaSetup = { 
@@ -79,12 +85,14 @@ class AnalysisToolsController {
     
     def genePatternSubmit = {
     		// Remove printlns later:
+    		/*
         	println(params['analysisModuleName'])
         	println(params['selectedGroups'])
         	println(params['geneReporterName'])
         	println(params['platformName'])
         	println(params['chromosomeName'])
         	println(params['analysisResultName'])
+        	*/
         	
         	gPService.generateGPSubmission(request)
 
