@@ -35,6 +35,16 @@ function A_checkSingleFindingStatus(taskId, sessionId)	{
 }
 */
 
+//takes the whole relative path to the image, and changes just the image file name
+function changeImageSrcOnly(iSrc, newImage)	{
+	try	{
+		var imageOnly = iSrc.substring(iSrc.lastIndexOf('/')+1);
+		var nSrc = iSrc.replace(imageOnly, newImage);
+		return nSrc;
+	}
+	catch(e){ }
+	return iSrc;
+}
 
 function A_checkGenePatternStatus_cb(message){
 	//looking for an assoc array arr[taskId]=arr[status, time]
@@ -50,7 +60,7 @@ function A_checkGenePatternStatus_cb(message){
 		if(curEl.innerHTML != "completed")	{
 			curEl.innerHTML = "completed";
 			//alert("message == 'completed' " + message);
-			curElImg.src = "/cma/images/check.png";
+			curElImg.src = changeImageSrcOnly(curElImg.src, "check.png");
 			curElLink.onclick = "";
 			curElLink.removeAttribute("onclick");
 		}
@@ -60,7 +70,7 @@ function A_checkGenePatternStatus_cb(message){
 		if(curEl.innerHTML.indexOf('error') == -1)	{
 			var comments = "Unspecified Error";	
 			curEl.innerHTML = showErrorHelp(comments, "error");
-			curElImg.src = "/cma/images/error.png";
+			curElImg.src = changeImageSrcOnly(curElImg.src, "error.png");
 			//curElLink.onclick = "";
 			//curElLink.removeAttribute("onclick");
 		}
