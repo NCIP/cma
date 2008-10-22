@@ -66,11 +66,15 @@ class AnalysisToolsController {
     
     def genePatternSetup = {
         	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
-        	def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
         	
-        	def moduleList = ["Gene Expression", "Copy Number"]
+        	// Below not used for Rembrandt data
+        	//def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
         	
-        	render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists, moduleList:moduleList])
+        	// 'Copy Number' not used for Rembrandt data. That leaves a selection of one, so don't bother.
+        	//def moduleList = ["Gene Expression", "Copy Number"]
+        	
+        	//render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists, moduleList:moduleList])
+        	render(view:'genePatternSetup', model:[patLists:patLists])
     }
     
     def genePatternSubmit = {
