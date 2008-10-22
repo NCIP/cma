@@ -6,7 +6,11 @@
 }
 #middle	{
 	/* height:100%; */
-	background: #fff;
+	background-color: #ffffff;
+}
+#content	{
+	position:relative; 
+	/* IE 6 fix vanishing text float bug */
 }
 
 #content, #content td	{
@@ -95,18 +99,20 @@ legend	{
 	cursor:pointer;
 }
 #ccontextText	{
+	float:left;
 	padding-left:40px;
 	color:#fff; 
 	font-size:20px;
 	background-image: url(../images/rbtContext30.gif);
 	background-repeat:no-repeat;
 	background-position: 5 2;
-	float:left;
+
 }
 #ccontextArrow	{
+	float:right;
 	padding:5px; 
 	border-left:1px solid black;
-	float:right;
+
 }
 #contextOptions	{
 	margin-left:20px;
