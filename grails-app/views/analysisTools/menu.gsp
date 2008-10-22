@@ -3,10 +3,11 @@
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
-		
 	</head>
 	<body>
+		<fieldset> <!--  without this IE6 will hide all the text on this page -->
 		<h3>High Order Analysis</h3>
+		
 		<ul>
 			<li><a href="${createLink(controller: 'analysisTools', action:'pcaSetup') }">Principle Component Analysis (PCA)</a></li>
 			<li><a href="${createLink(controller: 'analysisTools', action:'genePatternSetup') }">Gene Pattern Analysis</a></li>
@@ -16,5 +17,6 @@
 			<!-- <li><a href="#">Cancer Genome Workbench (Genomic View)</a></li> -->
 
 		</ul>
+		</fieldset>
 	</body>
 </html>
