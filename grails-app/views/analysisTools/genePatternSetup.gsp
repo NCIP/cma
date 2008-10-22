@@ -43,16 +43,21 @@
 		<h3>Gene Pattern Analysis</h3>
 		<g:form name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
 		
+		<!-- No need to select for Rembrandt data
 		<fieldset>
 		<legend>Select an Analysis Module</legend>
 			<div id="analysisModule" style="vertical-align: middle; display: table-cell;">
 				<g:select name="analysisModuleName" size="1" 
 				style="width: 200px; overflow: none;" 
-				onchange="dropdownChromo(this,'advZ','advZ');"
+			<!--	onchange="dropdownChromo(this,'advZ','advZ');" -->
 				from="${moduleList}"></g:select>				
 			</div>
 		</fieldset>
+		-->
+		<input type="hidden" name="analysisModuleName" value="Gene Expression"/>
 		
+		
+		<!-- Not used for Rembrandt data
 		<div id="advZ" style="display:none;">
 			<fieldset>
 				<legend>Select a chromosome</legend>		
@@ -63,6 +68,7 @@
 				</g:select>
 			</fieldset>
 		</div>
+		-->
 		<input type="hidden" id="chromosomeName" name="chromosomeName" value=""/>
 		
 		<fieldset>
@@ -75,6 +81,7 @@
 			</div>
 		</fieldset>
 		
+		<!-- Not used for Rembrandt data
 		<fieldset>
 			<legend>Filter Genes/Reporters</legend>
 			Select a gene/reporter list: <br/>
@@ -83,6 +90,7 @@
 			noSelection="['none':'none']"  
 			from="${geneLists}"></g:select>		
 		</fieldset>
+		-->
 		
 		<fieldset>
 			<legend>Select Array Platform</legend>
