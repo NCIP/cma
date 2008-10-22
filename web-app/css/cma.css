@@ -95,14 +95,18 @@ legend	{
 	cursor:pointer;
 }
 #ccontextText	{
-	padding:10px;
-	margin:10px; 
+	padding-left:40px;
 	color:#fff; 
 	font-size:20px;
+	background-image: url(../images/rbtContext30.gif);
+	background-repeat:no-repeat;
+	background-position: 5 2;
+	float:left;
 }
 #ccontextArrow	{
 	padding:5px; 
 	border-left:1px solid black;
+	float:right;
 }
 #contextOptions	{
 	margin-left:20px;

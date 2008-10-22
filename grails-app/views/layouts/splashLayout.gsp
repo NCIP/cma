@@ -58,10 +58,10 @@
 						Select Context
 					</div>
 					<div id="">
-						<a id="rbtContext" href="#" onclick="$('ccontextText').update(this.innerHTML);" style="display:block" onclick="return false;">Rembrandt</a>
+						<a id="rbtContext" href="#" onclick="$('ccontextText').update(this.innerHTML);$('ccontextText').setStyle({backgroundImage: this.getStyle('backgroundImage')});" style="display:block" onclick="return false;">Rembrandt</a>
 					</div>
 					<div id="">
-						<a id="tcgaContext" href="#" onclick="$('ccontextText').update(this.innerHTML);" style="display:block" onclick="return false;">TCGA</a>
+						<a id="tcgaContext" href="#" onclick="$('ccontextText').update(this.innerHTML);$('ccontextText').setStyle({backgroundImage: this.getStyle('backgroundImage')});" style="display:block" onclick="return false;">TCGA</a>
 					</div>
 				</div>
 				<!--  end ccontextOptions -->
