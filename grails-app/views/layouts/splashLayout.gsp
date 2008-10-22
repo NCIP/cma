@@ -28,12 +28,7 @@
 
 				$('contextDiv').observe('click', function()	{$('contextOptions').toggle();} );
 				
-				
-				
-				$('middle').observe('mouseover', function()	{
-					$('contextOptions').hide();
-				}
-				);
+				$('middle').observe('mouseover', function()	{ $('contextOptions').hide();}	);
 			 });
 		</script> 
         <g:layoutHead />
@@ -52,7 +47,7 @@
 						V
 					</span>
 				</div>
-				<!--  end ccontext -->
+				<!--  end ccontextDiv -->
 				<div id="contextOptions" style="display:none;">
 					<div>
 						Select Context
@@ -66,6 +61,7 @@
 				</div>
 				<!--  end ccontextOptions -->
 			</div>
+			<!-- end contextDiv -->
 		</div>
 		
 		<div id="middle">
