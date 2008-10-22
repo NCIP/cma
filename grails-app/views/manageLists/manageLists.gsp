@@ -55,23 +55,5 @@
 				<a href="#" onclick="javascript:scroll(0,0);return false;">[top]</a>
 			</div>
 		</g:each>
-		
-    <script type="text/javascript">
-    	//this is just for testing - must have Firebug or another JS console (this will cause IE to bomb fyi)
-       DynamicListHelper.getAllLists(function(txt) { 
-       //	console.log(txt);
-      	console.log(txt.isJSON());
-      	var l = txt.evalJSON();
-      	console.log(l.length); //3, 1 for each type
-      	console.log(l);
-      	l.each(function(t)	{
-      		console.log("-------------- List Type: " + t.listType + "----------------------");
-      		
-      		t.listItems.each( function(tt)	{
-      			console.log(tt.listName);
-      		});
-      	}); 	
-      });
-    </script>
 	</body>
 </html>
