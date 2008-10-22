@@ -3,11 +3,11 @@ var coordx   = new Array();
 var coordy   = new Array();
 
 if (ie) {
-	markersrc = "images/marker.gif";
+	markersrc = "../images/marker.gif";
 } else if(saf) {
-	markersrc = "images/blank.gif";
+	markersrc = "../images/blank.gif";
 } else {
-	markersrc = "images/marker.png";
+	markersrc = "../images/marker.png";
 }
 
 
