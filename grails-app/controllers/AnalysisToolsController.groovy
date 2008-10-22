@@ -11,7 +11,6 @@ class AnalysisToolsController {
 			defaultListLoaderService.loadDefaultLists()
 		}
 		gpHomeURL = GenePatternIntegrationHelper.gpHomeURL(request);
-		gpHomeURL = gpHomeURL + "&target=new";
 		//println("gpHomeURL = " + gpHomeURL)
 	}
 	
