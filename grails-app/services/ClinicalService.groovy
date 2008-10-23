@@ -401,6 +401,14 @@ class ClinicalService {
     }
     
     
+    
+    public List getClinicalDataForGroup(String groupName) {
+    	List sg = new ArrayList()
+    	sg.add(groupName)
+    	List groupIds = getIdsForSampleGroups(sg)
+    	return getClinicalData(groupIds)
+    }
+    
     public List getClinicalData(List patientIds) {
     	
     	/*
