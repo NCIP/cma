@@ -9,8 +9,10 @@
 	background-color: #ffffff;
 }
 #content	{
-	position:relative; 
+	_position:relative; 
 	/* IE 6 fix vanishing text float bug */
+	/* adding this causes sidebar links to now work in FF */
+	/* so use _ IE hack because IE6 is a horrible browser full of bugs with float */
 }
 
 #content, #content td	{
