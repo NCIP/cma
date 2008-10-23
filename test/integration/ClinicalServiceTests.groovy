@@ -24,19 +24,22 @@ class ClinicalServiceTests extends GroovyTestCase {
 //    	patientGroups[0] = "GBM"
 //    	patientGroups[1] = "NON_TUMOR"
 
-		List<String> patientGroups = new ArrayList<String>()
-    	patientGroups.add("GBM")
-    	patientGroups.add("NON_TUMOR")
+		//List<String> patientGroups = new ArrayList<String>()
+    	//patientGroups.add("GBM")
+    	//patientGroups.add("ASTROCYTOMA")
     	
-    	List ids = clinicalService.getIdsForSampleGroups(patientGroups)
+    	//List ids = clinicalService.getIdsForSampleGroups(patientGroups)
     	
-    	System.out.println("getIdsForSampleGroups returned ids:")
-    	ids.each { id ->
-    		System.out.println("${id}")
+    	//System.out.println("getIdsForSampleGroups returned ids:")
+    	//ids.each { id ->
+    	//	System.out.println("${id}")
     		
-    	}
+    	//}
     	
-        List data = clinicalService.getClinicalData(ids)
+        //List data = clinicalService.getClinicalData(ids)
+        
+        List data = clinicalService.getClinicalDataForGroup("GBM")
+        
         System.out.println("Got back numResults=${data?.size()}")
         System.out.println("==== CLINICAL REPORT ====")
     	data.each { d -> 
