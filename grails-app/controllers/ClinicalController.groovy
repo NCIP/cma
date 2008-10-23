@@ -1,3 +1,4 @@
+import grails.converters.*
 import gov.nih.nci.cma.clinical.*;
 import java.text.SimpleDateFormat;
 
@@ -62,6 +63,15 @@ class ClinicalController {
     
     def clinicalReportDisplay = {
     	render(view:"clinicalReportTable")
+    }
+    
+    def clinicalKM = {
+		//process form, set model and forward
+		def sreq = params as JSON
+    	def path = request.getContextPath()
+    	def sessionId = session.getId()
+    	
+    	render(view:"clinicKmPlot", model:[plot:params.plot,listItems:sreq, sessionId:sessionId])
     }
     
     def clinicalReportTest = {

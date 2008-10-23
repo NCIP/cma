@@ -34,14 +34,22 @@
 				  }
 			    }
 			  }
+			Event.observe(window, "load", function()	{
+				new Effect.Corner($('sampleKMHeader'), 'top');
+				new Effect.Corner($('clinicalHeader'), 'top');
+			});
 		</script>
 	</head>
 	<body>
 		<h2>Clinical View</h2>
+		<fieldset>
 		<g:if test="${flash.message}">
         	<div class="message">${flash.message}</div><br/>
         </g:if>
-		<div id="stylized" class="myform">
+		<div id="clinicalHeader" class="sectionHeader">
+			<h5>Clinical Search</h5>
+		</div>
+		<div class="sectionBody">
 			<g:form action="clinicalReport" method="post" name="clinicalForm" target="_blank">
 			<table class="formTable">
 				<tr>
@@ -113,5 +121,42 @@
 			</div>
 			</g:form>
 		</div>
+		</fieldset>
+		
+		
+		<!--  start km -->
+		<div>
+			<div id="sampleKMHeader" class="sectionHeader">
+				<h5>Sample-based Kaplan-Meier Graph</h5>
+			</div>
+			<div class="sectionBody">
+				<g:form action="clinicalKM" method="post" name="clinicKMPlotForm">
+				<input type="hidden" name="plot" value="SAMPLE_KM_PLOT"/>
+				<table align="center" border="0">
+		    		<tr style="vertical-align:top">
+		    			<td>
+			       			Kaplan-Meier survival plot for Sample Data&nbsp;
+			        		<br/><br/>
+			        		<g:select name="groupNameOne" style="margin-left:20px;width:200px;" id="groupNameOne"
+			        			from="${patLists}"></g:select>
+			         		vs. 
+							<g:select name="groupNameCompare" style="margin-left:20px;width:200px;" id="groupNameCompare"
+			        			from="${patLists}"></g:select>
+			        		<br/><br/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+		        			<div style="text-align:center">
+			        			<input type="submit" id="submittalButton" class="subButton" value="Go" />
+		        			</div>
+		        		</td>
+		        	</tr>
+				</table>
+				</g:form>
+			</div>
+		</div>
+		<!--  end km -->
+		
 	</body>
 </html>
