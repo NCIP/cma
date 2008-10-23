@@ -53,7 +53,7 @@ function kmPlotCallback(data) {
 				var groupName = sampleGroupNames[i].name;
 				var groupCount = sampleGroupNames[i].count;
 				var ids = sampleGroupNames[i].ids;
-				reportHTML += "&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:spawnx('clinicalReport.do?method=runReport&taskId=" + groupName + "QuickSearch&ids=" + ids + "', 750, 500,'clinical_report');\">" + groupName + "</a>&nbsp;&nbsp;";
+				reportHTML += "&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:spawn('./clinicalSampleGroup?taskId=" + groupName +"', 750, 500,'clinical_report');\">" + groupName + "</a>&nbsp;&nbsp;";
 				statisticsHTML += "&nbsp;&nbsp;" + groupName + ":&nbsp;&nbsp;" + groupCount + "&nbsp;samples<br />";
 			}
 			if (logRank != null) {
@@ -72,6 +72,11 @@ function kmPlotCallback(data) {
 		
 	}
 }
+
+function spawn(url, winw, winh) {
+    var w = window.open(url, "_blank", "screenX=0,screenY=0,status=yes,toolbar=no,menubar=no,location=no,width=" + winw + ",height=" + winh + ",scrollbars=yes,resizable=yes");
+}
+
 /* Loads an indicator image while image is retrieved */
 function loadingImage() {
 	$("geneKmPlot").innerHTML = "<img src=\"../images/indicator.gif\" /> loadingImage...";

@@ -13,6 +13,7 @@
 	else	{
 		request.setAttribute( "rbl", rbl );
 	}
+	String noBack = request.getParameter("noBack")!=null ? (String) request.getParameter("noBack") : "false";
 	//request.setAttribute( "rbl", rbl );
 %>
 <html>
@@ -25,6 +26,9 @@
 	<div id="superTop"></div>
 	<div id="top"></div>
 	<div class="list" id="reportTableDiv">
+<% if(!noBack.equals("true")) { %>
+	<a id="backToClinical" href="./">Back to Clinical</a><br/>
+<% } %>
 	<display:table name="requestScope.rbl" defaultsort="1" defaultorder="descending" requestURI="" pagesize="50">
 	  <display:caption>Clinical Report: <%= gov.nih.nci.cma.util.SafeHTMLUtil.clean(key) %></display:caption>
 	  <display:column property="sampleId" title="ID" sortable="true" headerClass="sortable" />

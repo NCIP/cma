@@ -50,7 +50,7 @@
 			<h5>Clinical Search</h5>
 		</div>
 		<div class="sectionBody">
-			<g:form action="clinicalReport" method="post" name="clinicalForm" target="_blank">
+			<g:form action="clinicalReport" method="post" name="clinicalForm">
 			<table class="formTable">
 				<tr>
 			        <td class="label">Sample Group(s)

@@ -40,6 +40,12 @@ class ClinicalController {
     
     def clinicalReport = {
 
+		if(params.sampleGroup == null)	{
+    		//flash and redirect
+    		flash.message = "Please select a Sample Group"
+            redirect(controller:"clinical")
+            return
+    	}
 		//TODO: we will also want a sep method for pulling completed reports from cache?
 		//this view is a JSP using the DisplayTag for report rendering
 		//check query name
@@ -66,12 +72,27 @@ class ClinicalController {
     }
     
     def clinicalKM = {
+    	if(params.groupNameOne == params.groupNameCompare)	{
+    		//flash and redirect
+    		flash.message = "Groups can not be the same"
+            redirect(controller:"clinical")
+            return
+    	}
 		//process form, set model and forward
 		def sreq = params as JSON
     	def path = request.getContextPath()
     	def sessionId = session.getId()
     	
     	render(view:"clinicKmPlot", model:[plot:params.plot,listItems:sreq, sessionId:sessionId])
+    }
+    
+    def clinicalSampleGroup =	{
+    		
+   		SimpleDateFormat dateformatMMDDYYYY = new SimpleDateFormat("MMddyyyy");
+		def qname = "clinical_" + dateformatMMDDYYYY.format(new Date())
+   		List reportBeansList = clinicalService.getClinicalDataForGroup(params.taskId);
+   		session.setAttribute(qname, reportBeansList);
+   		redirect(action:'clinicalReportDisplay', params:[taskId:qname, noBack:'true'])
     }
     
     def clinicalReportTest = {
