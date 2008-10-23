@@ -6,6 +6,10 @@
 		
 		<script type="text/javascript">
 			Event.observe(window, "load", function()	{
+			
+				$$(".sectionHeader").each(function(e){
+					new Effect.Corner(e, 'top');
+				} );
 				new Ajax.Request("${createLink(controller:'genomeView', action:'links')}", {
 				  onSuccess: function(transport) {
 				   // console.log(transport.responseJSON.length);
@@ -54,35 +58,40 @@
 		</script>
 	</head>
 	<body>
-		<h3>Genome View</h3>
-		
-		<fieldset id="cnfs">
-			<legend>Genomic View of Copy Number Data</legend>
-			<div style="padding:5px;margin-left:40px;">
+		<h2>Genome View</h2>
+		<fieldset>
+		<div id="cnfs">
+			<div class="sectionHeader"><h5>Genomic View of Copy Number Data</h5></div>
+			<div class="sectionBody" style="padding-left:40px;">
 				<div id="genomeBasedCN"></div>
 			</div>
-		</fieldset>
-		<fieldset id="expfs">
-			<legend>Genomic View of Gene Expression Data</legend>
-			<div style="padding:5px;margin-left:40px;">
+		</div>
+		<br clear="all" />
+		<br clear="all" />
+		
+		<div id="expfs">
+			<div class="sectionHeader"><h5>Genomic View of Gene Expression Data</h5></div>
+			<div class="sectionBody" style="padding-left:40px;">
 				<div id="genomeBased"></div>
 			</div>
-		</fieldset>
-		
-		<fieldset id="metfs">
-			<legend>Genomic View of Methylation Data</legend>
-			<div style="padding:5px;margin-left:40px;">
+		</div>
+		<br clear="all" />
+		<br clear="all" />
+		<div id="metfs">
+			<div class="sectionHeader"><h5>Genomic View of Methylation Data</h5></div>
+			<div class="sectionBody" style="padding-left:40px;">
 				<div id="genomeBasedME"></div>
 			</div>
-		</fieldset>
-		
-		<fieldset id="mutfs">
-			<legend>Genomic View of Mutation Data</legend>
-			<div style="padding:5px;margin-left:40px;">
+		</div>
+		<br clear="all" />
+		<br clear="all" />
+		<div id="mutfs">
+			<div class="sectionHeader"><h5>Genomic View of Mutation Data</h5></div>
+			<div class="sectionBody" style="padding-left:40px;">
 				<a href="http://cgwb.nci.nih.gov/cgi-bin/fwd?hint=tcga&hint2=genomic" target="_blank">Cancer Genome Workbench (Genomic View)</a>
 			</div>
+		</div>
 		</fieldset>
-
 <b>Requires Java Plugin</b><br/><br/>
 
 	

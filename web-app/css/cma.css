@@ -33,6 +33,19 @@
 	margin-top:10px;
 }
 
+.sectionHeader	{
+	/* typically rounded on top */
+	padding:5px;
+	background-color:#2B2D51; 
+	color:#fff;	
+	position:relative;
+}
+.sectionBody	{
+	border:1px solid #E0E0E0;
+	_border:0px solid #E0E0E0;
+	/* IE 6 flakes out when you have a border on these */
+}
+
 .xbutton	{
 	border-top:1px solid #2B2D51;
 	border-left:1px solid #2B2D51;
@@ -46,8 +59,11 @@ fieldset	{
 	border-left:0px;
 	border-top:0px dashed #2B2D51;
 	/*width:70%;*/
+	/*
 	padding:20px;
 	margin-top:20px;
+	*/
+	margin-bottom:20px;
 }
 .radio	{
 	margin-left:40px;
@@ -128,6 +144,16 @@ legend	{
 	cursor:pointer;
 	color:#000;
 }
+
+
+/* KM Related */
+#geSubmitButton	{
+	width:150px;
+	margin-left: auto;
+    margin-right: auto;	
+    display:block;
+}
+
 
 /* MESSAGES AND ERRORS from main.css */
 

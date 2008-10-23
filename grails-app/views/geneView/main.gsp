@@ -70,7 +70,7 @@
 		</script>
 	</head>
 	<body>
-		<h3>Gene View</h3>
+		<h2>Gene View</h2>
 		
 		<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm">
 		
