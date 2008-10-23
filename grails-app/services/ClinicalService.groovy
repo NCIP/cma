@@ -88,12 +88,12 @@ class ClinicalService {
     /**
      * Not sure where to get grade from
      */
-    public List getIdsForGrade(String gender) {
+    public List getIdsForGrade(String grade) {
     	
     	def criteria = CmaRembClin.createCriteria()
     	def results = criteria.list{
     	  like('parm', 'GRADE')
-    	  like('parmCharValue', gender)    		
+    	  like('parmCharValue', grade)    		
     	}
     	
     	List idList = new ArrayList()
@@ -108,7 +108,7 @@ class ClinicalService {
     	def criteria = CmaRembClin.createCriteria()
     	def results = criteria.list{
     	  like('parm', 'RACE')
-    	  like('parmCharValue', gender)    		
+    	  like('parmCharValue', race)    		
     	}
     	
     	List idList = new ArrayList()
@@ -466,9 +466,9 @@ class ClinicalService {
     		values.add("UNKNOWN");    	
     	}
     	else if (paramName.equals(RembrandtClinicalKeys.gender)) {
-    		values.add("Male");
-    		values.add("Female");
-    		values.add("Other");    		
+    		values.add("M");
+    		values.add("F");
+    		values.add("O");    		
     	}
     	else if (paramName.equals(RembrandtClinicalKeys.race)) {    		
     		values.add("WHITE")
