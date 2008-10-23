@@ -71,8 +71,9 @@
 			}
 			.splashMenu	{
 				width:200px;
-				border-left: 1px solid #E0E0E0;
+				border-left: 0px solid #E0E0E0;
 				color: silver;
+				height:50px;
 			}
 			.splashMenu h5	{
 				padding:5px;
@@ -111,9 +112,9 @@
 									Study Results
 								</h5>
 							</td>
-							<td rowspan="5" id="splashMain" style="border: 5px solid #2B2D51;">
+							<td rowspan="6" id="splashMain" style="border: 5px solid #2B2D51;">
 							</td>
-							<td rowspan="5">
+							<td rowspan="6">
 								<div style="width: 250px;">
 									<div style="padding: 20px">
 										<span style="color: DimGray; font-size: .9em">
@@ -201,9 +202,12 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="splashMenu" title="tools" style="border-bottom: 1px solid #E0E0E0;">
+							<td class="splashMenu" title="tools" style="">
 								<h5>Analysis Tools</h5>
 							</td>
+						</tr>
+						<tr>
+							<td> </td>
 						</tr>
 					</tbody>
 				</table>
