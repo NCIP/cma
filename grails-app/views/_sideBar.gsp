@@ -33,6 +33,6 @@
 <g:javascript>
 	Event.observe(window, "load", function()	{
 		//load up the news
-		new Ajax.Updater('sidebarNews', '../news.html');
+		new Ajax.Updater('sidebarNews', '${createLinkTo(dir:'',file:'news.html')}');
 	});
 </g:javascript>
