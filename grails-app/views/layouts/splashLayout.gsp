@@ -75,7 +75,6 @@
 			<g:fixScript name="none">
 				<g:pageProperty name="page.side" default="${render(template:'/sideBar', model:[location:'home'])}"/>
 			</g:fixScript>
-			
 			<div id="content" style="padding:10px;">
 	    	    <g:layoutBody />
 	    	    <br clear="all"/>
