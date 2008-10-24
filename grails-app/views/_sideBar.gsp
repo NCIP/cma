@@ -1,4 +1,3 @@
-
 <div class="sidebar">
 	<div style="padding: 10px;">
 		<b>Administration:</b>
@@ -9,27 +8,10 @@
 			<li>
 				<a href="${createLink(controller:'manageLists')}" title="">List Management</a>
 			</li>
-			<li>
-				<a href="http://tcga-data.nci.nih.gov/tcga" title="" target="_blank">Cancer
-					Genome Atlas Data Download</a>
-			</li>
 		</ul>
 		<br />
 		<b>News:</b>
-		<ul>
-			<li>
-				<a href="newsDataVersion.do">Data Version</a>
-			</li>
-			<li>
-				Number of Patients - 223
-			</li>
-			<li>
-				Number of Expression Arrays - 938
-			</li>
-			<li>
-				Number of Copy Number Arrays - 361
-			</li>
-		</ul>
+		<ul id="sidebarNews"></ul>
 		<div id="sidebar">
 
 			<!--
@@ -47,3 +29,10 @@
 		</div>
 	</div>
 </div>
+
+<g:javascript>
+	Event.observe(window, "load", function()	{
+		//load up the news
+		new Ajax.Updater('sidebarNews', '../news.html');
+	});
+</g:javascript>

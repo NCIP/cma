@@ -69,11 +69,8 @@
 			
 			<g:fixScript name="none">
 				<g:pageProperty name="page.tabs" default="${render(template:'/tabs', model:[location:'home'])}"/>
-			</g:fixScript>
-			
 			<!--  sidebar -->
-			<g:fixScript name="none">
-				<g:pageProperty name="page.side" default="${render(template:'/sideBar', model:[location:'home'])}"/>
+				<g:pageProperty name="page.side" default="${render(template:'/sideBar')}"/>
 			</g:fixScript>
 			<div id="content" style="padding:10px;">
 	    	    <g:layoutBody />
