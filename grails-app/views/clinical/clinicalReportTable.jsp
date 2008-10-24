@@ -33,13 +33,11 @@
 	  <display:caption>Clinical Report: <%= gov.nih.nci.cma.util.SafeHTMLUtil.clean(key) %></display:caption>
 	  <display:column property="sampleId" title="ID" sortable="true" headerClass="sortable" />
 	  <display:column property="disease" sortable="true" headerClass="sortable" />
-	  <display:column property="ageAtDx" sortable="true" headerClass="sortable" />
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="grade" sortable="true" headerClass="sortable" />
 	  <display:column property="mriDesc"  title="MRI" />
 	  <display:column property="karnofsky" sortable="true" headerClass="sortable" />
 	  
-<display:column property="survivalMonths" sortable="true" headerClass="sortable" />
 <display:column property="survivalLengthRange" sortable="true" headerClass="sortable" />
 <display:column property="race" sortable="true" headerClass="sortable" />
 <display:column property="institution" sortable="true" headerClass="sortable" />
