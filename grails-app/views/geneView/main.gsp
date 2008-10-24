@@ -78,9 +78,9 @@
 						plotType = myform.plot[i].value;
 					}
 				}
-				var pathwayName = myform.pathwayName.value;
-			
+				
 				if (plotType == "pathway"){
+					var pathwayName = myform.pathwayName.value;
 					var link = "${pwLink}" + pathwayName;
 					window.open( link, 'page2', 'status,resizable,scrollbars,width=965px,height=800px,screenX=100,screenY=100');
 					return false;
@@ -161,6 +161,7 @@
 		<!-- close mainc -->
 		</div>
 		
+		<!-- 
 		<br/><br/>
 		<div id="pathwaySearchHeader" style="padding:5px;background-color:#2B2D51; color:#fff;">
 			<h5>Pathway Visualization</h5>
@@ -178,6 +179,7 @@
         	<input type="reset" value="clear" id="clearButton" class="">&nbsp;&nbsp;
 	        <input type="button" class="subButton" value="Go" onclick="popPathway($F('pathwayName'));" />
         </div>
+        -->
         
 		</fieldset>
 		</form>
