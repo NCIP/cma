@@ -105,7 +105,7 @@ import org.genepattern.webservice.Parameter;
 
 class GPService {
 	static scope = "request"
-	boolean transactional = true
+	boolean transactional = false
 	
     private static Logger logger = Logger.getLogger(GPService.class);
     private IdMapper idMappingManager;
@@ -140,6 +140,7 @@ class GPService {
 		String arrayPlatformName = platform.platformName
 		
 //		 Remove printlns later:
+		/*
 		println("******")
 		println("patientGroups[0] = " + patientGroups[0])
     	println("gpModule = " + gpModule)
@@ -149,6 +150,7 @@ class GPService {
     	println("analysisResultName = " + analysisResultName)
     	println("annotationFileName = " + annotationFileName)
     	println("arrayPlatformName = " + arrayPlatformName)
+    	*/
 			
 		idMappingManager = SpringContext.getBean("idMappingManager");
 		annotationManager = SpringContext.getBean("annotationManager");
@@ -168,17 +170,17 @@ class GPService {
 
 	    	List<ListItem> listItems = helper.getUserList(patientGroup).getListItems();
 	    	
-			println("### patientIdset ###")
+			//println("### patientIdset ###")
 	    	
 	    	Set<String> patientIdset = new HashSet<String>();
 			for (Iterator i = listItems.iterator(); i.hasNext(); ) {
 				ListItem item = (ListItem)i.next();
 				patientIdset.add(item.getName());
 				
-				print(" " + item.getName())
+				//print(" " + item.getName())
 			}
 			
-			println(" END")
+			//println(" END")
 			
 			criteria.setPatientIds(patientIdset);
 			criteria.setFileName(binaryFileName);
@@ -307,7 +309,7 @@ class GPService {
 		String gpserverURL = System.getProperty("gov.nih.nci.caintegrator.gp.server") !=null ? 
 				(String)System.getProperty("gov.nih.nci.caintegrator.gp.server") : "localhost:8080"; //default to localhost
 				
-		println("gpserverURL = ")
+		//println("gpserverURL = ")
 				
 		try {
 		//*	
@@ -319,6 +321,7 @@ class GPService {
 			
 			if (info != null)
 				cmaUser = info.getUserName();
+			
 			String publicUser = System.getProperty("gov.nih.nci.caintegrator.gp.publicuser.name");
 			String password = System.getProperty("gov.nih.nci.caintegrator.gp.publicuser.password");
 			
@@ -328,8 +331,8 @@ class GPService {
 			if (cmaUser == null)
 				cmaUser = publicUser;
 			
-			println("cmaUser = " + cmaUser)
-			println("password = " + password)
+			//println("cmaUser = " + cmaUser)
+			//println("password = " + password)
 			
 			GPServer gpServer = null;
 			if (cmaUser.equals(publicUser)) {
@@ -340,22 +343,22 @@ class GPService {
 					session.setAttribute(GenePatternPublicUserPool.PUBLIC_USER_NAME, gpUser);
 					session.setAttribute(GenePatternPublicUserPool.PUBLIC_USER_POOL, pool);
 					
-					if (pool != null)
-						println("PublicUserPool not null")
-					else
-						println("gpUser = " + gpUser)
+					//if (pool != null)
+					//	println("PublicUserPool not null")
+					//else
+					//	println("gpUser = " + gpUser)
 				}
 				cmaUser = gpUser;
-				println("cmaUser now = " + cmaUser)
+				//println("cmaUser now = " + cmaUser)
 			}
 			String encryptKey = System.getProperty("gov.nih.nci.caintegrator.gp.desencrypter.key");
-			println("encryptKey = " + encryptKey)
+			//println("encryptKey = " + encryptKey)
 			String urlString = EncryptionUtil.encrypt(cmaUser + gpPoolString, encryptKey);
-			println("urlString = " + urlString)
+			//println("urlString = " + urlString)
 			urlString = URLEncoder.encode(urlString, "UTF-8");
-			println("urlString after encoding = " + urlString)
+			//println("urlString after encoding = " + urlString)
 			String ticketString = gpserverURL + "gp?ticket=" + urlString;
-			println("Gene Pattern ticketString = " + ticketString)
+			//println("Gene Pattern ticketString = " + ticketString)
 			
 			logger.info(ticketString);
 			URL url;
@@ -371,10 +374,10 @@ class GPService {
             
 			gpServer = new GPServer(gpserverURL, cmaUser, password);
 			
-			if (gpServer != null)
-				println("gpServer not null")
-			else
-				println("gpServer is null")
+			//if (gpServer != null)
+			//	println("gpServer not null")
+			//else
+			//	println("gpServer is null")
 			
 			//*/
 			//GPServer gpServer = new GPServer(gpserverURL, gpuname, password);
@@ -382,7 +385,7 @@ class GPService {
 			int offset = 4;
 			String moduleName =  System.getProperty("gov.nih.nci.caintegrator.gp.modulename.geneexpression");
 			
-			println("moduleName = " + moduleName)
+			//println("moduleName = " + moduleName)
 			
 			Parameter[] par = null;
 			if (gpModule.equalsIgnoreCase("Copy Number")) {
@@ -416,12 +419,12 @@ class GPService {
 				par[++currpos] = new Parameter("output.cn.file",analysisResultName+".cn");
 			//JobResult preprocess = gpServer.runAnalysis(gpModule, par);
 			
-			println("Before gpServer.runAnalysisNoWait")
-			println("par = " + par)
+			//println("Before gpServer.runAnalysisNoWait")
+			//println("par = " + par)
 			
 			int nowait = gpServer.runAnalysisNoWait(moduleName, par);
 			
-			println("After gpServer.runAnalysisNoWait")
+			//println("After gpServer.runAnalysisNoWait")
 
 			tid = String.valueOf(nowait);
 			//LSID = urn:lsid:8080.root.localhost:genepatternmodules:20:2.1.7
