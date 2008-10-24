@@ -6,6 +6,10 @@
 	</head>
 	<body>
 		<h3>Principal Component Analysis</h3>
+		<g:if test="${flash.message}">
+        	<div class="message">${flash.message}</div><br/>
+        </g:if>
+        
 		<g:form controller="analysisTools" action="pcaSubmit" method="post">
 		<fieldset>
 		<legend>Select Patient Group</legend>

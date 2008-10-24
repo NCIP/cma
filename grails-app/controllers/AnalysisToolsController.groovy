@@ -37,7 +37,27 @@ class AnalysisToolsController {
 //    		params.sgroups = sgroups;
     	//had to pass entire request, not just params, b/c grails cant properly make a mult
     	//select a string[] if only 1 thing is selected.
-		QueryDTO queryDTO = pCAService.createDTO(session.getId(), request)
+		
+    	if(params.selectedGroups == null)	{
+    		//flash and redirect
+    		flash.message = "Please select at least one Sample Group"
+            redirect(controller:"analysisTools", action:"pcaSetup")
+            return
+    	}
+    	if(params.arrayPlatform == null || params.arrayPlatform == "")	{
+    		//flash and redirect
+    		flash.message = "Please select a Platform"
+            redirect(controller:"analysisTools", action:"pcaSetup")
+            return
+    	}
+    	if(params.analysisResultName == null || params.analysisResultName == "")	{
+    		//flash and redirect
+    		flash.message = "Please select a Name for your Analysis"
+            redirect(controller:"analysisTools", action:"pcaSetup")
+            return
+    	}
+    	
+    	QueryDTO queryDTO = pCAService.createDTO(session.getId(), request)
 		
 		pCAService.submitQuery(session.getId(), queryDTO);
 		
