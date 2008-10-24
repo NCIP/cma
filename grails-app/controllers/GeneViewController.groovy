@@ -84,6 +84,18 @@ class GeneViewController {
             redirect(controller:"geneView")
             return 
     	}
+    	if(params.sampleGroupNameMultiple == null)	{
+    		flash.message = "Please Select a Sample Group"
+            redirect(controller:"geneView")
+            return 
+    	}
+    	if(params.geArrayPlatform == null || params.geArrayPlatform == "")	{
+    		flash.message = "Please Select a Platform"
+            redirect(controller:"geneView")
+            return 
+    	}
+    	
+    	
     	
     	def gs = new GeneSearch(annotationManager, idMappingManager, kmReporterService)
     	def annotationsMap = gs.lookupReportersForQuickSearch(request)
