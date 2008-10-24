@@ -180,6 +180,23 @@ public class DynamicListHelper {
 		return success;
 	}
 	
+	//same as above, but callable outside DWR context
+	public static String saveSamplesWithSession(String commaSepList, String name, HttpSession session)	{
+		String success = "fail";
+		String[] listArr = commaSepList.split(",");
+		List<String> list = Arrays.asList(listArr);
+		try	{
+            ProjectListValidator lv = new ProjectListValidator(ListType.PatientDID, list);
+			success = CommonListFunctions.createGenericListWithSession(ListType.PatientDID, null, list, name, lv, session);
+		}
+		catch(Exception e) {
+			//most likely cant access the session
+			System.out.println("err: "+ e.getMessage());
+		}
+		return success;
+	}
+	
+	
 	public String processRepoterAnnotation(String key)	{
 		String url = System.getProperty("gov.nih.nci.cma.annotations.links.reporter");
 		String aurl = url != null ? url +key : "";

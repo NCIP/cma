@@ -95,6 +95,25 @@ class ClinicalController {
    		redirect(action:'clinicalReportDisplay', params:[taskId:qname, noBack:'true'])
     }
     
+    //called from a remote call to save samples
+    def saveSamplesFromClinical = { 
+    		//get the list of reportbeans
+    		def idList = [] 
+    		String commaList = "";
+    		List rbs = new ArrayList()
+    		rbs = session.getAttribute(params.sessionKey)
+    		if(rbs!=null)	{
+    			rbs.each{
+    				idList << it.getSampleId()
+    			}
+    			commaList = idList.join(",")
+    		}
+    		
+    		//call dynamic list helper - pass/fail return
+    		String results = gov.nih.nci.cma.web.ajax.DynamicListHelper.saveSamplesWithSession(commaList, params.listName, request.getSession())
+    		render results
+    }
+    
     def clinicalReportTest = {
     		
     		//generate this List artificially

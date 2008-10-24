@@ -13,8 +13,11 @@ body {
 }
 
 /*  from displaytag pagination */
-.pagebanner, .pagelinks, caption	{
+.pagebanner, .pagelinks, caption, #saveSamplesDiv, #backToClinical	{
 	font: 14px verdana, arial, helvetica, sans-serif;	
+}
+#backToClinical	{
+	float:right;	
 }
 .pagebanner, .pagelinks	{
 	color:gray;	

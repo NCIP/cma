@@ -21,14 +21,21 @@
 	<title>CMA</title>
 	<link href="../css/cma.css" rel="stylesheet" type="text/css" />
 	<link href="../css/gtable.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/prototype/prototype.js"></script>
+	<script type="text/javascript" src="../js/saveSamplesFromClinical.js"></script>
 </head>
 <body>
 	<div id="superTop"></div>
 	<div id="top"></div>
 	<div class="list" id="reportTableDiv">
-<% if(!noBack.equals("true")) { %>
-	<a id="backToClinical" href="./">Back to Clinical</a><br/>
-<% } %>
+<%if(!noBack.equals("true")) { %> 
+	<a id="backToClinical" href="./">Back to Clinical</a><br/> 
+<% } %> 
+	<div id="saveSamplesDiv"> 
+		<input type="text" value="<%=key%>_samples" name="listName" id="listName" /> 
+		<input type="button" id="saveSamplesButton" onclick="saveGroupFromClinical('<%=key%>',$('listName').value);" value="Save All Samples from Report" /> 
+		<span id="saveSamplesStatus"></span>
+	</div>
 	<display:table name="requestScope.rbl" defaultsort="1" defaultorder="descending" requestURI="" pagesize="50">
 	  <display:caption>Clinical Report: <%= gov.nih.nci.cma.util.SafeHTMLUtil.clean(key) %></display:caption>
 	  <display:column property="sampleId" title="ID" sortable="true" headerClass="sortable" />
@@ -72,4 +79,4 @@
 	</div>	  
 		
 </body>
-</html>
+</html>?></span></div></div>
