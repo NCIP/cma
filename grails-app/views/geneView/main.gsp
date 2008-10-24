@@ -70,7 +70,7 @@
 			
 			function checkTask(myform){
 
-				$('submittalButton').disable();
+				//$('submittalButton').disable();
 				var radioLength = myform.plot.length;
 				var plotType = "";
 				for(var i = 0; i < radioLength; i++) {
