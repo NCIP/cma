@@ -121,7 +121,7 @@
 	        Gene Expression plot&nbsp;<br />
 			<input type="radio" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">
 	        Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br />
-			<input type="radio" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">
+			<input disabled="disabled" type="radio" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">
 	        View mutations and copy number changes&nbsp;<br/>
 			<br/>
 			
@@ -151,7 +151,7 @@
 			
 			Select Array Platform: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- sets the hidden field to the platformName - do not change -->
-			<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.list()}" optionValue="platformName" optionKey="fileName"></g:select>
+			<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;" name="geArrayPlatform" id="geArrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.list()}" optionValue="platformName" optionKey="fileName"></g:select>
 			<input type="hidden" id="platformName" name="platformName" value=""/>
 			
 			<div style="text-align:center; padding-top:10px;">
