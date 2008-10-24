@@ -53,8 +53,10 @@ class GeneViewController {
     	
     	//fetch the patient lists to popupate the form
     	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+    	String pwLink = System.getProperty("gov.nih.nci.cma.links.pathway_url");
+    	String gwbLink = System.getProperty("gov.nih.nci.cma.links.genomeworkbench_url");
     	
-    	render(view:'main', model:[patLists:patLists])
+    	render(view:'main', model:[patLists:patLists, pwLink:pwLink, gwbLink:gwbLink])
     }
     
     def geneBasedView = {

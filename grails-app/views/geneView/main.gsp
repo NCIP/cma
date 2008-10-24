@@ -60,6 +60,7 @@
 		  		document.getElementById("geArrayPlatformId").disabled = ok;
 			}
 
+			//not in use
 			function popPathway(pathwayName)	{
 				var link = "" + pathwayName; //need to get this
 				alert("need to read link from props");
@@ -67,12 +68,42 @@
 				return false;
 			}
 			
+			function checkTask(myform){
+
+				$('submittalButton').disable();
+				var radioLength = myform.plot.length;
+				var plotType = "";
+				for(var i = 0; i < radioLength; i++) {
+					if(myform.plot[i].checked) {
+						plotType = myform.plot[i].value;
+					}
+				}
+				var pathwayName = myform.pathwayName.value;
+			
+				if (plotType == "pathway"){
+					var link = "${pwLink}" + pathwayName;
+					window.open( link, 'page2', 'status,resizable,scrollbars,width=965px,height=800px,screenX=100,screenY=100');
+					return false;
+				}
+				else if (plotType == "genomeWorkbench"){
+					var geneName = myform.geneSymbol.value;
+					if (geneName == null || geneName.length == 0){
+						alert("Please enter a gene symbol.");
+						return false;
+					}
+					var link = "${gwbLink}" + geneName + "&hint=tcga";
+					window.open( link, 'page2', 'status,resizable,scrollbars,width=965px,height=800px,screenX=100,screenY=100');
+					return false;
+				}
+				return true;
+			}
+			
 		</script>
 	</head>
 	<body>
 		<h2>Gene View</h2>
 		
-		<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm">
+		<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm" onsubmit="return checkTask(this);">
 		
 		<fieldset>
 			<g:if test="${flash.message}">
@@ -142,7 +173,7 @@
 	        <select name="pathwayName" onchange="needGVal = false;" id="pathwayName" style="margin-left:20px;width:350px;">
 			</select>
 		</div>
-		<br><br>
+		<br/><br/>
         <div style="text-align:center">
         	<input type="reset" value="clear" id="clearButton" class="">&nbsp;&nbsp;
 	        <input type="button" class="subButton" value="Go" onclick="popPathway($F('pathwayName'));" />
