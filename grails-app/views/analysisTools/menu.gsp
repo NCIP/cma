@@ -3,9 +3,19 @@
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
+		<script type="text/javascript">
+			Event.observe(window, "load", function()	{
+				new Effect.Corner($$('.sectionHeader')[0], 'top');
+			});
+		</script>
 	</head>
 	<body>
-		<h3>High Order Analysis</h3>
+		<h2>Analysis Tools</h2>
+		<fieldset>
+		<div class="sectionHeader">
+			<h5>Select an Analysis Tool</h5>
+		</div>
+		<div class="sectionBody">
 		<ul>
 			<li><a href="${createLink(controller: 'analysisTools', action:'pcaSetup') }">Principle Component Analysis (PCA)</a></li>
 			<li><a href="${createLink(controller: 'analysisTools', action:'genePatternSetup') }">Gene Pattern Analysis</a></li>
@@ -14,6 +24,8 @@
 			<!-- Below commented until RBT functionality is provided -->
 			<!-- <li><a href="#">Cancer Genome Workbench (Genomic View)</a></li> -->
 		</ul>
+		</div>
 		<br clear="both"/>
+		</fieldset>
 	</body>
 </html>
