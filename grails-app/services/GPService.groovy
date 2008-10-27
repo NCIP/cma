@@ -220,6 +220,7 @@ class GPService {
 		if (geneReporterName != null && !geneReporterName.equalsIgnoreCase("none")) {
 // Currently only using Gene lists, so this block isnt needed
 // Also, no need for the substring stuff since we're not appending listtype
+
 /*
 			int i = geneReporterName.lastIndexOf(ListType.Reporter.toString());
 			//it's a reporter filter
@@ -241,6 +242,7 @@ class GPService {
 				i = geneReporterName.lastIndexOf(ListType.Gene.toString());
 				geneReporterName = geneReporterName.substring(0, i - 3);
 */
+
 		    	List<ListItem> listItems = helper.getUserList(geneReporterName).getListItems();
 		    	
 		    	List<String> geneList = new ArrayList<String>();
