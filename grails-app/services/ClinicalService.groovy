@@ -3,9 +3,15 @@ import gov.nih.nci.cma.util.ClinParmsComparator
 import gov.nih.nci.cma.clinical.RembrandtClinicalKeys
 import gov.nih.nci.cma.clinical.RembrandtClinicalReportBean
 
+import gov.nih.nci.caintegrator.application.lists.UserList
+import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
+import gov.nih.nci.caintegrator.application.lists.ListItem
+import gov.nih.nci.caintegrator.application.lists.ListType
+import org.springframework.web.context.request.RequestContextHolder
+
 class ClinicalService {
 
-    boolean transactional = true
+    boolean transactional = false
     
     def cmaRembClin 
     def parmsComparator = new ClinParmsComparator()
@@ -16,8 +22,37 @@ class ClinicalService {
 
     }
     
-    
     public List getIdsForSampleGroups(List sampleGroups) {
+      Set idSet = new HashSet()
+      Set groupNames = new HashSet(sampleGroups)
+      
+      if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
+    	  
+    	  def webRequest= RequestContextHolder.currentRequestAttributes()        	  
+          def session = webRequest.session    	 
+
+          UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
+  	      List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
+          java.util.List listItems = null
+  	      lists.each { ul ->
+  	         System.out.println("Checking listName=${ul.getName()}")
+  	         if (groupNames.contains(ul.getName())) {
+  	           listItems = ul.getListItems()
+  	           listItems.each { li -> 
+  	        	  idSet.add(li.getName())
+  	           }
+  	         }
+  	      }    	      	  
+      }
+      
+      java.util.List idList = new ArrayList(idSet)
+  	    	
+      return idList
+    	
+    }
+    
+    /*
+    public List getIdsForSampleGroupsOld(List sampleGroups) {
     	Set idSet = new HashSet()
     	if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
             String queryStr = "From gov.nih.nci.cma.domain.CmaList lst where lst.name in (" 
@@ -53,6 +88,7 @@ class ClinicalService {
     	    	
         return idList
     }
+    */
     
     public List getIdsForDiseaseType(String diseaseType) {
     	def criteria = CmaRembClin.createCriteria()
@@ -135,10 +171,12 @@ class ClinicalService {
     }    
     
     public List getIdsForSurvival(Integer survivalLower, Integer survivalUpper) {
+    	Integer survivalLowerDays = survivalLower * 30
+    	Integer survivalUpperDays = survivalUpper * 30
     	def criteria = CmaRembClin.createCriteria()
     	def results = criteria.list{
     	  like('parm', 'SURVIVAL_LENGTH')
-    	  between('parmNumValue', survivalLower, survivalUpper)    		
+    	  between('parmNumValue', survivalLowerDays, survivalUpperDays)    		
     	}
     	
     	List idList = new ArrayList()
@@ -420,6 +458,10 @@ class ClinicalService {
     	List cats = q.list();
     	*/
     	
+    	if ((patientIds == null) || (patientIds.size() == 0)) {
+    	  System.out.println("Warning no patientIds passed to getClinicalData!")
+          return Collections.emptyList()
+    	}
     	
     	String queryStr = "From gov.nih.nci.cma.domain.CmaRembClin rc where rc.sampleId in (" 
     	
