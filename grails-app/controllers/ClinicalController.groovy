@@ -90,8 +90,16 @@ class ClinicalController {
     		
    		SimpleDateFormat dateformatMMDDYYYY = new SimpleDateFormat("MMddyyyy");
 		def qname = "clinical_" + dateformatMMDDYYYY.format(new Date())
-   		List reportBeansList = clinicalService.getClinicalDataForGroup(params.taskId);
-   		session.setAttribute(qname, reportBeansList);
+   		List reportBeansList = null;
+   		
+		if(params.ids != null)	{
+			List samList = Arrays.asList(params.ids.split(","));
+			reportBeansList = clinicalService.getClinicalData(samList)
+		}
+		else	{
+			reportBeansList = clinicalService.getClinicalDataForGroup(params.taskId);
+		}
+		session.setAttribute(qname, reportBeansList);
    		redirect(action:'clinicalReportDisplay', params:[taskId:qname, noBack:'true'])
     }
     

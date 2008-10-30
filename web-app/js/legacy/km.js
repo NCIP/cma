@@ -36,6 +36,11 @@ included are the sample Groups used and the p-value rank -KR
 function kmPlotCallback(data) {
 	
 	try {
+		//is this a gene or clinical based KM?
+		var kmtype = "gene";
+		if(location.href.indexOf('geneView')==-1)
+			kmtype = "clinical";
+				
 		var plotInfo = eval("(" + data + ")");
 		var fileName = plotInfo.fileInfo;
 		var servletPath = "servlet/DisplayChart?filename=";
@@ -53,7 +58,11 @@ function kmPlotCallback(data) {
 				var groupName = sampleGroupNames[i].name;
 				var groupCount = sampleGroupNames[i].count;
 				var ids = sampleGroupNames[i].ids;
-				reportHTML += "&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:spawn('./clinicalSampleGroup?taskId=" + groupName +"', 750, 500,'clinical_report');\">" + groupName + "</a>&nbsp;&nbsp;";
+				if(kmtype == "clinical")
+					reportHTML += "&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:spawn('../clinical/clinicalSampleGroup?taskId=" + groupName +"', 750, 500,'clinical_report');\">" + groupName + "</a>&nbsp;&nbsp;";
+				else
+					reportHTML += "&nbsp;&nbsp;<a href=\"#\" onclick=\"javascript:spawn('../clinical/clinicalSampleGroup?taskId=" + groupName +"KM&ids=" + ids + "', 750, 500,'clinical_report');\">" + groupName + "</a>&nbsp;&nbsp;";
+
 				statisticsHTML += "&nbsp;&nbsp;" + groupName + ":&nbsp;&nbsp;" + groupCount + "&nbsp;samples<br />";
 			}
 			if (logRank != null) {
