@@ -1,6 +1,7 @@
 import grails.converters.*
 import gov.nih.nci.cma.clinical.*;
 import java.text.SimpleDateFormat;
+import gov.nih.nci.cma.services.rembrandt.RembrandtClinicalService;
 
 class ClinicalController {
 	
@@ -11,13 +12,17 @@ class ClinicalController {
 		}
 	}
 	
-	def clinicalService;
+	//def clinicalService;
+	def rembrandtClinicalService;
 	
     def index = { 
 		def patLists = defaultListLoaderService.getPatientLists(session.id, false);
-		def genderList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.gender)
-		def diseaseList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.disease)
-		def raceList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.race)
+//		def genderList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.gender)
+//		def diseaseList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.disease)
+//		def raceList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.race)
+		def genderList = rembrandtClinicalService.getPermissibleValues(RembrandtClinicalKeys.gender)
+		def diseaseList = rembrandtClinicalService.getPermissibleValues(RembrandtClinicalKeys.disease)
+		def raceList = rembrandtClinicalService.getPermissibleValues(RembrandtClinicalKeys.race)
 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
@@ -58,7 +63,8 @@ class ClinicalController {
     	qname = gov.nih.nci.cma.util.SafeHTMLUtil.clean(qname)
 
     	//	if(session.getAttribute(qname) == null)	{ //one already exists, overwrite
-    		List reportBeansList = clinicalService.getClinicalData(request);
+    		//List reportBeansList = clinicalService.getClinicalData(request);
+    	    List reportBeansList = rembrandtClinicalService.getClinicalData(request);
 	    	//put the reportBeansList somewhere..session for now, cache would be better, keyed as taskid (Query name)
 	    	session.setAttribute(qname, reportBeansList);
    // 	}
@@ -94,10 +100,13 @@ class ClinicalController {
    		
 		if(params.ids != null)	{
 			List samList = Arrays.asList(params.ids.split(","));
-			reportBeansList = clinicalService.getClinicalData(samList)
+			//reportBeansList = clinicalService.getClinicalData(samList)
+			reportBeansList = rembrandtClinicalService.getClinicalData(samList)
 		}
 		else	{
-			reportBeansList = clinicalService.getClinicalDataForGroup(params.taskId);
+			//reportBeansList = clinicalService.getClinicalDataForGroup(params.taskId);
+			reportBeansList = rembrandtClinicalService.getClinicalDataForGroup(params.taskId);
+			
 		}
 		session.setAttribute(qname, reportBeansList);
    		redirect(action:'clinicalReportDisplay', params:[taskId:qname, noBack:'true'])
