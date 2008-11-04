@@ -13,6 +13,12 @@ import org.apache.log4j.Logger;
 import gov.nih.nci.cma.clinical.RembrandtClinicalKeys
 import gov.nih.nci.cma.clinical.RembrandtClinicalReportBean
 
+import gov.nih.nci.caintegrator.application.lists.UserList
+import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
+import gov.nih.nci.caintegrator.application.lists.ListItem
+import gov.nih.nci.caintegrator.application.lists.ListType
+import org.springframework.web.context.request.RequestContextHolder
+
 class RembrandtClinicalService {
 
     boolean transactional = false
@@ -22,55 +28,131 @@ class RembrandtClinicalService {
 
     }
     
+    /**
+     * Extracts a list of unique ids from a list of domin objects
+     */
+    private List getIdList(List domainObjs) {
+      if (domainObjs == null) {
+    	logger.warn("getIdList passed null parameter")
+    	return Collections.emptyList()
+      }
+      Set retSet = new HashSet()
+      domainObjs.each { d ->
+        if (d != null) {
+          retSet.add(d.getId())  
+        }
+        else {
+          logger.warn("getIdList got null domain object.")
+        }
+      }
+      return new ArrayList(retSet)
+    }
+    
+    /**
+     * 
+     */
+    public List getPatientDIDsForSampleIds(Set idSet) {      
+      String idString = getIdString(idSet)
+      String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.sampleId in " 
+      
+      pdQS += idString
+      
+      def patients = PatientData.findAll(pdQS)
+      Set pdidsIds = new HashSet()
+      patients.each { p ->
+    	  pdidsIds.add(p.getId())
+      }
+      return new ArrayList(pdidsIds)
+    }
+    
+    /**
+     * getIdsForSampleGroups
+     */
     public List getIdsForSampleGroups(List sampleGroups) {
-    	return Collections.emptyList()
+    	  Set idSet = new HashSet()
+          Set groupNames = new HashSet(sampleGroups)
+          
+          if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
+        	  
+        	  def webRequest= RequestContextHolder.currentRequestAttributes()        	  
+              def session = webRequest.session    	 
+
+              UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
+      	      List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
+              java.util.List listItems = null
+      	      lists.each { ul ->
+      	         logger.debug("Checking listName=${ul.getName()}")
+      	         if (groupNames.contains(ul.getName())) {
+      	           listItems = ul.getListItems()
+      	           listItems.each { li -> 
+      	        	  idSet.add(li.getName())
+      	           }
+      	         }
+      	      }    	      	  
+          }
+    	  
+    	  return getPatientDIDsForSampleIds(idSet)                   
     }
     
+    /**
+     * getIdsForDiseaseType
+     */
     public List getIdsForDiseaseType(String diseaseType) {
-    	return Collections.emptyList()
+    	def patients = PatientData.findAllByDiseaseTypeLike(diseaseType)
+    	logger.debug("getIdsForDiseaseType returned numRows=${patients.size()} for diseaseType=${diseaseType}")
+    	return getIdList(patients)
     }
     
+    /**
+     * getIdsForGender
+     */
     public List getIdsForGender(String gender) {
-        return Collections.emptyList()
+    	def patients = PatientData.findAllByGenderLike(gender)
+    	logger.debug("getIdsForGender returned numRows=${patients.size()} for gender=${gender}")
+    	return getIdList(patients)
     }
     
     public List getIdsForGrade(String grade) {
         return Collections.emptyList()	
     }
     
+    /**
+     * getIdsForRace
+     */
     public List getIdsForRace(String race) { 
-    	//def criteria = PatientData.createCriteria()
-    	//def results = criteria.list{
-    	//  like('race', race)    	  		
-    	//}
-    	
+    	    	
     	def patients = PatientData.findAllByRaceLike(race)
     	logger.debug("getIdsForRace returned numRows=${patients.size()} for race=${race}")
-    	List idList = new ArrayList()
-    	patients.each { p ->
-    	   
-    	   if (p != null) {
-    		 
-    	     idList.add(p.getId())
-    	   }
-    	   else {
-    		 logger.warn("Got null patient data record")
-    	   }
-    	}
-    	
-    	return idList
+    	return getIdList(patients)
     }
     
+    /**
+     * getIdsForAgeAtDx
+     */
     public List getIdsForAgeAtDx(Integer ageAtDxLower, Integer ageAtDxUpper) {
-    	return Collections.emptyList()
+    	def patients = PatientData.findAllByAgeBetween(ageAtDxLower, ageAtDxUpper)
+    	logger.debug("getIdsForAgeAtDx returned numRows=${patients.size()} for lower=${ageAtDxLower} upper=${ageAtDxUpper}")
+    	return getIdList(patients)
     }
     
+    /**
+     * getIdsForSurvival
+     */
     public List getIdsForSurvival(Integer survivalLower, Integer survivalUpper) {
-    	return Collections.emptyList()
+    	def patients = PatientData.findAllBySurvivalLengthBetween(survivalLower, survivalUpper)
+    	logger.debug("getIdsForSurvival returned numRows=${patients.size()} for lower=${survivalLower} upper=${survivalUpper}")
+    	return getIdList(patients)
     }
     
+    
+    /**
+     * getClinicalDataForGroup
+     */
     public List getClinicalDataForGroup(String groupName) { 
-        return Collections.emptyList()	
+        List groupList = new ArrayList()
+        groupList.add(groupName)
+        List ids = getIdsForSampleGroups(groupList)
+        return getClinicalData(ids)
     }
     
     
@@ -154,8 +236,7 @@ class RembrandtClinicalService {
     	    	
     }
     
-    private void loadReportBeanWithPatientData(RembrandtClinicalReportBean rptBean, PatientData ptData) {
-    	
+    private void loadReportBeanWithPatientData(RembrandtClinicalReportBean rptBean, PatientData ptData) {    	
     	rptBean.setSampleId(ptData.getSampleId())    	
     	rptBean.setAgeGroup(ptData.getAgeGroup())
     	rptBean.setSurvivalLengthRange(ptData.getSurvivalLengthRange())
@@ -163,91 +244,11 @@ class RembrandtClinicalService {
     	rptBean.setDisease(ptData.getDiseaseType())
     	rptBean.setGrade(ptData.getWhoGrade())
     	rptBean.setRace(ptData.getRace())
-    	rptBean.setInstitution(ptData.getInstitutionName())
-    	
-    	
-    	//Get the priorChemo
-    	//java.util.Set priorChemo = ptData.getPriorChemoList()
-    	//PriorChemotherapy.findAllByPatientDataId()
-    	
-    	
-    	//priorChemo.each { pc ->
-    	//  println("priorChemo=${pc.getId()} agentName=${pc.getAgentName()}")	    	
-    	//}
-    	
-    	
-// 	    java.util.Set neuro = ptData.getNeuroEvalList()
-// 	    if (neuro != null) { 
-//	 	    neuro.each { n ->
-//	 	     println("neuro=${n.getId()}")    		       		  
-//	 	    }
-// 	    }
-// 	    else {
-// 	       println("neuro was null for ptdid=${ptData.getSampleId()}")
-// 	    }
+    	rptBean.setInstitution(ptData.getInstitutionName())    	    	
  	}    	    
     	
     	
     	
-    	/*
-    	 RPT BEAN
-    	
-    	
-    	
-    	
-    		 
-    	 
-    	
-    	private String karnofsky;	 
-    	private String neurologicalExamOutcome;	 
-    	private String mriDesc;	 
-    	private String followupMonth;	 
-    	private String steroidDoseStatus;	 
-    	private String antiConvulsantStatus;	 
-    	private String priorTherapyRadiationSite;	 
-    	private String priorTherapyRadiationFractionDose;	 
-    	private String priorTherapyRadiationFractionNumber;	 
-    	private String priorTherapyRadiationType;	 
-    	private String priorTherapyChemoAgentName;	 
-    	private String priorTherapyChemoCourseCount;	 
-    	private String priorTherapySurgeryProcedureTitle;	 
-    	private String priorTherapySurgeryTumorHistology;	 
-    	private String priorTherapySurgeryOutcome;	 
-    	private String onStudyTherapyRadiationSite;	 
-    	private String onStudyTherapyRadiationNeurosisStatus;	 
-    	private String onStudyTherapyRadiationFractionDose;
-    	private String onStudyTherapyRadiationFractionNumber;	 
-    	private String onStudyTherapyRadiationType;	 
-    	private String onStudyTherapyChemoAgentName;	 
-    	private String onStudyTherapyChemoCourseCount;	 
-    	private String onStudyTherapySurgeryProcedureTitle;	 
-    	private String onStudyTherapySurgeryIndication;	 
-    	private String onStudyTherapySurgeryHistoDiagnosis;	 
-    	private String onStudyTherapySurgeryOutcome;
-    	*/
-    	
-    	
-    	/*
-    	 * PATIENT DATA
-    	 * 
-   
-   
-    
- 
-    
-   
-    
-    
-    
-    java.lang.String censoringStatus
-   
-   
-    java.lang.String specimenName
-    static hasMany = [ patientDidPriorChemotherapyList : PriorChemotherapy , patientDidPriorRadiationtherapyList : PriorRadiationtherapy , patientDidPriorSurgeryList : PriorSurgery , patientDidPtChemotherapyList : PtChemotherapy , patientDidPtRadiationtherapyList : PtRadiationtherapy , patientDidPtSurgeryList : PtSurgery , patientDidNeurologicalEvaluationList : NeurologicalEvaluation ]
-    	 */
-    			
-    			
-
    private Map createPatientDataMap(List dataList) {
        Map dataMap = new HashMap()
        List itemList = null
@@ -279,7 +280,7 @@ class RembrandtClinicalService {
     	   if (crb == null) {
     	      crb = new RembrandtClinicalReportBean()    	      
     	      patientMap.put(pd.getId().toString(), crb)   
-    	      println("Created crb for pdid=${pd.getId()}")
+    	      //println("Created crb for pdid=${pd.getId()}")
     	   }
     	   loadReportBeanWithPatientData(crb, pd)
        }
@@ -294,7 +295,7 @@ class RembrandtClinicalService {
            loadReportBeanWithNeuroData(crb, nd)
          }
          else {
-           println("Warning: No patient data for pdid=${pdid}")
+           logger.warn("Warning: No patient data for pdid=${pdid}")
          }
        
        }
@@ -308,7 +309,7 @@ class RembrandtClinicalService {
         	 loadReportBeanWithPriorChemoData(crb, pc)
          }
          else {
-             println("Warning: No patient data for pdid=${pdid}")
+             logger.warn("Warning: No patient data for pdid=${pdid}")
            }
        }
        
@@ -321,7 +322,7 @@ class RembrandtClinicalService {
         	 loadReportBeanWithPriorRadData(crb, pr)
        	 }
        	 else {
-             println("Warning: No patient data for pdid=${pdid}")
+             logger.warn("Warning: No patient data for pdid=${pdid}")
          }
        }
        
@@ -336,7 +337,7 @@ class RembrandtClinicalService {
         	 loadReportBeanWithPriorSurgData(crb, ps)
          }
          else {
-        	 println("Warning: No patient data for pdid=${pdid}") 
+        	 logger.warn("Warning: No patient data for pdid=${pdid}") 
          }
        }
        
@@ -349,7 +350,7 @@ class RembrandtClinicalService {
            loadReportBeanWithPtChemoData(crb, ptChemo)
          }
          else {
-        	 println("Warning: No patient data for pdid=${pdid}")
+        	 logger.warn("Warning: No patient data for pdid=${pdid}")
          }
        }
        
@@ -362,7 +363,7 @@ class RembrandtClinicalService {
         	 loadReportBeanWithPtRadData(crb, ptRad)
          }
          else {
-        	 println("Warning: No patient data for pdid=${pdid}")
+        	 logger.warn("Warning: No patient data for pdid=${pdid}")
          }
        }
        
@@ -375,11 +376,32 @@ class RembrandtClinicalService {
            loadReportBeanWithPtSurgData(crb, ptSurg)
          }
          else {
-        	 println("Warning: No patient data for pdid=${pdid}")
+        	 logger.warn("Warning: No patient data for pdid=${pdid}")
          }
        }
        
        return new ArrayList(patientMap.values())
+    }
+    
+    private String getIdString(Set idSet) {
+    	int ind = 0;
+    	int numIds  = idSet.size()
+    	StringBuffer idSB = new StringBuffer()
+    	
+    	idSB.append("(")
+    			
+    	idSet.each { id -> 
+    	         
+    	         if (ind == (numIds-1))  {
+    	        	 idSB.append("'${id}'")    	    	        	 
+    	         }
+    	         else {
+    	        	idSB.append("'${id}',")    	    	        	
+    	         }
+                 ind++
+    	}
+    	idSB.append(")")
+    	return idSB.toString()
     }
     
     /**
@@ -388,51 +410,41 @@ class RembrandtClinicalService {
     public List getClinicalData(List patientIds) { 
            	     	    	    	    	    	   
     	    	if ((patientIds == null) || (patientIds.size() == 0)) {
-    	    	  println("Warning no patientIds passed to getClinicalData!")
+    	    	  logger.warn("Warning no patientIds passed to getClinicalData!")
     	          return Collections.emptyList()
     	    	}
     	    	
     	    	Set idSet = new HashSet(patientIds)
     	    	StringBuffer idSB = new StringBuffer()
-    	    	String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.id in (" 
-    	    	String neuroQS = "From gov.nih.nci.cma.domain.rembrandt.NeurologicalEvaluation neuroExam where neuroExam.patientDid in ("
-    	    	String priorChemoQS = "From gov.nih.nci.cma.domain.rembrandt.PriorChemotherapy priorChemo where priorChemo.patientDid in ("		
-    	    	String priorRadQS = "From gov.nih.nci.cma.domain.rembrandt.PriorRadiationtherapy prad where prad.patientDid in ("		
-    	    	String priorSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PriorSurgery psurg where psurg.patientDid in ("		
-    	    	String ptChemoQS = 	"From gov.nih.nci.cma.domain.rembrandt.PtChemotherapy ptChemo where ptChemo.patientDid in ("
-    	    	String ptRadQS = "From gov.nih.nci.cma.domain.rembrandt.PtRadiationtherapy ptRad where ptRad.patientDid in ("
-    	    	String ptSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PtSurgery ptsurg where ptsurg.patientDid in ("			
-    	    			    	    			
-    	        int ind = 0;
-    	    	int numIds  = idSet.size()
+    	    	String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.id in " 
+    	    	String neuroQS = "From gov.nih.nci.cma.domain.rembrandt.NeurologicalEvaluation neuroExam where neuroExam.patientDid in "
+    	    	String priorChemoQS = "From gov.nih.nci.cma.domain.rembrandt.PriorChemotherapy priorChemo where priorChemo.patientDid in "		
+    	    	String priorRadQS = "From gov.nih.nci.cma.domain.rembrandt.PriorRadiationtherapy prad where prad.patientDid in "		
+    	    	String priorSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PriorSurgery psurg where psurg.patientDid in "		
+    	    	String ptChemoQS = 	"From gov.nih.nci.cma.domain.rembrandt.PtChemotherapy ptChemo where ptChemo.patientDid in "
+    	    	String ptRadQS = "From gov.nih.nci.cma.domain.rembrandt.PtRadiationtherapy ptRad where ptRad.patientDid in "
+    	    	String ptSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PtSurgery ptsurg where ptsurg.patientDid in "			
     	    			
-    	    	idSet.each { id -> 
-    	    	         
-    	    	         if (ind == (numIds-1))  {
-    	    	        	 idSB.append("'${id}')")    	    	        	 
-    	    	         }
-    	    	         else {
-    	    	        	idSB.append("'${id}',")    	    	        	
-    	    	         }
-    	                 ind++
-    	    	}
-    	    	pdQS += idSB.toString()    	    	  
-    	    	neuroQS += idSB.toString() 
-    	    	priorChemoQS += idSB.toString()
-    	    	priorRadQS += idSB.toString()
-    	    	priorSurgQS += idSB.toString()
-    	    	ptChemoQS += idSB.toString()
-    	    	ptRadQS += idSB.toString()
-    	    	ptSurgQS += idSB.toString()    	    			    	    	
+    	    	
+    	    	String idString = getIdString(idSet)
+    	       
+    	    	pdQS += idString    	    	  
+    	    	neuroQS += idString 
+    	    	priorChemoQS += idString
+    	    	priorRadQS += idString
+    	    	priorSurgQS += idString
+    	    	ptChemoQS += idString
+    	    	ptRadQS += idString
+    	    	ptSurgQS += idString   	    			    	    	
     	    	    	    	
-    	    	println("QueryStr=${pdQS}")
-    	    	println("QueryStr=${neuroQS}")
-    	    	println("QueryStr=${priorChemoQS}")
-    	    	println("QueryStr=${priorRadQS}")
-    	    	println("QueryStr=${priorSurgQS}")
-    	    	println("QueryStr=${ptChemoQS}")
-    	    	println("QueryStr=${ptRadQS}")
-    	    	println("QueryStr=${ptSurgQS}")
+    	    	logger.debug("QueryStr=${pdQS}")
+    	    	logger.debug("QueryStr=${neuroQS}")
+    	    	logger.debug("QueryStr=${priorChemoQS}")
+    	    	logger.debug("QueryStr=${priorRadQS}")
+    	    	logger.debug("QueryStr=${priorSurgQS}")
+    	    	logger.debug("QueryStr=${ptChemoQS}")
+    	    	logger.debug("QueryStr=${ptRadQS}")
+    	    	logger.debug("QueryStr=${ptSurgQS}")
     	    	
     	    	
     	    	
@@ -447,7 +459,7 @@ class RembrandtClinicalService {
 	            List ptSurgData = PtSurgery.findAll(ptSurgQS)
 	        
     	        
-    	        println("Got back patientData numRows=${patientData?.size()}")
+    	        logger.debug("Got back patientData numRows=${patientData?.size()}")
     	        
     	        List clinData = assembleClinicalData(patientData, neuroData, priorChemoData, priorRadData, priorSurgData, ptChemoData, ptRadData, ptSurgData );
     	    	    	    	    	 
@@ -458,7 +470,7 @@ class RembrandtClinicalService {
      
     def getClinicalData =  { clinicalForm -> 
 	    clinicalForm.getParameterNames().each	{
-	    	System.out.println(it + ": " + clinicalForm.getParameter(it))
+	    	logger.debug(it + ": " + clinicalForm.getParameter(it))
 	    }
 
 		String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroup")
@@ -485,6 +497,50 @@ class RembrandtClinicalService {
 	    logger.debug("survivalUpper=${survivalUpper}")
 	    logger.debug("disease=${disease}")
 	    logger.debug("race=${race}")
+	    
+	     List groupNames = new ArrayList()
+      if ((sampleGroups != null) && (sampleGroups.length > 0)) {
+    	  for (int i=0; i < sampleGroups.length ; i++) {
+    		 groupNames.add(sampleGroups[i])
+    	  }
+      }
+      else {
+    	  groupNames.add("ALL_PATIENTS")
+      }
+      
+      List ids = getIdsForSampleGroups(groupNames)
+      
+      Set idSet = new HashSet(ids)
+
+      if ((gender != null) && (!gender.equals("ANY"))) {
+        List genderIds = getIdsForGender(gender)
+        idSet.retainAll(genderIds)
+      }
+      
+      if ((race != null) && (!race.equals("ANY"))) {
+        List raceIds = getIdsForRace(race)
+        idSet.retainAll(raceIds)    	      	  
+      }
+      
+      if ((ageAtDxLower != null) && (ageAtDxUpper != null)) {
+        List ageIds = getIdsForAgeAtDx(ageAtDxLower, ageAtDxUpper)
+        idSet.retainAll(ageIds)
+      }
+      
+      if ((survivalLower != null) && (survivalUpper != null)) {
+          List survivalIds = getIdsForSurvival(survivalLower,survivalUpper)
+          idSet.retainAll(survivalIds)
+      }
+      
+      if ((disease != null) && (!disease.equals("ANY"))) {
+        List diseaseIds = getIdsForDiseaseType(disease)
+        idSet.retainAll(diseaseIds)
+      }
+      
+      List lookupIds = new ArrayList(idSet)
+      
+      
+      return getClinicalData(lookupIds)
     }
     
     /**
