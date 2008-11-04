@@ -4,10 +4,9 @@ public class RembrandtClinicalReportBean {
 	
 	private String rptStr = null;
 	
-	private String sampleId;
-	private String ageAtDx;	 
+	private String sampleId; 
+	private String ageGroup;
 	private String gender;
-	private String survivalMonths;	 
 	private String survivalLengthRange;
 	private String disease;	 
 	private String grade;	 
@@ -39,29 +38,26 @@ public class RembrandtClinicalReportBean {
 	private String onStudyTherapySurgeryIndication;	 
 	private String onStudyTherapySurgeryHistoDiagnosis;	 
 	private String onStudyTherapySurgeryOutcome;
+	
+	
+	private String getAppendString(String origStr, String strToAppend) {
+	  if ((origStr == null) || (origStr.length() == 0)) {
+	    return strToAppend;
+	  }
+	  return origStr + ", " + strToAppend;
+	}
+	
 	public String getSampleId() {
 		return sampleId;
 	}
 	public void setSampleId(String sampleId) {
 		this.sampleId = sampleId;
 	}
-	public String getAgeAtDx() {
-		return ageAtDx;
-	}
-	public void setAgeAtDx(String ageAtDx) {
-		this.ageAtDx = ageAtDx;
-	}
 	public String getGender() {
 		return gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-	public String getSurvivalMonths() {
-		return survivalMonths;
-	}
-	public void setSurvivalMonths(String survivalMonths) {
-		this.survivalMonths = survivalMonths;
 	}
 	public String getDisease() {
 		return disease;
@@ -90,21 +86,36 @@ public class RembrandtClinicalReportBean {
 	public String getKarnofsky() {
 		return karnofsky;
 	}
-	public void setKarnofsky(String karnofsky) {
-		this.karnofsky = karnofsky;
+//	public void setKarnofsky(String karnofsky) {
+//		this.karnofsky = karnofsky;
+//	}
+	public void appendKarnofsky(String karnofsky) {
+	  this.karnofsky = getAppendString(this.karnofsky, karnofsky);
 	}
+	
 	public String getNeurologicalExamOutcome() {
 		return neurologicalExamOutcome;
 	}
-	public void setNeurologicalExamOutcome(String neurologicalExamOutcome) {
-		this.neurologicalExamOutcome = neurologicalExamOutcome;
+//	public void setNeurologicalExamOutcome(String neurologicalExamOutcome) {
+//		this.neurologicalExamOutcome = neurologicalExamOutcome;
+//	}
+	
+	public void appendNeurologicalExamOutcome(String neurologicalExamOutcome) {
+		this.neurologicalExamOutcome = getAppendString(this.neurologicalExamOutcome, neurologicalExamOutcome);
 	}
+	
+	
 	public String getMriDesc() {
 		return mriDesc;
 	}
-	public void setMriDesc(String mriDesc) {
-		this.mriDesc = mriDesc;
+//	public void setMriDesc(String mriDesc) {
+//		this.mriDesc = mriDesc;
+//	}
+	
+	public void appendMriDesc(String mriDesc) {
+	  this.mriDesc = getAppendString(this.mriDesc, mriDesc);
 	}
+	
 	public String getFollowupMonth() {
 		return followupMonth;
 	}
@@ -114,145 +125,224 @@ public class RembrandtClinicalReportBean {
 	public String getSteroidDoseStatus() {
 		return steroidDoseStatus;
 	}
-	public void setSteroidDoseStatus(String steroidDoseStatus) {
-		this.steroidDoseStatus = steroidDoseStatus;
+//	public void setSteroidDoseStatus(String steroidDoseStatus) {
+//		this.steroidDoseStatus = steroidDoseStatus;
+//	}
+	public void appendSteroidDoseStatus(String steroidDoseStatus) {
+		this.steroidDoseStatus = getAppendString(this.steroidDoseStatus, steroidDoseStatus);
 	}
 	public String getAntiConvulsantStatus() {
 		return antiConvulsantStatus;
 	}
-	public void setAntiConvulsantStatus(String antiConvulsantStatus) {
-		this.antiConvulsantStatus = antiConvulsantStatus;
+//	public void setAntiConvulsantStatus(String antiConvulsantStatus) {
+//		this.antiConvulsantStatus = antiConvulsantStatus;
+//	}
+	public void appendAntiConvulsantStatus(String antiConvulsantStatus) {
+		this.antiConvulsantStatus = getAppendString(this.antiConvulsantStatus, antiConvulsantStatus);
 	}
+	
 	public String getPriorTherapyRadiationSite() {
 		return priorTherapyRadiationSite;
 	}
-	public void setPriorTherapyRadiationSite(String priorTherapyRadiationSite) {
-		this.priorTherapyRadiationSite = priorTherapyRadiationSite;
+//	public void setPriorTherapyRadiationSite(String priorTherapyRadiationSite) {
+//		this.priorTherapyRadiationSite = priorTherapyRadiationSite;
+//	}
+	public void appendPriorTherapyRadiationSite(String priorTherapyRadiationSite) {
+		this.priorTherapyRadiationSite = getAppendString(this.priorTherapyRadiationSite,priorTherapyRadiationSite);
 	}
 	public String getPriorTherapyRadiationFractionDose() {
 		return priorTherapyRadiationFractionDose;
 	}
-	public void setPriorTherapyRadiationFractionDose(
-			String priorTherapyRadiationFractionDose) {
-		this.priorTherapyRadiationFractionDose = priorTherapyRadiationFractionDose;
-	}
+//	public void setPriorTherapyRadiationFractionDose(
+//			String priorTherapyRadiationFractionDose) {
+//		this.priorTherapyRadiationFractionDose = priorTherapyRadiationFractionDose;
+//	}
+	public void appendPriorTherapyRadiationFractionDose(
+	String priorTherapyRadiationFractionDose) {
+		this.priorTherapyRadiationFractionDose = getAppendString(this.priorTherapyRadiationFractionDose, priorTherapyRadiationFractionDose);
+	}	
+	
 	public String getPriorTherapyRadiationFractionNumber() {
 		return priorTherapyRadiationFractionNumber;
 	}
-	public void setPriorTherapyRadiationFractionNumber(
+//	public void setPriorTherapyRadiationFractionNumber(
+//			String priorTherapyRadiationFractionNumber) {
+//		this.priorTherapyRadiationFractionNumber = priorTherapyRadiationFractionNumber;
+//	}
+	public void appendPriorTherapyRadiationFractionNumber(
 			String priorTherapyRadiationFractionNumber) {
-		this.priorTherapyRadiationFractionNumber = priorTherapyRadiationFractionNumber;
+		this.priorTherapyRadiationFractionNumber = getAppendString(this.priorTherapyRadiationFractionNumber, priorTherapyRadiationFractionNumber);
 	}
 	public String getPriorTherapyRadiationType() {
 		return priorTherapyRadiationType;
 	}
-	public void setPriorTherapyRadiationType(String priorTherapyRadiationType) {
-		this.priorTherapyRadiationType = priorTherapyRadiationType;
+//	public void setPriorTherapyRadiationType(String priorTherapyRadiationType) {
+//		this.priorTherapyRadiationType = priorTherapyRadiationType;
+//	}
+	public void appendPriorTherapyRadiationType(String priorTherapyRadiationType) {
+		this.priorTherapyRadiationType = getAppendString(this.priorTherapyRadiationType, priorTherapyRadiationType);
 	}
 	public String getPriorTherapyChemoAgentName() {
 		return priorTherapyChemoAgentName;
 	}
-	public void setPriorTherapyChemoAgentName(String priorTherapyChemoAgentName) {
-		this.priorTherapyChemoAgentName = priorTherapyChemoAgentName;
+//	public void setPriorTherapyChemoAgentName(String priorTherapyChemoAgentName) {
+//		this.priorTherapyChemoAgentName = priorTherapyChemoAgentName;
+//	}
+	public void appendPriorTherapyChemoAgentName(String priorTherapyChemoAgentName) {
+		this.priorTherapyChemoAgentName = getAppendString(this.priorTherapyChemoAgentName, priorTherapyChemoAgentName);
 	}
 	public String getPriorTherapyChemoCourseCount() {
 		return priorTherapyChemoCourseCount;
 	}
-	public void setPriorTherapyChemoCourseCount(String priorTherapyChemoCourseCount) {
-		this.priorTherapyChemoCourseCount = priorTherapyChemoCourseCount;
+//	public void setPriorTherapyChemoCourseCount(String priorTherapyChemoCourseCount) {
+//		this.priorTherapyChemoCourseCount = priorTherapyChemoCourseCount;
+//	}
+	public void appendPriorTherapyChemoCourseCount(String priorTherapyChemoCourseCount) {
+		this.priorTherapyChemoCourseCount = getAppendString(this.priorTherapyChemoCourseCount,priorTherapyChemoCourseCount) ;
 	}
 	public String getPriorTherapySurgeryProcedureTitle() {
 		return priorTherapySurgeryProcedureTitle;
 	}
-	public void setPriorTherapySurgeryProcedureTitle(
+//	public void setPriorTherapySurgeryProcedureTitle(
+//			String priorTherapySurgeryProcedureTitle) {
+//		this.priorTherapySurgeryProcedureTitle = priorTherapySurgeryProcedureTitle;
+//	}
+	public void appendPriorTherapySurgeryProcedureTitle(
 			String priorTherapySurgeryProcedureTitle) {
-		this.priorTherapySurgeryProcedureTitle = priorTherapySurgeryProcedureTitle;
+		this.priorTherapySurgeryProcedureTitle = getAppendString(this.priorTherapySurgeryProcedureTitle,priorTherapySurgeryProcedureTitle);
 	}
 	public String getPriorTherapySurgeryTumorHistology() {
 		return priorTherapySurgeryTumorHistology;
 	}
-	public void setPriorTherapySurgeryTumorHistology(
+//	public void setPriorTherapySurgeryTumorHistology(
+//			String priorTherapySurgeryTumorHistology) {
+//		this.priorTherapySurgeryTumorHistology = priorTherapySurgeryTumorHistology;
+//	}
+	public void appendPriorTherapySurgeryTumorHistology(
 			String priorTherapySurgeryTumorHistology) {
-		this.priorTherapySurgeryTumorHistology = priorTherapySurgeryTumorHistology;
+		this.priorTherapySurgeryTumorHistology = getAppendString(this.priorTherapySurgeryTumorHistology, priorTherapySurgeryTumorHistology);
 	}
 	public String getPriorTherapySurgeryOutcome() {
 		return priorTherapySurgeryOutcome;
 	}
-	public void setPriorTherapySurgeryOutcome(String priorTherapySurgeryOutcome) {
-		this.priorTherapySurgeryOutcome = priorTherapySurgeryOutcome;
+//	public void setPriorTherapySurgeryOutcome(String priorTherapySurgeryOutcome) {
+//		this.priorTherapySurgeryOutcome = priorTherapySurgeryOutcome;
+//	}
+	public void appendPriorTherapySurgeryOutcome(String priorTherapySurgeryOutcome) {
+		this.priorTherapySurgeryOutcome = getAppendString(this.priorTherapySurgeryOutcome,priorTherapySurgeryOutcome) ;
 	}
 	public String getOnStudyTherapyRadiationSite() {
 		return onStudyTherapyRadiationSite;
 	}
-	public void setOnStudyTherapyRadiationSite(String onStudyTherapyRadiationSite) {
-		this.onStudyTherapyRadiationSite = onStudyTherapyRadiationSite;
+//	public void setOnStudyTherapyRadiationSite(String onStudyTherapyRadiationSite) {
+//		this.onStudyTherapyRadiationSite = onStudyTherapyRadiationSite;
+//	}
+	public void appendOnStudyTherapyRadiationSite(String onStudyTherapyRadiationSite) {
+		this.onStudyTherapyRadiationSite = getAppendString(this.onStudyTherapyRadiationSite,onStudyTherapyRadiationSite) ;
 	}
 	public String getOnStudyTherapyRadiationNeurosisStatus() {
 		return onStudyTherapyRadiationNeurosisStatus;
 	}
-	public void setOnStudyTherapyRadiationNeurosisStatus(
+//	public void setOnStudyTherapyRadiationNeurosisStatus(
+//			String onStudyTherapyRadiationNeurosisStatus) {
+//		this.onStudyTherapyRadiationNeurosisStatus = onStudyTherapyRadiationNeurosisStatus;
+//	}
+	public void appendOnStudyTherapyRadiationNeurosisStatus(
 			String onStudyTherapyRadiationNeurosisStatus) {
-		this.onStudyTherapyRadiationNeurosisStatus = onStudyTherapyRadiationNeurosisStatus;
+		this.onStudyTherapyRadiationNeurosisStatus = getAppendString(this.onStudyTherapyRadiationNeurosisStatus,onStudyTherapyRadiationNeurosisStatus);
 	}
 	public String getOnStudyTherapyRadiationFractionDose() {
 		return onStudyTherapyRadiationFractionDose;
 	}
-	public void setOnStudyTherapyRadiationFractionDose(
+//	public void setOnStudyTherapyRadiationFractionDose(
+//			String onStudyTherapyRadiationFractionDose) {
+//		this.onStudyTherapyRadiationFractionDose = onStudyTherapyRadiationFractionDose;
+//	}
+	public void appendOnStudyTherapyRadiationFractionDose(
 			String onStudyTherapyRadiationFractionDose) {
-		this.onStudyTherapyRadiationFractionDose = onStudyTherapyRadiationFractionDose;
+		this.onStudyTherapyRadiationFractionDose = getAppendString(this.onStudyTherapyRadiationFractionDose,onStudyTherapyRadiationFractionDose) ;
 	}
 	public String getOnStudyTherapyRadiationFractionNumber() {
 		return onStudyTherapyRadiationFractionNumber;
 	}
-	public void setOnStudyTherapyRadiationFractionNumber(
+//	public void setOnStudyTherapyRadiationFractionNumber(
+//			String onStudyTherapyRadiationFractionNumber) {
+//		this.onStudyTherapyRadiationFractionNumber = onStudyTherapyRadiationFractionNumber;
+//	}
+	public void appendOnStudyTherapyRadiationFractionNumber(
 			String onStudyTherapyRadiationFractionNumber) {
-		this.onStudyTherapyRadiationFractionNumber = onStudyTherapyRadiationFractionNumber;
+		this.onStudyTherapyRadiationFractionNumber = getAppendString(this.onStudyTherapyRadiationFractionNumber,onStudyTherapyRadiationFractionNumber); 
 	}
 	public String getOnStudyTherapyRadiationType() {
 		return onStudyTherapyRadiationType;
 	}
-	public void setOnStudyTherapyRadiationType(String onStudyTherapyRadiationType) {
-		this.onStudyTherapyRadiationType = onStudyTherapyRadiationType;
+//	public void setOnStudyTherapyRadiationType(String onStudyTherapyRadiationType) {
+//		this.onStudyTherapyRadiationType = onStudyTherapyRadiationType;
+//	}
+	public void appendOnStudyTherapyRadiationType(String onStudyTherapyRadiationType) {
+		this.onStudyTherapyRadiationType = getAppendString(this.onStudyTherapyRadiationType, onStudyTherapyRadiationType);
 	}
 	public String getOnStudyTherapyChemoAgentName() {
 		return onStudyTherapyChemoAgentName;
 	}
-	public void setOnStudyTherapyChemoAgentName(String onStudyTherapyChemoAgentName) {
-		this.onStudyTherapyChemoAgentName = onStudyTherapyChemoAgentName;
+//	public void setOnStudyTherapyChemoAgentName(String onStudyTherapyChemoAgentName) {
+//		this.onStudyTherapyChemoAgentName = onStudyTherapyChemoAgentName;
+//	}
+	public void appendOnStudyTherapyChemoAgentName(String onStudyTherapyChemoAgentName) {
+		this.onStudyTherapyChemoAgentName = getAppendString(this.onStudyTherapyChemoAgentName,onStudyTherapyChemoAgentName) ;
 	}
 	public String getOnStudyTherapyChemoCourseCount() {
 		return onStudyTherapyChemoCourseCount;
 	}
-	public void setOnStudyTherapyChemoCourseCount(
+//	public void setOnStudyTherapyChemoCourseCount(
+//			String onStudyTherapyChemoCourseCount) {
+//		this.onStudyTherapyChemoCourseCount = onStudyTherapyChemoCourseCount;
+//	}
+	public void appendOnStudyTherapyChemoCourseCount(
 			String onStudyTherapyChemoCourseCount) {
-		this.onStudyTherapyChemoCourseCount = onStudyTherapyChemoCourseCount;
+		this.onStudyTherapyChemoCourseCount = getAppendString(this.onStudyTherapyChemoCourseCount,onStudyTherapyChemoCourseCount);
 	}
 	public String getOnStudyTherapySurgeryProcedureTitle() {
 		return onStudyTherapySurgeryProcedureTitle;
 	}
-	public void setOnStudyTherapySurgeryProcedureTitle(
+//	public void setOnStudyTherapySurgeryProcedureTitle(
+//			String onStudyTherapySurgeryProcedureTitle) {
+//		this.onStudyTherapySurgeryProcedureTitle = onStudyTherapySurgeryProcedureTitle;
+//	}
+	public void appendOnStudyTherapySurgeryProcedureTitle(
 			String onStudyTherapySurgeryProcedureTitle) {
-		this.onStudyTherapySurgeryProcedureTitle = onStudyTherapySurgeryProcedureTitle;
+		this.onStudyTherapySurgeryProcedureTitle = getAppendString(this.onStudyTherapySurgeryProcedureTitle, onStudyTherapySurgeryProcedureTitle) ;
 	}
 	public String getOnStudyTherapySurgeryIndication() {
 		return onStudyTherapySurgeryIndication;
 	}
-	public void setOnStudyTherapySurgeryIndication(
+//	public void setOnStudyTherapySurgeryIndication(
+//			String onStudyTherapySurgeryIndication) {
+//		this.onStudyTherapySurgeryIndication = onStudyTherapySurgeryIndication;
+//	}
+	public void appendOnStudyTherapySurgeryIndication(
 			String onStudyTherapySurgeryIndication) {
-		this.onStudyTherapySurgeryIndication = onStudyTherapySurgeryIndication;
+		this.onStudyTherapySurgeryIndication = getAppendString(this.onStudyTherapySurgeryIndication, onStudyTherapySurgeryIndication) ;
 	}
 	public String getOnStudyTherapySurgeryHistoDiagnosis() {
 		return onStudyTherapySurgeryHistoDiagnosis;
 	}
-	public void setOnStudyTherapySurgeryHistoDiagnosis(
+//	public void setOnStudyTherapySurgeryHistoDiagnosis(
+//			String onStudyTherapySurgeryHistoDiagnosis) {
+//		this.onStudyTherapySurgeryHistoDiagnosis = onStudyTherapySurgeryHistoDiagnosis;
+//	}
+	public void appendOnStudyTherapySurgeryHistoDiagnosis(
 			String onStudyTherapySurgeryHistoDiagnosis) {
-		this.onStudyTherapySurgeryHistoDiagnosis = onStudyTherapySurgeryHistoDiagnosis;
+		this.onStudyTherapySurgeryHistoDiagnosis = getAppendString(this.onStudyTherapySurgeryHistoDiagnosis, onStudyTherapySurgeryHistoDiagnosis);
 	}
 	public String getOnStudyTherapySurgeryOutcome() {
 		return onStudyTherapySurgeryOutcome;
 	}
-	public void setOnStudyTherapySurgeryOutcome(String onStudyTherapySurgeryOutcome) {
-		this.onStudyTherapySurgeryOutcome = onStudyTherapySurgeryOutcome;
+//	public void setOnStudyTherapySurgeryOutcome(String onStudyTherapySurgeryOutcome) {
+//		this.onStudyTherapySurgeryOutcome = onStudyTherapySurgeryOutcome;
+//	}
+	public void appendOnStudyTherapySurgeryOutcome(String onStudyTherapySurgeryOutcome) {
+		this.onStudyTherapySurgeryOutcome = getAppendString(this.onStudyTherapySurgeryOutcome, onStudyTherapySurgeryOutcome);
 	}
 	public String getSurvivalLengthRange() {
 		return survivalLengthRange;
@@ -261,15 +351,15 @@ public class RembrandtClinicalReportBean {
 		this.survivalLengthRange = survivalLengthRange;
 	}	
 	
+	
 	public String toString() {
 		
 	 if (rptStr == null) {
 	
 		 StringBuffer sb = new StringBuffer();		 
 		 sb.append(sampleId).append(",");
-		 sb.append(ageAtDx).append(",");
-		 sb.append(gender).append(",");
-		 sb.append(survivalMonths).append(",");
+		 sb.append(ageGroup).append(",");
+		 sb.append(gender).append(",");		 
 		 sb.append(survivalLengthRange).append(",");
 		 sb.append(disease).append(",");
 		 sb.append(grade).append(",");
@@ -308,6 +398,12 @@ public class RembrandtClinicalReportBean {
 		
 	 return rptStr;
 		
+	}
+	public String getAgeGroup() {
+		return ageGroup;
+	}
+	public void setAgeGroup(String ageGroup) {
+		this.ageGroup = ageGroup;
 	}
 	
 }
