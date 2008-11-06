@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import gov.nih.nci.cma.clinical.RembrandtClinicalKeys
 import gov.nih.nci.cma.clinical.RembrandtClinicalReportBean
+import gov.nih.nci.cma.util.RbtNeuroComparator;
 
 import gov.nih.nci.caintegrator.application.lists.UserList
 import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
@@ -224,6 +225,10 @@ class RembrandtClinicalService {
     
     private void loadReportBeanWithNeuroData(RembrandtClinicalReportBean rptBean, List neuroData) {
       //may want to order the list
+      //order by followup month
+      RbtNeuroComparator neuroComparator = new RbtNeuroComparator();
+      Collections.sort(neuroData, neuroComparator);
+            
       neuroData.each { nd ->
          //println("pdid=${nd.getPatientDid()} timepoint=${nd.getTimePoint()}  karnofskyScore=${nd.getKarnofskyScore()}")
          
