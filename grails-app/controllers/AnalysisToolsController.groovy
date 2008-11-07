@@ -11,7 +11,6 @@ class AnalysisToolsController {
 			defaultListLoaderService.loadDefaultLists()
 		}
 		gpHomeURL = GenePatternIntegrationHelper.gpHomeURL(request);
-		//println("gpHomeURL = " + gpHomeURL)
 	}
 	
 	def pCAService;
@@ -21,7 +20,6 @@ class AnalysisToolsController {
     
     def menu =	{
     	render(view:'menu', model:[gpHomeURL:gpHomeURL])
-    	//render(view:'menu')
     }
     
     def pcaSetup = { 
@@ -90,20 +88,36 @@ class AnalysisToolsController {
     }
     
     def genePatternSetup = {
+    		
         	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
         	
-        	// Below not used for Rembrandt data
-        	//def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
+        	// Get the data context 
+    		def dataContext = grailsApplication.config.cma.dataContext
+    		// Displays or hides certain GP setup page elements
+    		String displayEl = ""
+    		
+    		if (dataContext.equalsIgnoreCase("TCGA")) {
+    			// Below not used for Rembrandt data
+    			def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
         	
-        	// 'Copy Number' not used for Rembrandt data. That leaves a selection of one, so don't bother.
-        	//def moduleList = ["Gene Expression", "Copy Number"]
+        		// 'Copy Number' not used for Rembrandt data. That leaves 
+        		// a selection of one, so don't bother with list for Rembrandt.
+        		def moduleList = ["Gene Expression", "Copy Number"]
+        		
+        		// Display some elements not visible for dataContext="Rembrandt"
+        		displayEl = "display:inline"
         	
-        	//render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists, moduleList:moduleList])
-        	render(view:'genePatternSetup', model:[patLists:patLists])
+        		render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists, moduleList:moduleList, displayEl:displayEl])
+    		}
+    		else if (dataContext.equalsIgnoreCase("Rembrandt")) {
+    			// Hide some elements not visible for dataContext="Rembrandt"
+    			displayEl = "display:none"
+    			
+    			render(view:'genePatternSetup', model:[patLists:patLists, displayEl:displayEl])
+    		}
     }
     
     def genePatternSubmit = {
-    		// Remove printlns later:
     		/*
         	println(params['analysisModuleName'])
         	println(params['selectedGroups'])
