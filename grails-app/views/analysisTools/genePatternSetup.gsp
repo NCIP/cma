@@ -40,24 +40,27 @@
 	</head>
 	
 	<body>
+		<br/>
 		<h3>Gene Pattern Analysis</h3>
+		<br/><br/>
 		<g:form name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
 		
-		<!-- No need to select for Rembrandt data
+		<div id="analysisModuleDisplay" style="${displayEl}">
+		<!-- Not used with Rembrandt data -->
 		<fieldset>
 		<legend>Select an Analysis Module</legend>
 			<div id="analysisModule" style="vertical-align: middle; display: table-cell;">
 				<g:select name="analysisModuleName" size="1" 
 				style="width: 200px; overflow: none;" 
-			<!--	onchange="dropdownChromo(this,'advZ','advZ');" -->
+				onchange="dropdownChromo(this,'advZ','advZ');"
 				from="${moduleList}"></g:select>				
 			</div>
 		</fieldset>
-		-->
+		</div>
 		<input type="hidden" name="analysisModuleName" value="Gene Expression"/>
 		
 		
-		<!-- Not used for Rembrandt data
+		<!-- Not used with Rembrandt data -->
 		<div id="advZ" style="display:none;">
 			<fieldset>
 				<legend>Select a chromosome</legend>		
@@ -68,8 +71,8 @@
 				</g:select>
 			</fieldset>
 		</div>
-		-->
 		<input type="hidden" id="chromosomeName" name="chromosomeName" value=""/>
+		
 		
 		<fieldset>
 		<legend>Select Patient Group</legend>
@@ -81,7 +84,9 @@
 			</div>
 		</fieldset>
 		
-		<!-- Not used for Rembrandt data
+		
+		<div id="geneListDisplay" style="${displayEl}">
+		<!-- Not used with Rembrandt -->
 		<fieldset>
 			<legend>Filter Genes/Reporters</legend>
 			Select a gene/reporter list: <br/>
@@ -90,7 +95,8 @@
 			noSelection="['none':'none']"  
 			from="${geneLists}"></g:select>		
 		</fieldset>
-		-->
+		</div>
+		
 		
 		<fieldset>
 			<legend>Select Array Platform</legend>
@@ -100,16 +106,19 @@
 			from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" 
 			optionValue="platformName" optionKey="fileName"></g:select>
 		</fieldset>
+
 			
 		<fieldset>
 			<legend>Name Analysis Result*</legend>
 			<input type="text" id="analysisResultName" value="" size="50" name="analysisResultName"/>
 		</fieldset>
+
 		
 		<div align="center">
 			<input type="reset" value="clear"/>
 			<input type="submit" value="submit"/>
-		</div>	
+		</div>
+			
 		</g:form>
 		
 	</body>
