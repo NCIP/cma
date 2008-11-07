@@ -7,6 +7,10 @@
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
 grails.config.locations = ["file:C:/local/content/cma/config/cma.properties"]
+
+
+//cma.dataContext="Rembrandt"  
+cma.dataContext="TCGA"
 				
 
 // if(System.properties["${appName}.config.location"]) {
@@ -68,8 +72,10 @@ log4j {
             hibernate="off"
         }
         gov {
-        	nih.nci.caintegrator="debug"       	
+        	nih.nci.caintegrator="debug"   
+        	nih.nci.cma="debug"
         }
+      
     }
     additivity.StackTrace=true
 }
