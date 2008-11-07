@@ -119,8 +119,8 @@ class ApplicationUserController extends BaseController {
     		  user.userId = params.userId
     		  user.password = params.password
     		    	
-    		  try{ 
-    			AuthenticationManager authenticationManager = SecurityServiceProvider.getAuthenticationManager('cma'); 
+    		  try{
+    			AuthenticationManager authenticationManager = SecurityServiceProvider.getAuthenticationManager(grailsApplication.config.cma.authenticationManagerContext); 
     			loginOK = authenticationManager.login(params.userId, params.password); 
     		  } catch (CSException cse){ 
     			loginOK = false
