@@ -8,9 +8,13 @@
 
 grails.config.locations = ["file:C:/local/content/cma/config/cma.properties"]
 
-
-//cma.dataContext="Rembrandt"  
+// TCGA:
 cma.dataContext="TCGA"
+cma.authenticationManagerContext="cma"
+
+// Rembrandt:
+//cma.dataContext="Rembrandt"
+//cma.authenticationManagerContext="rembrandt"
 				
 
 // if(System.properties["${appName}.config.location"]) {
