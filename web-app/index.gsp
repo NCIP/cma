@@ -237,8 +237,9 @@
 					<br/><br/>
 					Available resources include:  Gene Expression Plots, KM Survival Plots, Genome Browser, and Pathway Visualizations.
 					<br/><br/>
-					<img src="${createLinkTo(dir:'images',file:'km.gif')}" align="right"/>
-					<img src="${createLinkTo(dir:'images',file:'pathway.gif')}"/>
+					<div align="center">
+						<img src="${createLinkTo(dir:'images',file:'geneViewCollage.png')}" />
+					</div>
 				</div>
 			</div>
 			<div id="genomeContent">
@@ -261,8 +262,7 @@
 					Available resources include: Clinical Query with Reports and KM Sample Plots
 					<br/><br/>
 					<div align="center">
-						<img src="${createLinkTo(dir:'images',file:'clinical.gif')}" align="left" width="180" height="130"/>
-						<img src="${createLinkTo(dir:'images',file:'km.gif')}" align="right"/>
+						<img src="${createLinkTo(dir:'images',file:'clinicalViewCollage.png')}" />
 					</div>
 				</div>
 			</div>
@@ -274,8 +274,7 @@
 					Available resources include: PCA Analysis and Gene Pattern Integration
 					<br/><br/>
 					<div align="center">
-						<img src="${createLinkTo(dir:'images',file:'pca.gif')}" align="left" />
-						<img src="${createLinkTo(dir:'images',file:'gp.gif')}" align="right" width="210" height="35"/>
+						<img src="${createLinkTo(dir:'images',file:'analysisToolsCollage.png')}"  />
 					</div>
 				</div>
 			</div>
