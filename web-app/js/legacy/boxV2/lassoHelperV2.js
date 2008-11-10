@@ -93,7 +93,7 @@ function init(imgId) {
 			removeEventListeners(document,"mouseup",mouseUpHandle);
 			bubbleCancel(evt);
 			
-		 	alert("Start: " + startX + "," + startY+ "\nEnd: " + endX + "," + endY);
+		 	//alert("Start: " + startX + "," + startY+ "\nEnd: " + endX + "," + endY);
 		 	getLassoed(startX, startY, endX, endY);
 		 }
 	}
@@ -134,7 +134,7 @@ function init(imgId) {
 			}
 		}
 		if(lassoed.length>0)	{
-			alert("You selected: " + lassoed);
+			//alert("You selected: " + lassoed);
 			writePendings();
 		}
 		else	{
@@ -219,7 +219,7 @@ function initMarkerPoints(myMap)	{
 		 marker.src = markersrc;
 		 marker.id = "the_marker";
 		 marker.alt = "";
-		 //marker.style.display = "none"; //none
+		 marker.style.display = "none"; //none
 		 marker.style.position = "absolute";
 		 $("pcaImageContainer").appendChild(marker);
 	}
