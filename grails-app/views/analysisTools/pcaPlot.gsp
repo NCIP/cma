@@ -9,50 +9,77 @@
 		<script type='text/javascript' src='../dwr/util.js'></script>
 		<g:javascript library="overlib_mini" />
 		<g:javascript library="legacy/box/browserSniff" />
-		
+	  	
 		<g:javascript library="legacy/a_saveSamples" />
+		<g:javascript library="legacy/boxV2/api" />
+		<g:javascript library="legacy/boxV2/lassoHelperV2" />
+		
+		
+	<!--
 		<g:javascript library="legacy/box/x_core" />
 		<g:javascript library="legacy/box/x_event" />
 		<g:javascript library="legacy/box/x_dom" />
 		<g:javascript library="legacy/box/x_drag" />
 		<g:javascript library="legacy/box/wz_jsgraphics" />
 		<g:javascript library="legacy/box/dbox" />
-		
+	-->	
 		<script type="text/javascript">
 			function togglePCAPlot(plot) {
-				$$("li.current")[0].removeClassName("current");
-				
-				if(document.getElementById("pcaChart"))	{
-					var chart = document.getElementById("pcaChart");
-					var imgURL = chart.src.split("filename=");
-					chart.src = (imgURL[0] + "filename=" + plot);
-					chart.useMap = "#"+plot;
-					
-					//reset
-					if(document.getElementsByName("graphTypeLinks"))	{
-						var lnks = document.getElementsByName("graphTypeLinks");
-						for(var i=0; i < lnks.length; i++)	{
-							//lnks[i].style.backgroundColor = "#FFFAE1";
-							//lnks[i].style.textDecoration = "underline";
-						}
-					}
-					//highlight the default one
-					var temp = plot+"_link";
-			
-					var defaultLink = document.getElementById(plot+"_link");
-					$(plot+"_link").up().addClassName("current");
-					
-					//defaultLink.style.backgroundColor = "#F2f2f2";
-					//defaultLink.style.textDecoration = "none";
-					//call to the graphics part from lassoHelper.js
-					setMain("pcaChart");
+				if($$(".currentPlot")[0].id == plot)	{
+					return; //clicked one we already are showing
 				}
+				//alert($$(".currentPlot").length);
+			
+				$$("li.current")[0].removeClassName("current");
+				//hide the currentPCA
+				$$(".currentPlot")[0].hide();
+				$$(".currentPlot")[0].removeClassName("currentPlot");
+				
+				//show the requested one
+				$(plot).addClassName("currentPlot");
+				$(plot).show();
+
+
+				//var imgURL = $("pcaChart").src.split("filename=");
+				//$("pcaChart").src = (imgURL[0] + "filename=" + plot);
+				//alert(chart.src);
+				//$("pcaChart").useMap = "#"+plot;
+				
+				
+				//reset
+				if(document.getElementsByName("graphTypeLinks"))	{
+					var lnks = document.getElementsByName("graphTypeLinks");
+				}
+				//highlight the default one
+				var temp = plot+"_link";
+		
+				var defaultLink = $(plot+"_link");
+				$(plot+"_link").up().addClassName("current");
+				//call to the graphics part from lassoHelper.js
+				//setMain("pcaChart");
+				//setMain(plot);
+				init(plot);
+				initMarkerPoints(plot);
 			}
+			
+			Event.observe(window, "load", function()	{
+				//setMain("${PC1vsPC2}");
+				init("${PC1vsPC2}");
+				initMarkerPoints("${PC1vsPC2}");
+			});
+			
 		</script>
 		<style>
-		#middle, #bottom, #superTop, #top {
-			
-			margin: 0px 5px 0px 5px;
+			#middle, #bottom, #superTop, #top {
+				margin: 0px 5px 0px 5px;
+			}
+			#drag { 
+				border:1px solid red;
+				background-color:#eee;
+				-moz-opacity:.4;
+				-khtml-opacity:.4;
+				filter: alpha(opacity=40);
+				opacity:.4;
 			}
 		</style>
 	</head>
@@ -85,8 +112,13 @@
 					<div id="main" style="font-family:arial; font-size:12px">
 					<!-- div style="background-color:#ffffff;" -->
 						<div style="border:0px solid #000;margin:5px;align-text:center">
-							<div style="width:550px; overflow:auto; text-align:center; left:30 ">
-								<img src="${defaultURL }" border="0" usemap="#${defaultFilename }" id="pcaChart">
+							<div id="pcaImageContainer" style="width:550px; overflow:auto; text-align:center; left:30 ">
+							<!-- 
+								<img src="${defaultURL }" border="0" usemap="#${defaultFilename}" id="pcaChart">
+							-->	
+								<img src="${PC1vsPC2URL}" border="0" usemap="#${PC1vsPC2}" id="${PC1vsPC2}" class="currentPlot">
+								<img src="${PC1vsPC3URL}" border="0" usemap="#${PC1vsPC3}" id="${PC1vsPC3}" style="display:none";>
+								<img src="${PC2vsPC3URL}" border="0" usemap="#${PC2vsPC3}" id="${PC2vsPC3}" style="display:none">
 							</div>
 						</div>
 					</div>
@@ -139,6 +171,8 @@
 			}
 			
 		</script>
+		<!--  
 		<g:javascript library="legacy/box/lassoHelper" />
+		-->
 	</body>
 </html>
