@@ -6,7 +6,6 @@
 			<li id="genome_tab"><a href="${createLink(controller:'genomeView')}" title="">Genome View</a></li>
 			<li id="clinical_tab"><a href="${createLink(controller:'clinical')}" title="">Clinical View</a></li>
 			<li id="analysis_tab"><a href="${createLink(controller:'analysisTools')}" title="">Analysis Tools</a></li>
-			<li id="study_tab"><a href="${createLink(controller:'studyResults')}" title="">Study Results</a></li>
 			<g:if test="${session.userId != null }">
 				<li><a style="background-color:#fff;color:#000;" href="${createLink(controller:'applicationUser', action:'logout')}" title="">Welcome, ${session.userId} - Logout</a></li>
 				

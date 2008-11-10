@@ -15,9 +15,8 @@
 					case "tools":
 						go = "${createLink(controller:'analysisTools')}";
 					break;
-					case "studyResults":
-						go = "${createLink(controller:'studyResults')}";
-					break;
+					
+
 					case "gene":
 						go = "${createLink(controller:'geneView')}";
 					break;
@@ -107,10 +106,8 @@
 				<table border="0" cellspacing="0" cellpadding="0" style="width: 100%">
 					<tbody>
 						<tr>
-							<td class="splashMenu  splashCurrent" title="studyResults">
-								<h5>
-									Study Results
-								</h5>
+							<td class="splashMenu splashCurrent" title="gene">
+								<h5>Gene View</h5>
 							</td>
 							<td rowspan="6" id="splashMain" style="border: 5px solid #2B2D51;">
 							</td>
@@ -184,11 +181,6 @@
 										</div>
 									</div>
 								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="splashMenu" title="gene">
-								<h5>Gene View</h5>
 							</td>
 						</tr>
 						<tr>
