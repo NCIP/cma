@@ -44,7 +44,7 @@
 	  <display:column property="grade" sortable="true" headerClass="sortable" />
 	  <display:column property="mriDesc"  title="MRI" />
 	  <display:column property="karnofsky" sortable="true" headerClass="sortable" />
-	  
+	  <display:column property="ageGroup"  title="Age Group" />
 <display:column property="survivalLengthRange" sortable="true" headerClass="sortable" />
 <display:column property="race" sortable="true" headerClass="sortable" />
 <display:column property="institution" sortable="true" headerClass="sortable" />
