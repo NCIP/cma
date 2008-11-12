@@ -96,8 +96,8 @@ class TCGAClinicalService {
 		String informedConsentAcquired = (String)clinicalForm.getParameter("informedConsentAcquired")
 		String tumorTissueSite = (String) clinicalForm.getParameter("tumorTissueSite")
 	    String vitalStatus = (String) clinicalForm.getParameter("vitalStatus")
-	    String sampleGroup = (String) clnicalForm.getParameter("sampleGroup")
-	    String patientId = (String) clnicalForm.getParameter("patientId")
+	    String sampleGroup = (String) clinicalForm.getParameter("sampleGroup")
+	    String patientId = (String) clinicalForm.getParameter("patientId")
 		Integer dodMinusDopLower = clinicalForm.getParameter("dodMinusDopLower")!=null ? Integer.valueOf(clinicalForm.getParameter("dodMinusDopLower")) : null
 		Integer dodMinusDopUpper = clinicalForm.getParameter("dodMinusDopUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("dodMinusDopUpper")) : null
 		Integer dodfuMinusDopLower = clinicalForm.getParameter("dodfuMinusDopLower")!=null ? Integer.valueOf(clinicalForm.getParameter("dodfuMinusDopLower")) : null
