@@ -115,5 +115,27 @@ public class TCGAClinicalReportBean {
 	public void setPtid(String ptid) {
 		this.ptid = ptid;
 	}
+	
+	public String toString() {
+	  StringBuffer sb = new StringBuffer();
+	  sb.append(patientId).append(",");
+	  sb.append(tumorTissueSite).append(",");
+	  sb.append(vitalStatus).append(",");
+	  sb.append(dob).append(",");
+	  sb.append(dod).append(",");
+	  sb.append(lastFollowUp).append(",");
+	  sb.append(firstProcedure).append(",");
+	  sb.append(firstExam).append(",");
+	  sb.append(karnofskyScore).append(",");
+	  sb.append(firstRadiation).append(",");
+	  sb.append(dodMinusDop).append(",");
+	  sb.append(dodfuMinusDop).append(",");
+	  sb.append(cfId).append(",");
+	  sb.append(gender).append(",");
+	  sb.append(informedConsentAcquired).append(",");
+	  sb.append(ptid);
+	  return sb.toString();		
+	}
+	
 
 }
