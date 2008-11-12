@@ -2,6 +2,11 @@ import gov.nih.nci.cma.domain.tcga.ClinicalNew;
 import gov.nih.nci.cma.clinical.TCGAClinicalReportBean;
 import org.apache.log4j.Logger;
 
+import gov.nih.nci.caintegrator.application.lists.UserList;
+import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
+import gov.nih.nci.caintegrator.application.lists.ListItem;
+import org.springframework.web.context.request.RequestContextHolder;
+
 class TCGAClinicalService {
 	
 	//gender: ANY
@@ -48,7 +53,7 @@ class TCGAClinicalService {
       Set retSet = new HashSet()
       domainObjs.each { d ->
         if (d != null) {
-          retSet.add(d.getId())  
+          retSet.add(d.getPtid())  
         }
         else {
           logger.warn("getIdList got null domain object.")
@@ -87,7 +92,7 @@ class TCGAClinicalService {
     def getClinicalData = { clinicalForm -> 
                
 	    clinicalForm.getParameterNames().each	{
-	    	logger.debug(it + ": " + clinicalForm.getParameter(it))
+	    	println(it + ": " + clinicalForm.getParameter(it))
 	    }
 	    	    
 		String gender = (String)clinicalForm.getParameter("gender")				
@@ -106,14 +111,18 @@ class TCGAClinicalService {
 				
 		List ids = getIdsForSampleGroup(sampleGroup)
 		
+		println("getIdsForSampleGroup returned numIds=${ids.size()}")
+		
 		
 		Set idSet = new HashSet(ids)
-				
+			
+		/*
 		if ((patientId != null ) && (!patientId.equals("ANY"))) {
 			  List idl = new ArrayList()
 			  idl.add(patientId)
-			  ids.retainAll(idl)
+			  idSet.retainAll(idl)
 		}
+		*/
 					
 		if ((gender != null) && (!gender.equals("ANY"))) {
 			List genderIds = getIdsForGender(gender)
@@ -200,9 +209,16 @@ class TCGAClinicalService {
     }
     
     public List getClinicalData(List patientIds) { 
+    	
+    	if ((patientIds == null) || (patientIds.isEmpty())) {
+    	  println("Warning empty list passed to getClinicalData")
+    	  return Collections.emptyList()
+    	}
+    	
     	Set idSet = new HashSet(patientIds)
     	String idStr = getIdString(idSet)
     	String cnQS = "From gov.nih.nci.cma.domain.tcga.ClinicalNew cn where cn.id in ${idStr}"
+    	println("getClinicalData cnQS=${cnQS}")
     	List cl = ClinicalNew.findAll(cnQS)
     	List rptBeanList = new ArrayList()
     	cl.each { c ->
@@ -213,8 +229,30 @@ class TCGAClinicalService {
     }
     
     
+    public List getIdsForSampleGroup(String sampleGroup) {
+    	Set idSet = new HashSet()
+    	println("getIdsForSampleGroup sampleGroup=${sampleGroup}")
+    	if ((sampleGroup != null) && (sampleGroup.size() > 0)) {      	  
+      	    def webRequest= RequestContextHolder.currentRequestAttributes()        	  
+            def session = webRequest.session    	 
+
+            UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
+    	    UserList ul = userListBeanHelper.getUserList(sampleGroup);
+    	    logger.debug("Got user list bean !")
+    	    java.util.List listItems = ul.getListItems()
+    	    listItems.each { li -> 
+    	      println("adding item ${li.getName()}")
+    	      idSet.add(li.getName())
+    	    }    	        	        	  
+        }    	    	
+    	return new ArrayList(idSet)
+    }
+    
+    
     public List getClinicalDataForGroup(String groupName) {
-      return Collections.emptyList()
+       List idList = getIdsForSampleGroup(groupName)
+       println("getClinicalDataForGroup groupName=${groupName} returned numIds=${idList.size()}")
+       return getClinicalData(idList)
     }
    
 }
