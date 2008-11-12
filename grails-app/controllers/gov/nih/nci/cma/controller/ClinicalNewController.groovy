@@ -1,6 +1,6 @@
 package gov.nih.nci.cma.controller
 
-import gov.nih.nci.cma.domain.ClinicalNew
+import gov.nih.nci.cma.domain.tcga.ClinicalNew
 
 class ClinicalNewController {
     
