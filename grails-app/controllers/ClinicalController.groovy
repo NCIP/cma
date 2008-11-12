@@ -1,9 +1,11 @@
 import grails.converters.*
 import gov.nih.nci.cma.clinical.*;
 import java.text.SimpleDateFormat;
-import gov.nih.nci.cma.services.rembrandt.RembrandtClinicalService;
+import org.apache.log4j.Logger;
 
 class ClinicalController {
+	
+	private static Logger logger = Logger.getLogger(ClinicalController.class);
 	
 	def defaultListLoaderService
 	def beforeInterceptor = {
@@ -12,22 +14,29 @@ class ClinicalController {
 		}
 	}
 	
-	//def clinicalService;
-	def rembrandtClinicalService;
+	
+	def getClinicalService = {
+			def dc = grailsApplication.config.cma.dataContext
+			def dataServiceName = "${dc}ClinicalService"
+			def clinicalServiceClass = grailsApplication.getArtefact("Service", dataServiceName)
+			logger.debug("getClinicalService returning instance of ${clinicalServiceClass.getName()}")
+			return clinicalServiceClass.newInstance()					
+	}
 	
     def index = { 
+			
+		def clinSrv = getClinicalService()	
+						
 		def patLists = defaultListLoaderService.getPatientLists(session.id, false);
-//		def genderList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.gender)
-//		def diseaseList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.disease)
-//		def raceList = clinicalService.getPermissibleValues(RembrandtClinicalKeys.race)
-		def genderList = rembrandtClinicalService.getPermissibleValues(RembrandtClinicalKeys.gender)
-		def diseaseList = rembrandtClinicalService.getPermissibleValues(RembrandtClinicalKeys.disease)
-		def raceList = rembrandtClinicalService.getPermissibleValues(RembrandtClinicalKeys.race)
+		def genderList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.gender)
+		def diseaseList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.disease)
+		def raceList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.race)
 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
 		
-		render(view:'main', model:[patLists:patLists, genderList:genderList, diseaseList:diseaseList, raceList:raceList])	
+		render(view:'tcgaMain', model:[patLists:patLists, genderList:genderList, diseaseList:diseaseList, raceList:raceList])
+		
     }
     
     def clinicalSubmit = {
@@ -64,7 +73,8 @@ class ClinicalController {
 
     	//	if(session.getAttribute(qname) == null)	{ //one already exists, overwrite
     		//List reportBeansList = clinicalService.getClinicalData(request);
-    	    List reportBeansList = rembrandtClinicalService.getClinicalData(request);
+    	    def clinSrv = getClinicalService()	
+    	    List reportBeansList = clinSrv.getClinicalData(request);
 	    	//put the reportBeansList somewhere..session for now, cache would be better, keyed as taskid (Query name)
 	    	session.setAttribute(qname, reportBeansList);
    // 	}
@@ -98,14 +108,17 @@ class ClinicalController {
 		def qname = "clinical_" + dateformatMMDDYYYY.format(new Date())
    		List reportBeansList = null;
    		
+		def clinSrv = getClinicalService()	
+		
 		if(params.ids != null)	{
 			List samList = Arrays.asList(params.ids.split(","));
 			//reportBeansList = clinicalService.getClinicalData(samList)
-			reportBeansList = rembrandtClinicalService.getClinicalData(samList)
+			reportBeansList = clinSrv.getClinicalData(samList)
 		}
 		else	{
 			//reportBeansList = clinicalService.getClinicalDataForGroup(params.taskId);
-			reportBeansList = rembrandtClinicalService.getClinicalDataForGroup(params.taskId);
+			
+			reportBeansList = clinSrv.getClinicalDataForGroup(params.taskId);
 			
 		}
 		session.setAttribute(qname, reportBeansList);
