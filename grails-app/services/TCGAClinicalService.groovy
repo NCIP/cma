@@ -39,7 +39,22 @@ class TCGAClinicalService {
     }
     
     public List<String> getPermissibleValues(String paramName) {
-       return Collections.emptyList()    	    	
+    	List<String> permValues = new ArrayList()
+    	
+    	if (paramName.equals("tumorTissueSite")) {
+    		permValues.add("GBM")
+    	}
+    	else if (paramName.equals("vitalStatus")) {
+    		permValues.add("ALIVE")
+    		permValues.add("DEAD")
+    	}
+    	else if (paramName.equals("gender")) {
+    		permValues.add("MALE")
+    		permValues.add("FEMALE")
+    	}
+    	
+    	return permValues;
+    	
     }
     
     /**
@@ -112,17 +127,15 @@ class TCGAClinicalService {
 		List ids = getIdsForSampleGroup(sampleGroup)
 		
 		println("getIdsForSampleGroup returned numIds=${ids.size()}")
-		
-		
+				
 		Set idSet = new HashSet(ids)
-			
-		/*
-		if ((patientId != null ) && (!patientId.equals("ANY"))) {
+					
+		if ((patientId != null ) && (!patientId.equals("ANY")) && (patientId.trim().length() > 0)) {
 			  List idl = new ArrayList()
 			  idl.add(patientId)
 			  idSet.retainAll(idl)
 		}
-		*/
+		
 					
 		if ((gender != null) && (!gender.equals("ANY"))) {
 			List genderIds = getIdsForGender(gender)
