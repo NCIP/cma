@@ -54,7 +54,7 @@
 	  <display:column property="dodMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="dodMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="dodfuMinusDop" sortable="true" headerClass="sortable" />
-	  <display:column property="cfid" sortable="true" headerClass="sortable" />
+	  <display:column property="cfId" sortable="true" headerClass="sortable" />
 	  <display:column property="informedConsentAcquired" sortable="true" headerClass="sortable" />
 </g:invokeTag>
 	</display:table>
