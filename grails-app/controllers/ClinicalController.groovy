@@ -35,7 +35,8 @@ class ClinicalController {
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
 		
-		render(view:'tcgaMain', model:[patLists:patLists, genderList:genderList, diseaseList:diseaseList, raceList:raceList])
+		def ds = grailsApplication.config.cma.dataContext ?: ""
+		render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, diseaseList:diseaseList, raceList:raceList])
 		
     }
     
@@ -84,7 +85,8 @@ class ClinicalController {
     }
     
     def clinicalReportDisplay = {
-    	render(view:"clinicalReportTable")
+		def ds = grailsApplication.config.cma.dataContext ?: ""
+    	render(view:"${ds}ClinicalReportTable")
     }
     
     def clinicalKM = {
