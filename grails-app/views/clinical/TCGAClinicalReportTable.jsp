@@ -1,5 +1,6 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
-<%@page import="java.util.*, gov.nih.nci.cma.clinical.*"%>
+  
+<%@page import="java.util.*, gov.nih.nci.cma.clinical.*, context.UserContextService, gov.nih.nci.caintegrator.application.configuration.*"%>
 
 <%
 	//get the reportBeansList
@@ -31,6 +32,14 @@
 <%if(!noBack.equals("true")) { %> 
 	<a id="backToClinical" href="./">Back to Clinical</a><br/> 
 <% } %> 
+<%
+//all this because the g:innvokeTag didnt work at all...
+UserContextService userContextService = (UserContextService) SpringContext.getBean("userContextService");
+boolean isLogged = false;
+if(userContextService!=null && userContextService.isLoggedIn()!=null && userContextService.isLoggedIn().toString().equals("true"))	{
+	isLogged = true;
+}
+ %>
 
 	<div id="saveSamplesDiv"> 
 		<input type="text" value="<%=key%>_samples" name="listName" id="listName" /> 
@@ -42,7 +51,7 @@
 	  <display:column property="patientId" title="ID" sortable="true" headerClass="sortable" />
 	  <display:column property="tumorTissueSite" sortable="true" headerClass="sortable" />
 	  <display:column property="ptid"  sortable="true" headerClass="sortable" />
-<% if(session.getAttribute("userId")!=null)	{ %>
+<% if(isLogged)	{ %>
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="vitalStatus" title="Vital Status" sortable="true" headerClass="sortable" />
 	  <display:column property="dob" sortable="true" headerClass="sortable" />
