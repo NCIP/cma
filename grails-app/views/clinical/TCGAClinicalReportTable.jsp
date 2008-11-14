@@ -31,6 +31,7 @@
 <%if(!noBack.equals("true")) { %> 
 	<a id="backToClinical" href="./">Back to Clinical</a><br/> 
 <% } %> 
+
 	<div id="saveSamplesDiv"> 
 		<input type="text" value="<%=key%>_samples" name="listName" id="listName" /> 
 		<input type="button" id="saveSamplesButton" onclick="saveGroupFromClinical('<%=key%>',$('listName').value);" value="Save All Samples from Report" /> 
@@ -41,7 +42,7 @@
 	  <display:column property="patientId" title="ID" sortable="true" headerClass="sortable" />
 	  <display:column property="tumorTissueSite" sortable="true" headerClass="sortable" />
 	  <display:column property="ptid"  sortable="true" headerClass="sortable" />
-<g:invokeTag name="isLoggedIn">
+<% if(session.getAttribute("userId")!=null)	{ %>
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="vitalStatus" title="Vital Status" sortable="true" headerClass="sortable" />
 	  <display:column property="dob" sortable="true" headerClass="sortable" />
@@ -56,7 +57,7 @@
 	  <display:column property="dodfuMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="cfId" sortable="true" headerClass="sortable" />
 	  <display:column property="informedConsentAcquired" sortable="true" headerClass="sortable" />
-</g:invokeTag>
+<% } %>
 	</display:table>
 	</div>
 	<div  id="bottom" align="center">
