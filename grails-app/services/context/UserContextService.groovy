@@ -1,3 +1,4 @@
+package context;
 import org.springframework.web.context.request.RequestContextHolder
 import javax.servlet.http.HttpSession
 
@@ -13,13 +14,14 @@ class UserContextService {
     	def webRequest= RequestContextHolder.currentRequestAttributes()  
     	def session = webRequest.session
     	
-    	if(session.userId != null)	{
+    	if(session.userId != null && session.userId != "")	{
     		return true;
     	}
     	else	{
     		return false;
     	}
     }
+    
     private HttpSession getSession() {
     	def webRequest= RequestContextHolder.currentRequestAttributes()  
     	def session = webRequest.session
