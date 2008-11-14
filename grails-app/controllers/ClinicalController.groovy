@@ -32,11 +32,16 @@ class ClinicalController {
 		def diseaseList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.disease)
 		def raceList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.race)
 
+		def tumorTissueSiteList = clinSrv.getPermissibleValues("tumorTissueSite");
+		def vitalStatusList = clinSrv.getPermissibleValues("vitalStatus");
+		
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
 		
 		def ds = grailsApplication.config.cma.dataContext ?: ""
-		render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, diseaseList:diseaseList, raceList:raceList])
+		render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
+		   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
+		   vitalStatusList:vitalStatusList])
 		
     }
     

@@ -74,7 +74,7 @@
 		        <tr>
 			        <td class="label">Tumor Tissue Site</td>
 			        <td>
-			        	<g:select name="tumorTissueSite"  from="${genderList}" noSelection="${['ANY':'Any']}" />
+			        	<g:select name="tumorTissueSite"  from="${tumorTissueSiteList}" noSelection="${['ANY':'Any']}" />
 					</td>
 				</tr>
 				<!--  -------------- -->
@@ -82,7 +82,7 @@
 				<tr>
 			        <td class="label">Vital Status</td>
 			        <td>
-			        	<g:select name="vitalStatus"  from="${genderList}" noSelection="${['ANY':'Any']}" />
+			        	<g:select name="vitalStatus"  from="${vitalStatusList}" noSelection="${['ANY':'Any']}" />
 					</td>
 				</tr>
 		        <tr>
