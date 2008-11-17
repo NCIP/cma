@@ -41,7 +41,7 @@
 			<div id="contextDiv">
 				<div id="ccontextDiv">
 					<span id="ccontextText">
-						Rembrandt
+						${grailsApplication.config.cma.dataContext ?: "Rembrandt" }
 					</span>
 					<span id="ccontextArrow">
 						V
