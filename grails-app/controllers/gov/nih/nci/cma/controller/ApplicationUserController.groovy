@@ -125,7 +125,7 @@ class ApplicationUserController extends BaseController {
     		  } catch (CSException cse){ 
     			loginOK = false
     			System.out.println("Caught CSException when trying to login.. ");
-    			ese.printStackTrace(System.out);
+    			cse.printStackTrace(System.out);
     		  } catch (java.lang.SecurityException ex) {
     			loginOK = false
     			System.out.println("Caught SecurityException when trying to login..");
