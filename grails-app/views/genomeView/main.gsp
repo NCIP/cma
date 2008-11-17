@@ -59,6 +59,11 @@
 	</head>
 	<body>
 		<h2>Genome View</h2>
+		
+		<br/> 
+		<span style="font-size:1.2em">&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://cgwb.nci.nih.gov/cgi-bin/heatmap" target="_blank"><u>Easy access to genome heatmaps</u></a></span>
+		<br/><br/><br/>
+		
 		<fieldset>
 		<div id="cnfs">
 			<div class="sectionHeader"><h5>Genomic View of Copy Number Data</h5></div>
