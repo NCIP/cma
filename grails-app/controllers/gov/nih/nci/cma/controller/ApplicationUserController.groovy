@@ -185,6 +185,7 @@ class ApplicationUserController extends BaseController {
 
    def logout = {
 		session.userId = null
+		session.acceptedLicense = null
 		//session.invalidate(); //dont invalidate, but rather start a new one - more to do here
 	    //need to clean the session entirely, lists, cache, temp files, ect....this is not enough
 	
