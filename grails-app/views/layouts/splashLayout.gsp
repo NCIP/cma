@@ -40,7 +40,7 @@
 		<div id="top">
 			<div id="contextDiv">
 				<div id="ccontextDiv">
-					<span id="ccontextText">
+					<span id="ccontextText" style="background-image:url(${createLinkTo(dir:'images',file:grailsApplication.config.cma.dataContext.toLowerCase()+'Context30.gif')});">
 						${grailsApplication.config.cma.dataContext ?: "Rembrandt" }
 					</span>
 					<span id="ccontextArrow">
@@ -53,10 +53,10 @@
 						Select Context
 					</div>
 					<div id="">
-						<a id="rbtContext" href="/cma-rembrandt/" onclick="$('ccontextText').update(this.innerHTML);$('ccontextText').setStyle({backgroundImage: this.getStyle('backgroundImage')});" style="display:block" onclick="return false;">Rembrandt</a>
+						<a id="RembrandtContext" href="/cma-rembrandt/" onclick="$('ccontextText').update(this.innerHTML);$('ccontextText').setStyle({backgroundImage: this.getStyle('backgroundImage')});" style="display:block" onclick="return false;">Rembrandt</a>
 					</div>
 					<div id="">
-						<a id="tcgaContext" href="/cma-tcga/" onclick="$('ccontextText').update(this.innerHTML);$('ccontextText').setStyle({backgroundImage: this.getStyle('backgroundImage')});" style="display:block" onclick="return false;">TCGA</a>
+						<a id="TCGAContext" href="/cma-tcga/" onclick="$('ccontextText').update(this.innerHTML);$('ccontextText').setStyle({backgroundImage: this.getStyle('backgroundImage')});" style="display:block" onclick="return false;">TCGA</a>
 					</div>
 				</div>
 				<!--  end ccontextOptions -->
