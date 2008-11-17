@@ -2,6 +2,7 @@ class CMAFilters {
    def filters = {
         manageLicenseAcceptance(controller:'*') {
 			before = {
+			if(controllerName != "applicationUser")	{
 				//println(" *** CMAFilter")
 				//println("controllerName = " + controllerName)
 				//println("actionName = " + actionName)
@@ -26,6 +27,7 @@ class CMAFilters {
 					session.acceptedLicense = "true"
 					session.uController = null
 				}			
+			}
 			}
 		}
    }
