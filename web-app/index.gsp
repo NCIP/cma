@@ -33,7 +33,7 @@
 			}		
 
 			Event.observe(window, "load", function()	{
-				$('splashMain').update($('studyResultsContent').innerHTML);
+				$('splashMain').update($('geneContent').innerHTML);
 				$$(".splashMenu").each( function(el)	{
 					el.observe("click", function() { process(el.title); } );
 					el.observe("mouseover", function() { nav(el); });
@@ -114,6 +114,16 @@
 							<td rowspan="6">
 								<div style="width: 250px;">
 									<div style="padding: 20px">
+									<g:contextAware mode="showOnlyTo" context="Rembrandt">
+										<div class="splashBoxHeader">
+											Data Access:
+										</div>
+										<div class="splashBoxContent">
+											The CMA Application serves public data from the Rembrandt Study.  
+										</div>
+										<br/><br/>
+									</g:contextAware>
+									<g:contextAware mode="hideFromOnly" context="Rembrandt">
 										<span style="color: DimGray; font-size: .9em">
 											* Login	is not required for public data access
 										</span>
@@ -166,14 +176,17 @@
 										</div>
 										<br />
 										<br />
+										</g:contextAware>
 										<div class="splashBoxHeader">
 											Additional Information:
 										</div>
 										<div class="splashBoxContent">
 											<ul>
+											<g:contextAware mode="hideFromOnly" context="Rembrandt">
 												<li>
 													<a href="/cma/registration.gsp">Register</a>
 												</li>
+											</g:contextAware>
 												<li>
 													<a href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">Provide your feedback</a>
 												</li>
@@ -229,8 +242,7 @@
 					<br/><br/>
 					Available resources include:  Gene Expression Plots, KM Survival Plots, Genome Browser, and Pathway Visualizations.
 					<br/><br/>
-					<div align="center">
-						<img src="${createLinkTo(dir:'images',file:'geneViewCollage.png')}" />
+					<div align="center" style="height:217px;background-image: url(${createLinkTo(dir:'images',file:'geneViewCollage.png')}); ">
 					</div>
 				</div>
 			</div>
@@ -253,8 +265,7 @@
 					<br/><br/>
 					Available resources include: Clinical Query with Reports and KM Sample Plots
 					<br/><br/>
-					<div align="center">
-						<img src="${createLinkTo(dir:'images',file:'clinicalViewCollage.png')}" />
+					<div align="center" style="height:217px;background-image: url(${createLinkTo(dir:'images',file:'clinicalViewCollage.png')}); ">
 					</div>
 				</div>
 			</div>
@@ -265,8 +276,7 @@
 					<br/><br/>
 					Available resources include: PCA Analysis and Gene Pattern Integration
 					<br/><br/>
-					<div align="center">
-						<img src="${createLinkTo(dir:'images',file:'analysisToolsCollage.png')}"  />
+					<div align="center" style="height:217px;background-image: url(${createLinkTo(dir:'images',file:'analysisToolsCollage.png')}); ">
 					</div>
 				</div>
 			</div>
