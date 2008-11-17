@@ -98,12 +98,12 @@ legend	{
 	background-color:gray;
 	color:#fff;
 }
-#contextOptions a#tcgaContext	{
+#contextOptions a#TCGAContext	{
 	padding:5px;
 	background-image: url(../images/tcgaContext30.gif);
 	background-repeat:no-repeat;
 }
-#contextOptions a#rbtContext	{
+#contextOptions a#RembrandtContext	{
 	padding:5px;
 	background-image: url(../images/rbtContext30.gif);
 	background-repeat:no-repeat;
