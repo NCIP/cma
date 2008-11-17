@@ -32,65 +32,65 @@ class ApplicationUserController extends BaseController {
         else { return [ user : user ] }
     }
 
-    def delete = {
-        def user = ApplicationUser.get( params.id )
-        if(user) {
-            user.delete()
-            flash.message = "User ${params.id} deleted"
-            redirect(action:list)
-        }
-        else {
-            flash.message = "User not found with id ${params.id}"
-            redirect(action:list)
-        }
-    }
-
-    def edit = {
-        def user = ApplicationUser.get( params.id )
-
-        if(!user) {
-            flash.message = "User not found with id ${params.id}"
-            redirect(action:list)
-        }
-        else {
-            return [ user : user ]
-        }
-    }
-
-    def update = {
-        def user = ApplicationUser.get( params.id )
-        if(user) {
-            user.properties = params
-            if(!user.hasErrors() && user.save()) {
-                flash.message = "User ${params.id} updated"
-                redirect(action:show,id:user.id)
-            }
-            else {
-                render(view:'edit',model:[user:user])
-            }
-        }
-        else {
-            flash.message = "User not found with id ${params.id}"
-            redirect(action:edit,id:params.id)
-        }
-    }
-
-    def create = {
-        def user = new ApplicationUser()
-        user.properties = params
-        return ['user':user]
-    }
-
-    def save = {
-        def user = new ApplicationUser(params)
-        if(!user.hasErrors() && user.save()) {
-            flash.message = "User ${user.id} created"
-            redirect(action:show,id:user.id)
-        }
-        else {
-            render(view:'create',model:[user:user])
-        }
-    }
+//    def delete = {
+//        def user = ApplicationUser.get( params.id )
+//        if(user) {
+//            user.delete()
+//            flash.message = "User ${params.id} deleted"
+//            redirect(action:list)
+//        }
+//        else {
+//            flash.message = "User not found with id ${params.id}"
+//            redirect(action:list)
+//        }
+//    }
+//
+//    def edit = {
+//        def user = ApplicationUser.get( params.id )
+//
+//        if(!user) {
+//            flash.message = "User not found with id ${params.id}"
+//            redirect(action:list)
+//        }
+//        else {
+//            return [ user : user ]
+//        }
+//    }
+//
+//    def update = {
+//        def user = ApplicationUser.get( params.id )
+//        if(user) {
+//            user.properties = params
+//            if(!user.hasErrors() && user.save()) {
+//                flash.message = "User ${params.id} updated"
+//                redirect(action:show,id:user.id)
+//            }
+//            else {
+//                render(view:'edit',model:[user:user])
+//            }
+//        }
+//        else {
+//            flash.message = "User not found with id ${params.id}"
+//            redirect(action:edit,id:params.id)
+//        }
+//    }
+//
+//    def create = {
+//        def user = new ApplicationUser()
+//        user.properties = params
+//        return ['user':user]
+//    }
+//
+//    def save = {
+//        def user = new ApplicationUser(params)
+//        if(!user.hasErrors() && user.save()) {
+//            flash.message = "User ${user.id} created"
+//            redirect(action:show,id:user.id)
+//        }
+//        else {
+//            render(view:'create',model:[user:user])
+//        }
+//    }
 
     
     //CSM based login 

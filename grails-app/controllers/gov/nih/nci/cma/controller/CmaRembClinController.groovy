@@ -24,63 +24,63 @@ class CmaRembClinController {
         else { return [ cmaRembClin : cmaRembClin ] }
     }
 
-    def delete = {
-        def cmaRembClin = CmaRembClin.get( params.id )
-        if(cmaRembClin) {
-            cmaRembClin.delete()
-            flash.message = "CmaRembClin ${params.id} deleted"
-            redirect(action:list)
-        }
-        else {
-            flash.message = "CmaRembClin not found with id ${params.id}"
-            redirect(action:list)
-        }
-    }
-
-    def edit = {
-        def cmaRembClin = CmaRembClin.get( params.id )
-
-        if(!cmaRembClin) {
-            flash.message = "CmaRembClin not found with id ${params.id}"
-            redirect(action:list)
-        }
-        else {
-            return [ cmaRembClin : cmaRembClin ]
-        }
-    }
-
-    def update = {
-        def cmaRembClin = CmaRembClin.get( params.id )
-        if(cmaRembClin) {
-            cmaRembClin.properties = params
-            if(!cmaRembClin.hasErrors() && cmaRembClin.save()) {
-                flash.message = "CmaRembClin ${params.id} updated"
-                redirect(action:show,id:cmaRembClin.id)
-            }
-            else {
-                render(view:'edit',model:[cmaRembClin:cmaRembClin])
-            }
-        }
-        else {
-            flash.message = "CmaRembClin not found with id ${params.id}"
-            redirect(action:edit,id:params.id)
-        }
-    }
-
-    def create = {
-        def cmaRembClin = new CmaRembClin()
-        cmaRembClin.properties = params
-        return ['cmaRembClin':cmaRembClin]
-    }
-
-    def save = {
-        def cmaRembClin = new CmaRembClin(params)
-        if(!cmaRembClin.hasErrors() && cmaRembClin.save()) {
-            flash.message = "CmaRembClin ${cmaRembClin.id} created"
-            redirect(action:show,id:cmaRembClin.id)
-        }
-        else {
-            render(view:'create',model:[cmaRembClin:cmaRembClin])
-        }
-    }
+//    def delete = {
+//        def cmaRembClin = CmaRembClin.get( params.id )
+//        if(cmaRembClin) {
+//            cmaRembClin.delete()
+//            flash.message = "CmaRembClin ${params.id} deleted"
+//            redirect(action:list)
+//        }
+//        else {
+//            flash.message = "CmaRembClin not found with id ${params.id}"
+//            redirect(action:list)
+//        }
+//    }
+//
+//    def edit = {
+//        def cmaRembClin = CmaRembClin.get( params.id )
+//
+//        if(!cmaRembClin) {
+//            flash.message = "CmaRembClin not found with id ${params.id}"
+//            redirect(action:list)
+//        }
+//        else {
+//            return [ cmaRembClin : cmaRembClin ]
+//        }
+//    }
+//
+//    def update = {
+//        def cmaRembClin = CmaRembClin.get( params.id )
+//        if(cmaRembClin) {
+//            cmaRembClin.properties = params
+//            if(!cmaRembClin.hasErrors() && cmaRembClin.save()) {
+//                flash.message = "CmaRembClin ${params.id} updated"
+//                redirect(action:show,id:cmaRembClin.id)
+//            }
+//            else {
+//                render(view:'edit',model:[cmaRembClin:cmaRembClin])
+//            }
+//        }
+//        else {
+//            flash.message = "CmaRembClin not found with id ${params.id}"
+//            redirect(action:edit,id:params.id)
+//        }
+//    }
+//
+//    def create = {
+//        def cmaRembClin = new CmaRembClin()
+//        cmaRembClin.properties = params
+//        return ['cmaRembClin':cmaRembClin]
+//    }
+//
+//    def save = {
+//        def cmaRembClin = new CmaRembClin(params)
+//        if(!cmaRembClin.hasErrors() && cmaRembClin.save()) {
+//            flash.message = "CmaRembClin ${cmaRembClin.id} created"
+//            redirect(action:show,id:cmaRembClin.id)
+//        }
+//        else {
+//            render(view:'create',model:[cmaRembClin:cmaRembClin])
+//        }
+//    }
 }
