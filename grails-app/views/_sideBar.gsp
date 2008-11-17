@@ -29,10 +29,9 @@
 		</div>
 	</div>
 </div>
-
 <g:javascript>
 	Event.observe(window, "load", function()	{
 		//load up the news
-		new Ajax.Updater('sidebarNews', '${createLinkTo(dir:'',file:'news.html')}');
+		new Ajax.Updater('sidebarNews', '${createLinkTo(dir:'',file:grailsApplication.config.cma.dataContext+'news.html')}');
 	});
 </g:javascript>
