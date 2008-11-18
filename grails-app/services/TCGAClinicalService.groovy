@@ -79,7 +79,7 @@ class TCGAClinicalService {
            
     
     public List<String> getIdsForVitalStatus(String vitalStatus) {
-    	List clinList = ClinicalNew.findAllByVitalStatusLike(vitalStatus)
+    	List clinList = ClinicalNew.findAllByVitalStatusLike(vitalStatus.toUpperCase())
     	println("getIdsForVitalStatus returned numRows=${clinList.size()} vitalStatus=${vitalStatus}")
     	return getIdList(clinList)
     }
@@ -101,18 +101,19 @@ class TCGAClinicalService {
     }
     
     public List<String> getIdsForInformedConsentAcquired(String value) {
-    	List clinList = ClinicalNew.findAllByInformedConsentAcquiredLike(value)
+    	List clinList = ClinicalNew.findAllByInformedConsentAcquiredLike(value.toUpperCase())
+    	println("getIdsForInformedConsentAcquired returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
     
     public List<String> getIdsForGender(String gender) {
-    	List clinList = ClinicalNew.findAllByGenderLike(gender)
+    	List clinList = ClinicalNew.findAllByGenderLike(gender.toUpperCase())
     	println("getIdsForGender returned numRows=${clinList.size()} gender=${gender}")
     	return getIdList(clinList)
     }
     
     public List<String> getIdsForTumorTissueSite(String site) {
-       List clinList = ClinicalNew.findAllByTumorTissueSiteLike(site)
+       List clinList = ClinicalNew.findAllByTumorTissueSiteLike(site.toUpperCase())
        return getIdList(clinList)
     }
       
@@ -140,6 +141,7 @@ class TCGAClinicalService {
 		println("gender=${gender}")
 		println("patientId=${patientId}")
 		println("vitalStatus=${vitalStatus}")
+		println("informedConsentAcquired=${informedConsentAcquired}")
 				
 				
 		List ids = getIdsForSampleGroup(sampleGroup)
