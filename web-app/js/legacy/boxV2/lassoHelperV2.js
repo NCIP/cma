@@ -5,15 +5,21 @@ var theMap = "";
 
 function init(imgId) {
 	refPoint = imgId;
-    theMap = $(refPoint).readAttribute("usemap").replace("#", "");
+
+	try {
+	    theMap = $(refPoint).readAttribute("usemap").replace("#", "");
+	}
+	catch(e)	{
+		theMap = $(refPoint).useMap.replace("#", "");
+	}
 
 	//imgOffTop =  $(refPoint).offsetTop;
 	//imgOffLeft = $(refPoint).offsetLeft;
 	imgW =  $(refPoint).width;
 	imgH =  $(refPoint).height;
-	imgOffTop = $(refPoint).positionedOffset().top;
-	imgOffLeft = $(refPoint).positionedOffset().left;
 
+	imgOffTop = $(refPoint).cumulativeOffset().top;
+	imgOffLeft = $(refPoint).cumulativeOffset().left;
 	//alert(imgOffTop + " " + imgOffLeft + " " + imgW + " " + imgH );
 
 	$(refPoint).ondrag = function () { return false; };
@@ -117,6 +123,7 @@ function init(imgId) {
 		//give the box startX, startY, endX, endY - which points did we get
 		//in the pic 20,30 should be 20+offsetLeft, 30+offsetTop
 		var rects = document.getElementsByName(theMap)[0].getElementsByTagName("area");
+		
 		for(var i=0; i<rects.length; i++)	{
 			var cds = rects[i].coords.split(",");
 			//alert(cds);
@@ -219,9 +226,11 @@ function initMarkerPoints(myMap)	{
 		 marker.src = markersrc;
 		 marker.id = "the_marker";
 		 marker.alt = "";
+		 marker.style.left = "0px";
+		 marker.style.top = "0px";
 		 marker.style.display = "none"; //none
 		 marker.style.position = "absolute";
-		 $("pcaImageContainer").appendChild(marker);
+		 document.body.appendChild(marker);
 	}
 	var theMap = document.getElementsByName(myMap);
 	theAreas = theMap[0].getElementsByTagName("area");
@@ -254,8 +263,8 @@ function maphide () {
 function mapshow (city) {
 	//main.reset();
     var offset = 0 - (markersize/2);
-    var ofst = $$(".currentPlot")[0].positionedOffset();
-    
+    var ofst = $$(".currentPlot")[0].cumulativeOffset();
+   
     var x = coordx[city] + offset + ofst.left;
     var y = coordy[city] + offset + ofst.top;
     var _marker = $("the_marker");
