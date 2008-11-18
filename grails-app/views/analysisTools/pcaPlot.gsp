@@ -36,8 +36,8 @@
 				$$(".currentPlot")[0].removeClassName("currentPlot");
 				
 				//show the requested one
-				$(plot).addClassName("currentPlot");
-				$(plot).show();
+				$(plot+"_img").addClassName("currentPlot");
+				$(plot+"_img").show();
 
 
 				//var imgURL = $("pcaChart").src.split("filename=");
@@ -56,15 +56,13 @@
 				var defaultLink = $(plot+"_link");
 				$(plot+"_link").up().addClassName("current");
 				//call to the graphics part from lassoHelper.js
-				//setMain("pcaChart");
-				//setMain(plot);
-				init(plot);
+				
+				init(plot+"_img");
 				initMarkerPoints(plot);
 			}
 			
 			Event.observe(window, "load", function()	{
-				//setMain("${PC1vsPC2}");
-				init("${PC1vsPC2}");
+				init("${PC1vsPC2}_img");
 				initMarkerPoints("${PC1vsPC2}");
 			});
 			
@@ -116,9 +114,9 @@
 							<!-- 
 								<img src="${defaultURL }" border="0" usemap="#${defaultFilename}" id="pcaChart">
 							-->	
-								<img src="${PC1vsPC2URL}" border="0" usemap="#${PC1vsPC2}" id="${PC1vsPC2}" class="currentPlot">
-								<img src="${PC1vsPC3URL}" border="0" usemap="#${PC1vsPC3}" id="${PC1vsPC3}" style="display:none";>
-								<img src="${PC2vsPC3URL}" border="0" usemap="#${PC2vsPC3}" id="${PC2vsPC3}" style="display:none">
+								<img src="${PC1vsPC2URL}" border="0" usemap="#${PC1vsPC2}" id="${PC1vsPC2}_img" class="currentPlot"/>
+								<img src="${PC1vsPC3URL}" border="0" usemap="#${PC1vsPC3}" id="${PC1vsPC3}_img" style="display:none;"/>
+								<img src="${PC2vsPC3URL}" border="0" usemap="#${PC2vsPC3}" id="${PC2vsPC3}_img" style="display:none;"/>
 							</div>
 						</div>
 					</div>
