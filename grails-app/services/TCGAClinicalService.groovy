@@ -102,6 +102,11 @@ class TCGAClinicalService {
     	List clinList = ClinicalNew.findAllByGenderLike(gender)
     	return getIdList(clinList)
     }
+    
+    public List<String> getIdsForTumorTissueSite(String site) {
+       List clinList = ClinicalNew.findAllByTumorTissueSite(site)
+       return getIdList(clinList)
+    }
       
     
     def getClinicalData = { clinicalForm -> 
