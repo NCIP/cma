@@ -77,6 +77,13 @@ class TCGAClinicalService {
       return new ArrayList(retSet)
     }
            
+    
+    public List<String> getIdsForVitalStatus(String vitalStatus) {
+    	List clinList = ClinicalNew.findAllByVitalStatusLike(vitalStatus)
+    	println("getIdsForVitalStatus returned numRows=${clinList.size()} vitalStatus=${vitalStatus}")
+    	return getIdList(clinList)
+    }
+    
     public List<String> getIdsForKarnofskyScore(Integer lower, Integer upper) {
     	List clinList = ClinicalNew.findAllByKarnofskyScoreBetween(lower, upper)
     	return getIdList(clinList)
@@ -94,17 +101,18 @@ class TCGAClinicalService {
     }
     
     public List<String> getIdsForInformedConsentAcquired(String value) {
-    	List clinList = ClinicalNew.findAllByInformedConsentAcquired(value)
+    	List clinList = ClinicalNew.findAllByInformedConsentAcquiredLike(value)
     	return getIdList(clinList)
     }
     
     public List<String> getIdsForGender(String gender) {
     	List clinList = ClinicalNew.findAllByGenderLike(gender)
+    	println("getIdsForGender returned numRows=${clinList.size()} gender=${gender}")
     	return getIdList(clinList)
     }
     
     public List<String> getIdsForTumorTissueSite(String site) {
-       List clinList = ClinicalNew.findAllByTumorTissueSite(site)
+       List clinList = ClinicalNew.findAllByTumorTissueSiteLike(site)
        return getIdList(clinList)
     }
       
@@ -128,6 +136,11 @@ class TCGAClinicalService {
 		Integer dodfuMinusDopLower = clinicalForm.getParameter("dodfuMinusDopLower")!=null ? Integer.valueOf(clinicalForm.getParameter("dodfuMinusDopLower")) : null
 		Integer dodfuMinusDopUpper = clinicalForm.getParameter("dodfuMinusDopUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("dodfuMinusDopUpper")) : null
 	
+		println("== Params ==")
+		println("gender=${gender}")
+		println("patientId=${patientId}")
+		println("vitalStatus=${vitalStatus}")
+				
 				
 		List ids = getIdsForSampleGroup(sampleGroup)
 		
@@ -235,7 +248,7 @@ class TCGAClinicalService {
     	
     	Set idSet = new HashSet(patientIds)
     	String idStr = getIdString(idSet)
-    	String cnQS = "From gov.nih.nci.cma.domain.tcga.ClinicalNew cn where cn.id in ${idStr}"
+    	String cnQS = "From gov.nih.nci.cma.domain.tcga.ClinicalNew cn where cn.ptid in ${idStr}"
     	println("getClinicalData cnQS=${cnQS}")
     	List cl = ClinicalNew.findAll(cnQS)
     	List rptBeanList = new ArrayList()
@@ -259,7 +272,7 @@ class TCGAClinicalService {
     	    logger.debug("Got user list bean !")
     	    java.util.List listItems = ul.getListItems()
     	    listItems.each { li -> 
-    	      println("adding item ${li.getName()}")
+    	      //println("adding item ${li.getName()}")
     	      idSet.add(li.getName())
     	    }    	        	        	  
         }    	    	
