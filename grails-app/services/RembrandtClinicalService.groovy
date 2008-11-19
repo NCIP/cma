@@ -53,7 +53,7 @@ class RembrandtClinicalService {
      */
     public List getPatientDIDsForSampleIds(Set idSet) {      
       String idString = getIdString(idSet)
-      String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.sampleId in " 
+      String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.institutionId=8 and pd.sampleId in " 
       
       pdQS += idString
       
@@ -98,7 +98,7 @@ class RembrandtClinicalService {
      * getIdsForDiseaseType
      */
     public List getIdsForDiseaseType(String diseaseType) {
-    	def patients = PatientData.findAllByDiseaseTypeLike(diseaseType)
+    	def patients = PatientData.findAllByDiseaseTypeLikeAndInstitutionId(diseaseType, 8)
     	logger.debug("getIdsForDiseaseType returned numRows=${patients.size()} for diseaseType=${diseaseType}")
     	return getIdList(patients)
     }
@@ -107,7 +107,7 @@ class RembrandtClinicalService {
      * getIdsForGender
      */
     public List getIdsForGender(String gender) {
-    	def patients = PatientData.findAllByGenderLike(gender)
+    	def patients = PatientData.findAllByGenderLikeAndInstitutionId(gender, 8)
     	logger.debug("getIdsForGender returned numRows=${patients.size()} for gender=${gender}")
     	return getIdList(patients)
     }
@@ -121,7 +121,7 @@ class RembrandtClinicalService {
      */
     public List getIdsForRace(String race) { 
     	    	
-    	def patients = PatientData.findAllByRaceLike(race)
+    	def patients = PatientData.findAllByRaceLikeAndInstitutionId(race, 8)
     	logger.debug("getIdsForRace returned numRows=${patients.size()} for race=${race}")
     	return getIdList(patients)
     }
@@ -130,7 +130,7 @@ class RembrandtClinicalService {
      * getIdsForAgeAtDx
      */
     public List getIdsForAgeAtDx(Integer ageAtDxLower, Integer ageAtDxUpper) {
-    	def patients = PatientData.findAllByAgeBetween(ageAtDxLower, ageAtDxUpper)
+    	def patients = PatientData.findAllByInstitutionIdAndAgeBetween(8,ageAtDxLower, ageAtDxUpper)
     	logger.debug("getIdsForAgeAtDx returned numRows=${patients.size()} for lower=${ageAtDxLower} upper=${ageAtDxUpper}")
     	return getIdList(patients)
     }
@@ -139,7 +139,7 @@ class RembrandtClinicalService {
      * getIdsForSurvival
      */
     public List getIdsForSurvival(Integer survivalLower, Integer survivalUpper) {
-    	def patients = PatientData.findAllBySurvivalLengthBetween(survivalLower, survivalUpper)
+    	def patients = PatientData.findAllByInstitutionIdAndSurvivalLengthBetween(8,survivalLower, survivalUpper)
     	logger.debug("getIdsForSurvival returned numRows=${patients.size()} for lower=${survivalLower} upper=${survivalUpper}")
     	return getIdList(patients)
     }
@@ -420,14 +420,14 @@ class RembrandtClinicalService {
     	    	
     	    	Set idSet = new HashSet(patientIds)
     	    	StringBuffer idSB = new StringBuffer()
-    	    	String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.id in " 
-    	    	String neuroQS = "From gov.nih.nci.cma.domain.rembrandt.NeurologicalEvaluation neuroExam where neuroExam.patientDid in "
-    	    	String priorChemoQS = "From gov.nih.nci.cma.domain.rembrandt.PriorChemotherapy priorChemo where priorChemo.patientDid in "		
-    	    	String priorRadQS = "From gov.nih.nci.cma.domain.rembrandt.PriorRadiationtherapy prad where prad.patientDid in "		
-    	    	String priorSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PriorSurgery psurg where psurg.patientDid in "		
-    	    	String ptChemoQS = 	"From gov.nih.nci.cma.domain.rembrandt.PtChemotherapy ptChemo where ptChemo.patientDid in "
-    	    	String ptRadQS = "From gov.nih.nci.cma.domain.rembrandt.PtRadiationtherapy ptRad where ptRad.patientDid in "
-    	    	String ptSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PtSurgery ptsurg where ptsurg.patientDid in "			
+    	    	String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.institutionId=8 and pd.id in " 
+    	    	String neuroQS = "From gov.nih.nci.cma.domain.rembrandt.NeurologicalEvaluation neuroExam where neuroExam.institutionId=8 and neuroExam.patientDid in "
+    	    	String priorChemoQS = "From gov.nih.nci.cma.domain.rembrandt.PriorChemotherapy priorChemo where  priorChemo.institutionId=8 and priorChemo.patientDid in "		
+    	    	String priorRadQS = "From gov.nih.nci.cma.domain.rembrandt.PriorRadiationtherapy prad where prad.institutionId=8 and prad.patientDid in "		
+    	    	String priorSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PriorSurgery psurg where psurg.institutionId=8 and psurg.patientDid in "		
+    	    	String ptChemoQS = 	"From gov.nih.nci.cma.domain.rembrandt.PtChemotherapy ptChemo where ptChemo.institutionId=8 and ptChemo.patientDid in "
+    	    	String ptRadQS = "From gov.nih.nci.cma.domain.rembrandt.PtRadiationtherapy ptRad where ptRad.institutionId=8 and ptRad.patientDid in "
+    	    	String ptSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PtSurgery ptsurg where ptsurg.institutionId=8 and ptsurg.patientDid in "			
     	    			
     	    	
     	    	String idString = getIdString(idSet)
