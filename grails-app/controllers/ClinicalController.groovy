@@ -60,7 +60,16 @@ class ClinicalController {
     
     def clinicalReport = {
 
-		if(params.sampleGroup == null)	{
+		if(params.containsKey("patientId") )	{
+			//you dont need to select either a sample group OR a patientId
+			if(params.sampleGroup == null && params.patientId == null)	{
+	    		//flash and redirect
+	    		flash.message = "Please select a Sample Group or a Patient Id"
+	            redirect(controller:"clinical")
+	            return
+	    	}
+		}
+		else if(params.sampleGroup == null)	{
     		//flash and redirect
     		flash.message = "Please select a Sample Group"
             redirect(controller:"clinical")
