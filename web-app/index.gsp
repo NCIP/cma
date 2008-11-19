@@ -64,7 +64,7 @@
 			.splashBoxContent {
 				border:2px solid #E0E0E0;
 				padding:5px;
-				background-image: url(resources/globeBG.gif);
+				background-image: url(${createLinkTo(dir:'images',file:'globeBG.gif')});
 				background-position: -350 bottom;
 				background-repeat: no-repeat;
 			}
@@ -90,7 +90,7 @@
 				height:300px;
 				overflow:auto;
 				background-color:#F0F0F0;
-				background-image: url(resources/globeBG.gif);
+				background-image: url(${createLinkTo(dir:'images',file:'globeBG.gif')});
 				background-position: -350 bottom;
 				background-repeat: no-repeat;
 			}
