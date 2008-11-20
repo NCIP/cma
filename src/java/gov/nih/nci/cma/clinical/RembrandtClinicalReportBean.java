@@ -47,6 +47,15 @@ public class RembrandtClinicalReportBean {
 	  return origStr + ", " + strToAppend;
 	}
 	
+	
+	/**
+	 * getId returns the id to be place in the patient lists
+	 * @return
+	 */
+	public String getId() {
+	  return sampleId;
+	}
+	
 	public String getSampleId() {
 		return sampleId;
 	}

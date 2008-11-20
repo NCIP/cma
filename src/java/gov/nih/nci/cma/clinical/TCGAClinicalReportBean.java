@@ -19,9 +19,19 @@ public class TCGAClinicalReportBean {
 	private String informedConsentAcquired;
 	private String ptid;
 	
+	
+	/**
+	 * getId returns the id to use to identify items to be placed in the patient lists
+	 * @return
+	 */
+	public String getId() {
+	  return ptid;
+	}
+	
 	public String getPatientId() {
 		return patientId;
 	}
+	
 	public void setPatientId(String patientId) {
 		this.patientId = patientId;
 	}
