@@ -150,7 +150,7 @@ class ClinicalController {
     		rbs = session.getAttribute(params.sessionKey)
     		if(rbs!=null)	{
     			rbs.each{
-    				idList << it.getSampleId()
+    				idList << it.getId()
     			}
     			commaList = idList.join(",")
     		}
