@@ -61,7 +61,7 @@
 			</td>
 			<td>
 				Advanced Filter Settings?
-				<g:checkBox onclick="document.getElementById('advY').toggle();" name="adv" id="adv"/><br/>
+				<g:checkBox onclick="\$('advY').toggle();" name="adv" id="adv"/><br/>
 			</td>
 		</tr>
 		<tr>
