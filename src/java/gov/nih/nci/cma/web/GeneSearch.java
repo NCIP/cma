@@ -179,7 +179,7 @@ public class GeneSearch {
 					sgnm[0], request.getSession().getId());
 			System.out.println("got finding");
 
-			if(finding!=null){
+			if(finding!=null && finding.getDataVectors()!=null){
 			    m.put("reporter",finding.getDataVectors().get(0).getName());
 			    m.put("taskId",finding.getTaskId());
 			    kmRequestMap = m;
