@@ -6,16 +6,22 @@
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-grails.config.locations = ["file:C:/local/content/cma/config/cma.properties"]
+
 
 // TCGA:
 cma.dataContext="TCGA"
 cma.authenticationManagerContext="cma"
+cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-tcga.properties"
+//cma.appPropertiesFile="/local/content/cma/config/cma-tcga.properties"
 
 // Rembrandt:
 //cma.dataContext="Rembrandt"
 //cma.authenticationManagerContext="rembrandt"
+//cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-rembrandt.properties"
+//cma.appPropertiesFile="/local/content/cma/config/cma-rembrandt.properties"
 				
+grails.config.locations = ["file:${cma.appPropertiesFile}"]
+
 
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
@@ -46,7 +52,7 @@ grails.enable.native2ascii = true
 environments {
     production {
         grails.serverURL = "http://cma-dev.nci.nih.gov"
-	  grails.config.locations = ["file:/local/content/cma/config/cma.properties"]
+	  //grails.config.locations = ["file:C:/local/content/cma/config/cma-tcga.properties"]
     }
 }
 
