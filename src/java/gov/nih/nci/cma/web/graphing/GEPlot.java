@@ -32,6 +32,7 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
@@ -219,6 +220,7 @@ public class GEPlot {
 			//IMAGE Size Control
 
 			CategoryAxis xAxis = new CategoryAxis(xAxisLabel);
+			xAxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
 			NumberAxis yAxis = new NumberAxis(yAxisLabel);
 			yAxis.setAutoRangeIncludesZero(true);
 			BoxAndWhiskerCoinPlotRenderer bwRenderer = null;
@@ -344,6 +346,7 @@ public class GEPlot {
 			// lets start some customization to retro fit w/jcharts lookand feel
 			CategoryPlot plot = log2Chart.getCategoryPlot();
 			CategoryAxis axis = plot.getDomainAxis();
+			axis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
 			axis.setLowerMargin(0.02); // two percent
 			axis.setCategoryMargin(0.20); // 20 percent
 			axis.setUpperMargin(0.02); // two percent
@@ -410,6 +413,7 @@ public class GEPlot {
 			// lets start some customization to retro fit w/jcharts lookand feel
 			CategoryPlot plot = gmChart.getCategoryPlot();
 			CategoryAxis axis = plot.getDomainAxis();
+			axis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
 			axis.setLowerMargin(0.02); // two percent
 			axis.setCategoryMargin(0.20); // 20 percent
 			axis.setUpperMargin(0.02); // two percent
