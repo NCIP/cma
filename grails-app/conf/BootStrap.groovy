@@ -6,10 +6,17 @@ import java.io.FileInputStream;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.codehaus.groovy.grails.commons.*
+
+
+
 class BootStrap {
 
     def init = { servletContext ->
     
+        def config = ConfigurationHolder.config
+        
+        println("BootStrap: dataContext=${config.cma.dataContext}")
         
      	//load the properties file and put props into system properties
      	//Load the the application properties and set them as system properties
@@ -20,11 +27,16 @@ class BootStrap {
      	//need to fix this. When deploying in JBoss there is no problem because
      	//properties-service.xml will define the location of the app properties file
      	//for now just hardcode the path. 
-  		String appPropertiesFileName = "C:\\local\\content\\cma\\config\\cma.properties"
+  		//String appPropertiesFileName = "C:\\local\\content\\cma\\config\\cma-tcga.properties"
   		     
+  		
+  		//String appPropertiesFileName = "/local/content/cma/config/cma-tcga.properties"
+  		//String appPropertiesFileName = "/local/content/cma/config/cma-rembrandt.properties"
+  		  		
+  		
   		FileInputStream inputStream
   		
-  		inputStream = new FileInputStream(appPropertiesFileName);
+  		inputStream = new FileInputStream(config.cma.appPropertiesFile);
   		cmaPortalProperties.load(inputStream);
   		   
   		if (cmaPortalProperties.isEmpty()) {
