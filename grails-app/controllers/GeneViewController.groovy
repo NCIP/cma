@@ -163,34 +163,39 @@ class GeneViewController {
     		StringWriter sw = new StringWriter()
     		def geneSymbol = ""
 
-    			GEPlot gePlot = (GEPlot)request.getSession().getAttribute("gePlot");
-    			if(gePlot != null)	{
-    				geneSymbol = gePlot.getGeneSymbol();
-    				
-    				bwFilename = gePlot.generateBWLog2IntensityChart("Groups", 
-    							"Log2 Expression Intensity", request.getSession(), new PrintWriter(sw), false);
-    				log2filename = gePlot.generateLog2Chart("Disease Type", 
-    							"Log2 Expression Intensity", request.getSession(), new PrintWriter(sw));
-    				
-    				gmfilename = gePlot.generateGeometricMeanIntensityChart("Group", 
-    							"Mean Expression Intensity", request.getSession(), new PrintWriter(sw));
-    					
-    				defaultFilename = gmfilename; //log2filename; //bwFilename;
-    				legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
-    					
-    				//String size = (String) charts.get("size");
-    					
-    				gmgraphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + gmfilename;
-    				log2graphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + log2filename;
-    				bwgraphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + bwFilename;
-    				defaultURL = gmgraphURL;  //log2graphURL; //bwgraphURL;
-    			}	
-    		
-    		
-    	render(view:'genePlot', model:[sw:sw, geneSymbol:geneSymbol, legendHtml:legendHtml,
-    	        gmfilename:gmfilename, log2filename:log2filename, bwFilename:bwFilename,
-    			gmgraphURL:gmgraphURL, log2graphURL:log2graphURL, bwgraphURL:bwgraphURL, 
-    			defaultURL:defaultURL, defaultFilename:defaultFilename])
+			GEPlot gePlot = (GEPlot)request.getSession().getAttribute("gePlot");
+			if(gePlot != null)	{
+				geneSymbol = gePlot.getGeneSymbol();
+				
+				bwFilename = gePlot.generateBWLog2IntensityChart("Groups", 
+							"Log2 Expression Intensity", request.getSession(), new PrintWriter(sw), false);
+				log2filename = gePlot.generateLog2Chart("Disease Type", 
+							"Log2 Expression Intensity", request.getSession(), new PrintWriter(sw));
+				
+				gmfilename = gePlot.generateGeometricMeanIntensityChart("Group", 
+							"Mean Expression Intensity", request.getSession(), new PrintWriter(sw));
+					
+				defaultFilename = gmfilename; //log2filename; //bwFilename;
+				legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
+					
+				//String size = (String) charts.get("size");
+					
+				gmgraphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + gmfilename;
+				log2graphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + log2filename;
+				bwgraphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + bwFilename;
+				defaultURL = gmgraphURL;  //log2graphURL; //bwgraphURL;
+				
+				render(view:'genePlot', model:[sw:sw, geneSymbol:geneSymbol, legendHtml:legendHtml,
+				                   	        gmfilename:gmfilename, log2filename:log2filename, bwFilename:bwFilename,
+				                   			gmgraphURL:gmgraphURL, log2graphURL:log2graphURL, bwgraphURL:bwgraphURL, 
+				                   			defaultURL:defaultURL, defaultFilename:defaultFilename])
+				return
+			}	
+			else	{
+				flash.message = "No Data found for this gene and platform combination.  Please select a different gene or platform and try again."
+	            redirect(action:index)
+	            return
+			}
     }
     
     def popCoinGraph = {

@@ -146,10 +146,12 @@ public class GeneSearch {
 				    int status = plot.prepareGeneGraphDataSet(binaryFileName, sampleGroups, reporterGroup);
 					if (status == -1) {
 						//ERR
+						request.getSession().setAttribute("gePlot", null);
 					}
-
-				    request.getSession().setAttribute("gePlot", plot);
-                    System.out.println("plot in session");
+					else	{
+						request.getSession().setAttribute("gePlot", plot);
+						System.out.println("plot in session");
+					}
 				}
 //				return mapping.findForward("histogram");
 			} catch (Exception e) {
