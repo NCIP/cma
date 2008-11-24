@@ -151,9 +151,7 @@ class TCGAClinicalService {
 		Set idSet = new HashSet(ids)
 					
 		if ((patientId != null ) && (!patientId.equals("ANY")) && (patientId.trim().length() > 0)) {
-			  List idl = new ArrayList()
-			  idl.add(patientId)
-			  idSet.retainAll(idl)
+		  idSet.add(patientId)
 		}
 		
 					
