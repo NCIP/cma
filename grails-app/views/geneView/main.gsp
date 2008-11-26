@@ -163,25 +163,31 @@
 		<!-- close mainc -->
 		</div>
 		
-		<!-- 
+		<g:contextAware mode="showOnlyTo" context="TCGA">
 		<br/><br/>
 		<div id="pathwaySearchHeader" style="padding:5px;background-color:#2B2D51; color:#fff;">
 			<h5>Pathway Visualization</h5>
 		</div>
 		<div style="border:1px solid #E0E0E0; padding:5px;">
-	        
-	        Pathway Visualization&nbsp;
-			<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select a Pathway&nbsp;<br>
-
+	        <blockquote>
+	        <a href="http://tcga-portal-stage.nci.nih.gov/tcga-portal/pathwayList.portal" target="_blank">
+	        	View Pathway Visualization
+	        </a>
+	        </blockquote>
+			<br/><br/>
+			<!--  			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select a Pathway&nbsp;<br>
 	        <select name="pathwayName" onchange="needGVal = false;" id="pathwayName" style="margin-left:20px;width:350px;">
 			</select>
-		</div>
-		<br/><br/>
-        <div style="text-align:center">
-        	<input type="reset" value="clear" id="clearButton" class="">&nbsp;&nbsp;
-	        <input type="button" class="subButton" value="Go" onclick="popPathway($F('pathwayName'));" />
+		
+			<br/><br/>
+	        <div style="text-align:center">
+	        	<input type="reset" value="clear" id="clearButton" class="">&nbsp;&nbsp;
+		        <input type="button" class="subButton" value="Go" onclick="popPathway($F('pathwayName'));" />
+	        </div>
+	        -->
         </div>
-        -->
+        </g:contextAware>
         
 		</fieldset>
 		</form>
