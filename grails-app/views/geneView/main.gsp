@@ -121,8 +121,10 @@
 	        Gene Expression plot&nbsp;<br />
 			<input type="radio" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">
 	        Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br />
+			<g:contextAware mode="showOnlyTo" context="Rembrandt">
 			<input disabled="disabled" type="radio" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">
 	        View mutations and copy number changes&nbsp;<br/>
+	        </g:contextAware>
 			<br/>
 			
 			Gene Symbol (HUGO):
