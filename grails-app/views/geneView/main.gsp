@@ -121,8 +121,8 @@
 	        Gene Expression plot&nbsp;<br />
 			<input type="radio" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">
 	        Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br />
-			<g:contextAware mode="showOnlyTo" context="Rembrandt">
-			<input disabled="disabled" type="radio" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">
+			<g:contextAware mode="showOnlyTo" context="TCGA">
+			<input type="radio" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">
 	        View mutations and copy number changes&nbsp;<br/>
 	        </g:contextAware>
 			<br/>
@@ -170,7 +170,7 @@
 		</div>
 		<div style="border:1px solid #E0E0E0; padding:5px;">
 	        <blockquote>
-	        <a href="http://tcga-portal-stage.nci.nih.gov/tcga-portal/pathwayList.portal" target="_blank">
+	        <a href="${grailsApplication.config.cma.gov.nci.nih.cma.links.pathway_url ?: '#'}" target="_blank">
 	        	View Pathway Visualization
 	        </a>
 	        </blockquote>
