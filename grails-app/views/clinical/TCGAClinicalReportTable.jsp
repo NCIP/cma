@@ -62,7 +62,6 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="karnofskyScore" title="Karnofsky" sortable="true" headerClass="sortable" />
 	  <display:column property="firstRadiation" title="First Radiation" sortable="true" headerClass="sortable" />
 	  <display:column property="dodMinusDop" sortable="true" headerClass="sortable" />
-	  <display:column property="dodMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="dodfuMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="cfId" sortable="true" headerClass="sortable" />
 	  <display:column property="informedConsentAcquired" sortable="true" headerClass="sortable" />
