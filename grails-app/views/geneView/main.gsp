@@ -170,7 +170,8 @@
 		</div>
 		<div style="border:1px solid #E0E0E0; padding:5px;">
 	        <blockquote>
-	        <a href="${grailsApplication.config.cma.gov.nci.nih.cma.links.pathway_url ?: '#'}" target="_blank">
+
+	        <a href="${grailsApplication.config.gov.nih.nci.cma.links.pathway_url ?: '#'}" target="_blank">
 	        	View Pathway Visualization
 	        </a>
 	        </blockquote>
