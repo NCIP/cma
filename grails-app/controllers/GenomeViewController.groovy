@@ -12,9 +12,11 @@ class GenomeViewController {
 //  def xmlLink = "https://cgwb.nci.nih.gov/cgi-bin/heatmap?xml_dump=1&project=Rembrandt%20GBM" //RBT only, SSL
 //  def xmlLink = "http://lpgws.nci.nih.gov/perl/heatmap?xml_dump=1&project=Rembrandt%20GBM" //RBT only
 		
-	def xmlLink = System.properties["gov.nih.nci.cma.links.heatmap_url"]
-    		
+	//def xmlLink = System.properties["gov.nih.nci.cma.links.heatmap_url"]
+    
+    
     def links = {
+    	def xmlLink = "${grailsApplication.config.gov.nih.nci.cma.links.heatmap_url}"	
 	    def result = heatmapLinksService.fetchParseXml(xmlLink)
 	    render result as JSON
 	}  
