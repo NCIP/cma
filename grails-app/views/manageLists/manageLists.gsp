@@ -27,7 +27,9 @@
 			<g:each var="ltype" in="${lts}">
 				<a href="#${ltype.toString()}Lists">${ltype.toString()} Lists</a> | 
 			</g:each>
+			<!--  
 			<a href="#addList">Add List</a>
+			-->
 		</div>
 		<br/><br/>
 	
