@@ -243,7 +243,7 @@ class RembrandtClinicalService {
     private void loadReportBeanWithPatientData(RembrandtClinicalReportBean rptBean, PatientData ptData) {    	
     	rptBean.setSampleId(ptData.getSampleId())    	
     	rptBean.setAgeGroup(ptData.getAgeGroup())
-    	rptBean.setSurvivalLengthRange(ptData.getSurvivalLengthRange())
+    	rptBean.setSurvivalLengthRange(ptData.getSurvivLengthRange())
     	rptBean.setGender(ptData.getGender())
     	rptBean.setDisease(ptData.getDiseaseType())
     	rptBean.setGrade(ptData.getWhoGrade())
@@ -532,7 +532,9 @@ class RembrandtClinicalService {
       }
       
       if ((survivalLower != null) && (survivalUpper != null)) {
-          List survivalIds = getIdsForSurvival(survivalLower,survivalUpper)
+    	  Integer survivalLower_days = survivalLower * 30;
+    	  Integer survivalUpper_days = survivalUpper * 30;
+          List survivalIds = getIdsForSurvival(survivalLower_days,survivalUpper_days)
           idSet.retainAll(survivalIds)
       }
       
