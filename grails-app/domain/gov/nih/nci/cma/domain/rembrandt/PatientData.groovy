@@ -4,7 +4,7 @@ package gov.nih.nci.cma.domain.rembrandt
  * The PatientData entity.
  *
  * @author    
- * @version $Revision: 1.1 $, $Date: 2008-11-04 15:41:33 $
+ * @version $Revision: 1.2 $, $Date: 2008-11-28 20:13:47 $
  *
  *
  */
@@ -39,7 +39,7 @@ class PatientData {
     java.math.BigDecimal age
     java.lang.String ageGroup
     java.math.BigDecimal survivalLength
-    java.lang.String survivalLengthRange
+    java.lang.String survivLengthRange
     java.lang.String gender
     java.lang.String diseaseType
     java.lang.String whoGrade
@@ -60,7 +60,7 @@ class PatientData {
         age(nullable: true, size: 0..22)
         ageGroup(size: 0..20)
         survivalLength(nullable: true, size: 0..22)
-        survivalLengthRange(size: 0..15)
+        survivLengthRange(size: 0..15)
         gender(size: 0..5)
         diseaseType(size: 0..100)
         whoGrade(size: 0..5)
