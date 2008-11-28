@@ -62,7 +62,7 @@ class ClinicalController {
 
 		if(params.containsKey("patientId") )	{
 			//you dont need to select either a sample group OR a patientId
-			if(params.sampleGroup == null && params.patientId == null)	{
+			if(params.sampleGroup == null && ((params.patientId == null)||(params.patientId.trim().length() == 0)))	{
 	    		//flash and redirect
 	    		flash.message = "Please select a Sample Group or a Patient Id"
 	            redirect(controller:"clinical")
