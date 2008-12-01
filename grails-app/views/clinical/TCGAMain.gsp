@@ -120,9 +120,9 @@
 						<input type="checkbox" onclick="toggleDisable('dodMinusDopLower', 'dodMinusDopUpper');"/>Restrict by Dod minus Dop
 						<br/><br/>
 						between
-						<g:select name="dodMinusDopLower" from="${(0..100).step(10)}" value="0" disabled="true" /> 
+						<g:select name="dodMinusDopLower" from="${(0..3500).step(100)}" value="0" disabled="true" /> 
 						and
-						<g:select name="dodMinusDopUpper" from="${(10..500).step(50)}" value="110" disabled="true" />						
+						<g:select name="dodMinusDopUpper" from="${(100..3600).step(100)}" value="100" disabled="true" />						
 			        </td>
 		        </tr>
 		        <tr>		        
@@ -133,9 +133,9 @@
 						<input type="checkbox" onclick="toggleDisable('dodfuMinusDopLower', 'dodfuMinusDopUpper');"/>Restrict by Dodfu minus Dop
 						<br/><br/>
 						between
-						<g:select name="dodfuMinusDopLower" from="${(0..100).step(10)}" value="0" disabled="true" /> 
+						<g:select name="dodfuMinusDopLower" from="${(0..3500).step(100)}" value="0" disabled="true" /> 
 						and
-						<g:select name="dodfuMinusDopUpper" from="${(10..500).step(50)}" value="110" disabled="true" />						
+						<g:select name="dodfuMinusDopUpper" from="${(100..3600).step(100)}" value="100" disabled="true" />						
 			        </td>
 		        </tr>
 		        </g:isLoggedIn>
