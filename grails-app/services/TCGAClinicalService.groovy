@@ -182,7 +182,7 @@ class TCGAClinicalService {
         
         if ((dodMinusDopLower != null) && (dodMinusDopUpper != null)) {
           List dodIds = getIdsForDodMinusDop(dodMinusDopLower, dodMinusDopUpper)
-          idSet.retainAll(dodids)
+          idSet.retainAll(dodIds)
         }
         
         if ((dodfuMinusDopLower != null) && (dodfuMinusDopUpper != null)) {
