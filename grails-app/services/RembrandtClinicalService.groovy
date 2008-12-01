@@ -539,8 +539,23 @@ class RembrandtClinicalService {
       }
       
       if ((disease != null) && (!disease.equals("ANY"))) {
-        List diseaseIds = getIdsForDiseaseType(disease)
-        idSet.retainAll(diseaseIds)
+    	      	    	  
+    	if (disease.equals("ALL_GLIOMA")) {
+    	  Set diseaseIdSet = new HashSet();
+    	  List gbmIds = getIdsForDiseaseType("GBM");
+    	  diseaseIdSet.addAll(gbmIds);
+    	  List astroIds = getIdsForDiseaseType("ASTROCYTOMA");
+    	  diseaseIdSet.addAll(astroIds);
+    	  List oligoIds = getIdsForDiseaseType("OLIGODENDROGLIOMA");
+    	  diseaseIdSet.addAll(oligoIds);
+    	  List mixedIds = getIdsForDiseaseType("MIXED")
+    	  diseaseIdSet.addAll(mixedIds);	
+    	  idSet.retainAll(diseaseIdSet);    		
+    	}
+    	else {
+    	  List diseaseIds = getIdsForDiseaseType(disease)
+          idSet.retainAll(diseaseIds)    		
+    	}
       }
       
       List lookupIds = new ArrayList(idSet)
