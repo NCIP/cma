@@ -6,6 +6,9 @@ import gov.nih.nci.caintegrator.application.lists.UserList;
 import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
 import gov.nih.nci.caintegrator.application.lists.ListItem;
 import org.springframework.web.context.request.RequestContextHolder;
+import gov.nih.nci.caintegrator.application.lists.ListType
+
+
 
 class TCGAClinicalService {
 	
@@ -130,7 +133,8 @@ class TCGAClinicalService {
 		String informedConsentAcquired = (String)clinicalForm.getParameter("informedConsentAcquired")
 		String tumorTissueSite = (String) clinicalForm.getParameter("tumorTissueSite")
 	    String vitalStatus = (String) clinicalForm.getParameter("vitalStatus")
-	    String sampleGroup = (String) clinicalForm.getParameter("sampleGroup")
+	    //String sampleGroup = (String) clinicalForm.getParameter("sampleGroup")
+	    String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroup")
 	    String patientId = (String) clinicalForm.getParameter("patientId")
 		Integer dodMinusDopLower = clinicalForm.getParameter("dodMinusDopLower")!=null ? Integer.valueOf(clinicalForm.getParameter("dodMinusDopLower")) : null
 		Integer dodMinusDopUpper = clinicalForm.getParameter("dodMinusDopUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("dodMinusDopUpper")) : null
@@ -144,17 +148,20 @@ class TCGAClinicalService {
 		println("informedConsentAcquired=${informedConsentAcquired}")
 				
 				
-		List ids = getIdsForSampleGroup(sampleGroup)
-		
-		println("getIdsForSampleGroup returned numIds=${ids.size()}")
-				
-		Set idSet = new HashSet(ids)
-					
+	    List groupNames = new ArrayList()
+		Set idSet = new HashSet()
+        if ((sampleGroups != null) && (sampleGroups.length > 0)) {
+    	  for (int i=0; i < sampleGroups.length ; i++) {
+    		 groupNames.add(sampleGroups[i])
+    	  }
+    	  List ids = getIdsForSampleGroups(groupNames)    	  
+    	  idSet.addAll(ids)
+        }
+        																
 		if ((patientId != null ) && (!patientId.equals("ANY")) && (patientId.trim().length() > 0)) {
 		  idSet.add(patientId)
 		}
-		
-					
+							
 		if ((gender != null) && (!gender.equals("ANY"))) {
 			List genderIds = getIdsForGender(gender)
 	        idSet.retainAll(genderIds)
@@ -181,8 +188,8 @@ class TCGAClinicalService {
         }
         
         if ((dodMinusDopLower != null) && (dodMinusDopUpper != null)) {
-          List dodIds = getIdsForDodMinusDop(dodMinusDopLower, dodMinusDopUpper)
-          idSet.retainAll(dodIds)
+          List dodIds = getIdsForDodMinusDop(dodMinusDopLower, dodMinusDopUpper)                   
+          idSet.retainAll(dodIds)          
         }
         
         if ((dodfuMinusDopLower != null) && (dodfuMinusDopUpper != null)) {
@@ -260,6 +267,35 @@ class TCGAClinicalService {
     }
     
     
+    
+    
+    public List getIdsForSampleGroups(List sampleGroups) {
+    	  Set idSet = new HashSet()
+          Set groupNames = new HashSet(sampleGroups)
+          
+          if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
+        	  
+        	  def webRequest= RequestContextHolder.currentRequestAttributes()        	  
+              def session = webRequest.session    	 
+
+              UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
+      	      List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
+              java.util.List listItems = null
+      	      lists.each { ul ->
+      	         logger.debug("Checking listName=${ul.getName()}")
+      	         println("Checking listName=${ul.getName()}")
+      	         if (groupNames.contains(ul.getName())) {
+      	           listItems = ul.getListItems()
+      	           println("getIdsForSampleGroups: list=${ul.getName()} numItems=${listItems.size()}")
+      	           listItems.each { li -> 
+      	        	  idSet.add(li.getName())
+      	           }
+      	         }
+      	      }    	      	  
+          }
+    	  return new ArrayList(idSet);    	     	     	
+    }
+     
     public List getIdsForSampleGroup(String sampleGroup) {
     	Set idSet = new HashSet()
     	println("getIdsForSampleGroup sampleGroup=${sampleGroup}")
