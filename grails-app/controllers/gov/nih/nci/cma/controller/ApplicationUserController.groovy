@@ -186,13 +186,15 @@ class ApplicationUserController extends BaseController {
    def logout = {
 		session.userId = null
 		session.acceptedLicense = null
-		//session.invalidate(); //dont invalidate, but rather start a new one - more to do here
-	    //need to clean the session entirely, lists, cache, temp files, ect....this is not enough
-	
+		//invalidating the session will cause sessionDestroyed to 
+		//be called in the CMASessionTracker. sessionDestroyed will 
+		//clean up the cache etc..
+	    session.invalidate()
+	    
 	    flash['message'] = 'Successfully logged out'
 		
 		//reload the default lists
-		defaultListLoaderService.loadDefaultLists()
+		//defaultListLoaderService.loadDefaultLists()
 		
 	    redirect(uri: "/");
    }
