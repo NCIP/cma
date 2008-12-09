@@ -198,7 +198,7 @@ class GPService {
 		}
 
 		allStringList.add(idStringList);
-		fileNameList.add("labIdsFile");
+		fileNameList.add(request.getSession().getId() + "_labIdsFile");
 
 /*
 		List<PlatformMapping> platformMappings = 
@@ -276,13 +276,13 @@ class GPService {
 		if (reporterGroup.isEmpty()) {
 			reportIdStringList.add("reporter=NONE");
 			allStringList.add(reportIdStringList);
-			fileNameList.add("reporterIdsFile");
+			fileNameList.add(request.getSession().getId() + "_reporterIdsFile");
 			logger.info("Have no gene or report list...");
 		}
 		else {
 			reportIdStringList.add(getIdsAsDelimitedString("reporter", reporterGroup, "\t", 0));
 			allStringList.add(reportIdStringList);
-			fileNameList.add("reporterIdsFile");
+			fileNameList.add(request.getSession().getId() + "_reporterIdsFile");
 		}
 
 		
