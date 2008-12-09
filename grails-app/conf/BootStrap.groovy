@@ -54,10 +54,10 @@ class BootStrap {
   		
   		//Initialize the analysis server
   		AnalysisServerClientManager am = AnalysisServerClientManager.getInstance();
-  		String jmsProviderURL = System.getProperty("gov.nih.nci.cma.jms.jboss_url");
-	    String jndiFactoryName = System.getProperty("gov.nih.nci.cma.jms.factory_jndi");
-		String requestQueueName = System.getProperty("gov.nih.nci.cma.jms.analysis_request_queue");
-		String responseQueueName = System.getProperty("gov.nih.nci.cma.jms.analysis_response_queue");
+  		String jmsProviderURL = "${config.gov.nih.nci.cma.jms.jboss_url}";
+	    String jndiFactoryName = "${config.gov.nih.nci.cma.jms.factory_jndi}";
+		String requestQueueName = "${config.gov.nih.nci.cma.jms.analysis_request_queue}";
+		String responseQueueName = "${config.gov.nih.nci.cma.jms.analysis_response_queue}";
 			   
 		am.setJMSparameters(jmsProviderURL, jndiFactoryName, requestQueueName, responseQueueName);
 			   
