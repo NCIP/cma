@@ -152,7 +152,7 @@
 				<tr>
 			        <td class="label">CNS Status</td>
 			        <td>
-			        	<g:select name="cnsStatus"  from="${cnsStatusList}" noSelection="${['ANY':'Any']}" />
+			        	<g:select style="width:200px;" name="cnsStatus"  from="${cnsStatusList}" noSelection="${['ANY':'Any']}" />
 					</td>
 				</tr>
 				<tr>
