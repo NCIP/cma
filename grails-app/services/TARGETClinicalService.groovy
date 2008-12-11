@@ -63,12 +63,53 @@ class TARGETClinicalService {
           return permValues;
 	}
 	
+	public TARGETClinicalReportBean getRptBean(TargetClinicalStg cs) { 
+	  TARGETClinicalReportBean rb = new TARGETClinicalReportBean()
+	  rb.setPtId(cs.getPtId());
+	  rb.setTargetID(cs.getTargetId());
+	  rb.setGender(cs.getGender());
+	  rb.setNaaccrRace(cs.getNaaccrRace());
+	  rb.setNaaccrEthnicity(cs.getNaaccrEthnicity());
+	  rb.setCongenitalAbnormality(cs.getCongenitalAbnormality());
+	  rb.setAge(cs.getAge());
+	  rb.setPbWbc(cs.getPbWbc());
+	  rb.setCns(cs.getCns());
+	  rb.setTesticular(cs.getTesticular());
+	  rb.setKaryotype(cs.getkaryotype());
+	  rb.setMrdDay8(cs.getMrdDay8());
+	  rb.setMrdDay29(cs.getMrdDay29());
+	  rb.setBmaBlastsDay8(cs.getBmaBlastsDay8());
+	  rb.setBmaBlastsDay29(cs.getBmaBlastsDay29());
+	  rb.setEvent(cs.getEvent());
+	  rb.setTimeToEvent(cs.getTimeToEvent());
+	  rb.setDeath(cs.getDeath());
+	  rb.setTimeToDeath(cs.getTimeToDeath());
+	  rb.setSiteOfRelapse(cs.getSiteOfRelapse());
+	  rb.setTelStatus(cs.getTelStatus());
+	  rb.setTrisomies_4_10(cs.getTrisomies_4_10());
+	  rb.setMllStatus(cs.getMllStatus());
+	  rb.setE2aStatus(cs.getE2aStatus());
+	  rb.setBcrStatus(cs.getBcrStatus());
+	  rb.setDnaIndex(cs.getDnaIndex());
+	  return rb;
+	  	  	  	  	  	  
+	}
+	
 	/**
 	 * Get the clinical data given a clinical form.
 	 */
 	def getClinicalData = { clinicalForm -> 
+	   List clinBeans = new ArrayList();
+	   List clinData = TargetClinicalStg.list();
+	   
+	   TARGETClinicalReportBean rb;
+	   clinData.each { cd ->
+		 rb = getRptBean(cd)
+		 clinBeans.add(rb)
+	   }
+	    
+	   return clinBeans
 	
-	  return Collections.emptyList();
 	}
 	
 	 /**
