@@ -35,13 +35,29 @@ class ClinicalController {
 		def tumorTissueSiteList = clinSrv.getPermissibleValues("tumorTissueSite");
 		def vitalStatusList = clinSrv.getPermissibleValues("vitalStatus");
 		
+		
+		  def eventList = clinSrv.getPermissibleValues("event");
+		  def deathList = clinSrv.getPermissibleValues("death");
+		  def congenitalAbnormalityList = clinSrv.getPermissibleValues("congenitalAbnormality");
+		  def telStatusList = clinSrv.getPermissibleValues("telStatus");
+		  def trisomiesList = clinSrv.getPermissibleValues("trisomies_4_10");
+		  def mllStatusList = clinSrv.getPermissibleValues("mllStatus");
+		  def e2aStatusList = clinSrv.getPermissibleValues("e2aStatus");
+		  def bcrStatusList = clinSrv.getPermissibleValues("bcrStatus");
+		  def cnsStatusList = clinSrv.getPermissibleValues("cns");
+		  def testicularStatusList = clinSrv.getPermissibleValues("testicular");
+		 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
 		
 		def ds = grailsApplication.config.cma.dataContext ?: ""
 		render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
 		   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
-		   vitalStatusList:vitalStatusList])
+		   vitalStatusList:vitalStatusList
+		   ,eventList:eventList, deathList:deathList, congenitalAbnormalityList:congenitalAbnormalityList,
+		   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,
+		   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
+		   testicularStatusList:testicularStatusList])
 		
     }
     
