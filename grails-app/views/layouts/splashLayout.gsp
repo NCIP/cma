@@ -52,12 +52,11 @@
 					<div>
 						Select Context
 					</div>
-					<div id="">
-						<a id="RembrandtContext" href="/cma-rembrandt/"  style="display:block" >Rembrandt</a>
-					</div>
-					<div id="">
-						<a id="TCGAContext" href="/cma-tcga/"  style="display:block" >TCGA</a>
-					</div>
+					<g:each in="${grailsApplication.config.cma.availableContexts}">
+						<div id="">
+							<a id="${it.toLowerCase()}Context" href="/cma-${it.toLowerCase()}/"  style="display:block;background-image: url(../images/${it.toLowerCase()}Context30.gif);" >${it}</a>
+						</div>
+					</g:each>
 				</div>
 				<!--  end ccontextOptions -->
 			</div>

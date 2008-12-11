@@ -9,7 +9,8 @@
 
 
 // TCGA:
-cma.dataContext="TCGA"
+cma.dataContext="TARGET"
+cma.availableContexts = ["Rembrandt", "TCGA", "TARGET"]
 cma.authenticationManagerContext="cma"
 cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-tcga.properties"
 //cma.appPropertiesFile="/local/content/cma/config/cma-tcga.properties"

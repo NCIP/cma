@@ -98,6 +98,11 @@ legend	{
 	background-color:gray;
 	color:#fff;
 }
+#contextOptions a	{
+	padding:5px;
+	background-repeat:no-repeat;
+}
+/*
 #contextOptions a#TCGAContext	{
 	padding:5px;
 	background-image: url(../images/tcgaContext30.gif);
@@ -108,6 +113,12 @@ legend	{
 	background-image: url(../images/rbtContext30.gif);
 	background-repeat:no-repeat;
 }
+#contextOptions a#TARGETContext	{
+	padding:5px;
+	background-image: url(../images/targetContext30.gif);
+	background-repeat:no-repeat;
+}
+*/
 #ccontextDiv	{
 	/* note the 2nd c */
 	width:200px;
