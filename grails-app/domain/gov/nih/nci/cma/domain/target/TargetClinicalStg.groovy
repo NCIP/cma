@@ -2,7 +2,7 @@ package gov.nih.nci.cma.domain.target
 
 class TargetClinicalStg {
 	  private String ptId;                  
-	  private String targetID;              
+	  private String targetId;              
 	  private String gender;    
 	  private String naaccrRace; 
 	  private String naaccrEthnicity;
