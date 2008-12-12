@@ -51,6 +51,30 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="ptId" title="ID" sortable="true" headerClass="sortable" />
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="congenitalAbnormality"  sortable="true" headerClass="sortable" />
+
+	  <display:column property="targetID"  sortable="true" headerClass="sortable" />
+	  <display:column property="naaccrRace"  sortable="true" headerClass="sortable" />
+	  <display:column property="naaccrEthnicity"  sortable="true" headerClass="sortable" />
+	  <display:column property="age"  sortable="true" headerClass="sortable" />
+	  <display:column property="pbWbc"  sortable="true" headerClass="sortable" />
+	  <display:column property="cns"  sortable="true" headerClass="sortable" />
+	  <display:column property="testicular"  sortable="true" headerClass="sortable" />
+	  <display:column property="karyotype"  sortable="true" headerClass="sortable" />
+	  <display:column property="mrdDay8"  sortable="true" headerClass="sortable" />
+	  <display:column property="mrdDay29"  sortable="true" headerClass="sortable" />
+	  <display:column property="bmaBlastsDay8"  sortable="true" headerClass="sortable" />
+	  <display:column property="bmaBlastsDay29"  sortable="true" headerClass="sortable" />
+	  <display:column property="event"  sortable="true" headerClass="sortable" />
+	  <display:column property="timeToEvent"  sortable="true" headerClass="sortable" />
+	  <display:column property="death"  sortable="true" headerClass="sortable" />
+	  <display:column property="timeToDeath"  sortable="true" headerClass="sortable" />
+	  <display:column property="siteOfRelapse"  sortable="true" headerClass="sortable" />
+	  <display:column property="telStatus"  sortable="true" headerClass="sortable" />
+	  <display:column property="trisomies_4_10"  sortable="true" headerClass="sortable" />
+	  <display:column property="mllStatus"  sortable="true" headerClass="sortable" />
+	  <display:column property="e2aStatus"  sortable="true" headerClass="sortable" />
+	  <display:column property="bcrStatus"  sortable="true" headerClass="sortable" />
+	  <display:column property="dnaIndex"  sortable="true" headerClass="sortable" />
 	</display:table>
 	</div>
 	<div  id="bottom" align="center">
