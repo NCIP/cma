@@ -74,7 +74,7 @@ class TARGETClinicalService {
 	  rb.setNaaccrEthnicity(cs.naaccrEthnicity);
 	  rb.setCongenitalAbnormality(cs.congenitalAbnormality);
 	  
-	  println("getRptBean gorm id=${cs.id} ptId=${cs.ptId} gender=${cs.gender} abnorm=${cs.congenitalAbnormality}")
+	  //println("getRptBean gorm id=${cs.id} ptId=${cs.ptId} gender=${cs.gender} abnorm=${cs.congenitalAbnormality}")
 		 
 	  
 	  rb.setAge(cs.age);
