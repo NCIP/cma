@@ -3,7 +3,7 @@ package gov.nih.nci.cma.clinical;
 public class TARGETClinicalReportBean {
   
   private String ptId;                  
-  private String targetID;              
+  private String targetId;              
   private String gender;    
   private String naaccrRace; 
   private String naaccrEthnicity;
@@ -34,11 +34,11 @@ public class TARGETClinicalReportBean {
 	public void setPtId(String ptId) {
 		this.ptId = ptId;
 	}
-	public String getTargetID() {
-		return targetID;
+	public String getTargetId() {
+		return targetId;
 	}
-	public void setTargetID(String targetID) {
-		this.targetID = targetID;
+	public void setTargetID(String targetId) {
+		this.targetId = targetId;
 	}
 	public String getGender() {
 		return gender;
