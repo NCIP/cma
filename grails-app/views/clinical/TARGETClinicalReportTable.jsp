@@ -52,7 +52,7 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="congenitalAbnormality"  sortable="true" headerClass="sortable" />
 
-	  <display:column property="targetID"  sortable="true" headerClass="sortable" />
+	  <display:column property="targetId"  sortable="true" headerClass="sortable" />
 	  <display:column property="naaccrRace"  sortable="true" headerClass="sortable" />
 	  <display:column property="naaccrEthnicity"  sortable="true" headerClass="sortable" />
 	  <display:column property="age"  sortable="true" headerClass="sortable" />
