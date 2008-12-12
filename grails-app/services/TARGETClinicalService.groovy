@@ -1,4 +1,6 @@
 import java.util.Collections;
+import gov.nih.nci.cma.domain.target.TargetClinicalStg;
+import gov.nih.nci.cma.clinical.TARGETClinicalReportBean;
 
 
 class TARGETClinicalService {
@@ -65,32 +67,36 @@ class TARGETClinicalService {
 	
 	public TARGETClinicalReportBean getRptBean(TargetClinicalStg cs) { 
 	  TARGETClinicalReportBean rb = new TARGETClinicalReportBean()
-	  rb.setPtId(cs.getPtId());
-	  rb.setTargetID(cs.getTargetId());
-	  rb.setGender(cs.getGender());
-	  rb.setNaaccrRace(cs.getNaaccrRace());
-	  rb.setNaaccrEthnicity(cs.getNaaccrEthnicity());
-	  rb.setCongenitalAbnormality(cs.getCongenitalAbnormality());
-	  rb.setAge(cs.getAge());
-	  rb.setPbWbc(cs.getPbWbc());
-	  rb.setCns(cs.getCns());
-	  rb.setTesticular(cs.getTesticular());
-	  rb.setKaryotype(cs.getkaryotype());
-	  rb.setMrdDay8(cs.getMrdDay8());
-	  rb.setMrdDay29(cs.getMrdDay29());
-	  rb.setBmaBlastsDay8(cs.getBmaBlastsDay8());
-	  rb.setBmaBlastsDay29(cs.getBmaBlastsDay29());
-	  rb.setEvent(cs.getEvent());
-	  rb.setTimeToEvent(cs.getTimeToEvent());
-	  rb.setDeath(cs.getDeath());
-	  rb.setTimeToDeath(cs.getTimeToDeath());
-	  rb.setSiteOfRelapse(cs.getSiteOfRelapse());
-	  rb.setTelStatus(cs.getTelStatus());
-	  rb.setTrisomies_4_10(cs.getTrisomies_4_10());
-	  rb.setMllStatus(cs.getMllStatus());
-	  rb.setE2aStatus(cs.getE2aStatus());
-	  rb.setBcrStatus(cs.getBcrStatus());
-	  rb.setDnaIndex(cs.getDnaIndex());
+	  rb.setPtId(cs.ptId);
+	  rb.setTargetID(cs.targetId);
+	  rb.setGender(cs.gender);
+	  rb.setNaaccrRace(cs.naaccrRace);
+	  rb.setNaaccrEthnicity(cs.naaccrEthnicity);
+	  rb.setCongenitalAbnormality(cs.congenitalAbnormality);
+	  
+	  println("getRptBean gorm id=${cs.id} ptId=${cs.ptId} gender=${cs.gender} abnorm=${cs.congenitalAbnormality}")
+		 
+	  
+	  rb.setAge(cs.age);
+	  rb.setPbWbc(cs.pbWbc);
+	  rb.setCns(cs.cns);
+	  rb.setTesticular(cs.testicular);
+	  rb.setKaryotype(cs.karyotype);
+	  rb.setMrdDay8(cs.mrdDay8);
+	  rb.setMrdDay29(cs.mrdDay29);
+	  rb.setBmaBlastsDay8(cs.bmaBlastsDay8);
+	  rb.setBmaBlastsDay29(cs.bmaBlastsDay29);
+	  rb.setEvent(cs.event);
+	  rb.setTimeToEvent(cs.timeToEvent);
+	  rb.setDeath(cs.death);
+	  rb.setTimeToDeath(cs.timeToDeath);
+	  rb.setSiteOfRelapse(cs.siteOfRelapse);
+	  rb.setTelStatus(cs.telStatus);
+	  rb.setTrisomies_4_10(cs.trisomies_4_10);
+	  rb.setMllStatus(cs.mllStatus);
+	  rb.setE2aStatus(cs.e2aStatus);
+	  rb.setBcrStatus(cs.bcrStatus);
+	  rb.setDnaIndex(cs.dnaIndex);
 	  return rb;
 	  	  	  	  	  	  
 	}
@@ -100,14 +106,16 @@ class TARGETClinicalService {
 	 */
 	def getClinicalData = { clinicalForm -> 
 	   List clinBeans = new ArrayList();
-	   List clinData = TargetClinicalStg.list();
+	   List clinData = TargetClinicalStg.findAll()
+	   
+	   println("Call to clinData.findAll returned numItems=${clinData.size()}")
 	   
 	   TARGETClinicalReportBean rb;
 	   clinData.each { cd ->
 		 rb = getRptBean(cd)
 		 clinBeans.add(rb)
 	   }
-	    
+	   	   	    
 	   return clinBeans
 	
 	}
