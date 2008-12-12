@@ -37,7 +37,7 @@ public class TARGETClinicalReportBean {
 	public String getTargetId() {
 		return targetId;
 	}
-	public void setTargetID(String targetId) {
+	public void setTargetId(String targetId) {
 		this.targetId = targetId;
 	}
 	public String getGender() {
