@@ -20,6 +20,7 @@ class ClinicalController {
 			def dataServiceName = "${dc}ClinicalService"
 			def clinicalServiceClass = grailsApplication.getArtefact("Service", dataServiceName)
 			logger.debug("getClinicalService returning instance of ${clinicalServiceClass.getName()}")
+			println("getClinicalService returning instance of ${clinicalServiceClass.getName()}")
 			return clinicalServiceClass.newInstance()					
 	}
 	
