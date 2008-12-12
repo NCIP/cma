@@ -68,7 +68,7 @@ class TARGETClinicalService {
 	public TARGETClinicalReportBean getRptBean(TargetClinicalStg cs) { 
 	  TARGETClinicalReportBean rb = new TARGETClinicalReportBean()
 	  rb.setPtId(cs.ptId);
-	  rb.setTargetID(cs.targetId);
+	  rb.setTargetId(cs.targetId);
 	  rb.setGender(cs.gender);
 	  rb.setNaaccrRace(cs.naaccrRace);
 	  rb.setNaaccrEthnicity(cs.naaccrEthnicity);
