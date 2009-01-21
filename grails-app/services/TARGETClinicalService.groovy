@@ -3,7 +3,7 @@ import gov.nih.nci.cma.domain.target.TargetClinicalStg;
 import gov.nih.nci.cma.clinical.TARGETClinicalReportBean;
 
 
-class TARGETClinicalService {
+class TARGETClinicalService extends AbstractClinicalService {
 	
 	/**
 	 * Get permissible values for a given parameter

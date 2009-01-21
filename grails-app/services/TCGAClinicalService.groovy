@@ -10,7 +10,7 @@ import gov.nih.nci.caintegrator.application.lists.ListType
 
 
 
-class TCGAClinicalService {
+class TCGAClinicalService extends AbstractClinicalService {
 	
 	//gender: ANY
 	//karnofskyScoreUpper: 110
@@ -203,26 +203,26 @@ class TCGAClinicalService {
     }
     
     
-    private String getIdString(Set idSet) {
-    	int ind = 0;
-    	int numIds  = idSet.size()
-    	StringBuffer idSB = new StringBuffer()
-    	
-    	idSB.append("(")
-    			
-    	idSet.each { id -> 
-    	         
-    	         if (ind == (numIds-1))  {
-    	        	 idSB.append("'${id}'")    	    	        	 
-    	         }
-    	         else {
-    	        	idSB.append("'${id}',")    	    	        	
-    	         }
-                 ind++
-    	}
-    	idSB.append(")")
-    	return idSB.toString()
-    }
+//    private String getIdString(Set idSet) {
+//    	int ind = 0;
+//    	int numIds  = idSet.size()
+//    	StringBuffer idSB = new StringBuffer()
+//    	
+//    	idSB.append("(")
+//    			
+//    	idSet.each { id -> 
+//    	         
+//    	         if (ind == (numIds-1))  {
+//    	        	 idSB.append("'${id}'")    	    	        	 
+//    	         }
+//    	         else {
+//    	        	idSB.append("'${id}',")    	    	        	
+//    	         }
+//                 ind++
+//    	}
+//    	idSB.append(")")
+//    	return idSB.toString()
+//    }
     
     public TCGAClinicalReportBean getRptBean(ClinicalNew cn) {
       TCGAClinicalReportBean rptBean = new TCGAClinicalReportBean()
@@ -269,51 +269,51 @@ class TCGAClinicalService {
     
     
     
-    public List getIdsForSampleGroups(List sampleGroups) {
-    	  Set idSet = new HashSet()
-          Set groupNames = new HashSet(sampleGroups)
-          
-          if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
-        	  
-        	  def webRequest= RequestContextHolder.currentRequestAttributes()        	  
-              def session = webRequest.session    	 
-
-              UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
-      	      List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
-              java.util.List listItems = null
-      	      lists.each { ul ->
-      	         logger.debug("Checking listName=${ul.getName()}")
-      	         println("Checking listName=${ul.getName()}")
-      	         if (groupNames.contains(ul.getName())) {
-      	           listItems = ul.getListItems()
-      	           println("getIdsForSampleGroups: list=${ul.getName()} numItems=${listItems.size()}")
-      	           listItems.each { li -> 
-      	        	  idSet.add(li.getName())
-      	           }
-      	         }
-      	      }    	      	  
-          }
-    	  return new ArrayList(idSet);    	     	     	
-    }
-     
-    public List getIdsForSampleGroup(String sampleGroup) {
-    	Set idSet = new HashSet()
-    	println("getIdsForSampleGroup sampleGroup=${sampleGroup}")
-    	if ((sampleGroup != null) && (sampleGroup.size() > 0)) {      	  
-      	    def webRequest= RequestContextHolder.currentRequestAttributes()        	  
-            def session = webRequest.session    	 
-
-            UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
-    	    UserList ul = userListBeanHelper.getUserList(sampleGroup);
-    	    logger.debug("Got user list bean !")
-    	    java.util.List listItems = ul.getListItems()
-    	    listItems.each { li -> 
-    	      //println("adding item ${li.getName()}")
-    	      idSet.add(li.getName())
-    	    }    	        	        	  
-        }    	    	
-    	return new ArrayList(idSet)
-    }
+//    public List getIdsForSampleGroups(List sampleGroups) {
+//    	  Set idSet = new HashSet()
+//          Set groupNames = new HashSet(sampleGroups)
+//          
+//          if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
+//        	  
+//        	  def webRequest= RequestContextHolder.currentRequestAttributes()        	  
+//              def session = webRequest.session    	 
+//
+//              UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
+//      	      List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
+//              java.util.List listItems = null
+//      	      lists.each { ul ->
+//      	         logger.debug("Checking listName=${ul.getName()}")
+//      	         println("Checking listName=${ul.getName()}")
+//      	         if (groupNames.contains(ul.getName())) {
+//      	           listItems = ul.getListItems()
+//      	           println("getIdsForSampleGroups: list=${ul.getName()} numItems=${listItems.size()}")
+//      	           listItems.each { li -> 
+//      	        	  idSet.add(li.getName())
+//      	           }
+//      	         }
+//      	      }    	      	  
+//          }
+//    	  return new ArrayList(idSet);    	     	     	
+//    }
+//     
+//    public List getIdsForSampleGroup(String sampleGroup) {
+//    	Set idSet = new HashSet()
+//    	println("getIdsForSampleGroup sampleGroup=${sampleGroup}")
+//    	if ((sampleGroup != null) && (sampleGroup.size() > 0)) {      	  
+//      	    def webRequest= RequestContextHolder.currentRequestAttributes()        	  
+//            def session = webRequest.session    	 
+//
+//            UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
+//    	    UserList ul = userListBeanHelper.getUserList(sampleGroup);
+//    	    logger.debug("Got user list bean !")
+//    	    java.util.List listItems = ul.getListItems()
+//    	    listItems.each { li -> 
+//    	      println("adding item ${li.getName()}")
+//    	      idSet.add(li.getName())
+//    	    }    	        	        	  
+//        }    	    	
+//    	return new ArrayList(idSet)
+//    }
     
     
     public List getClinicalDataForGroup(String groupName) {

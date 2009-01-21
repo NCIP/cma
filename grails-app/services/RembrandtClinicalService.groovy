@@ -19,7 +19,7 @@ import gov.nih.nci.caintegrator.application.lists.ListItem
 import gov.nih.nci.caintegrator.application.lists.ListType
 import org.springframework.web.context.request.RequestContextHolder
 
-class RembrandtClinicalService {
+class RembrandtClinicalService extends AbstractClinicalService {
 
     boolean transactional = false
     private static Logger logger = Logger.getLogger(RembrandtClinicalService.class);
@@ -65,10 +65,21 @@ class RembrandtClinicalService {
       return new ArrayList(pdidsIds)
     }
     
+    
     /**
      * getIdsForSampleGroups
      */
-    public List getIdsForSampleGroups(List sampleGroups) {
+     public List getIdsForSampleGroups(List sampleGroups) {
+    	List sampleIds = super.getIdsForSampleGroups(sampleGroups)
+    	Set sampleIdSet = new HashSet(sampleIds)
+    	return getPatientDIDsForSampleIds(sampleIdSet)    
+    }
+     
+    
+    /**
+     * getIdsForSampleGroups
+     */
+/*    public List getIdsForSampleGroups(List sampleGroups) {
     	  Set idSet = new HashSet()
           Set groupNames = new HashSet(sampleGroups)
           
@@ -92,7 +103,7 @@ class RembrandtClinicalService {
           }
     	  
     	  return getPatientDIDsForSampleIds(idSet)                   
-    }
+    }*/
     
     /**
      * getIdsForDiseaseType
@@ -387,26 +398,26 @@ class RembrandtClinicalService {
        return new ArrayList(patientMap.values())
     }
     
-    private String getIdString(Set idSet) {
-    	int ind = 0;
-    	int numIds  = idSet.size()
-    	StringBuffer idSB = new StringBuffer()
-    	
-    	idSB.append("(")
-    			
-    	idSet.each { id -> 
-    	         
-    	         if (ind == (numIds-1))  {
-    	        	 idSB.append("'${id}'")    	    	        	 
-    	         }
-    	         else {
-    	        	idSB.append("'${id}',")    	    	        	
-    	         }
-                 ind++
-    	}
-    	idSB.append(")")
-    	return idSB.toString()
-    }
+//    private String getIdString(Set idSet) {
+//    	int ind = 0;
+//    	int numIds  = idSet.size()
+//    	StringBuffer idSB = new StringBuffer()
+//    	
+//    	idSB.append("(")
+//    			
+//    	idSet.each { id -> 
+//    	         
+//    	         if (ind == (numIds-1))  {
+//    	        	 idSB.append("'${id}'")    	    	        	 
+//    	         }
+//    	         else {
+//    	        	idSB.append("'${id}',")    	    	        	
+//    	         }
+//                 ind++
+//    	}
+//    	idSB.append(")")
+//    	return idSB.toString()
+//    }
     
     /**
      * Get a list of report beans for a list of patientIds
