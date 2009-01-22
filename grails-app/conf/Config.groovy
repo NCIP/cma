@@ -6,10 +6,16 @@
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-
+// TARGET
+//cma.dataContext="TARGET"
+//cma.availableContexts = ["Rembrandt", "TCGA", "TARGET"]
+//cma.authenticationManagerContext="cma"
+//cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-target.properties"
+//cma.appPropertiesFile="/local/content/cma/config/cma-tcga.properties"
 
 // TCGA:
 cma.dataContext="TCGA"
+cma.availableContexts = ["Rembrandt", "TCGA", "TARGET"]
 cma.authenticationManagerContext="cma"
 cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-tcga.properties"
 //cma.appPropertiesFile="/local/content/cma/config/cma-tcga.properties"
