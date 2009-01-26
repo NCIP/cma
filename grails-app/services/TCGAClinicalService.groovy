@@ -158,8 +158,8 @@ class TCGAClinicalService {
     	  idSet.addAll(ids)
         }
         																
-		if ((patientId != null ) && (!patientId.equals("ANY")) && (patientId.trim().length() > 0)) {
-		  idSet.add(patientId)
+		if ((patientId != null ) && (!patientId.trim().equals("ANY")) && (patientId.trim().length() > 0)) {
+		  idSet.add(patientId.trim())
 		}
 							
 		if ((gender != null) && (!gender.equals("ANY"))) {
