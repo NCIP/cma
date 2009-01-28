@@ -49,9 +49,9 @@ class RembrandtClinicalService {
     }
     
     /**
-     * 
+     * Translate from sample ids to patient dids
      */
-    public List getPatientDIDsForSampleIds(Set idSet) {      
+    public Set getPatientDIDsForSampleIds(Set idSet) {      
       String idString = getIdString(idSet)
       String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.institutionId=8 and pd.sampleId in " 
       
@@ -62,8 +62,26 @@ class RembrandtClinicalService {
       patients.each { p ->
     	  pdidsIds.add(p.getId())
       }
-      return new ArrayList(pdidsIds)
+      return pdidsIds
     }
+    
+    /**
+     * Translate from patient dids to sample ids
+     */
+    public List getSampleIdsForPatientDIDs(Set idSet) {      
+      String idString = getIdString(idSet)
+      String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.institutionId=8 and pd.id in " 
+      
+      pdQS += idString
+      
+      def patients = PatientData.findAll(pdQS)
+      Set sampleIds = new HashSet()
+      patients.each { p ->
+    	  sampleIds.add(p.getSampleId())
+      }
+      return new ArrayList(sampleIds)
+    }
+    
     
     /**
      * getIdsForSampleGroups
@@ -90,8 +108,8 @@ class RembrandtClinicalService {
       	         }
       	      }    	      	  
           }
-    	  
-    	  return getPatientDIDsForSampleIds(idSet)                   
+    	  return new ArrayList(idSet)
+    	  //return getPatientDIDsForSampleIds(idSet)                   
     }
     
     /**
@@ -409,16 +427,15 @@ class RembrandtClinicalService {
     }
     
     /**
-     * Get a list of report beans for a list of patientIds
+     * Get a list of report beans for a list of sampleIds
      */
-    public List getClinicalData(List patientIds) { 
+    public List getClinicalData(List sampleIds) { 
            	     	    	    	    	    	   
-    	    	if ((patientIds == null) || (patientIds.size() == 0)) {
-    	    	  logger.warn("Warning no patientIds passed to getClinicalData!")
+    	    	if ((sampleIds == null) || (sampleIds.size() == 0)) {
+    	    	  logger.warn("Warning no sampleIds passed to getClinicalData!")
     	          return Collections.emptyList()
     	    	}
     	    	
-    	    	Set idSet = new HashSet(patientIds)
     	    	StringBuffer idSB = new StringBuffer()
     	    	String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.institutionId=8 and pd.id in " 
     	    	String neuroQS = "From gov.nih.nci.cma.domain.rembrandt.NeurologicalEvaluation neuroExam where neuroExam.institutionId=8 and neuroExam.patientDid in "
@@ -429,6 +446,9 @@ class RembrandtClinicalService {
     	    	String ptRadQS = "From gov.nih.nci.cma.domain.rembrandt.PtRadiationtherapy ptRad where ptRad.institutionId=8 and ptRad.patientDid in "
     	    	String ptSurgQS = "From gov.nih.nci.cma.domain.rembrandt.PtSurgery ptsurg where ptsurg.institutionId=8 and ptsurg.patientDid in "			
     	    			
+    	    	//translate from sample ids to patient ids
+    	    	Set sampleIdSet = new HashSet(sampleIds)
+    	    	Set idSet = getPatientDIDsForSampleIds(sampleIdSet)
     	    	
     	    	String idString = getIdString(idSet)
     	       
@@ -449,8 +469,6 @@ class RembrandtClinicalService {
     	    	logger.debug("QueryStr=${ptChemoQS}")
     	    	logger.debug("QueryStr=${ptRadQS}")
     	    	logger.debug("QueryStr=${ptSurgQS}")
-    	    	
-    	    	
     	    	
     	    	//Get the raw data
     	        List patientData = PatientData.findAll(pdQS)
@@ -512,9 +530,10 @@ class RembrandtClinicalService {
     	  groupNames.add("ALL_PATIENTS")
       }
       
-      List ids = getIdsForSampleGroups(groupNames)
+      Set sampleIds = new HashSet(getIdsForSampleGroups(groupNames))
       
-      Set idSet = new HashSet(ids)
+      //translate to patient ids
+      Set idSet = getPatientDIDsForSampleIds(sampleIds)
 
       if ((gender != null) && (!gender.equals("ANY"))) {
         List genderIds = getIdsForGender(gender)
@@ -558,9 +577,8 @@ class RembrandtClinicalService {
     	}
       }
       
-      List lookupIds = new ArrayList(idSet)
-      
-      
+      List lookupIds = getSampleIdsForPatientDIDs(idSet)
+            
       return getClinicalData(lookupIds)
     }
     
