@@ -1,10 +1,149 @@
 import java.util.Collections;
 import gov.nih.nci.cma.domain.target.TargetClinicalStg;
 import gov.nih.nci.cma.clinical.TARGETClinicalReportBean;
-
+import org.apache.log4j.Logger;
 
 class TARGETClinicalService extends AbstractClinicalService {
 	
+    boolean transactional = false
+    
+    private static Logger logger = Logger.getLogger(TARGETClinicalService.class);
+		 
+    
+    /**
+     * Extracts a list of unique ids from a list of domin objects
+     */
+    private List getIdList(List clinObjs) {
+      if (clinObjs == null) {
+    	logger.warn("getIdList passed null parameter")
+    	return Collections.emptyList()
+      }
+      Set retSet = new HashSet()
+      clinObjs.each { c ->
+        if (c != null) {
+          retSet.add(c.getTargetId())  
+        }
+        else {
+          logger.warn("getIdList got null domain object.")
+        }
+      }
+      return new ArrayList(retSet)
+    }
+    
+    
+	 /**
+	  * Get Ids for age
+	  */
+	  public List<String> getIdsForAge(Integer ageLower, Integer ageUppper) {
+		List clinList = TargetClinicalStg.findAllByAgeBetween(ageLower, ageUpper)
+		return getIdList(clinList)	 		 
+	  }
+	   	 
+	 /**
+	  * Get Ids for WBC
+	  */
+	 public List<String> getIdsForWBC(Integer wbcLower, Integer wbcUppper) {
+	   List clinList = TargetClinicalStg.findAllByPbWbcBetween(wbcLower, wbcUpper)
+	   return getIdList(clinList)	 		 
+	 }
+	
+	 /**
+	  * Get Ids for minimal residual disease day 8
+	  */
+	 public List<String> getIdsForMrdDay8(Integer mrdDay8Lower, Integer mrdDay8Uppper) {
+	   List clinList = TargetClinicalStg.findAllByMrdDay8Between(mrdDay8Lower, mrdDay8Upper)
+	   return getIdList(clinList)	 		 
+	 }
+	 
+	 /**
+	  * Get Ids for minimal residual disease day 29
+	  */
+	 public List<String> getIdsForMrdDay29(Integer mrdDay29Lower, Integer mrdDay29Uppper) {
+	   List clinList = TargetClinicalStg.findAllByMrdDay29Between(mrdDay29Lower, mrdDay29Upper)
+	   return getIdList(clinList)	 		 
+	 }
+	 
+	 /**
+	  * Get ids for event
+	  */
+	 public List<String> getIdsForEvent(String eventValue) {
+	   List clinList = TargetClinicalStg.findAllByEventLike(eventValue)
+	   return getIdList(clinList)		 
+	 }
+	 
+	 /**
+	  * Get ids for death event
+	  */
+	 public List<String> getIdsForDeath(String eventValue) {
+	   List clinList = TargetClinicalStg.findAllByDeathLike(eventValue)
+	   return getIdList(clinList)		 
+	 }
+	 
+	 /**
+	  * Get ids for congenitalAbnormality
+	  */
+	 public List<String> getIdsForCongenitalAbnormality(String congenitalAbnormalityValue) {
+	   List clinList = TargetClinicalStg.findAllByCongenitalAbnormalityLike(congenitalAbnormalityValue)
+	   return getIdList(clinList)			
+	 }
+	 
+	 /**
+	  * Get ids for telStatus
+	  */
+	 public List<String> getIdsForTelStatus(String telStatus) {
+	   List clinList = TargetClinicalStg.findAllByTelStatusLike(telStatus)
+	   return getIdList(clinList)			
+	 }
+	 
+	 /**
+	  * Get ids for trisomies
+	  */
+	 public List<String> getIdsForTrisomies(String trisomiesStatus) {
+	   List clinList = TargetClinicalStg.findAllByTrisomiesLike(trisomiesStatus)
+	   return getIdList(clinList)			
+	 }
+	 
+	 /**
+	  * Get ids for mll status
+	  */
+	 public List<String> getIdsForMllStatus(String mllStatus) {
+	   List clinList = TargetClinicalStg.findAllByMllStatusLike(mllStatus)
+	   return getIdList(clinList)			
+	 }
+	 
+	 /**
+	  * Get ids for e2aStatus
+	  */
+	 public List<String> getIdsForE2aStatus(String e2aStatus) {
+	   List clinList = TargetClinicalStg.findAllByE2aStatusLike(e2aStatus)
+	   return getIdList(clinList)			
+	 }
+	 
+	 /**
+	  * Get ids for bcrStatus
+	  */
+	  public List<String> getIdsForBcrStatus(String bcrStatus) {
+		List clinList = TargetClinicalStg.findAllByBcrStatusLike(bcrStatus)
+		return getIdList(clinList)		  		  
+	  }
+	 
+	  /**
+	   * Get ids for Testicular Status
+	   */
+	   public List<String> getIdsForTesticularStatus(String testicularStatus) {
+		 List clinList = TargetClinicalStg.findAllByTesticularStatusLike(testicularStatus)
+		 return getIdList(clinList)		  		  
+	   }
+	 
+	  /**
+	   * Get ids for gender
+	   */
+	   public List<String> getIdsForGender(String gender) {
+	      List clinList = TargetClinicalStg.findAllByGenderLike(gender)
+		  return getIdList(clinList)		    	
+	   }
+ 	 
+	 	 		
 	/**
 	 * Get permissible values for a given parameter
 	 */
@@ -70,32 +209,44 @@ class TARGETClinicalService extends AbstractClinicalService {
 	  rb.setPtId(cs.ptId);
 	  rb.setTargetId(cs.targetId);
 	  rb.setGender(cs.gender);
+	  rb.setGenderStr(cs.genderStr);
 	  rb.setNaaccrRace(cs.naaccrRace);
+	  rb.setRaceStr(cs.raceStr);
 	  rb.setNaaccrEthnicity(cs.naaccrEthnicity);
+	  rb.setEthnicityStr(cs.ethnicityStr);
 	  rb.setCongenitalAbnormality(cs.congenitalAbnormality);
+	  rb.setCongenitalAbStr(cs.congenitalAbStr);
 	  
 	  //println("getRptBean gorm id=${cs.id} ptId=${cs.ptId} gender=${cs.gender} abnorm=${cs.congenitalAbnormality}")
 		 
-	  
 	  rb.setAge(cs.age);
 	  rb.setPbWbc(cs.pbWbc);
 	  rb.setCns(cs.cns);
+	  rb.setCnsStr(cs.cnsStr);
 	  rb.setTesticular(cs.testicular);
+	  rb.setTesticularStr(cs.testicularStr);
 	  rb.setKaryotype(cs.karyotype);
 	  rb.setMrdDay8(cs.mrdDay8);
 	  rb.setMrdDay29(cs.mrdDay29);
 	  rb.setBmaBlastsDay8(cs.bmaBlastsDay8);
 	  rb.setBmaBlastsDay29(cs.bmaBlastsDay29);
 	  rb.setEvent(cs.event);
+	  rb.setEventStr(cs.eventStr);
 	  rb.setTimeToEvent(cs.timeToEvent);
 	  rb.setDeath(cs.death);
+	  rb.setDeathStr(cs.deathStr);
 	  rb.setTimeToDeath(cs.timeToDeath);
 	  rb.setSiteOfRelapse(cs.siteOfRelapse);
 	  rb.setTelStatus(cs.telStatus);
+	  rb.setTelStatusStr(cs.telStatusStr);
 	  rb.setTrisomies_4_10(cs.trisomies_4_10);
+	  rb.setTrisomies_4_10Str(cs.trisomies_4_10Str);
 	  rb.setMllStatus(cs.mllStatus);
+	  rb.setMllStatusStr(cs.mllStatusStr);
 	  rb.setE2aStatus(cs.e2aStatus);
+	  rb.setE2aStatusStr(cs.e2aStatusStr);
 	  rb.setBcrStatus(cs.bcrStatus);
+	  rb.setBcrStatusStr(cs.bcrStatusStr);
 	  rb.setDnaIndex(cs.dnaIndex);
 	  return rb;
 	  	  	  	  	  	  
@@ -105,27 +256,93 @@ class TARGETClinicalService extends AbstractClinicalService {
 	 * Get the clinical data given a clinical form.
 	 */
 	def getClinicalData = { clinicalForm -> 
-	   List clinBeans = new ArrayList();
-	   List clinData = TargetClinicalStg.findAll()
+	   //List clinBeans = new ArrayList();
+	   //List clinData = TargetClinicalStg.findAll()	   
+	   //println("Call to clinData.findAll returned numItems=${clinData.size()}")
 	   
-	   println("Call to clinData.findAll returned numItems=${clinData.size()}")
-	   
-	   TARGETClinicalReportBean rb;
-	   clinData.each { cd ->
-		 rb = getRptBean(cd)
-		 clinBeans.add(rb)
+	   clinicalForm.getParameterNames().each	{
+	    	println(it + ": " + clinicalForm.getParameter(it))
 	   }
-	   	   	    
-	   return clinBeans
-	
+	   	  	   
+	   //Get the parameter values
+	   String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroup")
+	   String gender = (String)clinicalForm.getParameter("gender")	
+	   Integer ageLower = clinicalForm.getParameter("ageLower")!=null ? Integer.valueOf(clinicalForm.getParameter("ageLower")) : null
+	   Integer ageUpper = clinicalForm.getParameter("ageUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("ageUpper")) : null 
+	   Integer wbcLower = clinicalForm.getParameter("wbcLower")!=null ? Integer.valueOf(clinicalForm.getParameter("wbcLower")) : null
+	   Integer wbcUpper = clinicalForm.getParameter("wbcUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("wbcUpper")) : null 
+	   Integer day8mrdLower = clinicalForm.getParameter("day8Lower")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Lower")) : null
+	   Integer day8mrdUpper = clinicalForm.getParameter("day8Upper")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Upper")) : null 		
+	   Integer day29mrdLower = clinicalForm.getParameter("day8Lower")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Lower")) : null
+	   Integer day29mrdUpper = clinicalForm.getParameter("day8Upper")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Upper")) : null 					   
+	   String  event = (String)clinicalForm.getParameter("event")
+	   String  death = (String)clinicalForm.getParameter("death")	
+	   String  congenitalAbnormality = (String)clinicalForm.getParameter("congenitalAbnormality")
+	   String  telStatus = (String)clinicalForm.getParameter("telStatus")	   
+	   String  trisomies = (String)clinicalForm.getParameter("trisomies")	   	   
+	   String  mllStatus = (String)clinicalForm.getParameter("mllStatus")	   	   		   
+	   String  e2aStatus = (String)clinicalForm.getParameter("e2aStatus")	   	   		   
+	   String  bcrStatus = (String)clinicalForm.getParameter("bcrStatus")	
+	   String  cnsStatus  = (String)clinicalForm.getParameter("cnsStatus")
+	   String  testicularStatus  = (String)clinicalForm.getParameter("testicularStatus")
+	   
+	   Set idSet = new HashSet()
+	   	   	   
+	   List groupNames = new ArrayList()
+	   
+       if ((sampleGroups != null) && (sampleGroups.length > 0)) {
+         for (int i=0; i < sampleGroups.length ; i++) {
+    		 groupNames.add(sampleGroups[i])
+    	 }
+    	 List ids = getIdsForSampleGroups(groupNames)    	  
+    	 idSet.addAll(ids)    	     	     	     	
+       }
+	   
+	   if ((gender != null) && (!gender.equals("ANY"))) {
+			List genderIds = getIdsForGender(gender)
+	        idSet.retainAll(genderIds)
+	   }
+	   
+//	   TARGETClinicalReportBean rb;
+//	   clinData.each { cd ->
+//		 rb = getRptBean(cd)
+//		 clinBeans.add(rb)
+//	   }
+
+	   List lookupIds = new ArrayList(idSet)
+	   
+	   return getClinicalData(lookupIds)
+	   	   	   
 	}
 	
 	 /**
-	  * Get the cli
-	  * nical data for a sample group
+	  * Get the clinical data for a sample group
 	  */
 	 public List getClinicalDataForGroup(String groupName) {
 		 
 		 return Collections.emptyList();
 	 }
+	
+	 /**
+	  * Get clinical data for a list of patient ids
+	  */
+	 public List getClinicalData(List patientIds) { 
+    	
+    	if ((patientIds == null) || (patientIds.isEmpty())) {
+    	  println("Warning empty list passed to getClinicalData")
+    	  return Collections.emptyList()
+    	}
+    	
+    	Set idSet = new HashSet(patientIds)
+    	String idStr = getIdString(idSet)
+    	String clinQS = "From gov.nih.nci.cma.domain.target.TargetClinicalStg tc where tc.targetId in ${idStr}"
+    	println("getClinicalData clinQS=${clinQS}")
+    	List cl = TargetClinicalStg.findAll(clinQS)
+    	List rptBeanList = new ArrayList()
+    	cl.each { c ->
+    	  rptBeanList.add(getRptBean(c))    		
+    	}
+    	
+    	return rptBeanList
+    }
 }
