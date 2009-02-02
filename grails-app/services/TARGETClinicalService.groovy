@@ -34,7 +34,7 @@ class TARGETClinicalService extends AbstractClinicalService {
 	 /**
 	  * Get Ids for age
 	  */
-	  public List<String> getIdsForAge(Integer ageLower, Integer ageUppper) {
+	  public List<String> getIdsForAge(Integer ageLower, Integer ageUpper) {
 		List clinList = TargetClinicalStg.findAllByAgeBetween(ageLower, ageUpper)
 		return getIdList(clinList)	 		 
 	  }
@@ -99,7 +99,7 @@ class TARGETClinicalService extends AbstractClinicalService {
 	  * Get ids for trisomies
 	  */
 	 public List<String> getIdsForTrisomies(String trisomiesStatus) {
-	   List clinList = TargetClinicalStg.findAllByTrisomiesLike(trisomiesStatus)
+	   List clinList = TargetClinicalStg.findAllByTrisomies_4_10Like(trisomiesStatus)
 	   return getIdList(clinList)			
 	 }
 	 
@@ -128,10 +128,18 @@ class TARGETClinicalService extends AbstractClinicalService {
 	  }
 	 
 	  /**
+	   * Get ids for bcrStatus
+	   */
+	   public List<String> getIdsForCns(String cns) {
+	     List clinList = TargetClinicalStg.findAllByCnsLike(cns)
+		 return getIdList(clinList)		  		  
+	   }
+	 
+	  /**
 	   * Get ids for Testicular Status
 	   */
 	   public List<String> getIdsForTesticularStatus(String testicularStatus) {
-		 List clinList = TargetClinicalStg.findAllByTesticularStatusLike(testicularStatus)
+		 List clinList = TargetClinicalStg.findAllByTesticularLike(testicularStatus)
 		 return getIdList(clinList)		  		  
 	   }
 	 
@@ -139,6 +147,7 @@ class TARGETClinicalService extends AbstractClinicalService {
 	   * Get ids for gender
 	   */
 	   public List<String> getIdsForGender(String gender) {
+		  println("getIdsForGender serching gender=" + gender)
 	      List clinList = TargetClinicalStg.findAllByGenderLike(gender)
 		  return getIdList(clinList)		    	
 	   }
@@ -202,6 +211,19 @@ class TARGETClinicalService extends AbstractClinicalService {
 		  }
                                                   		  		 			
           return permValues;
+	}
+	
+	private String getParamCode(String paramValue) {
+	  String codeStr = null;
+	  String pval = paramValue.trim()
+	  if (pval == null) return null;
+	  if (paramValue.endsWith(")")) {
+	    //strip out the value
+	    int ind = pval.lastIndexOf("(") + 1;
+	    codeStr = pval.substring(ind, paramValue.length()-1).trim();
+	    return codeStr;
+	  }
+	  return paramValue;
 	}
 	
 	public TARGETClinicalReportBean getRptBean(TargetClinicalStg cs) { 
@@ -299,9 +321,91 @@ class TARGETClinicalService extends AbstractClinicalService {
        }
 	   
 	   if ((gender != null) && (!gender.equals("ANY"))) {
-			List genderIds = getIdsForGender(gender)
+		    String genderCode = getParamCode(gender)
+			List genderIds = getIdsForGender(genderCode)
 	        idSet.retainAll(genderIds)
 	   }
+	   
+	   if ((event != null) && (!event.equals("ANY"))) {
+		    String eventCode = getParamCode(event)
+			List eventIds = getIdsForEvent(eventCode)
+	        idSet.retainAll(eventIds)
+	   }
+	   
+	   if ((death != null) && (!death.equals("ANY"))) {
+		    String deathCode = getParamCode(death)
+			List deathIds = getIdsForDeath(deathCode)
+	        idSet.retainAll(deathIds)
+	   }
+	   
+	   if ((congenitalAbnormality != null) && (!congenitalAbnormality.equals("ANY"))) {
+		    String caCode = getParamCode(congenitalAbnormality)
+			List caIds = getIdsForCongenitalAbnormality(caCode)
+	        idSet.retainAll(caIds)
+	   }
+	   
+	   if ((telStatus != null) && (!telStatus.equals("ANY"))) {
+		    String tsCode = getParamCode(telStatus)
+			List tsIds = getIdsForTelStatus(tsCode)
+	        idSet.retainAll(tsIds)
+	   }
+	   
+	   if ((trisomies != null) && (!trisomies.equals("ANY"))) {
+		    String trCode = getParamCode(trisomies)
+			List trIds = getIdsForTrisomies(trCode)
+	        idSet.retainAll(trIds)
+	   }
+	   
+	   if ((mllStatus != null) && (!mllStatus.equals("ANY"))) {
+		    String mllCode = getParamCode(mllStatus)
+			List mllIds = getIdsForMllStatus(mllCode)
+	        idSet.retainAll(mllIds)
+	   }
+	   
+	   if ((e2aStatus != null) && (!e2aStatus.equals("ANY"))) {
+		    String e2aCode = getParamCode(e2aStatus)
+			List e2aIds = getIdsForE2aStatus(e2aCode)
+	        idSet.retainAll(e2aIds)
+	   }
+	   
+	   if ((bcrStatus != null) && (!bcrStatus.equals("ANY"))) {
+		    String bcrCode = getParamCode(bcrStatus)
+			List bcrIds = getIdsForBcrStatus(bcrCode)
+	        idSet.retainAll(bcrIds)
+	   }
+	   
+	   if ((cnsStatus != null) && (!cnsStatus.equals("ANY"))) {
+		    String cnsCode = getParamCode(cnsStatus)
+			List cnsIds = getIdsForCns(cnsCode)
+	        idSet.retainAll(cnsIds)
+	   }
+	   
+	   if ((testicularStatus != null) && (!testicularStatus.equals("ANY"))) {
+		    String tsCode = getParamCode(testicularStatus)
+			List tsIds = getIdsForTesticularStatus(tsCode)
+	        idSet.retainAll(tsIds)
+	   }
+	   
+	   if ((ageLower != null) && (ageUpper != null)) {
+	        List ageIds = getIdsForAge(ageLower, ageUpper)
+	        idSet.retainAll(ageIds)
+	   }
+	   
+	   if ((wbcLower != null) && (wbcUpper != null)) {
+	        List wbcIds = getIdsForWBC(wbcLower, wbcUpper)
+	        idSet.retainAll(wbcIds)
+	   }
+	   
+	   if ((day8mrdLower != null) && (day8mrdUpper != null)) {
+	        List day8mrdIds = getIdsForMrdDay8(day8mrdLower, day8mrdUpper)
+	        idSet.retainAll(day8mrdIds)
+	   }
+	   
+	   if ((day29mrdLower != null) && (day29mrdUpper != null)) {
+	        List day29mrdIds = getIdsForMrdDay29(day29mrdLower, day29mrdUpper)
+	        idSet.retainAll(day29mrdIds)
+	   }
+	   
 	   
 //	   TARGETClinicalReportBean rb;
 //	   clinData.each { cd ->
