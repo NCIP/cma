@@ -50,16 +50,16 @@ class TARGETClinicalService extends AbstractClinicalService {
 	 /**
 	  * Get Ids for minimal residual disease day 8
 	  */
-	 public List<String> getIdsForMrdDay8(Integer mrdDay8Lower, Integer mrdDay8Uppper) {
-	   List clinList = TargetClinicalStg.findAllByMrdDay8Between(mrdDay8Lower, mrdDay8Upper)
+	 public List<String> getIdsForMrdDay8(String day8mrdValue) {
+	   List clinList = TargetClinicalStg.findAllByMrdDay8Like(day8mrdValue)
 	   return getIdList(clinList)	 		 
 	 }
 	 
 	 /**
 	  * Get Ids for minimal residual disease day 29
 	  */
-	 public List<String> getIdsForMrdDay29(Integer mrdDay29Lower, Integer mrdDay29Uppper) {
-	   List clinList = TargetClinicalStg.findAllByMrdDay29Between(mrdDay29Lower, mrdDay29Upper)
+	 public List<String> getIdsForMrdDay29(String day29mrdValue) {
+	   List clinList = TargetClinicalStg.findAllByMrdDay29Like(day29mrdValue)
 	   return getIdList(clinList)	 		 
 	 }
 	 
@@ -209,6 +209,24 @@ class TARGETClinicalService extends AbstractClinicalService {
 			permValues.add("Yes (1)");
 			permValues.add("NA / Unknown (2)");
 		  }
+		  else if (paramName.equals("day8mrd")) {			 
+			  permValues.add("MRD Negative (sensitivity = 0.01%) (1)");
+			  permValues.add("0.01% < MRD <= 0.1% (2)");
+			  permValues.add("0.1% < MRD <= 1.0% ) (3)");
+			  permValues.add("1.0% < MRD <= 10.0% (4)");
+			  permValues.add("MRD > 10% (5)");
+			  permValues.add("MRD Negative (sensitivity = 0.1%) (100)");
+			  permValues.add("Indeterminate (999)");			  
+		  }
+		  else if (paramName.equals("day29mrd")) {
+			  permValues.add("MRD Negative (sensitivity = 0.01%) (1)");
+			  permValues.add("0.01% < MRD <= 0.1% (2)");
+			  permValues.add("0.1% < MRD <= 1.0% ) (3)");
+			  permValues.add("1.0% < MRD <= 10.0% (4)");
+			  permValues.add("MRD > 10% (5)");
+			  permValues.add("MRD Negative (sensitivity = 0.1%) (100)");
+			  permValues.add("Indeterminate (999)");
+		  }
                                                   		  		 			
           return permValues;
 	}
@@ -293,10 +311,8 @@ class TARGETClinicalService extends AbstractClinicalService {
 	   Integer ageUpper = clinicalForm.getParameter("ageUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("ageUpper")) : null 
 	   Integer wbcLower = clinicalForm.getParameter("wbcLower")!=null ? Integer.valueOf(clinicalForm.getParameter("wbcLower")) : null
 	   Integer wbcUpper = clinicalForm.getParameter("wbcUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("wbcUpper")) : null 
-	   Integer day8mrdLower = clinicalForm.getParameter("day8Lower")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Lower")) : null
-	   Integer day8mrdUpper = clinicalForm.getParameter("day8Upper")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Upper")) : null 		
-	   Integer day29mrdLower = clinicalForm.getParameter("day8Lower")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Lower")) : null
-	   Integer day29mrdUpper = clinicalForm.getParameter("day8Upper")!=null ? Integer.valueOf(clinicalForm.getParameter("day8Upper")) : null 					   
+	   String day8mrd  = clinicalForm.getParameter("day8mrd")	   
+	   String day29mrd = clinicalForm.getParameter("day29mrd")	    					  
 	   String  event = (String)clinicalForm.getParameter("event")
 	   String  death = (String)clinicalForm.getParameter("death")	
 	   String  congenitalAbnormality = (String)clinicalForm.getParameter("congenitalAbnormality")
@@ -398,13 +414,15 @@ class TARGETClinicalService extends AbstractClinicalService {
 	        idSet.retainAll(wbcIds)
 	   }
 	   
-	   if ((day8mrdLower != null) && (day8mrdUpper != null)) {
-	        List day8mrdIds = getIdsForMrdDay8(day8mrdLower, day8mrdUpper)
+	   if ((day8mrd != null) && (!day8mrd.equals("ANY"))) {
+		    String day8mrdCode = getParamCode(day8mrd)
+	        List day8mrdIds = getIdsForMrdDay8(day8mrdCode)
 	        idSet.retainAll(day8mrdIds)
 	   }
 	   
-	   if ((day29mrdLower != null) && (day29mrdUpper != null)) {
-	        List day29mrdIds = getIdsForMrdDay29(day29mrdLower, day29mrdUpper)
+	   if ((day29mrd != null) && (!day29mrd.equals("ANY"))) {
+		    String day29mrdCode = getParamCode(day29mrd)
+	        List day29mrdIds = getIdsForMrdDay29(day29mrdCode)
 	        idSet.retainAll(day29mrdIds)
 	   }
 	   
