@@ -42,7 +42,7 @@ class TARGETClinicalService extends AbstractClinicalService {
 	 /**
 	  * Get Ids for WBC
 	  */
-	 public List<String> getIdsForWBC(Integer wbcLower, Integer wbcUppper) {
+	 public List<String> getIdsForWBC(Integer wbcLower, Integer wbcUpper) {
 	   List clinList = TargetClinicalStg.findAllByPbWbcBetween(wbcLower, wbcUpper)
 	   return getIdList(clinList)	 		 
 	 }
