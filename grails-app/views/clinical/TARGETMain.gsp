@@ -70,9 +70,9 @@
 						<input type="checkbox" onclick="toggleDisable('wbcLower', 'wbcUpper');"/>Restrict by WBC
 						<br/><br/>					
 						between
-						<g:select name="wbcLower" from="${(0..100).step(10)}" value="0" id="wbcLower" disabled="true"/> 
+						<g:select name="wbcLower" from="${(0..900).step(100)}" value="0" id="wbcLower" disabled="true"/> 
 						and
-						<g:select name="wbcUpper" from="${(10..110).step(10)}" value="110" id="wbcUpper" disabled="true"/>
+						<g:select name="wbcUpper" from="${(100..1000).step(100)}" value="1000" id="wbcUpper" disabled="true"/>
 			        </td>
 		        </tr>
 		        <tr>
