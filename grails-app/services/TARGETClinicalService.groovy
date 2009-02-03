@@ -387,7 +387,9 @@ class TARGETClinicalService extends AbstractClinicalService {
 	   }
 	   
 	   if ((ageLower != null) && (ageUpper != null)) {
-	        List ageIds = getIdsForAge(ageLower, ageUpper)
+		    Integer ageLowerDays = ageLower*365;
+		    Integer ageUpperDays = ageUpper*365;
+	        List ageIds = getIdsForAge(ageLowerDays, ageUpperDays)
 	        idSet.retainAll(ageIds)
 	   }
 	   
