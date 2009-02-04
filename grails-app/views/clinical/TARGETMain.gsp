@@ -35,7 +35,7 @@
 			    }
 			  }
 			Event.observe(window, "load", function()	{
-				new Effect.Corner($('sampleKMHeader'), 'top');
+				//new Effect.Corner($('sampleKMHeader'), 'top');
 				new Effect.Corner($('clinicalHeader'), 'top');
 			});
 		</script>
