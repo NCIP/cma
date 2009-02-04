@@ -62,7 +62,9 @@ class TargetClinicalStg {
 	   String testicularStr
 	   String karyotype 
 	   String mrdDay8
+	   String mrdDay8Str
 	   String mrdDay29 
+	   String mrdDay29Str
 	   String bmaBlastsDay8 
 	   String bmaBlastsDay29 
 	   String event
