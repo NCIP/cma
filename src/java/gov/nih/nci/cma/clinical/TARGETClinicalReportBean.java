@@ -26,7 +26,9 @@ public class TARGETClinicalReportBean {
   private String testicularDisp;
   private String karyotype; 
   private String mrdDay8;
+  private String mrdDay8Str;
   private String mrdDay29; 
+  private String mrdDay29Str;
   private String bmaBlastsDay8; 
   private String bmaBlastsDay29; 
   private String event;
@@ -157,13 +159,13 @@ public class TARGETClinicalReportBean {
 		this.karyotype = karyotype;
 	}
 	public String getMrdDay8() {
-		return mrdDay8;
+		return mrdDay8Str + " - " + mrdDay8;
 	}
 	public void setMrdDay8(String mrdDay8) {
 		this.mrdDay8 = mrdDay8;
 	}
 	public String getMrdDay29() {
-		return mrdDay29;
+		return mrdDay29Str + " - " + mrdDay29;
 	}
 	public void setMrdDay29(String mrdDay29) {
 		this.mrdDay29 = mrdDay29;
@@ -380,5 +382,13 @@ public class TARGETClinicalReportBean {
 
 	public void setBcrStatusStr(String bcrStatusStr) {
 		this.bcrStatusStr = bcrStatusStr;
+	}
+
+	public void setMrdDay8Str(String mrdDay8Str) {
+		this.mrdDay8Str = mrdDay8Str;
+	}
+
+	public void setMrdDay29Str(String mrdDay29Str) {
+		this.mrdDay29Str = mrdDay29Str;
 	} 
 }
