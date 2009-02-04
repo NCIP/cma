@@ -60,8 +60,8 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="cns"  sortable="true" headerClass="sortable" />
 	  <display:column property="testicular"  sortable="true" headerClass="sortable" />
 	  <display:column property="karyotype"  sortable="true" headerClass="sortable" />
-	  <display:column property="day8mrd"  sortable="true" headerClass="sortable" />
-	  <display:column property="day9mrd"  sortable="true" headerClass="sortable" />
+	  <display:column property="mrdDay8"  sortable="true" headerClass="sortable" />
+	  <display:column property="mrdDay29"  sortable="true" headerClass="sortable" />
 	  <display:column property="bmaBlastsDay8"  sortable="true" headerClass="sortable" />
 	  <display:column property="bmaBlastsDay29"  sortable="true" headerClass="sortable" />
 	  <display:column property="event"  sortable="true" headerClass="sortable" />
