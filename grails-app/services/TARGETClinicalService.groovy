@@ -267,7 +267,9 @@ class TARGETClinicalService extends AbstractClinicalService {
 	  rb.setTesticularStr(cs.testicularStr);
 	  rb.setKaryotype(cs.karyotype);
 	  rb.setMrdDay8(cs.mrdDay8);
+	  rb.setMrdDay8Str(cs.mrdDay8Str);
 	  rb.setMrdDay29(cs.mrdDay29);
+	  rb.setMrdDay29Str(cs.mrdDay29Str);
 	  rb.setBmaBlastsDay8(cs.bmaBlastsDay8);
 	  rb.setBmaBlastsDay29(cs.bmaBlastsDay29);
 	  rb.setEvent(cs.event);
