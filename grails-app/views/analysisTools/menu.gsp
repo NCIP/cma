@@ -17,9 +17,11 @@
 		</div>
 		<div class="sectionBody">
 		<ul>
+			<g:contextAware mode="hideOnlyFrom" context="TARGET">
 			<li><a href="${createLink(controller: 'analysisTools', action:'pcaSetup') }">Principle Component Analysis (PCA)</a></li>
 			<li><a href="${createLink(controller: 'analysisTools', action:'genePatternSetup') }">Gene Pattern Analysis</a></li>
 			<li><a href="${gpHomeURL}" target="_blank">Gene Pattern Home</a></li>
+			</g:contextAware>
 			<li><a href="${createLink(controller: 'genomeView')}">Integrated Heatmap Viewer</a></li>
 			<!-- Below commented until RBT functionality is provided -->
 			<!-- <li><a href="#">Cancer Genome Workbench (Genomic View)</a></li> -->

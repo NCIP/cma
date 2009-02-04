@@ -116,6 +116,7 @@
 			</h5>
 		</div>
 		<div id="mainc" style="border:1px solid #E0E0E0; padding:5px;">
+		<g:contextAware mode="hideOnlyFrom" context="TARGET">
 			View Type:<br/>
 			<input type="radio" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio">
 	        Gene Expression plot&nbsp;<br />
@@ -160,6 +161,12 @@
 	        	<input type="reset" value="clear" id="clearButton" class="">&nbsp;&nbsp;
 		        <input type="submit" name="method" value="Go" id="submittalButton" class="subButton">
 	        </div>
+	    </g:contextAware>
+	    <g:contextAware mode="showOnlyTo" context="TARGET">
+		    <div align="center">
+		    	<br/><br/>These features are not available in this context.<br/>  Gene Expression Data is required.<br/><br/><br/>
+		    </div>
+	    </g:contextAware>
 		<!-- close mainc -->
 		</div>
 		
