@@ -70,9 +70,9 @@
 						<input type="checkbox" onclick="toggleDisable('wbcLower', 'wbcUpper');"/>Restrict by WBC
 						<br/><br/>					
 						between
-						<g:select name="wbcLower" from="${(0..900).step(100)}" value="0" id="wbcLower" disabled="true"/> 
+						<g:select name="wbcLower" from="${(0..100).step(10)}" value="0" id="wbcLower" disabled="true"/> 
 						and
-						<g:select name="wbcUpper" from="${(100..1000).step(100)}" value="1000" id="wbcUpper" disabled="true"/>
+						<g:select name="wbcUpper" from="${(10..110).step(10)}" value="110" id="wbcUpper" disabled="true"/>
 			        </td>
 		        </tr>
 		        <tr>
@@ -80,12 +80,7 @@
 						<span class="small">bone marrow blast %</span>
 					</td>
 					<td>
-						<input type="checkbox" onclick="toggleDisable('day8Lower', 'day8Upper');"/>Restrict by Day 8
-						<br/><br/>					
-						between
-						<g:select name="day8Lower" from="${(0..90).step(10)}" value="0" id="day8Lower" disabled="true"/> 
-						and
-						<g:select name="day8Upper" from="${(10..100).step(10)}" value="100" id="day8Upper" disabled="true"/>
+						<g:select name="day8mrd"  from="${day8mrd}" noSelection="${['ANY':'Any']}" />
 			        </td>
 		        </tr>
 		        <tr>
@@ -93,12 +88,7 @@
 						<span class="small">bone marrow blast %</span>
 					</td>
 					<td>
-						<input type="checkbox" onclick="toggleDisable('day29Lower', 'day29Upper');"/>Restrict by Day 29
-						<br/><br/>					
-						between
-						<g:select name="day29Lower" from="${(0..90).step(10)}" value="0" id="day29Lower" disabled="true"/> 
-						and
-						<g:select name="day29Upper" from="${(10..100).step(10)}" value="100" id="day29Upper" disabled="true"/>
+						<g:select name="day29mrd"  from="${day29mrd}" noSelection="${['ANY':'Any']}" />
 			        </td>
 		        </tr>
 		         <tr>
@@ -169,16 +159,16 @@
 				</tr>
 	
 				<tr>		        
-					<td class="label">Age at Diagnosis
+					<td class="label">Age
 						<span class="small">years range</span>
 					</td>
 					<td>
 						<input type="checkbox" onclick="toggleDisable('ageLower', 'ageUpper');"/>Restrict by Age
 						<br/><br/>
 						between
-						<g:select name="ageLower" from="${(0..20).step(1)}" value="0" disabled="true" /> 
+						<g:select name="ageLower" from="${(0..100).step(10)}" value="0" disabled="true" /> 
 						and
-						<g:select name="ageUpper" from="${(1..21).step(1)}" value="21" disabled="true" />						
+						<g:select name="ageUpper" from="${(10..110).step(10)}" value="110" disabled="true" />						
 			        </td>
 		        </tr>
 		        
@@ -198,41 +188,5 @@
 			</g:form>
 		</div>
 		</fieldset>
-		
-		
-		<!--  start km -->
-		<div>
-			<div id="sampleKMHeader" class="sectionHeader">
-				<h5>Sample-based Kaplan-Meier Graph</h5>
-			</div>
-			<div class="sectionBody">
-				<g:form action="clinicalKM" method="post" name="clinicKMPlotForm">
-				<input type="hidden" name="plot" value="SAMPLE_KM_PLOT"/>
-				<table align="center" border="0">
-		    		<tr style="vertical-align:top">
-		    			<td>
-			       			Kaplan-Meier survival plot for Sample Data&nbsp;
-			        		<br/><br/>
-			        		<g:select name="groupNameOne" style="margin-left:20px;width:200px;" id="groupNameOne"
-			        			from="${patLists}"></g:select>
-			         		vs. 
-							<g:select name="groupNameCompare" style="margin-left:20px;width:200px;" id="groupNameCompare"
-			        			from="${patLists}"></g:select>
-			        		<br/><br/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-		        			<div style="text-align:center">
-			        			<input type="submit" id="submittalButton" class="subButton" value="Go" />
-		        			</div>
-		        		</td>
-		        	</tr>
-				</table>
-				</g:form>
-			</div>
-		</div>
-		<!--  end km -->
-		
 	</body>
 </html>
