@@ -114,16 +114,16 @@
 							<td rowspan="6">
 								<div style="width: 250px;">
 									<div style="padding: 20px">
-									<g:contextAware mode="showOnlyTo" context="Rembrandt">
+									<g:contextAware mode="hideFromOnly" context="TCGA">
 										<div class="splashBoxHeader">
 											Data Access:
 										</div>
 										<div class="splashBoxContent">
-											The CMA Application serves public data from the Rembrandt Study.  
+											The CMA Application serves public data from the context.  
 										</div>
 										<br/><br/>
 									</g:contextAware>
-									<g:contextAware mode="hideFromOnly" context="Rembrandt">
+									<g:contextAware mode="showOnlyTo" context="TCGA">
 										<span style="color: DimGray; font-size: .9em">
 											* Login	is not required for public data access
 										</span>
@@ -182,7 +182,7 @@
 										</div>
 										<div class="splashBoxContent">
 											<ul>
-											<g:contextAware mode="hideFromOnly" context="Rembrandt">
+											<g:contextAware mode="showOnlyTo" context="TCGA">
 												<li>
 													<a href="/cma/registration.gsp">Register</a>
 												</li>
