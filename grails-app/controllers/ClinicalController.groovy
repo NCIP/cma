@@ -47,6 +47,9 @@ class ClinicalController {
 		  def bcrStatusList = clinSrv.getPermissibleValues("bcrStatus");
 		  def cnsStatusList = clinSrv.getPermissibleValues("cns");
 		  def testicularStatusList = clinSrv.getPermissibleValues("testicular");
+		  
+		  def day8mrd = clinSrv.getPermissibleValues("day8mrd");
+		  def day29mrd = clinSrv.getPermissibleValues("day29mrd");
 		 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
@@ -58,7 +61,7 @@ class ClinicalController {
 		   ,eventList:eventList, deathList:deathList, congenitalAbnormalityList:congenitalAbnormalityList,
 		   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,
 		   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
-		   testicularStatusList:testicularStatusList])
+		   testicularStatusList:testicularStatusList, day29mrd:day29mrd, day8mrd:day8mrd])
 		
     }
     
