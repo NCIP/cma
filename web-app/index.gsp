@@ -184,7 +184,7 @@
 											<ul>
 											<g:contextAware mode="showOnlyTo" context="TCGA">
 												<li>
-													<a href="/cma/registration.gsp">Register</a>
+													<a href="${createLinkTo(dir:'',file:'registration.gsp')}">Register</a>
 												</li>
 											</g:contextAware>
 												<li>
