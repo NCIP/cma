@@ -54,7 +54,7 @@
 					</div>
 					<g:each in="${grailsApplication.config.cma.availableContexts}">
 						<div id="">
-							<a id="${it.toLowerCase()}Context" href="/cma-${it.toLowerCase()}/"  style="display:block;background-image: url(../images/${it.toLowerCase()}Context30.gif);" >${it}</a>
+							<a id="${it.toLowerCase()}Context" href="/cma-${it.toLowerCase()}/"  style="display:block;background-image: url(${createLinkTo(dir:'images',file:it.toLowerCase()+'Context30.gif')});" >${it}</a>
 						</div>
 					</g:each>
 				</div>
