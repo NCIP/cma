@@ -17,7 +17,7 @@
 		</div>
 		<div class="sectionBody">
 		<ul>
-			<g:contextAware mode="hideOnlyFrom" context="TARGET">
+			<g:contextAware mode="hideFromOnly" context="TARGET">
 			<li><a href="${createLink(controller: 'analysisTools', action:'pcaSetup') }">Principle Component Analysis (PCA)</a></li>
 			<li><a href="${createLink(controller: 'analysisTools', action:'genePatternSetup') }">Gene Pattern Analysis</a></li>
 			<li><a href="${gpHomeURL}" target="_blank">Gene Pattern Home</a></li>
