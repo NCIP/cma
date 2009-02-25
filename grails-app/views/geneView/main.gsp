@@ -116,7 +116,7 @@
 			</h5>
 		</div>
 		<div id="mainc" style="border:1px solid #E0E0E0; padding:5px;">
-		<g:contextAware mode="hideOnlyFrom" context="TARGET">
+		<g:contextAware mode="hideFromOnly" context="TARGET">
 			View Type:<br/>
 			<input type="radio" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio">
 	        Gene Expression plot&nbsp;<br />
