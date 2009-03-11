@@ -1,0 +1,21 @@
+function FileData_Pairs(x)
+{
+x.t("home","tool");
+x.t("home","genepattern");
+x.t("home","analysis");
+x.t("instructions","provided");
+x.t("provided","genepattern");
+x.t("access","genepattern");
+x.t("direct","access");
+x.t("provides","direct");
+x.t("follow","instructions");
+x.t("conduct","study");
+x.t("website","conduct");
+x.t("tools","genepattern");
+x.t("tool","provides");
+x.t("application","follow");
+x.t("genepattern","home");
+x.t("genepattern","website");
+x.t("genepattern","application");
+x.t("analysis","tools");
+}

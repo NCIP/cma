@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebWorksHelpIX version="5.0" xmlns="urn:WebWorks-Help-Index-Schema">
+  <g t="A" o="002">
+    <i t="accessing">
+      <i t="TCGA data">
+        <j l="17#1216767" />
+      </i>
+      <i t="the Data Access Matrix">
+        <j l="17#1216767" />
+      </i>
+    </i>
+    <i t="administration section features">
+      <j l="15" />
+    </i>
+    <i t="Affy_SNP6, described">
+      <j l="83#1076409" />
+    </i>
+    <i t="Agilent 8 x 15K Human miRNA-specific Microarray, described">
+      <j l="83#1076178" />
+    </i>
+    <i t="Agilent Whole Human Genome, described">
+      <j l="83#1076184" />
+    </i>
+    <i t="amplified, defined">
+      <j l="83#1076190" />
+    </i>
+    <i t="Analysis Tools link, function">
+      <j l="9#1217405" />
+    </i>
+    <i t="ANOVA, defined">
+      <j l="83#1076196" />
+    </i>
+    <i t="aray platform, defined">
+      <j l="83#1076950" />
+    </i>
+    <i t="automatic timeout period">
+      <j l="6#1218342" />
+    </i>
+  </g>
+  <g t="B" o="002">
+    <i t="BCM">
+      <j l="83#1076202" />
+    </i>
+    <i t="BCR/ABL, defined">
+      <j l="83#1076902" />
+    </i>
+    <i t="BCR_ABL_STATUS, defined">
+      <j l="55#1250613" />
+    </i>
+    <i t="box and whisker coin plot, described">
+      <j l="27#1281723" />
+    </i>
+    <i t="box and whisker log2 intensity plot">
+      <j l="23#1281359" />
+      <i t="described">
+        <j l="22#1281094" />
+        <j l="22#1281138" />
+      </i>
+      <i t="uses for">
+        <j l="26#1281564" />
+      </i>
+    </i>
+  </g>
+  <g t="C" o="002">
+    <i t="caBIG, defined">
+      <j l="83#1076208" />
+    </i>
+    <i t="Cancer Genome Atlas Data Download, function of">
+      <j l="16#1204675" />
+    </i>
+    <i t="Cancer Genome Workbench, accessing">
+      <j l="70" />
+    </i>
+    <i t="Cancer Molecular Analysis Portal (CMA Portal) overview">
+      <j l="4" />
+    </i>
+    <i t="categories of data analysis">
+      <j l="21#1281035" />
+    </i>
+    <i t="CBIIT, defined">
+      <j l="83#1076526" />
+    </i>
+    <i t="CFS WBC, defined">
+      <j l="83#1076929" />
+    </i>
+    <i t="characterization data">
+      <i t="types of">
+        <j l="41#1226747" />
+      </i>
+      <i t="viewing">
+        <j l="41#1223421" />
+      </i>
+    </i>
+    <i t="clinical datapoints collected">
+      <j l="74#1220900" />
+    </i>
+    <i t="clinical reports">
+      <i t="results">
+        <j l="55" />
+      </i>
+      <i t="viewing">
+        <j l="31" />
+      </i>
+    </i>
+    <i t="clinical search criteria, specifying">
+      <j l="48" />
+    </i>
+    <i t="Clinical View link, function">
+      <j l="9#1217400" />
+    </i>
+    <i t="CMA Portal">
+      <i t="available data in">
+        <j l="4" />
+      </i>
+      <i t="described">
+        <j l="4" />
+      </i>
+      <i t="logging out of">
+        <j l="19#1204951" />
+      </i>
+      <i t="overview of">
+        <j l="4" />
+      </i>
+      <i t="workspace">
+        <j l="8#1185846" />
+      </i>
+    </i>
+    <i t="CNS_STATUS_AT_DIAGNOSIS, defined">
+      <j l="55#1250648" />
+    </i>
+    <i t="coin plot">
+      <i t="described">
+        <j l="27#1281723" />
+      </i>
+      <i t="displaying">
+        <j l="27#1281723" />
+      </i>
+      <i t="displaying, for reporter genes">
+        <j l="26#1281635" />
+      </i>
+    </i>
+    <i t="combining lists">
+      <j l="82#1269193" />
+    </i>
+    <i t="context descriptions">
+      <i t="REMBRANDT">
+        <j l="4#1240425" />
+      </i>
+      <i t="TARGET">
+        <j l="4#1240428" />
+      </i>
+      <i t="TCGA">
+        <j l="4#1199828" />
+      </i>
+    </i>
+    <i t="context, described">
+      <j l="8#1194051" />
+    </i>
+    <i t="controlled data">
+      <i t="defined" />
+      <i t="see also controlled-access data" />
+    </i>
+    <i t="controlled-access data">
+      <j l="49" />
+      <i t="searching">
+        <j l="51" />
+      </i>
+    </i>
+    <i t="copy number">
+      <i t="copy number filter">
+        <j l="29#1281923" />
+      </i>
+      <i t="data, viewing">
+        <j l="42" />
+      </i>
+      <i t="defined">
+        <j l="83#1076219" />
+      </i>
+    </i>
+    <i t="creating">
+      <i t="custom lists">
+        <j l="82" />
+      </i>
+      <i t="gene expression plots">
+        <j l="22" />
+      </i>
+      <i t="gene expression queries">
+        <j l="30" />
+      </i>
+      <i t="gene expression-based Kaplan-Meier plots">
+        <j l="28#1281837" />
+      </i>
+      <i t="Kaplan-Meier plots">
+        <j l="28#1281837" />
+      </i>
+      <i t="lists from existing lists, illustrated">
+        <j l="82#1222862" />
+      </i>
+      <i t="new lists from existing lists">
+        <j l="82#1269193" />
+      </i>
+      <i t="PatientDID lists from clinical reports">
+        <j l="56#1222213" />
+      </i>
+      <i t="sample-based KM plots">
+        <j l="57#1220752" />
+      </i>
+    </i>
+    <i t="creation date, viewing in a list">
+      <j l="79#1234969" />
+    </i>
+    <i t="custom lists">
+      <i t="creating">
+        <j l="82" />
+      </i>
+      <i t="saving">
+        <j l="74#1220910" />
+      </i>
+      <i t="see also, lists" />
+    </i>
+  </g>
+  <g t="D" o="002">
+    <i t="Data Access Matrix, accessing">
+      <j l="17#1216767" />
+    </i>
+    <i t="data access policy">
+      <j l="49#1234090" />
+    </i>
+    <i t="data items, viewing in a list">
+      <j l="78#1234950" />
+    </i>
+    <i t="data sources, methylation">
+      <j l="44#1223342" />
+    </i>
+    <i t="data types available">
+      <j l="41#1226747" />
+    </i>
+    <i t="data user certificate">
+      <j l="5#1225126" />
+    </i>
+    <i t="data version, function of">
+      <j l="16#1183510" />
+    </i>
+    <i t="deleted, defined">
+      <j l="83#1076227" />
+    </i>
+    <i t="deleting lists">
+      <j l="80#1234976" />
+    </i>
+    <i t="description of array platforms">
+      <j l="22#1281233" />
+    </i>
+    <i t="DID, defined">
+      <j l="55#1250568" />
+    </i>
+    <i t="difference function, described">
+      <j l="82#1223179" />
+    </i>
+    <i t="DOB, defined">
+      <j l="55#1250508" />
+    </i>
+    <i t="DOD">
+      <j l="51#1253481" />
+      <j l="83#1076419" />
+      <i t="defined">
+        <j l="55#1250513" />
+      </i>
+      <i t="minus DOP, defined">
+        <j l="55#1250523" />
+      </i>
+    </i>
+    <i t="DODFU">
+      <j l="51#1253556" />
+      <j l="83#1076430" />
+      <i t="minus DOP, defined">
+        <j l="55#1250518" />
+      </i>
+    </i>
+    <i t="DOP">
+      <j l="51#1253481" />
+      <j l="83#1076456" />
+    </i>
+    <i t="downloading TCGA gene lists">
+      <j l="75#1221212" />
+    </i>
+  </g>
+  <g t="E" o="002">
+    <i t="E2A/PBX1, defined">
+      <j l="83#1076896" />
+    </i>
+    <i t="E2A_PBX1_STATUS, defined">
+      <j l="55#1250966" />
+    </i>
+    <i t="ethnicity, NAACR values for">
+      <j l="55#1250599" />
+    </i>
+    <i t="expression plots, see gene expression plots" />
+  </g>
+  <g t="F" o="002">
+    <i t="features unavailable in the REMBRANDT context">
+      <j l="22#1281112" />
+    </i>
+    <i t="filtering gene expression queries">
+      <j l="30" />
+    </i>
+    <i t="Firefox browser plugins">
+      <j l="18#1179742" />
+    </i>
+    <i t="First Exam, defined">
+      <j l="55#1250528" />
+    </i>
+    <i t="First Procedure, defined">
+      <j l="55#1250533" />
+    </i>
+    <i t="First Radiation, defined">
+      <j l="55#1250538" />
+    </i>
+    <i t="FIRST_EVENT, defined">
+      <j l="55#1250928" />
+    </i>
+  </g>
+  <g t="G" o="002">
+    <i t="gene anomalies">
+      <i t="categories of">
+        <j l="21#1280999" />
+      </i>
+      <i t="tables of">
+        <j l="38" />
+      </i>
+    </i>
+    <i t="gene copy number">
+      <i t="data sources">
+        <j l="42#1220236" />
+      </i>
+      <i t="platforms">
+        <j l="42#1221264" />
+      </i>
+    </i>
+    <i t="gene expression">
+      <i t="box and whisker log2 intensity details">
+        <j l="26#1281564" />
+      </i>
+      <i t="data, viewing">
+        <j l="43" />
+      </i>
+      <i t="defined">
+        <j l="83#1076234" />
+      </i>
+      <i t="described">
+        <j l="23#1281325" />
+      </i>
+      <i t="log2 intensity details">
+        <j l="25#1281506" />
+      </i>
+    </i>
+    <i t="gene expression filter">
+      <j l="29#1281931" />
+    </i>
+    <i t="gene expression plots">
+      <j l="23#1281325" />
+      <j l="23#1281325" />
+      <i t="creating">
+        <j l="22#1281097" />
+      </i>
+      <i t="generation exceptions">
+        <j l="22#1281243" />
+      </i>
+    </i>
+    <i t="gene expression queries, creating and filtering">
+      <j l="30" />
+    </i>
+    <i t="gene expression-based Kaplan-Meier plots">
+      <i t="defined">
+        <j l="29#1281896" />
+      </i>
+      <i t="described">
+        <j l="29" />
+      </i>
+    </i>
+    <i t="gene pattern analysis">
+      <j l="66#1221457" />
+    </i>
+    <i t="Gene View link, function">
+      <j l="9#1217390" />
+    </i>
+    <i t="gene-based views overview">
+      <j l="21" />
+    </i>
+    <i t="GenePattern application, accessing">
+      <j l="68" />
+    </i>
+    <i t="generating pathway diagrams">
+      <j l="36" />
+    </i>
+    <i t="genetic anomaly, agents associated with">
+      <j l="21#1281043" />
+    </i>
+    <i t="genome copy number data sources and platforms">
+      <j l="42#1221541" />
+    </i>
+    <i t="Genome View link, function">
+      <j l="9#1217395" />
+    </i>
+    <i t="genome-level visualization">
+      <j l="41#1226743" />
+    </i>
+    <i t="genomic views of data, overview of">
+      <j l="41" />
+    </i>
+    <i t="geometric mean plot">
+      <j l="23#1281349" />
+      <i t="described">
+        <j l="22#1281094" />
+        <j l="22#1281128" />
+      </i>
+    </i>
+    <i t="grade, defined">
+      <j l="55#1250550" />
+    </i>
+  </g>
+  <g t="H" o="002">
+    <i t="heatmap viewer">
+      <i t="accessing">
+        <j l="69" />
+      </i>
+      <i t="function of">
+        <j l="41#1226743" />
+      </i>
+      <i t="instructions for using">
+        <j l="45#1223192" />
+      </i>
+    </i>
+    <i t="Heatmap Viewer">
+      <i t="launching">
+        <j l="45" />
+      </i>
+      <i t="navigating">
+        <j l="45" />
+      </i>
+    </i>
+    <i t="HUGO, defined">
+      <j l="83#1076592" />
+    </i>
+  </g>
+  <g t="I" o="002">
+    <i t="Informed Consent Acquired, defined">
+      <j l="55#1250554" />
+    </i>
+    <i t="installing">
+      <i t="SVG plugin">
+        <j l="18" />
+      </i>
+    </i>
+    <i t="intensity">
+      <j l="23#1281383" />
+      <i t="defined">
+        <j l="83#1076240" />
+      </i>
+    </i>
+    <i t="intersect option, described">
+      <j l="82#1217593" />
+    </i>
+    <i t="intersecting lists">
+      <j l="82#1237197" />
+    </i>
+    <i t="investigating chromosomal regions">
+      <j l="41#1226743" />
+    </i>
+    <i t="investigating genes">
+      <i t="via pathway diagrams">
+        <j l="37" />
+      </i>
+      <i t="via pathway gene anomalies">
+        <j l="38" />
+      </i>
+    </i>
+  </g>
+  <g t="J" o="002">
+    <i t="join function, described">
+      <j l="82#1217591" />
+    </i>
+    <i t="joining lists">
+      <j l="82#1237195" />
+    </i>
+  </g>
+  <g t="K" o="002">
+    <i t="Kaplan-Meier plots">
+      <i t="creating">
+        <j l="28#1281837" />
+      </i>
+      <i t="defined">
+        <j l="29#1281896" />
+      </i>
+      <i t="survival, described">
+        <j l="22#1281094" />
+        <j l="22#1281144" />
+        <j l="28#1281835" />
+      </i>
+    </i>
+    <i t="Karnofsky Performance Status, defined">
+      <j l="83#1076912" />
+    </i>
+    <i t="Karnofsky Score, defined">
+      <j l="55#1250559" />
+    </i>
+  </g>
+  <g t="L" o="002">
+    <i t="last followup, defined">
+      <j l="55#1250563" />
+    </i>
+    <i t="legend probe sets">
+      <j l="23#1281369" />
+    </i>
+    <i t="list content">
+      <i t="managing">
+        <j l="77" />
+      </i>
+      <i t="viewing">
+        <j l="77" />
+      </i>
+    </i>
+    <i t="list management">
+      <j l="77" />
+      <i t="overview">
+        <j l="72" />
+      </i>
+    </i>
+    <i t="lists">
+      <i t="combining">
+        <j l="82#1269193" />
+      </i>
+      <i t="deleting">
+        <j l="80#1234976" />
+        <j l="81#1234989" />
+      </i>
+      <i t="saving">
+        <j l="74#1220910" />
+      </i>
+      <i t="types of">
+        <j l="73" />
+      </i>
+      <i t="viewing creation data">
+        <j l="79#1234969" />
+      </i>
+      <i t="viewing data items">
+        <j l="78#1234950" />
+      </i>
+    </i>
+    <i t="log2 intensity plot">
+      <j l="23#1281354" />
+      <i t="described">
+        <j l="22#1281094" />
+        <j l="22#1281133" />
+      </i>
+      <i t="gene expression">
+        <j l="25#1281506" />
+      </i>
+    </i>
+    <i t="logging in to the CMA Portal">
+      <j l="6" />
+      <i t="from the home page">
+        <j l="6#1216741" />
+      </i>
+    </i>
+    <i t="logging out">
+      <j l="19#1204951" />
+      <i t="logout link">
+        <j l="19#1204951" />
+      </i>
+    </i>
+    <i t="logout link">
+      <j l="19#1204953" />
+      <j l="19#1204939" />
+    </i>
+    <i t="log-rank p-value, statistical report">
+      <j l="58#1220866" />
+    </i>
+    <i t="LOH, defined">
+      <j l="83#1076252" />
+    </i>
+    <i t="loss of heterozygosity, defined">
+      <j l="83#1076252" />
+    </i>
+  </g>
+  <g t="M" o="002">
+    <i t="managing lists">
+      <j l="71" />
+      <j l="77" />
+      <j l="77" />
+      <i t="overview">
+        <j l="72#1231665" />
+      </i>
+    </i>
+    <i t="max (maximum), defined">
+      <j l="26#1281616" />
+    </i>
+    <i t="mean, defined">
+      <j l="26#1281596" />
+    </i>
+    <i t="median, defined">
+      <j l="26#1281591" />
+    </i>
+    <i t="methylation">
+      <i t="data sources">
+        <j l="44#1223342" />
+      </i>
+      <i t="data, viewing">
+        <j l="44" />
+      </i>
+      <i t="defined">
+        <j l="83#1076258" />
+      </i>
+    </i>
+    <i t="min (minimum), defined">
+      <j l="26#1281611" />
+    </i>
+    <i t="mismatch (MM), defined">
+      <j l="23#1281379" />
+      <j l="83#1076264" />
+    </i>
+    <i t="MLL, defined">
+      <j l="83#1076884" />
+    </i>
+    <i t="MLL_STATUS, defined">
+      <j l="55#1250960" />
+    </i>
+    <i t="MRD, defined">
+      <j l="83#1076855" />
+    </i>
+    <i t="MRD_DAY29, defined">
+      <j l="55#1250922" />
+    </i>
+    <i t="MRD_DAY8, defined">
+      <j l="55#1250916" />
+    </i>
+    <i t="mutated, defined">
+      <j l="83#1076270" />
+    </i>
+    <i t="mutation data, viewing">
+      <j l="46" />
+    </i>
+  </g>
+  <g t="N" o="002">
+    <i t="NAACCR, defined">
+      <j l="83#1076890" />
+    </i>
+    <i t="navigating">
+      <i t="clinical report results tables">
+        <j l="56" />
+      </i>
+      <i t="the CMA Portal">
+        <j l="7" />
+        <j l="12" />
+      </i>
+      <i t="the Gene Anomalies Table">
+        <j l="39" />
+      </i>
+      <i t="to the Report Results page">
+        <j l="54" />
+      </i>
+    </i>
+    <i t="Navigation pane">
+      <i t="function of">
+        <j l="8#1194039" />
+      </i>
+      <i t="links">
+        <j l="9" />
+        <j l="9" />
+      </i>
+    </i>
+    <i t="NCI">
+      <j l="83#1076276" />
+    </i>
+    <i t="NCICB">
+      <j l="83#1076282" />
+    </i>
+    <i t="newlink array">
+      <j l="83#1076965" />
+    </i>
+    <i t="news section features">
+      <j l="16" />
+    </i>
+    <i t="normalization, defined">
+      <j l="83#1076288" />
+    </i>
+    <i t="Number of Copy Number Arrays, defined">
+      <j l="16#1183522" />
+    </i>
+    <i t="Number of Expression Arrays, defined">
+      <j l="16#1183518" />
+    </i>
+  </g>
+  <g t="O" o="002">
+    <i t="Online help">
+      <i t="locating topics of interest">
+        <j l="1#1086625" />
+      </i>
+      <i t="printing">
+        <j l="1#1086653" />
+      </i>
+      <i t="using navigation tools">
+        <j l="2" />
+      </i>
+    </i>
+    <i t="Online help, using">
+      <j l="1" />
+    </i>
+    <i t="open-access data">
+      <j l="49" />
+      <i t="defined">
+        <j l="83#1076294" />
+      </i>
+      <i t="searching">
+        <j l="50" />
+      </i>
+    </i>
+    <i t="overexpressed, defined">
+      <j l="83#1076300" />
+    </i>
+    <i t="overview">
+      <i t="list management">
+        <j l="72" />
+      </i>
+      <i t="of genomic views of data">
+        <j l="41" />
+      </i>
+      <i t="pathway tools">
+        <j l="35" />
+      </i>
+    </i>
+    <i t="Overview pane">
+      <i t="features">
+        <j l="10" />
+      </i>
+      <i t="function">
+        <j l="8#1194043" />
+      </i>
+    </i>
+  </g>
+  <g t="P" o="002">
+    <i t="password, requests for">
+      <j l="5" />
+    </i>
+    <i t="pathway diagrams">
+      <i t="generating">
+        <j l="36" />
+      </i>
+      <i t="hyperlinks in">
+        <j l="37#1215923" />
+      </i>
+    </i>
+    <i t="pathway tools, overview">
+      <j l="35" />
+    </i>
+    <i t="pathways">
+      <j l="33" />
+      <i t="anomalies">
+        <j l="34" />
+      </i>
+    </i>
+    <i t="patient groups, selecting">
+      <j l="62#1220571" />
+    </i>
+    <i t="patient information types">
+      <j l="55#1221399" />
+    </i>
+    <i t="patient privacy policy">
+      <j l="49#1234090" />
+    </i>
+    <i t="patient_ID, defined">
+      <j l="55#1250576" />
+    </i>
+    <i t="patientDID">
+      <i t="defined">
+        <j l="55#1250568" />
+        <j l="83#1076315" />
+      </i>
+      <i t="lists, described">
+        <j l="74" />
+      </i>
+    </i>
+    <i t="PC1 defined">
+      <j l="64#1223857" />
+    </i>
+    <i t="PC2 defined">
+      <j l="64#1223857" />
+    </i>
+    <i t="PCA plots">
+      <j l="63" />
+      <i t="changing the display of">
+        <j l="64" />
+      </i>
+      <i t="selecting samples in">
+        <j l="65" />
+      </i>
+    </i>
+    <i t="perfect match (PM), defined">
+      <j l="23#1281379" />
+      <j l="83#1076323" />
+    </i>
+    <i t="platforms">
+      <i t="used to derive gene copy number data">
+        <j l="42#1221264" />
+      </i>
+      <i t="used to derive genome copy number data">
+        <j l="42#1221487" />
+      </i>
+    </i>
+    <i t="plots">
+      <i t="box and whisker log2 intensity">
+        <j l="26#1281564" />
+      </i>
+      <i t="log2 intensity gene expression">
+        <j l="25#1281506" />
+      </i>
+    </i>
+    <i t="plot-type selection">
+      <j l="23#1281345" />
+    </i>
+    <i t="principal component analysis">
+      <i t="described">
+        <j l="61#1229218" />
+        <j l="63#1226971" />
+      </i>
+      <i t="see also, PCA" />
+    </i>
+    <i t="probe set">
+      <j l="23#1281379" />
+      <i t="defined">
+        <j l="83#1076335" />
+      </i>
+    </i>
+    <i t="probe, defined">
+      <j l="83#1076329" />
+    </i>
+    <i t="PTID, defined">
+      <j l="55#1250581" />
+    </i>
+  </g>
+  <g t="Q" o="002">
+    <i t="Q1, defined">
+      <j l="26#1281601" />
+    </i>
+    <i t="Q3, defined">
+      <j l="26#1281606" />
+    </i>
+    <i t="queries">
+      <i t="preventing data loss in">
+        <j l="56#1237429" />
+      </i>
+      <i t="storage period of">
+        <j l="56#1237429" />
+      </i>
+    </i>
+    <i t="query by variance">
+      <j l="62#1228131" />
+    </i>
+  </g>
+  <g t="R" o="002">
+    <i t="race, NAACR values for">
+      <j l="55#1250595" />
+    </i>
+    <i t="records">
+      <i t="sorting">
+        <j l="56#1222152" />
+      </i>
+      <i t="viewing">
+        <j l="56#1221842" />
+      </i>
+    </i>
+    <i t="registering for an account">
+      <j l="5" />
+    </i>
+    <i t="REMBRANDT">
+      <i t="application overview">
+        <j l="4#1240425" />
+      </i>
+      <i t="context, available arrays">
+        <j l="22#1281193" />
+      </i>
+      <i t="context, characterizations of data in">
+        <j l="41#1215895" />
+      </i>
+      <i t="context, data displayed in">
+        <j l="75#1221165" />
+      </i>
+      <i t="context, feature availability">
+        <j l="28#1281852" />
+      </i>
+      <i t="context, function of">
+        <j l="16#1204058" />
+      </i>
+      <i t="features, availability of">
+        <j l="22#1281112" />
+      </i>
+      <i t="patient data, searching">
+        <j l="52#1233543" />
+      </i>
+      <i t="website">
+        <j l="4#1200004" />
+      </i>
+    </i>
+    <i t="reporter gene">
+      <i t="defined">
+        <j l="83#1076343" />
+      </i>
+      <i t="displaying coin plots for">
+        <j l="26#1281635" />
+      </i>
+      <i t="information">
+        <j l="23#1281372" />
+      </i>
+      <i t="lists of">
+        <j l="76" />
+      </i>
+    </i>
+    <i t="REpository for Molecular BRAin Neoplasia DaTa, see REMBRANDT" />
+    <i t="requesting a username and password">
+      <j l="5" />
+    </i>
+  </g>
+  <g t="S" o="002">
+    <i t="sample">
+      <i t="defined">
+        <j l="83#1076349" />
+      </i>
+      <i t="threshold, defined">
+        <j l="83#1076355" />
+      </i>
+    </i>
+    <i t="sample-based KM plot">
+      <j l="58#1237912" />
+      <i t="creating">
+        <j l="57#1220752" />
+      </i>
+      <i t="described">
+        <j l="58#1237912" />
+      </i>
+    </i>
+    <i t="search function">
+      <i t="clinical search">
+        <j l="50#1223738" />
+        <j l="51#1234324" />
+        <j l="52#1233543" />
+        <j l="53#1249432" />
+      </i>
+    </i>
+    <i t="searching">
+      <i t="controlled-access data">
+        <j l="51" />
+      </i>
+      <i t="REMBRANDT patient data">
+        <j l="52#1233543" />
+      </i>
+      <i t="TARGET patient data">
+        <j l="53#1249432" />
+      </i>
+    </i>
+    <i t="selecting">
+      <i t="criteria for PCA">
+        <j l="62" />
+      </i>
+      <i t="criteria, for gene pattern analysis">
+        <j l="67" />
+      </i>
+      <i t="patient groups">
+        <j l="62#1220571" />
+      </i>
+      <i t="samples in PCA plots">
+        <j l="65" />
+      </i>
+    </i>
+    <i t="side bar features">
+      <j l="14#1172806" />
+    </i>
+    <i t="SNP, defined">
+      <j l="83#1076363" />
+    </i>
+    <i t="sorting clinical report records">
+      <j l="56#1222152" />
+    </i>
+    <i t="sorting records">
+      <j l="56#1222152" />
+    </i>
+    <i t="specifying clinical search criteria">
+      <j l="48" />
+    </i>
+    <i t="standard deviation">
+      <j l="23#1281385" />
+      <i t="defined">
+        <j l="83#1076369" />
+      </i>
+    </i>
+    <i t="subtracting one list from another">
+      <j l="82#1237199" />
+    </i>
+    <i t="SVG plugin">
+      <i t="configuring for Firefox">
+        <j l="18#1179744" />
+      </i>
+      <i t="function of">
+        <j l="83#1076375" />
+      </i>
+      <i t="installing">
+        <j l="18" />
+      </i>
+    </i>
+  </g>
+  <g t="T" o="002">
+    <i t="tabs features">
+      <j l="13" />
+    </i>
+    <i t="TARGET">
+      <i t="application overview">
+        <j l="4#1240428" />
+      </i>
+      <i t="context, function of">
+        <j l="16#1240564" />
+      </i>
+      <i t="patient data, searching">
+        <j l="53#1249432" />
+      </i>
+    </i>
+    <i t="TCGA">
+      <i t="accessing">
+        <j l="17#1216767" />
+      </i>
+      <i t="application, overview">
+        <j l="4#1199828" />
+      </i>
+      <i t="data, requesting access to">
+        <j l="5" />
+      </i>
+      <i t="defined">
+        <j l="83#1076381" />
+      </i>
+      <i t="gene lists, downloading">
+        <j l="75#1221212" />
+      </i>
+      <i t="website">
+        <j l="4#1240431" />
+      </i>
+    </i>
+    <i t="TCGA data">
+      <i t="accessing">
+        <j l="17#1216767" />
+      </i>
+    </i>
+    <i t="TEL/AML1, defined">
+      <j l="83#1076872" />
+    </i>
+    <i t="TESTICULAR_INVOLVEMENT, defined">
+      <j l="55#1250674" />
+    </i>
+    <i t="The Cancer Genome Atlas, see TCGA" />
+    <i t="Therapeutically Applicable Research to Generate Effective Treatments, see TARGET" />
+    <i t="timeout period">
+      <j l="6#1218342" />
+    </i>
+    <i t="trisomies, defined">
+      <j l="83#1076878" />
+    </i>
+    <i t="TRISOMIES_4_10_STATUS, defined">
+      <j l="55#1250954" />
+    </i>
+    <i t="tumor mutation samples, defined">
+      <j l="83#1076387" />
+    </i>
+    <i t="tumor tissue site, defined">
+      <j l="55#1250586" />
+    </i>
+  </g>
+  <g t="U" o="002">
+    <i t="underexpressed, defined">
+      <j l="83#1076395" />
+    </i>
+    <i t="up-regulated, defined">
+      <j l="83#1076300" />
+    </i>
+    <i t="User Access pane">
+      <i t="features">
+        <j l="11" />
+      </i>
+      <i t="function">
+        <j l="8#1194047" />
+      </i>
+    </i>
+    <i t="user accounts, requesting">
+      <j l="5" />
+    </i>
+    <i t="usernames and passwords, for TCGA data access">
+      <j l="5" />
+    </i>
+    <i t="Using online help">
+      <j l="1" />
+    </i>
+  </g>
+  <g t="V" o="002">
+    <i t="value threshold, defined">
+      <j l="83#1076404" />
+    </i>
+    <i t="viewing">
+      <i t="characterization data">
+        <j l="41#1223421" />
+      </i>
+      <i t="clinical reports">
+        <j l="31" />
+      </i>
+      <i t="copy number data">
+        <j l="42" />
+      </i>
+      <i t="data items in a list">
+        <j l="78#1234950" />
+      </i>
+      <i t="gene expression data">
+        <j l="43" />
+      </i>
+      <i t="list content">
+        <j l="77" />
+      </i>
+      <i t="list creation dates">
+        <j l="79#1234969" />
+      </i>
+      <i t="methylation data">
+        <j l="44" />
+      </i>
+      <i t="multiple pages of clinical report records">
+        <j l="56#1221842" />
+      </i>
+      <i t="mutation and copy number changes">
+        <j l="32" />
+      </i>
+      <i t="mutation data">
+        <j l="46" />
+      </i>
+      <i t="records">
+        <j l="56#1221842" />
+      </i>
+      <i t="report results">
+        <j l="54#1247468" />
+      </i>
+    </i>
+    <i t="visualizing">
+      <j l="33" />
+      <i t="pathways">
+        <j l="33" />
+      </i>
+      <i t="probe sets">
+        <j l="24" />
+      </i>
+    </i>
+    <i t="Vital Status, defined">
+      <j l="55#1250591" />
+    </i>
+    <i t="VITAL_STATUS, defined">
+      <j l="55#1250944" />
+    </i>
+  </g>
+  <g t="W" o="002">
+    <i t="WBC_AT_DIAGNOSIS, defined">
+      <j l="55#1250603" />
+    </i>
+    <i t="working with">
+      <i t="clinical report results">
+        <j l="55" />
+        <j l="56" />
+      </i>
+      <i t="pathways and anomalies">
+        <j l="34" />
+      </i>
+      <i t="PCA plots">
+        <j l="63" />
+      </i>
+    </i>
+  </g>
+  <g t="Y" o="002">
+    <i t="YEARS_TO_DEATH, defined">
+      <j l="55#1250803" />
+    </i>
+    <i t="YEARS_TO_EVENT, defined">
+      <j l="55#1250934" />
+    </i>
+  </g>
+</WebWorksHelpIX>

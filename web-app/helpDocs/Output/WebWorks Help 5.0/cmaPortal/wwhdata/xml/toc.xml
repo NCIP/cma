@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebWorksHelpTOC version="5.0" xmlns="urn:WebWorks-Help-TOC-Schema">
+  <i t="Cancer Molecular Analysis Portal Online Help" l="0">
+    <i t="Using the Online Help" l="1">
+      <i t="Using Navigation Tools" l="2" />
+    </i>
+  </i>
+  <i t="Getting Started With the Cancer Molecular Analysis Portal" l="3">
+    <i t="About the Cancer Molecular Analysis Portal" l="4" />
+    <i t="Requesting a Username and Password" l="5" />
+    <i t="Logging In to the Cancer Molecular Analysis Portal" l="6" />
+    <i t="Navigating the Cancer Molecular Analysis Portal" l="7">
+      <i t="Navigating the Cancer Molecular Analysis Portal Home Page" l="8">
+        <i t="Navigation Pane Links" l="9" />
+        <i t="Overview Pane Features" l="10" />
+        <i t="User Access Pane Features" l="11" />
+      </i>
+      <i t="Navigating the Cancer Molecular Analysis Portal Workspaces" l="12">
+        <i t="Tabs Features" l="13" />
+        <i t="Side Bar Features" l="14" />
+        <i t="Administration Section Features" l="15" />
+        <i t="News Section Features" l="16" />
+        <i t="Accessing TCGA Data" l="17" />
+      </i>
+    </i>
+    <i t="Installing the SVG Plugin" l="18" />
+    <i t="Logging Out" l="19" />
+  </i>
+  <i t="Working With Gene-Based Views" l="20">
+    <i t="Overview" l="21" />
+    <i t="Creating Gene Expression Plots" l="22">
+      <i t="Understanding Geometric Mean Gene Expression Plots" l="23">
+        <i t="Visualizing Probe Sets In the Legend" l="24" />
+      </i>
+      <i t="Log2 Intensity Gene Expression Plot Details" l="25" />
+      <i t="Box and Whisker Log2 Intensity Gene Expression Plot Details" l="26">
+        <i t="Displaying Coin Plots" l="27" />
+      </i>
+    </i>
+    <i t="Creating Gene Expression-Based Kaplan-Meier Plots" l="28">
+      <i t="Understanding Gene Expression-Based Kaplan-Meier Plots" l="29" />
+      <i t="Creating and Filtering Gene Expression Queries" l="30" />
+    </i>
+    <i t="Viewing Clinical Reports" l="31" />
+    <i t="Viewing Mutation and Copy Number Changes" l="32" />
+    <i t="Visualizing Pathways" l="33" />
+  </i>
+  <i t="Working With Pathways and Associated Anomalies" l="34">
+    <i t="Pathway Visualization Overview" l="35" />
+    <i t="Generating Pathway Diagrams" l="36" />
+    <i t="Investigating Genes Via Pathway Diagrams" l="37" />
+    <i t="Investigating Genes Via Pathway Gene Anomalies Tables" l="38">
+      <i t="Navigating the Gene Anomalies Table" l="39" />
+    </i>
+  </i>
+  <i t="Working With Genome Views" l="40">
+    <i t="About Genomic Views of Data" l="41" />
+    <i t="Viewing Copy Number Data" l="42" />
+    <i t="Viewing Gene Expression Data" l="43" />
+    <i t="Viewing Methylation Data" l="44" />
+    <i t="Launching and Navigating the Heatmap Viewer" l="45" />
+    <i t="Viewing Mutation Data" l="46" />
+  </i>
+  <i t="Working With Clinical Views" l="47">
+    <i t="Specifying Clinical Data Search Criteria" l="48">
+      <i t="Searching for TCGA Clinical Data" l="49">
+        <i t="Searching Open-Access TCGA Data" l="50" />
+        <i t="Searching Controlled-Access TCGA Data" l="51" />
+      </i>
+      <i t="Searching for REMBRANDT Clinical Data" l="52" />
+      <i t="Searching for TARGET Clinical Data" l="53" />
+      <i t="Navigating to the Query Results Page" l="54" />
+    </i>
+    <i t="Working With Clinical Reports" l="55">
+      <i t="Navigating Clinical Report Table Results" l="56" />
+    </i>
+    <i t="Creating Sample-Based KM Plots" l="57">
+      <i t="Understanding Sample-Based KM Plots" l="58" />
+    </i>
+  </i>
+  <i t="Analysis Tools" l="59">
+    <i t="Overview" l="60" />
+    <i t="Principal Component Analysis" l="61">
+      <i t="Selecting Search Criteria for Principal Component Analysis" l="62" />
+      <i t="Working With PCA Plots" l="63">
+        <i t="Changing the PCA Display" l="64" />
+        <i t="Selecting and Saving Samples in PCA Plots" l="65" />
+      </i>
+    </i>
+    <i t="Gene Pattern Analysis" l="66">
+      <i t="Selecting Criteria for Gene Pattern Analysis" l="67" />
+    </i>
+    <i t="GenePattern Home" l="68" />
+    <i t="Integrated Heatmap Viewer" l="69" />
+    <i t="Cancer Genome Workbench" l="70" />
+  </i>
+  <i t="Managing Lists" l="71">
+    <i t="List Management Overview" l="72" />
+    <i t="List Types" l="73">
+      <i t="About PatientDID Lists" l="74" />
+      <i t="About Gene Lists" l="75" />
+      <i t="About Reporter Gene Lists" l="76" />
+    </i>
+    <i t="Viewing and Managing Lists" l="77">
+      <i t="Viewing List Details" l="78">
+        <i t="Viewing List Creation Data and Notes" l="79" />
+      </i>
+      <i t="Deleting Lists" l="80">
+        <i t="Deleting Items From a List" l="81" />
+      </i>
+    </i>
+    <i t="Creating Custom Lists" l="82" />
+  </i>
+  <i t="Glossary" l="83" />
+  <i t="Application Support" l="84" />
+</WebWorksHelpTOC>
