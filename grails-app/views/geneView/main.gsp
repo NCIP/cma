@@ -154,9 +154,12 @@
 			
 			Select Array Platform: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- sets the hidden field to the platformName - do not change -->
-			<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.list()}" optionValue="platformName" optionKey="fileName"></g:select>
+			<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>
 			<input type="hidden" id="platformName" name="platformName" value=""/>
-			
+			<span id="currentPlatform"></span>
+			<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
+			     <span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
+			</g:each>
 			<div style="text-align:center; padding-top:10px;">
 	        	<input type="reset" value="clear" id="clearButton" class="">&nbsp;&nbsp;
 		        <input type="submit" name="method" value="Go" id="submittalButton" class="subButton">
