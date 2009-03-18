@@ -17,4 +17,5 @@ class TcgaClinicalRestricted {
 	String gender
 	String informedConsentAcquired
 	String ptid
+	String histologicaltype
 }

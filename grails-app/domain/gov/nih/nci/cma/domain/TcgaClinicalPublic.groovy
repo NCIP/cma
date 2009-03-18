@@ -4,4 +4,5 @@ class TcgaClinicalPublic {
 	String ptid
 	String patientId
 	String tumorTissueSite
+	String histologicaltype
 }

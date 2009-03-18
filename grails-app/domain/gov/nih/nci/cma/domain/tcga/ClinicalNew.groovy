@@ -18,6 +18,7 @@ class ClinicalNew {
 		String gender
 		String informedConsentAcquired
 		String ptid
+		String histologicaltype
 		
 		/*
 		 * PATIENT_ID                 VARCHAR2(50 BYTE)  NOT NULL,
