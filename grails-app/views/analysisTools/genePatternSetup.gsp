@@ -14,8 +14,10 @@
     var showDiv = false;
     if (el == 'Copy Number') {
         showDiv = true;
+        $('arrayPlatformId').update($('copyNumberPlatforms').innerHTML);
     } else {
         showDiv = false;
+        $('arrayPlatformId').update($('geneExpressionPlatforms').innerHTML);
     }
     if (showDiv) {
        // if (win) {
@@ -35,6 +37,9 @@
     }
   }
 
+Event.observe(window, "load", function()	{
+	$('arrayPlatformId').update($('geneExpressionPlatforms').innerHTML);
+});
   </script>
   
 	</head>
@@ -43,7 +48,7 @@
 		<br/>
 		<h3>Gene Pattern Analysis</h3>
 		<br/><br/>
-		<g:form name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
+		<g:form id="gpForm" name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
 		
 		<div id="analysisModuleDisplay" style="${displayEl}">
 		<!-- Not used with Rembrandt data -->
@@ -103,8 +108,9 @@
 			<g:select name="platformName" id="arrayPlatformId"
 			style="width: 200px; overflow: none;" 
 			noSelection="['': 'choose platform']" 
-			from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" 
+			from="" 
 			optionValue="platformName" optionKey="fileName"></g:select>
+			
 		</fieldset>
 
 			
@@ -121,6 +127,20 @@
 			
 		</g:form>
 		
+		<div style="display:none;">
+			<!--  holds our options -->
+			<g:select name="platformName_copyNumber" id="copyNumberPlatforms"
+			style="width: 200px; overflow: none;" 
+			noSelection="['': 'choose platform']" 
+			from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('CopyNumber%')}"
+			optionValue="platformName" optionKey="fileName"></g:select>
+			
+			<g:select name="platformName_geneExpression" id="geneExpressionPlatforms"
+			style="width: 200px; overflow: none;" 
+			noSelection="['': 'choose platform']" 
+			from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" 
+			optionValue="platformName" optionKey="fileName"></g:select>
+		</div>
 	</body>
 </html>
 
