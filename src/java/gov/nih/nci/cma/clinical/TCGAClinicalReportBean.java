@@ -18,6 +18,7 @@ public class TCGAClinicalReportBean {
 	private String gender;
 	private String informedConsentAcquired;
 	private String ptid;
+	private String histologicaltype;
 	
 	
 	/**
@@ -145,6 +146,14 @@ public class TCGAClinicalReportBean {
 	  sb.append(informedConsentAcquired).append(",");
 	  sb.append(ptid);
 	  return sb.toString();		
+	}
+
+	public String getHistologicaltype() {
+		return histologicaltype;
+	}
+
+	public void setHistologicaltype(String histologicaltype) {
+		this.histologicaltype = histologicaltype;
 	}
 	
 
