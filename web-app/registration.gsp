@@ -6,8 +6,6 @@
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/interface/RegHelper.js'> </script>
 
-<g:javascript src="prototype/prototype.js" />
-<g:javascript src="prototype/effects.js" />
 <g:javascript src="Reg.js" />
 <g:javascript src="fat.js" />
 <g:javascript src="Help.js" />
@@ -85,17 +83,20 @@
 		<div class="h">Verification:</div>
 
 		<div class="r"><label>-<br/></label>Please type the text that is displayed in the image below</div>
-		<div class="rb"><label>&nbsp;</label><input type="text" id="cap"/></div>
+		<div class="r"><label>&nbsp;</label><input type="text" id="cap"/></div>
 
+	
+		<div class="rb" id="captchaDiv"><label>Image*:</label><img id="capImg" src="Captcha.jpg"/>
+		<a href="#" onclick="$('capImg').src = 'Captcha.jpg?'+Math.floor(Math.random()*9999)+'c';return false;">[refresh image]</a>
+		</div>
+		
+	
 		<div>&nbsp;</div>
 		<div style="text-align:center" id="regButtons">
 			<input type="reset" value="Reset"/>
 			<input type="button" value="Register" onclick="Reg.pReg();"/>
 		</div>
 		
-		<div>&nbsp;</div>
-		<div id="captchaDiv"><label>Image*:</label><img src="Captcha.jpg"/></div>
-		<div>&nbsp;</div>
 		
 	</fieldset>
 	</form>
