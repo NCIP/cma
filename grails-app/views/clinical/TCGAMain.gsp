@@ -157,7 +157,7 @@
 		</div>
 		</fieldset>
 		
-		
+		<br clear="all"/>
 		<!--  start km -->
 		<div>
 			<div id="sampleKMHeader" class="sectionHeader">
