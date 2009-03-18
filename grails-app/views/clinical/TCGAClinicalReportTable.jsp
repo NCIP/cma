@@ -51,16 +51,18 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="patientId" title="ID" sortable="true" headerClass="sortable" />
 	  <display:column property="tumorTissueSite" sortable="true" headerClass="sortable" />
 	  <display:column property="ptid"  sortable="true" headerClass="sortable" />
+	  <display:column property="histologicaltype" sortable="true" headerClass="sortable" />
 <% if(isLogged)	{ %>
+	  
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="vitalStatus" title="Vital Status" sortable="true" headerClass="sortable" />
-	  <display:column property="dob" sortable="true" headerClass="sortable" />
-	  <display:column property="dod" sortable="true" headerClass="sortable" />
-	  <display:column property="lastFollowUp" title="Last Followup" sortable="true" headerClass="sortable" />
-	  <display:column property="firstProcedure" title="First Procedure" sortable="true" headerClass="sortable" />
-	  <display:column property="firstExam" title="First Exam" sortable="true" headerClass="sortable" />
+	  <display:column property="dob" sortable="false" headerClass="sortable" />
+	  <display:column property="dod" sortable="false" headerClass="sortable" />
+	  <display:column property="lastFollowUp" title="Last Followup" sortable="false" headerClass="sortable" />
+	  <display:column property="firstProcedure" title="First Procedure" sortable="false" headerClass="sortable" />
+	  <display:column property="firstExam" title="First Exam" sortable="false" headerClass="sortable" />
 	  <display:column property="karnofskyScore" title="Karnofsky" sortable="true" headerClass="sortable" />
-	  <display:column property="firstRadiation" title="First Radiation" sortable="true" headerClass="sortable" />
+	  <display:column property="firstRadiation" title="First Radiation" sortable="false" headerClass="sortable" />
 	  <display:column property="dodMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="dodfuMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="cfId" sortable="true" headerClass="sortable" />
