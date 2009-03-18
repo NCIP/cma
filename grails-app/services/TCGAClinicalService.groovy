@@ -242,6 +242,7 @@ class TCGAClinicalService extends AbstractClinicalService {
       rptBean.setGender(cn.gender)
       rptBean.setInformedConsentAcquired(cn.informedConsentAcquired)
       rptBean.setPtid(cn.ptid)
+       rptBean.setHistologicaltype(cn.histologicaltype)
       return rptBean
     	
     }
