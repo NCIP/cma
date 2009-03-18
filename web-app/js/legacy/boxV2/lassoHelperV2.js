@@ -195,7 +195,7 @@ function writePendings()	{
 		$("sampleCount").innerHTML = "";
 	}
 	else {
-		$("sampleCount").innerHTML = pendingSamples.length + " smaples selected";
+		$("sampleCount").innerHTML = pendingSamples.length + " samples selected";
 	}
 }
 
