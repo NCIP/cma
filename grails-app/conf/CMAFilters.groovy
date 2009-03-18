@@ -1,5 +1,6 @@
 class CMAFilters {
    def filters = {
+		   /*
         manageLicenseAcceptance(controller:'*') {
 			before = {
 				//println(" *** CMAFilter")
@@ -32,7 +33,7 @@ class CMAFilters {
 				// else allow to proceed 
 			}
 		}
-        
+       */ 
    }
 }
 
