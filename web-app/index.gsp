@@ -142,18 +142,18 @@
                                                     <table>
                                                         <tr>
                                                             <td valign="middle">
-                                                                user:
+                                                                username:
                                                             </td>
                                                             <td>
-                                                                <input type="text" name="userId" value="" id="username">
+                                                                <input type="text" name="userId" value="" id="username" style="width:110px;">
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td valign="middle">
-                                                                pass:
+                                                                password:
                                                             </td>
                                                             <td>
-                                                                <input type="password" name="password" value="" id="password">
+                                                                <input type="password" name="password" value="" id="password" style="width:110px;">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -163,6 +163,11 @@
                                                             <td style="text-align: center; padding: 3px">
                                                                 <input type="submit" value="login" />
                                                             </td>
+                                                        </tr>
+                                                        <tr>
+                                                        	<td colspan="2" align="center">
+                                                            	<a style="font-size;10px;font-weight:normal;" href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">trouble logging in?</a>
+                                                        	</td>
                                                         </tr>
                                                     </table>
                                                 </g:form>
