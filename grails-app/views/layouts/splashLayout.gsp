@@ -17,14 +17,14 @@
 				new Effect.Corner($('bottom'), 'bottom');
 				
 				new Effect.Corner($('ccontextDiv'), 'bl');
-				$('ccontextDiv').setOpacity(0.5);
-				$('contextOptions').setOpacity(0.5);
+				$('ccontextDiv').setOpacity(0.7);
+				$('contextOptions').setOpacity(0.7);
 				
-				$('contextDiv').observe('mouseover', function()	{$('ccontextDiv').setOpacity(0.8);} );
-				$('contextDiv').observe('mouseout', function()	{$('ccontextDiv').setOpacity(0.5);} );
+				$('contextDiv').observe('mouseover', function()	{$('ccontextDiv').setOpacity(0.9);} );
+				$('contextDiv').observe('mouseout', function()	{$('ccontextDiv').setOpacity(0.7);} );
 				
-				$('contextDiv').observe('mouseover', function()	{$('contextOptions').setOpacity(0.8);} );
-				$('contextDiv').observe('mouseout', function()	{$('contextOptions').setOpacity(0.5);} );
+				$('contextDiv').observe('mouseover', function()	{$('contextOptions').setOpacity(0.9);} );
+				$('contextDiv').observe('mouseout', function()	{$('contextOptions').setOpacity(0.7);} );
 
 				$('contextDiv').observe('click', function()	{$('contextOptions').toggle();} );
 				
