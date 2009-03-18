@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.naming.OperationNotSupportedException;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import org.codehaus.groovy.grails.commons.ConfigurationHolder;
+
 
 public class DynamicListHelper {
 /**
@@ -165,12 +169,38 @@ public class DynamicListHelper {
 		return CommonListFunctions.uniteLists(sLists, groupName, groupType, action);
 	}
 	public String saveSamples(String commaSepList, String name)	{
+		//which context, and handle context specific pre-processing
+		Map propsMap = (Map) ConfigurationHolder.getFlatConfig();
+    	String dataContext = (String) propsMap.get("cma.dataContext"); 
+		
 		String success = "fail";
 		String[] listArr = commaSepList.split(",");
 		List<String> list = Arrays.asList(listArr);
+		
+		if(dataContext.equals("TCGA"))	{
+			
+			//TCGA - this case is to handle a discrepancy between patientID and Sample ID
+			//between the Analysis file and the DB
+			//format received here is : TCGA-XX-1234-XXX-XX-XXXX-XX
+			// we only want the 1234 part
+			//this approach works on newer TCGA data, when all IDs are using a uniform convention, newer than 3/11/09
+			List<String> tmpList = new ArrayList<String>();
+			for(String i : list){
+				String[] tmp = i.split("-");
+				//we want arr[2]
+				if(tmp!=null && tmp.length > 1){
+					tmpList.add(tmp[2]);
+				}
+			}
+			
+			list = new ArrayList<String>();
+			list.addAll(tmpList);
+			//Need to perform the reverse mapping here....only problem, the id mapper requires platform type to perform this
+			//and IDmapping manager must be injected here
+		}
+		
 		try	{
             ProjectListValidator lv = new ProjectListValidator(ListType.PatientDID, list);
-
 			success = CommonListFunctions.createGenericList(ListType.PatientDID, list, name, lv);
 		}
 		catch(Exception e) {
