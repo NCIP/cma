@@ -74,7 +74,7 @@
 				color: silver;
 				height:50px;
 			}
-			.splashMenu h5	{
+			h5.splashMenu	{
 				padding:5px;
 				padding-top:20px;
 				padding-bottom:20px;
@@ -106,12 +106,15 @@
 				<table border="0" cellspacing="0" cellpadding="0" style="width: 100%">
 					<tbody>
 						<tr>
-							<td class="splashMenu splashCurrent" title="gene">
-								<h5>Gene View</h5>
+							<td title="gene">
+								<h5 class="splashMenu splashCurrent" title="gene">Gene View</h5>
+								<h5 class="splashMenu" title="genome">Genome View</h5>
+								<h5 class="splashMenu" title="clinical">Clinical View</h5>
+								<h5 class="splashMenu" title="tools">Analysis Tools</h5>
 							</td>
-							<td rowspan="6" id="splashMain" style="border: 5px solid #2B2D51;">
+							<td rowspan="3" id="splashMain" style="border: 5px solid #2B2D51;">
 							</td>
-							<td rowspan="6">
+							<td rowspan="3">
 								<div style="width: 250px;">
 									<div style="padding: 20px">
 									<g:contextAware mode="hideFromOnly" context="TCGA">
@@ -119,7 +122,9 @@
 											Data Access:
 										</div>
 										<div class="splashBoxContent">
-											The CMA Application serves public data from the context.  
+											<br/>
+											The CMA Application serves public data from the context.
+											<br/><br/><br/>  
 										</div>
 										<br/><br/>
 									</g:contextAware>
@@ -196,26 +201,13 @@
 													<a href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">Provide your feedback</a>
 												</li>
 											</ul>
+											<br/>
 										</div>
 									</div>
 								</div>
 							</td>
 						</tr>
-						<tr>
-							<td class="splashMenu" title="genome">
-								<h5>Genome View</h5>
-							</td>
-						</tr>
-						<tr>
-							<td class="splashMenu" title="clinical">
-								<h5>Clinical View</h5>
-							</td>
-						</tr>
-						<tr>
-							<td class="splashMenu" title="tools" style="">
-								<h5>Analysis Tools</h5>
-							</td>
-						</tr>
+						
 						<tr>
 							<td> </td>
 						</tr>
