@@ -78,8 +78,8 @@
 	    	<br clear="all"/>
 	    </div>	
 
-		<div  id="bottom" align="center">
-			<table>
+		<div id="bottom" align="center">
+			<table align="center">
 				<tr>
 					<td><a href="http://www.cancer.gov/"><img width="63" height="31" border="0" alt="National Cancer Institute" src="${createLinkTo(dir:'images',file:'footer_nci.gif')}" /></a></td>
 					<td><a href="http://www.dhhs.gov/"><img width="39" height="31" border="0" alt="Department of Health and Human Services" src="${createLinkTo(dir:'images',file:'footer_hhs.gif')}"/></a></td>
