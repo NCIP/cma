@@ -1,9 +1,16 @@
 body {
+	/*
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
+	*/
 	font-family: verdana, arial, helvetica, sans-serif;
 	color: #000; /* ccc */
 	background-color: #666;
+	
+	margin:10px 0px; 
+	padding:0px;
+	text-align:center;
+	
 	}
 a {
 	text-decoration: none;
@@ -96,7 +103,9 @@ img {
 	margin-bottom: 5px; 
 	}
 #top {
-	margin: 0px 70px 0px 70px;
+/*	margin: 0px 70px 0px 70px;*/
+	margin:0px auto;
+	width:960px;
 	padding: 0px;
 	/* border: 0px; */
 	background: #fff;
@@ -114,6 +123,8 @@ html>body #top {
 	/* border: 0px; */
 	background: #666;
 	background: #fff;
-	margin: 0px 70px 0px 70px;
+	/*margin: 0px 70px 0px 70px;*/
+	width:960px;
+	margin:0px auto;
+	text-align:left;
 	}
-
