@@ -9,6 +9,8 @@ import gov.nih.nci.cma.domain.rembrandt.PtRadiationtherapy
 import gov.nih.nci.cma.domain.rembrandt.PtSurgery
 import org.apache.log4j.Logger;
 
+import gov.nih.nci.cma.domain.IdMapping
+
 import gov.nih.nci.cma.clinical.RembrandtClinicalKeys
 import gov.nih.nci.cma.clinical.RembrandtClinicalReportBean
 import gov.nih.nci.cma.util.RbtNeuroComparator;
@@ -54,6 +56,17 @@ class RembrandtClinicalService {
     public Set getPatientDIDsForSampleIds(Set idSet) {      
       String idString = getIdString(idSet)
       String pdQS = "From gov.nih.nci.cma.domain.rembrandt.PatientData pd where pd.institutionId=8 and pd.sampleId in " 
+
+      //what if these are analysisfileids (XXXXXX_T instead of  XXXXXXX)
+      //why not converting analysisfileids into pdids first?  not doing so causes errors
+      //if theyre already converted to pdids, this will return null - merge lists?
+      def idMapping = IdMapping.findAll("from IdMapping m where m.analysisFileId in "+idString)
+
+      idMapping.each { m ->
+		  idSet.add(m.getSampleId()) //this should be pdid, but the domain class is wrong - ptid v pdid, why?
+	  }
+      
+      idString = getIdString(idSet) //this time rebuild string, includes all the ids
       
       pdQS += idString
       
@@ -62,6 +75,12 @@ class RembrandtClinicalService {
       patients.each { p ->
     	  pdidsIds.add(p.getId())
       }
+      
+      
+      
+      System.out.println("**************************")
+      System.out.println(pdidsIds)
+      System.out.println("**************************")
       return pdidsIds
     }
     
