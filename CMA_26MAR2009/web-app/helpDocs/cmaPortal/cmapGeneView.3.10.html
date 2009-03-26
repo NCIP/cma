@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Understanding Gene Expression-Based Kaplan-Meier Plots</title>
+    <link rel="StyleSheet" href="css/cmapGeneView.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body style="" onLoad="WWHUpdate();" onUnload="WWHUnload();" onKeyDown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onKeyPress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onKeyUp="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="cmapGeneView.3.1.html#1281893">Working With Gene-Based Views</a> &gt; <a class="WebWorks_Breadcrumb_Link" href="cmapGeneView.3.9.html#1281893">Creating Gene Expression-Based Kaplan-Meier Plots</a> &gt; Understanding Gene Expression-Based Kaplan-Meier Plots</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading2"><a name="1281893">Understanding Gene Expression-Based Kaplan-Meier Plots</a></div>
+      <div class="Body_Text"><a name="1281896">A Gene Expression-Based </a><span class="Popup"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmaPortalGlossary.9.1.html#1076249', 'popups/cmaPortalGlossary-1076249.html');" onMouseOver="javascript:WWHShowPopup('cmaPortal', 'popups/cmaPortalGlossary-1076249.html', (document.all||document.getElementById||document.layers)?event:null);" onMouseOut="WWHHidePopup();">Kaplan-Meier</a></span> plot displays the survival rate at each time point for samples with certain expression characteristics (e.g., EGFR expression levels in tumor samples greater than those in the non-tumor samples by 3 fold or higher). Kaplan-Meier estimates are calculated based on the last follow-up (FU) time and the censor status (0=alive, 1=dead) from the samples of interest.The Kaplan-Meier estimates are then plotted against the survival time. The points that correspond to the events with censor status of 0 are indicated on the graph. You can dynamically modify the fold change (up and down regulation) thresholds and redraw the plot.</div>
+      <div class="Anchor_Para"><a name="1281903"> </a></div>
+      <div class="Body_Text"><a name="1281910">The following table</a> describes areas on the <span class="TopicJump"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmaPortalGlossary.9.1.html#1076249', 'popups/cmaPortalGlossary-1076249.html');" onMouseOver="javascript:WWHShowPopup('cmaPortal', 'popups/cmaPortalGlossary-1076249.html', (document.all||document.getElementById||document.layers)?event:null);" onMouseOut="WWHHidePopup();">Kaplan-Meier Survival Plot</a></span> for Gene Expression data page.</div>
+      <table id="1281911" class="Table_-_Column_Header" style="text-align: left;" cellspacing="2">
+        <caption></caption>
+        <tr>
+          <td id="tc1281913" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: middle; width: 92.25pt;">
+            <div class="Table_Header"><a name="1281913">Item</a></div>
+          </td>
+          <td id="tc1281915" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: middle; width: 329.25096pt;">
+            <div class="Table_Header"><a name="1281915">Function/Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281917" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text" style="color: #000000; font-family: Arial; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline;"><span class="Bold"><a name="1281917">Gene </a></span><span class="Bold">Expression/Copy </span><span class="Bold">Number Filter</span></div>
+          </td>
+          <td id="tc1281923" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281923">When you apply a copy number filter, the CMA Portal provides links to </a>display the copy number data for samples</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281925" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text" style="color: #000000; font-family: Arial; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline;"><span class="Bold"><a name="1281925">View Clinical </a></span><span class="Bold">Reports</span></div>
+          </td>
+          <td id="tc1281931" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281931">When you apply a gene expression filter, the CMA Portal provides links </a>to display the gene expression for <span class="Bold">Up-regulated 2.0</span>, <span class="Bold">Down-regulated </span><span class="Bold">2.0</span>, and <span class="Bold">Intermediary 2.0 </span>samples. To generate a clinical report, click the appropriate link. For more information, see <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmapGeneView.3.12.html#1282114', '');">Viewing Clinical Reports</a></span>.</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281936" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text" style="color: #000000; font-family: Arial; font-size: 10.0pt; font-style: normal; font-variant: normal; font-weight: bold; text-transform: none; vertical-align: baseline;"><span class="Bold"><a name="1281936">Statistical Report</a></span></div>
+          </td>
+          <td id="tc1281941" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Bullet_outer" style="margin-left: 0pt;">
+              <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281939">
+                <tr style="vertical-align: baseline;">
+                  <td>
+                    <div class="Table_Bullet_inner" style="width: 18pt; white-space: nowrap;">
+                      <span style="left: 10px; position: relative;">•</span>
+                    </div>
+                  </td>
+                  <td width="100%">
+                    <div class="Table_Bullet_inner"><span class="Bold"><a name="1281939">Number of Samples</a></span> specifies the number of <span class="Popup"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmaPortalGlossary.9.1.html#1076707', 'popups/cmaPortalGlossary-1076707.html');" onMouseOver="javascript:WWHShowPopup('cmaPortal', 'popups/cmaPortalGlossary-1076707.html', (document.all||document.getElementById||document.layers)?event:null);" onMouseOut="WWHHidePopup();">Up-Regulated</a></span>, Intermediary, and <span class="Popup"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmaPortalGlossary.9.1.html#1076837', 'popups/cmaPortalGlossary-1076837.html');" onMouseOver="javascript:WWHShowPopup('cmaPortal', 'popups/cmaPortalGlossary-1076837.html', (document.all||document.getElementById||document.layers)?event:null);" onMouseOut="WWHHidePopup();">Down-Regulated</a></span> samples, if any. </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="Table_Bullet_outer" style="margin-left: 0pt;">
+              <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281941">
+                <tr style="vertical-align: baseline;">
+                  <td>
+                    <div class="Table_Bullet_inner" style="width: 18pt; white-space: nowrap;">
+                      <span style="left: 10px; position: relative;">•</span>
+                    </div>
+                  </td>
+                  <td width="100%">
+                    <div class="Table_Bullet_inner"><span class="Bold"><a name="1281941">Log-rank </a></span><span class="Emphasis">p</span><span class="Bold" style="font-style: normal;">-Value</span> indicates the significance of the difference in survival between any two groups of samples segregated based on gene expression of the gene of interest. The log rank <span class="Emphasis">p</span>-value is calculated using Mantel-Haenszel method. The <span class="Emphasis">p</span>-values are recalculated every time a new threshold is selected. </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          // Add related topics
+          //
+          WWHAddRelatedTopic("Creating and Filtering Gene Expression Queries", "cmaPortal", "cmapGeneView.3.11.html#1281977");
+          WWHAddRelatedTopic("Understanding Geometric Mean Gene Expression Plots", "cmaPortal", "cmapGeneView.3.4.html#1281323");
+          WWHAddRelatedTopic("Creating Gene Expression Plots", "cmaPortal", "cmapGeneView.3.3.html#1281089");
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>
