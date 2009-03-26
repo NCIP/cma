@@ -19,6 +19,7 @@
 		 </script>
 	</head>
 	<body>
+		<div id="helptag_manage_lists_overview" class="help"></div>
 		<h3>Manage Lists</h3>
 	
 		<span id="info">&nbsp;</span>
