@@ -50,6 +50,7 @@
 			<h5>Clinical Search</h5>
 		</div>
 		<div class="sectionBody">
+			<div id="helptag_clinical_search_criteria" class="help"></div>
 			<g:form action="clinicalReport" method="post" name="clinicalForm">
 			<table class="formTable">
 				<tr>

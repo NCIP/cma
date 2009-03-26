@@ -46,7 +46,8 @@
     	});
     </script>
 	
-	<div style="border:0px solid #000;margin:5px;text-align:center;width:650px">		
+	<div style="border:0px solid #000;margin:5px;text-align:center;width:650px">
+	<div id="helptag_km_plots_overview" class="help"></div>		
 		<fieldset class="gray">
 			<legend class="red" style="font-size:1.2em">
 				Sample-based Filter

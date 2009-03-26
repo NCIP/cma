@@ -22,7 +22,14 @@
 	<link href="../css/cma.css" rel="stylesheet" type="text/css" />
 	<link href="../css/gtable.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/prototype/prototype.js"></script>
+	<script type="text/javascript" src="../js/Help.js"></script>
 	<script type="text/javascript" src="../js/saveSamplesFromClinical.js"></script>
+	<script type="text/javascript">
+		Event.observe(window, "load", function()	{
+			Help.url = "../"+Help.url;
+			Help.parsePage({pth: "../images" });
+	 	});
+	</script>
 </head>
 <body>
 	<div id="superTop"></div>
@@ -31,6 +38,8 @@
 <%if(!noBack.equals("true")) { %> 
 	<a id="backToClinical" href="./">Back to Clinical</a><br/> 
 <% } %> 
+	
+	<div id="helptag_clinical_report_table" class="help"></div>
 	<div id="saveSamplesDiv"> 
 		<input type="text" value="<%=key%>_samples" name="listName" id="listName" /> 
 		<input type="button" id="saveSamplesButton" onclick="saveGroupFromClinical('<%=key%>',$('listName').value);" value="Save All Samples from Report" /> 
@@ -77,6 +86,6 @@
 	<div  id="bottom" align="center">
 		
 	</div>	  
-		
+
 </body>
 </html>
