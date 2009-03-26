@@ -17,6 +17,7 @@
     <fieldset>
      	<legend>Report Results</legend>
      	<br/>
+     	<div id="helptag_view_results_overview" class="help"></div>
        	<div id="loadingMsg" style="color:red;font-weight:bold;">&nbsp;</div>
        	<ul>
      			
