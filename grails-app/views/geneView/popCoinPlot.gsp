@@ -1,7 +1,8 @@
 <html>
     <head>
 		<title>CMA Box and Whisker Log2 Intensity Coin Plots</title>
-        
+		<g:javascript library="prototype" />
+        <g:javascript library="Help" />
         <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'touch.css')}" />
         <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'bricks.css')}" />
         <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'cma.css')}" />
@@ -15,6 +16,7 @@
 	</head>
 	<body>
 		${sw?.toString()}
+		<div id="helptag_coin_plot" class="help"></div>
 		<h3>CMA Box and Whisker Log2 Intensity Coin Plots</h3>
 		<div style="text-align:center;" >
 			<br/><a class="message" style="text-decoration:underline" id="graphLink" 
@@ -26,5 +28,9 @@
 				<img src="${bwgraphURL}" border="0" id="geneChart" />
 			</div>
 		</div>
+		<script type="text/javascript">
+		Help.url = "../"+Help.url;
+		Help.parsePage({pth: "${createLinkTo(dir:'images')}" });
+		</script>
 	</body>
 </html>

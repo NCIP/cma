@@ -108,6 +108,7 @@
 	<body>
 	${sw?.toString()}
 
+		<div id="helptag_gene_expression_plot" class="help"></div>
 		<h3>Gene View</h3>
 %{--
 		<g:each in="${params}">

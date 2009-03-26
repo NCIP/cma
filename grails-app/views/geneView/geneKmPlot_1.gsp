@@ -48,6 +48,7 @@
 	<table border="0" width="670px" cellspacing="10" cellpadding="5"><tr>
 	<td>
 		<div style="border:0px solid #000;margin:5px;align-text:left;width=170px">		
+		<div id="helptag_expression_based_km" class="help"></div>
 		<fieldset class="gray">
 			<legend class="red" style="font-size:1.2em">
 				Gene Expression Filter
@@ -157,10 +158,12 @@
 			</td>
 		</tr>
 	</table>
-	<div align="center">
-			<b class="otherBold">View Clinical Data</b><br />
-				<span id="reportHTML"></span><br />
+	<div>
+		<div id="helptag_clinical_report" class="help"></div>
+		<b class="otherBold">View Clinical Data:</b>
+		<span id="reportHTML"></span><br />
 	</div>
+	<br/><br/>
 	<fieldset class="gray" style="text-align:left">
 		<legend class="red">Statistical	Report:</legend>
 				<div>

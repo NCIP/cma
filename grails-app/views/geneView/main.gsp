@@ -109,7 +109,7 @@
 			<g:if test="${flash.message}">
 	        	<div class="message">${flash.message}</div><br/>
 	        </g:if>
-            
+         
 		 <div id="geneSearchHeader" style="padding:3px;background-color:#2B2D51; color:#fff;">
 			<h5>
 				Gene based views&nbsp;&nbsp;&nbsp;&nbsp;
@@ -117,6 +117,7 @@
 		</div>
 		<div id="mainc" style="border:1px solid #E0E0E0; padding:5px;">
 		<g:contextAware mode="hideFromOnly" context="TARGET">
+			<div id="helptag_gene_view" class="help"></div> 
 			View Type:<br/>
 			<input type="radio" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio">
 	        Gene Expression plot&nbsp;<br />
@@ -179,6 +180,7 @@
 			<h5>Pathway Visualization</h5>
 		</div>
 		<div style="border:1px solid #E0E0E0; padding:5px;">
+			<div id="helptag_pathway_overview" class="help"></div>
 	        <blockquote>
 
 	        <a href="${grailsApplication.config.gov.nih.nci.cma.links.pathway_url ?: '#'}" target="_blank">
