@@ -38,6 +38,7 @@
 					el.observe("click", function() { process(el.title); } );
 					el.observe("mouseover", function() { nav(el); });
 				});
+				
 			});
 			var nav = function(el)	{
 				//switches content onmouseover for the splashpage
@@ -187,6 +188,16 @@
 										<br />
 										<br />
 										</g:contextAware>
+										
+										<div class="splashBoxHeader">
+											Application Help:
+										</div>
+										<div class="splashBoxContent">
+										<div id="helptag_welcome" class="help"></div>
+											Throughout the application, please click on the 
+											? icon for page specific help.
+										</div>
+										<br/><br/>
 										<div class="splashBoxHeader">
 											Additional Information:
 										</div>

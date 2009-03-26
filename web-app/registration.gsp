@@ -1,15 +1,17 @@
+<content tag="tabs">&nbsp;</content>
+<content tag="side">&nbsp;</content> 
 
-<!--
-<script type='text/javascript' src='../dwr/util.js'> </script>
--->
+<html>
+    <head>
+		<meta name="layout" content="splashLayout" />
 
+		
+		
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/interface/RegHelper.js'> </script>
 
 <g:javascript src="Reg.js" />
 <g:javascript src="fat.js" />
-<g:javascript src="Help.js" />
-
 
 <style>
 	#regTable input	{
@@ -25,35 +27,29 @@
 	#regTable fieldset	{
 		height:600px;
 		border:0px;
-		border-top:1px solid #42659C;
+		border-top:1px solid #2B2D51;
 		-moz-border-radius: 0px;
 	}
 	input#userName, input#password	{
 		width:140px;
 	}
 	#regTable div.r, #regTable div.rb	{
-		border-left: 2px solid #42659C;
-		border-right: 2px solid #42659C;
+		border-left: 2px solid #2B2D51;
+		border-right: 2px solid #2B2D51;
 		padding:5px;
 	}
 	#regTable div.rb	{
-		border-bottom: 2px solid #42659C;
+		border-bottom: 2px solid #2B2D51;
 		margin-bottom:10px;
 	}
 	#regTable div.h, legend {
-		color: #C6C7C6;
-		background-color:#42659C; 
+		color: #FFF;
+		background-color:#2B2D51; 
 		font-weight:bold;
 		padding:5px; 
 	}
 </style>
 
-<html>
-    <head>
-		<meta name="layout" content="splashLayout" />
-			
-		<content tag="tabs">&nbsp;</content>
-		<content tag="side">&nbsp;</content> 
 	</head>
 
 <body>
@@ -61,8 +57,7 @@
 <table id="regTable">
 	<tr>
 		<td>
-		
-	<script type="text/javascript">Help.insertHelp("Registering", "align='right'", "padding:_8px;");</script>
+	<div id="helptag_register" class="help"></div>
 	<br clear="both"/>
 	<form id="regForm">
 	<fieldset>
