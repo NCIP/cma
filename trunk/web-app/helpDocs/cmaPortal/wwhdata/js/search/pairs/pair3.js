@@ -1,0 +1,26 @@
+function FileData_Pairs(x)
+{
+x.t("plugin","logging");
+x.t("navigating","cancer");
+x.t("getting","started");
+x.t("installing","svg");
+x.t("logging","navigating");
+x.t("logging","cancer");
+x.t("provides","information");
+x.t("started","cancer");
+x.t("cancer","molecular");
+x.t("portal","navigating");
+x.t("portal","getting");
+x.t("portal","installing");
+x.t("portal","logging");
+x.t("portal","section");
+x.t("portal","topics");
+x.t("section","provides");
+x.t("section","include");
+x.t("include","cancer");
+x.t("svg","plugin");
+x.t("information","logging");
+x.t("topics","section");
+x.t("molecular","analysis");
+x.t("analysis","portal");
+}
