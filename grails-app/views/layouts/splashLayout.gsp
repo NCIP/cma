@@ -11,6 +11,7 @@
         <g:javascript library="prototype" />	
         <g:javascript library="scriptaculous" />	
         <g:javascript library="corners" />
+        <g:javascript library="Help" />
 		<script type="text/javascript">
 			 Event.observe(window, "load", function()	{
 				new Effect.Corner($('superTop'), 'top');
@@ -29,6 +30,10 @@
 				$('contextDiv').observe('click', function()	{$('contextOptions').toggle();} );
 				
 				$('middle').observe('mouseover', function()	{ $('contextOptions').hide();}	);
+				
+				//insert the help, passing path to the images dir
+				Help.url = "${createLinkTo(dir:'')}/"+Help.url;
+				Help.parsePage({pth: "${createLinkTo(dir:'images')}" });
 			 });
 		</script> 
         <g:layoutHead />
