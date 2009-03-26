@@ -39,7 +39,7 @@
 			<h5>Principal Component Analysis</h5>
 		</div>
 		<div class="sectionBody">
-        
+        <div id="helptag_principal_analysis" class="help"></div>
 		<g:form controller="analysisTools" action="pcaSubmit" method="post">
 		<table class="formTable">
 				<tr>

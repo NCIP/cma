@@ -15,6 +15,7 @@
 
 <script type="text/javascript">Help.insertHelp("genepattern_job_result", " align='right'", "padding:2px;");</script>
 <br/>       
+<div id="helptag_gene_pattern_analysis" class="help"></div>
      <fieldset>
      	<legend>Gene Pattern Job Result</legend>
      	<br/>

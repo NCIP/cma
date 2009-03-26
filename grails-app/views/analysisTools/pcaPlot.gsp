@@ -70,6 +70,7 @@
 		<style>
 			#middle, #bottom, #superTop, #top {
 				margin: 0px 5px 0px 5px;
+				width:725px;
 			}
 			#drag { 
 				border:1px solid red;
@@ -83,6 +84,7 @@
 	</head>
 	<body>
 		${sw}
+		<div id="helptag_pca_plot" class="help"></div>
 		<h3>PCA</h3>
 		
 		<!-- start div#nav -->

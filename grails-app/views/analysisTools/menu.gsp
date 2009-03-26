@@ -10,6 +10,7 @@
 		</script>
 	</head>
 	<body>
+		<div id="helptag_analysis_tools" class="help"></div>
 		<h2>Analysis Tools</h2>
 		<fieldset>
 		<div class="sectionHeader">
