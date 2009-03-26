@@ -60,6 +60,8 @@
 	<body>
 		<h2>Genome View</h2>
 		
+		<div id="helptag_genome_view" class="help"></div>
+		
 		<br/> 
 		<span style="font-size:1.2em">&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://cgwb.nci.nih.gov/cgi-bin/heatmap" target="_blank"><u>Easy access to genome heatmaps</u></a></span>
 		<br/><br/><br/>
