@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
+    <title>Creating Gene Expression Plots</title>
+    <link rel="StyleSheet" href="css/cmapGeneView.css" type="text/css" media="all" />
+    <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/towwhdir.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/wwhpagef.js"></script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        var  WebWorksRootPath = "";
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        // Set reference to top level help frame
+        //
+        var  WWHFrame = WWHGetWWHFrame("", true);
+      // -->
+    </script>
+    <script type="text/javascript" language="JavaScript1.2" src="scripts/expand.js"></script>
+  </head>
+  <body style="" onLoad="WWHUpdate();" onUnload="WWHUnload();" onKeyDown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onKeyPress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onKeyUp="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
+    <br />
+    <div class="WebWorks_Breadcrumbs" style="text-align: left;">
+      <a class="WebWorks_Breadcrumb_Link" href="cmapGeneView.3.1.html#1281089">Working With Gene-Based Views</a> &gt; Creating Gene Expression Plots</div>
+    <hr align="left" />
+    <blockquote>
+      <div class="Heading1"><a name="1281089">Creating Gene Expression Plots</a></div>
+      <div class="Body_Text"><a name="1281094">Gene views enable you to study Geometric Mean, Log2 Intensity, and Box and Whisker </a>Log2 Intensity, Kaplan-Meier Survival plots, and, for TCGA data, mutations and copy number changes.</div>
+      <div class="How_To">
+        <span class="Bold">How to </span><a name="1281097"> Create a Gene Expression Plot</a></div>
+      <div class="Numbered_List_1_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281098">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_1_inner" style="width: 18pt; white-space: nowrap;">1.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_1_inner"><a name="1281098">Do one of the following to navigate to the Gene View workspace:</a></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Bullet_Indent_outer" style="margin-left: 36pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281099">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bullet_Indent_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="Bullet_Indent_inner"><a name="1281099">From the Home page, click </a><span style="font-weight: bold;">Gene View</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body_Text_Indent_3_KWN"><a name="1281100">- </a><span class="Bold">or</span> -</div>
+      <div class="Bullet_Indent_outer" style="margin-left: 36pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281101">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Bullet_Indent_inner" style="width: 18pt; white-space: nowrap;">•</div>
+            </td>
+            <td width="100%">
+              <div class="Bullet_Indent_inner"><a name="1281101">From any page in the portal, click the </a><span class="Bold">Gene View</span> tab.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body_Text_Indent_2"><a name="1281105">The Gene View workspace appears.</a></div>
+      <div class="Note_Indent_outer" style="margin-left: 50.25pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281112">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Note_Indent_inner" style="width: 25px; white-space: nowrap;">
+                <span style="left: -20px; position: relative; top: 15px;">
+                  <img src="note_NCI.gif" alt="*" id="bullet1281112" border="0" width="30" height="30" />
+                </span>
+              </div>
+            </td>
+            <td width="100%">
+              <div class="Note_Indent_inner"><a name="1281112">The </a><span class="Bold">View mutations and copy number changes </span>and <span class="Bold">Pathway </span><span class="Bold">Visualization</span> features are not available in the REMBRANDT context.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Numbered_List_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281114">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_inner"><span class="Bold" style="font-weight: normal;"><a name="1281114">Under </a></span><span class="Bold">View Type</span>, select the type of plot you want to generate.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body_Text_Indent"><a name="1281162">The following table</a> lists the view type options.</div>
+      <table id="1281118" class="Table_-_Column_Header" style="text-align: left;" cellspacing="2">
+        <caption></caption>
+        <tr>
+          <td id="tc1281120" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: middle; width: 125.24976pt;">
+            <div class="Table_Header"><a name="1281120">View Type</a></div>
+          </td>
+          <td id="tc1281122" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: middle; width: 296.54928pt;">
+            <div class="Table_Header"><a name="1281122">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281124" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281124">Gene Expression Plot</a></div>
+          </td>
+          <td id="tc1281138" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281126">Generates the following plots:</a></div>
+            <div class="Table_Bullet_outer" style="margin-left: 0pt;">
+              <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281128">
+                <tr style="vertical-align: baseline;">
+                  <td>
+                    <div class="Table_Bullet_inner" style="width: 18pt; white-space: nowrap;">
+                      <span style="left: 10px; position: relative;">•</span>
+                    </div>
+                  </td>
+                  <td width="100%">
+                    <div class="Table_Bullet_inner"><span class="Bold"><a name="1281128">Geometric Mean</a></span> – displays mean expression intensity (Geometric mean) versus Groups. For additional gene expression plot details, see <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmapGeneView.3.4.html#1281323', '');">Understanding Geometric Mean Gene Expression Plots</a></span>.</div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="Table_Bullet_outer" style="margin-left: 0pt;">
+              <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281133">
+                <tr style="vertical-align: baseline;">
+                  <td>
+                    <div class="Table_Bullet_inner" style="width: 18pt; white-space: nowrap;">
+                      <span style="left: 10px; position: relative;">•</span>
+                    </div>
+                  </td>
+                  <td width="100%">
+                    <div class="Table_Bullet_inner"><span class="Bold"><a name="1281133">Log2 Intensity</a></span> – displays average expression intensities for the gene of interest. For additional graph details, see <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmapGeneView.3.6.html#1281503', '');">Log2 Intensity Gene Expression Plot Details</a></span>.</div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="Table_Bullet_outer" style="margin-left: 0pt;">
+              <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281138">
+                <tr style="vertical-align: baseline;">
+                  <td>
+                    <div class="Table_Bullet_inner" style="width: 18pt; white-space: nowrap;">
+                      <span style="left: 10px; position: relative;">•</span>
+                    </div>
+                  </td>
+                  <td width="100%">
+                    <div class="Table_Bullet_inner"><span class="Bold"><a name="1281138">Box and Whisker Log2 Intensity</a></span> – displays a Box and Whisker plot or box plot. For additional plot details, see <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmapGeneView.3.7.html#1281561', '');">Box and Whisker Log2 Intensity Gene Expression Plot Details</a></span>. </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281144" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281144">Kaplan-Meier Survival </a>Plot</div>
+          </td>
+          <td id="tc1281146" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Popup_Text"><a name="1281146">The Kaplan-Meier method is used for survival analysis. Kaplan-</a>Meier curves are used to estimate survival probability for the user-defined set of criteria as a function of time and survival differences as analyzed by the log-rank test.</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281148" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281148">View mutations and copy </a>number changes (TCGA context only)</div>
+          </td>
+          <td id="tc1281150" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281150">Generates heatmaps and launches the Cancer Genome </a>Workbench. For additional information, see <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmapGeneView.3.13.html#1282190', '');">Viewing Mutation and Copy Number Changes</a></span>.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Numbered_List_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281164">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">3.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_inner"><a name="1281164">In the Gene Symbol (</a><span class="Popup"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmaPortalGlossary.9.1.html#1076594', 'popups/cmaPortalGlossary-1076594.html');" onMouseOver="javascript:WWHShowPopup('cmaPortal', 'popups/cmaPortalGlossary-1076594.html', (document.all||document.getElementById||document.layers)?event:null);" onMouseOut="WWHHidePopup();">HUGO</a></span>) box, type the gene symbol of interest, for example, <span class="Emphasis" style="font-family: &quot;Courier New&quot;;">EGFR</span> or <span class="Emphasis" style="font-family: &quot;Courier New&quot;;">WT1</span>, for which you want to generate an expression plot.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Numbered_List_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281165">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">4.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_inner"><a name="1281165">To view details about the gene of interest in the Cancer Genome Anatomy </a>Project website, click <span class="Bold">show gene info</span>, otherwise, skip to Step <span class="Emphasis" style="color: #515186;"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmapGeneView.3.3.html#1281186', '');">6</a></span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body_Text_Indent_2"><a name="1281169">The Cancer Genome Anatomy Project website appears in a new browser </a>window.</div>
+      <div class="Numbered_List_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281183">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">5.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_inner"><a name="1281183">For help with using the Cancer Genome Anatomy Project, click </a><span class="Bold">CGAP How To</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Numbered_List_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281186">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">6.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_inner"><a name="1281186">To restrict your research to a specific </a><span class="Popup"><a href="javascript:WWHClickedPopup('cmaPortal', 'cmaPortalGlossary.9.1.html#1076352', 'popups/cmaPortalGlossary-1076352.html');" onMouseOver="javascript:WWHShowPopup('cmaPortal', 'popups/cmaPortalGlossary-1076352.html', (document.all||document.getElementById||document.layers)?event:null);" onMouseOut="WWHHidePopup();">sample</a></span> group, from the <span class="Bold">Restrict to </span><span class="Bold">sample group</span> drop-down list, select a sample group of interest. Custom lists you may have created earlier in your current session are listed as well.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note_outer" style="margin-left: 36pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281187">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Note_inner" style="width: 32.400000000000006pt; white-space: nowrap;">
+                <span class="Bold">Note:	</span>
+              </div>
+            </td>
+            <td width="100%">
+              <div class="Note_inner"><a name="1281187">The sample groups available in the REMBRANDT context differ from </a>those in TCGA context. For more information about the available sample groups, refer to The Cancer Genome Atlas’ (TCGA’s) website at <span class="HTTP"><a href="http://cancergenome.nih.gov/components/dmbca.asp" target="_window">http://cancergenome.nih.gov/components/dmbca.asp</a></span>, and the REMBRANDT website at: <span class="HTTP"><a href="http://caintegrator-info.nci.nih.gov/rembrandt" target="_window">http://caintegrator-info.nci.nih.gov/REMBRANDT</a></span></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Tip_Indent_outer" style="margin-left: 50.25pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281190">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Tip_Indent_inner" style="width: 25px; white-space: nowrap;">
+                <span style="left: -20px; position: relative; top: 15px;">
+                  <img src="tip_NCI.gif" alt="*" id="bullet1281190" border="0" width="30" height="30" />
+                </span>
+              </div>
+            </td>
+            <td width="100%">
+              <div class="Tip_Indent_inner"><a name="1281190">To select multiple sample groups for comparison, press and hold the </a><span class="Keypress">Ctrl </span>key and click each of the groups of interest. </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Numbered_List_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281191">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">7.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_inner"><a name="1281191">From the </a><span class="Bold">Select Array Platform</span> drop-down list, select an array platform.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Note_outer" style="margin-left: 36pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281193">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Note_inner" style="width: 32.400000000000006pt; white-space: nowrap;">
+                <span class="Bold">Note:	</span>
+              </div>
+            </td>
+            <td width="100%">
+              <div class="Note_inner"><a name="1281193">In the REMBRANDT context, Affy HT Human Genome U133 Plus 2.0 is </a>the only array available.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body_Text_Indent"><a name="1281236">The following table</a> provides a description of each of the available arrays.</div>
+      <table id="1281197" class="Table_-_Feature_Description" style="text-align: left;" cellspacing="2">
+        <caption></caption>
+        <tr>
+          <td id="tc1281200" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6pt; vertical-align: middle; width: 138.74976pt;">
+            <div class="Table_Header"><a name="1281200">Array Platform</a></div>
+          </td>
+          <td id="tc1281202" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6pt; vertical-align: middle; width: 283.04928pt;">
+            <div class="Table_Header"><a name="1281202">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281204" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281204">(GBM:Broad)</a><br />Affy HT Human Genome U133 Plus 2.0 (P2)</div>
+          </td>
+          <td id="tc1281206" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Popup_Text"><a name="1281206">Includes Affy HT Human Genome U133 set plus 6,500 </a>additional genes for analysis of over 47,000 transcripts. (For REMBRANDT data only)</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281208" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281208">(GBM: Broad)</a><br />Affy HT Human Genome U133A</div>
+          </td>
+          <td id="tc1281210" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Popup_Text"><a name="1281210">Analyzes the expression level of 18,400 transcripts and </a>variants, including 14,500 well-characterized human genes. Comprises more than 22,000 probe sets and 500,000 distinct oligonucleotide features.</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281212" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281212">(GBM:UNC)</a><br />Agilent Whole Human Genome</div>
+          </td>
+          <td id="tc1281214" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Popup_Text"><a name="1281214">High-density profiling analysis tool that covers over 41,000 </a>unique human genes and transcripts</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281216" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281216">(GBM:LBL)</a><br />Affy HE (Human Exon 1.0)</div>
+          </td>
+          <td id="tc1281218" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281218">Contains approximately one million predicted and confirmed </a>exons.</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281220" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281220">Agilent 8 x 15K Human </a>miRNA-specific Microarray</div>
+          </td>
+          <td id="tc1281222" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281222">Contains probes for 723 human and 76 human viral </a>microRNAs from the Sanger database v.10.1. </div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1281224" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281224">Affy_SNP6</a></div>
+          </td>
+          <td id="tc1281226" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1281226">DNA analysis array that covers 1.8 million genetic markers, </a>including more than 906,600 single nucleotide polymorphisms (SNPs) and more than 946,000 probes for the detection of copy number variation.</div>
+          </td>
+        </tr>
+      </table>
+      <div class="Numbered_List_outer" style="margin-left: 18pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281237">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">8.	</div>
+            </td>
+            <td width="100%">
+              <div class="Numbered_List_inner"><a name="1281237">Click </a><span class="Bold">Go</span>, or, to clear the entries on the page and start over, click <span class="Bold">Clear</span>.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="Body_Text_Indent"><a name="1281238">The geometric mean gene expression plot appears. </a></div>
+      <div class="Note_outer" style="margin-left: 36pt;">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1281243">
+          <tr style="vertical-align: baseline;">
+            <td>
+              <div class="Note_inner" style="width: 32.400000000000006pt; white-space: nowrap;">
+                <span class="Bold">Note:	</span>
+              </div>
+            </td>
+            <td width="100%">
+              <div class="Note_inner"><a name="1281243">The CMA Portal does not generate an expression plot if any of your crite</a>­ria are incompatible, for example, if the gene you selected is not applica­ble for the array platform you selected. In such cases, a message at the top of the page is displayed to alert you to the incompatibility issue.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript" language="JavaScript1.2">
+        <!--
+          // Clear related topics
+          //
+          WWHClearRelatedTopics();
+
+          // Add related topics
+          //
+          WWHAddRelatedTopic("Understanding Geometric Mean Gene Expression Plots", "cmaPortal", "cmapGeneView.3.4.html#1281323");
+          WWHAddRelatedTopic("Log2 Intensity Gene Expression Plot Details", "cmaPortal", "cmapGeneView.3.6.html#1281503");
+          WWHAddRelatedTopic("Box and Whisker Log2 Intensity Gene Expression Plot Details", "cmaPortal", "cmapGeneView.3.7.html#1281561");
+          WWHAddRelatedTopic("Visualizing Probe Sets In the Legend", "cmaPortal", "cmapGeneView.3.5.html#1281462");
+          WWHAddRelatedTopic("Displaying Coin Plots", "cmaPortal", "cmapGeneView.3.8.html#1281717");
+          WWHAddRelatedTopic("Creating Gene Expression-Based Kaplan-Meier Plots", "cmaPortal", "cmapGeneView.3.9.html#1281833");
+          WWHAddRelatedTopic("Viewing Clinical Reports", "cmaPortal", "cmapGeneView.3.12.html#1282114");
+          WWHAddRelatedTopic("Viewing Mutation and Copy Number Changes", "cmaPortal", "cmapGeneView.3.13.html#1282190");
+          WWHAddRelatedTopic("Visualizing Pathways", "cmaPortal", "cmapGeneView.3.14.html#1282208");
+
+          document.writeln(WWHRelatedTopicsInlineHTML());
+        // -->
+      </script>
+    </blockquote>
+    <script type="text/javascript" language="JavaScript1.2">
+      <!--
+        document.write(WWHRelatedTopicsDivTag() + WWHPopupDivTag() + WWHALinksDivTag());
+      // -->
+    </script>
+  </body>
+</html>
