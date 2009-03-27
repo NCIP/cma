@@ -194,8 +194,8 @@
 										</div>
 										<div class="splashBoxContent">
 										<div id="helptag_welcome" class="help"></div>
-											Throughout the application, please click on the 
-											? icon for page specific help.
+											<a href="#" onclick="Help.popHelp('welcome');return false;">Application Help</a><br/>
+											<a href="${createLinkTo(dir:'helpDocs',file:'cmap_user_guide.pdf')}" target="_blank">User Guide</a>
 										</div>
 										<br/><br/>
 										<div class="splashBoxHeader">
