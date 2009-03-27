@@ -127,10 +127,12 @@
 		
 		<!--  start km -->
 		<div>
+			
 			<div id="sampleKMHeader" class="sectionHeader">
 				<h5>Sample-based Kaplan-Meier Graph</h5>
 			</div>
 			<div class="sectionBody">
+			<div id="helptag_km_plots_overview" class="help"></div>
 				<g:form action="clinicalKM" method="post" name="clinicKMPlotForm">
 				<input type="hidden" name="plot" value="SAMPLE_KM_PLOT"/>
 				<table align="center" border="0">
