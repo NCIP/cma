@@ -49,7 +49,7 @@ Event.observe(window, "load", function()	{
 		<div id="helptag_gene_pattern_criteria" class="help"></div>
 		<h3>Gene Pattern Analysis</h3>
 		<br/><br/>
-		<g:form id="gpForm" name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
+		<g:form name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
 		
 		<div id="analysisModuleDisplay" style="${displayEl}">
 		<!-- Not used with Rembrandt data -->
