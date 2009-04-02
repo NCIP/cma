@@ -102,18 +102,19 @@ class AnalysisToolsController {
         	
         		// 'Copy Number' not used for Rembrandt data. That leaves 
         		// a selection of one, so don't bother with list for Rembrandt.
-        		def moduleList = ["Gene Expression", "Copy Number"]
+        		def moduleList = ["Gene Expression"] //, "Copy Number"
         		
         		// Display some elements not visible for dataContext="Rembrandt"
-        		displayEl = "display:inline"
+        		//displayEl = "display:inline"
         	
-        		render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists, moduleList:moduleList, displayEl:displayEl])
+        		render(view:'genePatternSetup', model:[patLists:patLists, geneLists:geneLists, moduleList:moduleList])
     		}
     		else if (dataContext.equalsIgnoreCase("Rembrandt")) {
+    			//the two lines below are bad code, why would you do this?
     			// Hide some elements not visible for dataContext="Rembrandt"
-    			displayEl = "display:none"
-    			
-    			render(view:'genePatternSetup', model:[patLists:patLists, displayEl:displayEl])
+    			//displayEl = "display:none"
+    			def moduleList = ["Gene Expression"]
+    			render(view:'genePatternSetup', model:[patLists:patLists, moduleList:moduleList])
     		}
     }
     

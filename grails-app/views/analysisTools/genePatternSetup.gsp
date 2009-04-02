@@ -51,7 +51,7 @@ Event.observe(window, "load", function()	{
 		<br/><br/>
 		<g:form name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
 		
-		<div id="analysisModuleDisplay" style="${displayEl}">
+		<div id="analysisModuleDisplay" style="">
 		<!-- Not used with Rembrandt data -->
 		<fieldset>
 		<legend>Select an Analysis Module</legend>
@@ -63,8 +63,9 @@ Event.observe(window, "load", function()	{
 			</div>
 		</fieldset>
 		</div>
+		<!-- why was this here? bad logic ML.
 		<input type="hidden" name="analysisModuleName" value="Gene Expression"/>
-		
+		-->
 		
 		<!-- Not used with Rembrandt data -->
 		<div id="advZ" style="display:none;">
@@ -77,8 +78,9 @@ Event.observe(window, "load", function()	{
 				</g:select>
 			</fieldset>
 		</div>
+		<!-- why was this here?  bad logic ML. 
 		<input type="hidden" id="chromosomeName" name="chromosomeName" value=""/>
-		
+		-->
 		
 		<fieldset>
 		<legend>Select Patient Group</legend>
@@ -90,8 +92,8 @@ Event.observe(window, "load", function()	{
 			</div>
 		</fieldset>
 		
-		
-		<div id="geneListDisplay" style="${displayEl}">
+		<g:contextAware mode="showOnlyTo" context="TCGA">
+		<div id="geneListDisplay" style="">
 		<!-- Not used with Rembrandt -->
 		<fieldset>
 			<legend>Filter Genes/Reporters</legend>
@@ -102,6 +104,7 @@ Event.observe(window, "load", function()	{
 			from="${geneLists}"></g:select>		
 		</fieldset>
 		</div>
+		</g:contextAware>
 		
 		
 		<fieldset>
