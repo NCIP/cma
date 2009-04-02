@@ -203,6 +203,8 @@
 										</div>
 										<div class="splashBoxContent">
 											<ul>
+											<li>CMA Version <g:meta name="app.version"/></li>
+											
 											<g:contextAware mode="showOnlyTo" context="TCGA">
 												<li>
 													<a href="${createLinkTo(dir:'',file:'registration.gsp')}">Register</a>

@@ -12,6 +12,7 @@
 		<br/>
 		<b>Help:</b>
 		<ul>
+			<li>CMA Version <g:meta name="app.version"/></li>
 			<li>
 				<a href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">Application Support</a>
 			</li>
