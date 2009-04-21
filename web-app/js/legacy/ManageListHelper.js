@@ -47,7 +47,7 @@
 					for(var t=0; t<lists.length; t++)	{
 					
 						var status = "<span id=\""+lists[t].listName+"status\" style=\"display:none\"><img src=\"../images/indicator.gif\"/></span>";
-						var shortName = lists[t].listName.length>25 ? lists[t].listName.substring(0,23) + "..." : lists[t].listName;
+						var shortName = lists[t].listName.length>35 ? lists[t].listName.substring(0,33) + "..." : lists[t].listName;
 						var theName = lists[t].listName;
 						var itemCount = lists[t].itemCount;
 						var author = lists[t].author;
@@ -65,22 +65,22 @@
 						// += or =
 						tst +=  "<div id='"
 		                	+ theName
-		                    + "' class='dlistListing'>" 
+		                    + "' class='dlistListing' style='padding:10px;'>" 
 		                    + "<input type='checkbox' style='border:0px;' id='' name='" + listType + "' value='" +theName+ "'/>"
 		                    + "<b style='"+lstyle+"' onmouseover=\"overlib('" + lib +"', CAPTION, '"+ theName+ "');\" onmouseout='return nd();'>"
-		                    + shortName + "</b><br/><div style='margin-left:10px'>" + listSubType 
+		                    + shortName + "</b><div style='margin-left:10px;width:250px;display:inline;'>" + listSubType 
 		                    + "<span id='"+theName+"_count'>" + itemCount + "</span> item(s)" 
-		                    + "<div style='cursor:pointer;margin-left:20px;width:200px;display:inline;' onclick='ManageListHelper.getDetails(\""
+		                    + "<div style='cursor:pointer;margin-left:20px;display:inline;' onclick='ManageListHelper.getDetails(\""
 		                    + theName
 		                    + "\");return false;'>"
 		                    + "<img src='../images/arrowPane20.png' border='0' style='vertical-align:text-bottom'/>details" + status + "</div>"
-		                    + "<div style='cursor:pointer;margin-left:20px;width:200px;display:inline;'  onclick='ManageListHelper.deleteList(\""
+		                    + "<div style='cursor:pointer;margin-left:20px;display:inline;'  onclick='ManageListHelper.deleteList(\""
 		                    + theName
 		                    + "\");return false;'>"
 		                    + "<img src='../images/deleteCross20.png' border='0' style='vertical-align:text-bottom;'/>delete</div>"
 		                    + "</div><br /><div id='"
 		                    + theName
-		                    + "details'></div>\n</div>\n";    
+		                    + "details'></div>\n</div></div>\n";    
 					}
 					if($(listType+'ListDiv'))
 						$(listType+'ListDiv').innerHTML = tst;
@@ -254,7 +254,7 @@
 		 		 document.getElementById(listName + "details").appendChild(dDIV);
 		 		//setup a handle to the working container
 		 		var wDiv = $(listName + "detailsDiv");
-		 		wDiv.style.borderLeft = "1px dashed red";
+		 		//wDiv.style.borderLeft = "1px dashed red";
 		 		wDiv.style.marginLeft = "20px";
 				wDiv.style.width="400px";
 		 		if(items.length > 0)	{
