@@ -16,7 +16,7 @@
 		<div class="sectionHeader">
 			<h5>Select an Analysis Tool</h5>
 		</div>
-		<div class="sectionBody">
+		<div class="sectionBody" style="border:1px solid #E0E0E0;">
 		<ul>
 			<g:contextAware mode="hideFromOnly" context="TARGET">
 			<li><a href="${createLink(controller: 'analysisTools', action:'pcaSetup') }">Principle Component Analysis (PCA)</a></li>
