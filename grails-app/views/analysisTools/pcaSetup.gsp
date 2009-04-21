@@ -86,9 +86,13 @@
            	<td>
 	            <!-- sets the hidden field to the platformName - do not change -->
 				<!--<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;" name="arrayPlatform" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.listOrderByPlatformName()}" optionValue="platformName" optionKey="fileName"></g:select>-->
-				<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;" name="arrayPlatform" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
+				<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
 				
 				<input type="hidden" id="platformName" name="platformName" value=""/>
+				<span id="currentPlatform" style="font-size:10px;"></span>
+				<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
+				     <span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
+				</g:each>
 			</td>
 		</tr>
 		
