@@ -134,7 +134,7 @@
 					<input type="text" id="sampleGroupName" name="sampleGroupName" style="width:95px"/><br/>
 					<input type="button" style="width:95px" value="save samples" onclick="javascript:A_saveSamples();" /><br/>			
 				</div>
-				<div style="margin-left:10px;font-size:5px;text-decoration:none; text-align:center;">
+				<div style="margin-left:10px;font-size:10px;text-decoration:none; text-align:center;">
 					<a href="#" onclick="javascript: if(confirm('clear samples?')) { clearPending();return false; } ">[clear samples]</a><br/>
 				</div>
 				</td>
