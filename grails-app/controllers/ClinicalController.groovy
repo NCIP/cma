@@ -1,11 +1,18 @@
-import grails.converters.*
-import gov.nih.nci.cma.clinical.*;
-import java.text.SimpleDateFormat;
-import org.apache.log4j.Logger;
+  import grails.converters.*
+  
+  import gov.nih.nci.cma.clinical.*;
+  
+  import java.text.SimpleDateFormat;
+  
+  import org.apache.log4j.Logger;
+  
 
 class ClinicalController {
 	
 	private static Logger logger = Logger.getLogger(ClinicalController.class);
+    
+    // Define the ClinicalView domain class/bean  
+    ClinicalView clinicalView
 	
 	def defaultListLoaderService
 	def beforeInterceptor = {
@@ -79,7 +86,13 @@ class ClinicalController {
     //END TEST TEST
     
     def clinicalReport = {
-
+        	
+    	// Bind request parameters onto properties of the ClinicalView bean
+	  	clinicalView = new ClinicalView(params) 
+	  		  	  	
+	  	if(clinicalView.validate()) {
+	  		  	  	
+		/*
 		if(params.containsKey("patientId") )	{
 			//you dont need to select either a sample group OR a patientId
 			if(params.sampleGroup == null && ((params.patientId == null)||(params.patientId.trim().length() == 0)))	{
@@ -95,27 +108,69 @@ class ClinicalController {
             redirect(controller:"clinical")
             return
     	}
-		//TODO: we will also want a sep method for pulling completed reports from cache?
-		//this view is a JSP using the DisplayTag for report rendering
-		//check query name
-		def qname = params.queryName //this will be the key to accessing the report in cache/session
-		if(params.queryName == null || params.queryName == "")	{
-			SimpleDateFormat dateformatMMDDYYYY = new SimpleDateFormat("MMddyyyy");
-			qname = "clinical_" + dateformatMMDDYYYY.format(new Date())
-			params.queryName = qname;
-		}
-    	qname = gov.nih.nci.cma.util.SafeHTMLUtil.clean(qname)
-
-    	//	if(session.getAttribute(qname) == null)	{ //one already exists, overwrite
-    		//List reportBeansList = clinicalService.getClinicalData(request);
-    	    def clinSrv = getClinicalService()	
-    	    List reportBeansList = clinSrv.getClinicalData(request);
-	    	//put the reportBeansList somewhere..session for now, cache would be better, keyed as taskid (Query name)
-	    	session.setAttribute(qname, reportBeansList);
-   // 	}
-    
-    	//forward as to not repost on refresh
-    	redirect(action:'clinicalReportDisplay', params:[taskId:qname])
+    	*/
+			//TODO: we will also want a sep method for pulling completed reports from cache?
+			//this view is a JSP using the DisplayTag for report rendering
+			//check query name
+			def qname = params.queryName //this will be the key to accessing the report in cache/session
+			if(params.queryName == null || params.queryName == "")	{
+				SimpleDateFormat dateformatMMDDYYYY = new SimpleDateFormat("MMddyyyy");
+				qname = "clinical_" + dateformatMMDDYYYY.format(new Date())
+				params.queryName = qname;
+			}
+	    	qname = gov.nih.nci.cma.util.SafeHTMLUtil.clean(qname)
+	
+	    	//	if(session.getAttribute(qname) == null)	{ //one already exists, overwrite
+	    		//List reportBeansList = clinicalService.getClinicalData(request);
+	    	    def clinSrv = getClinicalService()	
+	    	    List reportBeansList = clinSrv.getClinicalData(request);
+		    	//put the reportBeansList somewhere..session for now, cache would be better, keyed as taskid (Query name)
+		    	session.setAttribute(qname, reportBeansList);
+	   // 	}
+	    
+	    	//forward as to not repost on refresh
+	    	redirect(action:'clinicalReportDisplay', params:[taskId:qname])
+	    } else {
+	        List selectedSampleGrpList
+	        if ( request.getParameterValues("sampleGroups") != null ) {
+		        selectedSampleGrpList = Arrays.asList(request.getParameterValues("sampleGroups"))
+		    }
+							
+		    def clinSrv = getClinicalService()	
+			defaultListLoaderService.loadDefaultLists()
+						
+			def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+			def genderList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.gender)
+			def diseaseList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.disease)
+			def raceList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.race)
+	
+			def tumorTissueSiteList = clinSrv.getPermissibleValues("tumorTissueSite");
+			def vitalStatusList = clinSrv.getPermissibleValues("vitalStatus");
+						
+		    def eventList = clinSrv.getPermissibleValues("event");
+		    def deathList = clinSrv.getPermissibleValues("death");
+		    def congenitalAbnormalityList = clinSrv.getPermissibleValues("congenitalAbnormality");
+		    def telStatusList = clinSrv.getPermissibleValues("telStatus");
+		    def trisomiesList = clinSrv.getPermissibleValues("trisomies_4_10");
+		    def mllStatusList = clinSrv.getPermissibleValues("mllStatus");
+		    def e2aStatusList = clinSrv.getPermissibleValues("e2aStatus");
+		    def bcrStatusList = clinSrv.getPermissibleValues("bcrStatus");
+		    def cnsStatusList = clinSrv.getPermissibleValues("cns");
+		    def testicularStatusList = clinSrv.getPermissibleValues("testicular");
+		  
+		    def day8mrd = clinSrv.getPermissibleValues("day8mrd");
+		    def day29mrd = clinSrv.getPermissibleValues("day29mrd");
+		    
+			def dc = grailsApplication.config.cma.dataContext
+			//render(view:"${dc}Main")
+			render(view:"${dc}Main", model:[clinicalView:clinicalView, patLists:patLists, genderList:genderList, 
+			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
+			   vitalStatusList:vitalStatusList,eventList:eventList, deathList:deathList, 
+			   congenitalAbnormalityList:congenitalAbnormalityList, telStatusList:telStatusList, 
+			   trisomiesList:trisomiesList, mllStatusList:mllStatusList, e2aStatusList:e2aStatusList, 
+			   bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList, testicularStatusList:testicularStatusList, 
+			   day29mrd:day29mrd, day8mrd:day8mrd, selectedSampleGrpList:selectedSampleGrpList])
+	    }
     }
     
     def clinicalReportDisplay = {

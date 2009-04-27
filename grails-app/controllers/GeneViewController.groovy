@@ -1,21 +1,27 @@
-import grails.converters.*
-import gov.nih.nci.cma.web.GeneSearch;
-import gov.nih.nci.cma.web.graphing.GEPlot
-import gov.nih.nci.cma.web.graphing.LegendCreator
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.codehaus.groovy.grails.web.context.ServletContextHolder;
-import org.springframework.context.ApplicationContext 
-import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes;
+  import grails.converters.*
+  
+  import org.springframework.web.context.support.WebApplicationContextUtils;
+  import org.springframework.context.ApplicationContext 
+  
+  import org.codehaus.groovy.grails.web.context.ServletContextHolder;
+  import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes;
 
-import gov.nih.nci.caintegrator.application.analysis.AnalysisHelper
-import gov.nih.nci.caintegrator.analysis.messaging.ReporterGroup
-import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup
-import gov.nih.nci.caintegrator.service.findings.ExpressionLookupFinding
-import gov.nih.nci.caintegrator.analysis.messaging.DataPointVector
-import gov.nih.nci.caintegrator.util.CaIntegratorConstants
+  import gov.nih.nci.caintegrator.application.analysis.AnalysisHelper
+  import gov.nih.nci.caintegrator.analysis.messaging.ReporterGroup
+  import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup
+  import gov.nih.nci.caintegrator.service.findings.ExpressionLookupFinding
+  import gov.nih.nci.caintegrator.analysis.messaging.DataPointVector
+  import gov.nih.nci.caintegrator.util.CaIntegratorConstants
+
+  import gov.nih.nci.cma.web.GeneSearch;
+  import gov.nih.nci.cma.web.graphing.GEPlot
+  import gov.nih.nci.cma.web.graphing.LegendCreator
 
 
 class GeneViewController {
+    
+    // Define the GeneView domain class/bean  
+    GeneView geneView
 
 	def defaultListLoaderService
 	def beforeInterceptor = {
@@ -24,34 +30,8 @@ class GeneViewController {
 		}
 	}
 	
-    def index = { 
-    	
-    	
-    	//SAMPLE Call to the analysis server
-//    	ReporterGroup rg = new ReporterGroup()
-//    	rg.add("207848_at")
-//    	    	    	
-//    	
-//    	SampleGroup sg = new SampleGroup()
-//    	sg.add("TCGA-02-0071-01A-01R-0202-01")
-//    	sg.add("TCGA-12-0618-01A-01R-0306-01")
-//    	
-//    	String rbinaryFileName  = "TCGA.affyhg-u133a_4_3_08.Rda"
-//    	    	    
-    	//try sending a request
-//    	ExpressionLookupFinding finding = AnalysisHelper.getExpressionValuesForReporters(rg, rbinaryFileName, sg)
-//    	    	
-//    	List<DataPointVector> dataVectors = finding.getDataVectors()
-//    	
-//    	if (dataVectors != null) {
-//    	  System.out.println("Call to getExprValues returned numResults=${dataVectors.size()}")
-//    	}
-//    	else {
-//    	  System.out.println("No data vectors returned")	
-//    	}
-    	//END SAMPLE CALL to the analysis server.
-    	
-    	//fetch the patient lists to popupate the form
+    def index = {     	
+    	// Fetch the patient lists to populate the form
     	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
     	String pwLink = System.getProperty("gov.nih.nci.cma.links.pathway_url");
     	String gwbLink = System.getProperty("gov.nih.nci.cma.links.genomeworkbench_url");
@@ -59,7 +39,75 @@ class GeneViewController {
     	render(view:'main', model:[patLists:patLists, pwLink:pwLink, gwbLink:gwbLink])
     }
     
-    def geneBasedView = {
+    def geneBasedView = {        	
+    	// Bind request parameters onto properties of the GeneView bean
+	  	geneView = new GeneView(params) 
+	  	  		  		  	  	
+	  	if(geneView.validate()) {
+	    	def geneExpPlot = params["plot"]
+	    	
+	    	// Get the beans from spring, injection wont work here
+	    	ApplicationContext ctx =
+				ServletContextHolder.getServletContext().getAttribute(GrailsApplicationAttributes.APPLICATION_CONTEXT)
+			def annotationManager = ctx.getBean('annotationManager') 
+			def idMappingManager = ctx.getBean('idMappingManager');
+	    	//should be available via the km jar
+	    	def kmReporterService = ctx.getBean('kmReporterService');
+	    	
+	    	String geneSymbol = params['geneSymbol']
+	    	
+	    	def gs = new GeneSearch(annotationManager, idMappingManager, kmReporterService)
+	    	def annotationsMap = gs.lookupReportersForQuickSearch(request)
+	
+			if(annotationsMap == null || annotationsMap.size()==0)	{
+	    		//no reporters, so dont plot anything
+	    		flash.message = "No reporters for this gene and platform"
+	            redirect(controller:"geneView")
+	            return
+	    	}
+	    	
+	    	if (params['plot'] == 'geneExpPlot' )	{
+		    	gs.genePlot(request)
+		    	
+		        redirect(controller:"geneView",action:"genePlot")
+		        return
+		    }
+	    	else if (params['plot'] == CaIntegratorConstants.GENE_EXP_KMPLOT )	{
+		    	gs.geneKMPlot(request)
+		    	def kmRequestMap = gs.getKmRequestMap()
+		    	if(kmRequestMap == null)	{
+		    		flash.message = "Error performing KM Plot.  Please select different parameters and retry."
+		            redirect(action:index)
+		            return
+		    	}
+		    	else	{
+		    		params.taskId = kmRequestMap.get("taskId")
+		    		params.plot = kmRequestMap.get("plotType")
+		    		params.plotType = kmRequestMap.get("plotType")
+		    		params.reporter = kmRequestMap.get("reporter")
+		    		redirect(action:'kmPlot', params:params)
+		    		return
+		    	}
+		    }
+	    	else	{
+	    		flash.message = "Please select a  valid plot type"
+	            redirect(action:index)
+	            return
+	    	}
+        } else {
+	        List selectedSampleGrpList
+	        if ( request.getParameterValues("sampleGroups") != null ) {
+		        selectedSampleGrpList = Arrays.asList(request.getParameterValues("sampleGroups"))
+		    }
+
+	    	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+	    	String pwLink = System.getProperty("gov.nih.nci.cma.links.pathway_url");
+	    	String gwbLink = System.getProperty("gov.nih.nci.cma.links.genomeworkbench_url");
+	        render(view:'main',model:[geneView:geneView, patLists:patLists, pwLink:pwLink, gwbLink:gwbLink, selectedSampleGrpList:selectedSampleGrpList])
+        }
+        
+    
+    	/*
     	def geneExpPlot = params["plot"]
     	//call the injected service passing validated params
     	//render appropriate page or error message
@@ -144,6 +192,7 @@ class GeneViewController {
             redirect(action:index)
             return
     	}
+    	*/
     }
     
     def genePlot = {
