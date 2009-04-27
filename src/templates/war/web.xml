@@ -117,7 +117,7 @@
     
     <servlet-mapping>
 		<servlet-name>Captcha</servlet-name>
-		<url-pattern>/Captcha.jpg</url-pattern>
+		<url-pattern>/registration/Captcha.jpg</url-pattern>
 	</servlet-mapping>
 
     <welcome-file-list>
