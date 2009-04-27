@@ -1,6 +1,9 @@
 package context;
-import org.springframework.web.context.request.RequestContextHolder
-import javax.servlet.http.HttpSession
+
+  import org.springframework.web.context.request.RequestContextHolder
+  
+  import javax.servlet.http.HttpSession
+  
 
 class UserContextService {
 
@@ -16,8 +19,7 @@ class UserContextService {
     	
     	if(session.userId != null && session.userId != "")	{
     		return true;
-    	}
-    	else	{
+    	} else {
     		return false;
     	}
     }

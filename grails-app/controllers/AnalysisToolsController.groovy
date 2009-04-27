@@ -3,6 +3,10 @@ import gov.nih.nci.cma.web.graphing.PCAPlot;
 import gov.nih.nci.caintegrator.application.analysis.gp.GenePatternIntegrationHelper;
 
 class AnalysisToolsController {
+    
+    // Define the PcaView and GpaView domain classes/beans  
+    GpaView gpaView
+    PcaView pcaView
 
 	String gpHomeURL = "";
 	def defaultListLoaderService
@@ -36,6 +40,7 @@ class AnalysisToolsController {
     	//had to pass entire request, not just params, b/c grails cant properly make a mult
     	//select a string[] if only 1 thing is selected.
 		
+		/*
     	if(params.selectedGroups == null)	{
     		//flash and redirect
     		flash.message = "Please select at least one Sample Group"
@@ -54,15 +59,35 @@ class AnalysisToolsController {
             redirect(controller:"analysisTools", action:"pcaSetup")
             return
     	}
-    	
-    	QueryDTO queryDTO = pCAService.createDTO(session.getId(), request)
+    	*/
+        	
+    	// Bind request parameters onto properties of the PcaView bean
+	  	pcaView = new PcaView(params) 
+	  		  	  	
+	  	if (pcaView.validate()) {
+	    	
+	    	QueryDTO queryDTO = pCAService.createDTO(session.getId(), request)
+			
+			pCAService.submitQuery(session.getId(), queryDTO);
+			
+			//task should be put in cache and checked via inbox
+			//TODO:  WONT forward properly using this notation.
+			redirect(controller: 'inbox', action:'index');
+			return;
+			
+		} else {
+	        List selectedSampleGrpList
+	        if ( request.getParameterValues("selectedGroups") != null ) {
+		        selectedSampleGrpList = Arrays.asList(request.getParameterValues("selectedGroups"))
+		    }
 		
-		pCAService.submitQuery(session.getId(), queryDTO);
-		
-		//task should be put in cache and checked via inbox
-		//TODO:  WONT forward properly using this notation.
-		redirect(controller: 'inbox', action:'index');
-		return;
+	    	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+	    	def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
+	    	
+	    	render(view:'pcaSetup', model:[pcaView:pcaView, patLists:patLists, geneLists:geneLists, 
+	    			selectedSampleGrpList:selectedSampleGrpList])
+	    	
+		}
     }
     
     def pcaPlot = {
@@ -128,8 +153,50 @@ class AnalysisToolsController {
         	println(params['analysisResultName'])
         	*/
         	
+    	// Bind request parameters onto properties of the GpaView bean
+	  	gpaView = new GpaView(params) 
+	  	
+	    List selectedSampleGrpList
+	    if ( request.getParameterValues("selectedGroups") != null ) {
+		    selectedSampleGrpList = Arrays.asList(request.getParameterValues("selectedGroups"))
+	 	}
+			  		  	  	
+	  	if (gpaView.validate()) {
+	    	
         	gPService.generateGPSubmission(request)
-
-        	render(view:'genePatternJobView')        	     	
+        	render(view:'genePatternJobView')     
+        	
+        } else {
+    		
+        	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+        	
+        	// Get the data context 
+    		def dataContext = grailsApplication.config.cma.dataContext
+    		// Displays or hides certain GP setup page elements
+    		String displayEl = ""
+    		
+    		if (dataContext.equalsIgnoreCase("TCGA")) {
+    			// Below not used for Rembrandt data
+    			def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
+        	
+        		// 'Copy Number' not used for Rembrandt data. That leaves 
+        		// a selection of one, so don't bother with list for Rembrandt.
+        		def moduleList = ["Gene Expression", "Copy Number"]
+        		
+        		// Display some elements not visible for dataContext="Rembrandt"
+        		displayEl = "display:inline"
+        	
+        		render(view:'genePatternSetup', model:[gpaView:gpaView, patLists:patLists, 
+        				geneLists:geneLists, moduleList:moduleList, displayEl:displayEl,
+        				selectedSampleGrpList:selectedSampleGrpList])
+    		}
+    		else if (dataContext.equalsIgnoreCase("Rembrandt")) {
+    			// Hide some elements not visible for dataContext="Rembrandt"
+    			displayEl = "display:none"
+    			
+    			render(view:'genePatternSetup', model:[gpaView:gpaView, patLists:patLists, 
+    					displayEl:displayEl, selectedSampleGrpList:selectedSampleGrpList])
+    		}
+        }   	     	
     }
 }
