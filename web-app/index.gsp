@@ -15,17 +15,19 @@
 					case "tools":
 						go = "${createLink(controller:'analysisTools')}";
 					break;
-					
-
+				
 					case "gene":
 						go = "${createLink(controller:'geneView')}";
 					break;
+					
 					case "genome":
 						go = "${createLink(controller:'genomeView')}";
 					break;
+					
 					case "clinical":
 						go = "${createLink(controller:'clinical')}";
 					break;
+					
 					default:
 					break;
 				}
@@ -207,7 +209,7 @@
 											
 											<g:contextAware mode="showOnlyTo" context="TCGA">
 												<li>
-													<a href="${createLinkTo(dir:'',file:'registration.gsp')}">Register</a>
+													<g:link controller="registration">Register</g:link>
 												</li>
 											</g:contextAware>
 												<li>
