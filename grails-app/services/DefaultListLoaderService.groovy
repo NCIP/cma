@@ -1,4 +1,3 @@
-
 import gov.nih.nci.caintegrator.application.lists.UserListBean;
 import gov.nih.nci.caintegrator.application.lists.UserList;
 import gov.nih.nci.caintegrator.application.lists.ListItem;
@@ -79,6 +78,17 @@ class DefaultListLoaderService {
 	       	  
 	       	  userLists.add(ul)                	                   	  
           }
+          
+          //run the query for all-patients from study_participant table (all contexts have this)
+          def idMapping = CmaStudyParticipant.executeQuery( "select distinct a.participantDid from CmaStudyParticipant a" );
+          items = new ArrayList<ListItem>();
+          idMapping.each { m ->
+          	  ListItem i = new ListItem(m)
+          	  
+          	  items.add(i)
+          }
+          ul = new UserList("ALL_PATIENTS_CMA", ListType.PatientDID, items, Collections.emptyList())
+          userLists.add(ul)
           
           presentationCacheManager.addNonPersistableToSessionCache(session.getId(), 
        		   CacheConstants.USER_LISTS, userListBean);
