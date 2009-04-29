@@ -28,7 +28,6 @@
 				$('contextDiv').observe('mouseout', function()	{$('contextOptions').setOpacity(0.7);} );
 
 				$('contextDiv').observe('click', function()	{$('contextOptions').toggle();} );
-				
 				$('middle').observe('mouseover', function()	{ $('contextOptions').hide();}	);
 				
 				//insert the help, passing path to the images dir
@@ -46,7 +45,7 @@
 			<div id="contextDiv">
 				<div id="ccontextDiv">
 					<span id="ccontextText" style="background-image:url(${createLinkTo(dir:'images',file:grailsApplication.config.cma.dataContext.toLowerCase()+'Context30.gif')});">
-						${grailsApplication.config.cma.dataContext ?: "Rembrandt" }
+						${grailsApplication.config.cma.dataContexts[grailsApplication.config.cma.dataContext].displayName ?: "Rembrandt" }
 					</span>
 					<span id="ccontextArrow">
 						V
@@ -56,10 +55,10 @@
 				<div id="contextOptions" style="display:none;">
 					<div>
 						Select Context
-					</div>
-					<g:each in="${grailsApplication.config.cma.availableContexts}">
+					</div>					
+					<g:each in="${grailsApplication.config.cma.dataContexts}">
 						<div id="">
-							<a id="${it.toLowerCase()}Context" href="/cma-${it.toLowerCase()}/"  style="display:block;background-image: url(${createLinkTo(dir:'images',file:it.toLowerCase()+'Context30.gif')});" >${it}</a>
+							<a id="${it.key.toLowerCase()}Context" href="/cma-${it.key.toLowerCase()}/"  style="display:block;background-image: url(${createLinkTo(dir:'images',file:it.key.toLowerCase()+'Context30.gif')});" >${it.value.displayName}</a>
 						</div>
 					</g:each>
 				</div>
