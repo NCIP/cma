@@ -88,8 +88,15 @@ legend	{
 
 /* for context switching widget */
 #contextDiv	{
-	float:right; 
-	width:210px;
+	/*
+	float:right;
+	*/
+	position:relative;
+	top:0px;
+	left:700px;
+	_left:350px;
+	z-index:1000;
+	width:510px;
 	margin:0px;
 	color:#fff;	
 }
@@ -121,7 +128,7 @@ legend	{
 */
 #ccontextDiv	{
 	/* note the 2nd c */
-	width:200px;
+	width:250px;
 	height:30px;
 	text-align:right;
 	background-color:silver;	
@@ -147,7 +154,11 @@ legend	{
 	margin-left:20px;
 	width:165px;
 	text-align:right;
-	background-color:silver;	
+	background-color:silver;
+	position:absolute;
+	top:30px;
+	left:20px;
+	_left:150px;	
 }
 #contextOptions div	{
 	font-size:16px;
