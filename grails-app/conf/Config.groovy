@@ -6,23 +6,51 @@
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
+//The CURRENT Context - MUST match a key from cma.dataContexts map below -> TARGET | Rembrandt | TCGA | TCGAOvarian
+//EDIT THIS line to configure your builds context
+cma.dataContext="TCGA"
+cma.deployedTo = "local"; //local, dev, ect  (really only cares about 'local')
+
+//All Available Contexts
+cma.dataContexts =  [
+	'Rembrandt' : [
+		displayName:'Rembrandt',
+		authenticationManagerContext:'rembrandt',
+		propertiesFile:'cma-rembrandt.properties'
+	],
+	'TCGA' : [
+		displayName:'TCGA GBM',
+		authenticationManagerContext:'cma',
+		propertiesFile:'cma-tcga.properties'
+	],
+	'TCGAOvarian' : [
+		displayName:'TCGA Ovarian',
+		authenticationManagerContext:'cma',
+		propertiesFile:'cma-tcga.properties'
+	],
+	'TARGET' : [
+		displayName:'Target',
+		authenticationManagerContext:'target',
+		propertiesFile:'cma-target.properties'
+	]
+]
 
 
-// TCGA:
-cma.dataContext="TARGET"
-cma.availableContexts = ["Rembrandt", "TCGA", "TARGET"]
-cma.authenticationManagerContext="cma"
-cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-tcga.properties"
-//cma.appPropertiesFile="/local/content/cma/config/cma-tcga.properties"
+//Probably wont ever need to edit below this line ----------------------
+propertiesFilePath = cma.deployedTo=='local' ? "C:\\local\\content\\cma\\config\\"  : "/local/content/cma/config/";
+cma.appPropertiesFile = propertiesFilePath + cma.dataContexts[cma.dataContext].propertiesFile
+//cma.appPropertiesFile= propertiesFileUrl.propertiesFilesPath + cma.dataContexts[cma.dataContext].propertiesFile
+cma.authenticationManagerContext=cma.dataContexts[cma.dataContext].authenticationManagerContext
 
-// Rembrandt:
-//cma.dataContext="Rembrandt"
-//cma.authenticationManagerContext="rembrandt"
-//cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-rembrandt.properties"
-//cma.appPropertiesFile="/local/content/cma/config/cma-rembrandt.properties"
-				
+// CONTEXTS:  // 1 | 2 | 3
+//cma.authenticationManagerContext="cma"  //target  | rembrandt | cma  | tcgaovarian?
+//cma.availableContexts = ["Rembrandt", "TCGA_GBM", "TCGA_Ovarian", "TARGET"]  //add/remove for links
+//FOR LOCAL DEV:
+//cma.appPropertiesFile="C:\\local\\content\\cma\\config\\cma-tcga.properties"  //cma-target | cma-rembrandt | cma-tcga 
+//FOR SERVER DEPLOYMENT:
+//cma.appPropertiesFile="/local/content/cma/config/cma-tcga.properties" //cma-target | cma-rembrandt | cma-tcga 
+
 grails.config.locations = ["file:${cma.appPropertiesFile}"]
-
 
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
@@ -49,13 +77,7 @@ grails.converters.encoding="UTF-8"
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 
-// set per-environment serverURL stem for creating absolute links
-environments {
-    production {
-        grails.serverURL = "http://cma-dev.nci.nih.gov"
-	  //grails.config.locations = ["file:C:/local/content/cma/config/cma-tcga.properties"]
-    }
-}
+
 
 // log4j configuration
 log4j {
