@@ -56,9 +56,11 @@ class RegistrationController {
 	        mp.setMailTo("${registration.email}")
 	        mp.setMailFrom(grailsApplication.config.cma.feedback.mailFrom)
 
-	        Mail.sendMail(mp);
-			
-		    redirect(action:'index')
+	        Mail.sendMail(mp);			
+
+            // Go back to home page
+            redirect(uri: "/index.gsp")
+		    //redirect(action:'index')
 		    //redirect(uri:"cma")
 					
 		} catch (Exception e) {
