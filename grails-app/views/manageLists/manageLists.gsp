@@ -71,45 +71,51 @@
 			</div>
 			<br clear="all"/>
 		</g:each>
-		<g:uploadForm name="cmaListUploadForm" controller="manageLists" action="upload"> 
-			<a name="addList"></a>
-			<div class="sectionHeader" onclick="new Effect.toggle('UploadContainer')">
-				<h5>Upload List -or- Manually Type List</h5>
-			</div>
-			<div id="UploadContainer" class="sectionBody" style="border:1px solid #E0E0E0;">
-			    	
-				<g:if test="${flash.message}">
-			    	<div class="message">${flash.message}</div><br/>
-			    </g:if>
-			        	         	        
-				<table>
-					<tr>
-						<td>Choose the list type:</td>	
-						<td>
-							<g:select name="listTypes" style="width: 100px; overflow: none;" from="${lts}"></g:select>
-						</td>
-					</tr>
-					<tr>
-						<td valign="middle">Upload File:</td>
-						<td valign="middle">
-							<input type="file" name="cmaListUpload" />
-						</td>
-					</tr>
-					<tr>
-						<td class="label">List Name:</td>			
-						<td>						
-							<input type="text" id="listName" size="25" name="listName"/>
-						</td>
-					</tr>
-					<tr>
-						<td class="label">List Description:</td>			
-						<td>						
-							<input type="text" id="listDesc" size="50" name="listDesc"/> &nbsp;&nbsp;&nbsp;<input type="submit" value="Add List"/>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</g:uploadForm>			
+		
+		<!--  -------------- -->	
+		<g:isLoggedIn>
+			<g:uploadForm name="cmaListUploadForm" controller="manageLists" action="upload"> 
+				<a name="addList"></a>
+				<div class="sectionHeader" onclick="new Effect.toggle('UploadContainer')">
+					<h5>Upload List -or- Manually Type List</h5>
+				</div>
+				<div id="UploadContainer" class="sectionBody" style="border:1px solid #E0E0E0;">
+				    	
+					<g:if test="${flash.message}">
+				    	<div class="message">${flash.message}</div><br/>
+				    </g:if>
+				        	         	        
+					<table>
+						<tr>
+							<td>Choose the list type:</td>	
+							<td>
+								<g:select name="listTypes" style="width: 100px; overflow: none;" from="${lts}"></g:select>
+							</td>
+						</tr>
+						<tr>
+							<td valign="middle">Upload File*:</td>
+							<td valign="middle">
+								<input type="file" name="cmaListUpload" />
+							</td>
+						</tr>
+						<tr>
+							<td class="label">List Name*:</td>			
+							<td>						
+								<input type="text" id="listName" size="25" name="listName"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="label">List Description*:</td>			
+							<td>						
+								<input type="text" id="listDesc" size="50" name="listDesc"/> &nbsp;&nbsp;&nbsp;<input type="submit" value="Add List"/>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</g:uploadForm>		
+		</g:isLoggedIn>
+		<!--  -------------- -->
+		
 		<div style="text-align:right; margin:10px;">
 			<a href="#" onclick="javascript:scroll(0,0);return false;">[top]</a>
 		</div>
