@@ -110,53 +110,39 @@ class ManageListsController {
 
      
     def export = {
-
 		// Retrieve the selected list from session by name
-	    File outFile 
 		String listName = params["list"]
+		String outFileName = listName + ".txt"
        	UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session.getId())      
 		UserList ul = userListBeanHelper.getUserList(listName)	
-		
-	    try {
-	    	outFile = new File(listName + ".txt")
-	        BufferedWriter out = new BufferedWriter(new FileWriter(outFile));
-	        
-	        ul.listItems.each {
-	        	out.write(it.name);  
-	        	if ( it.rank != null || it.rank != "" ) {
-	        		out.write(" rank:" + it.rank);  
-	        	}      	
-	        	if ( it.notes != null || it.notes != "" ) {
-	        		out.write(" notes:" + it.notes);  
-	        	} 
-	        	out.newLine()     	
-	        }
-	        
-	        out.close();
-	    } catch (IOException e) {
-	    }
-	    
         ServletOutputStream op = response.getOutputStream()
-        String mimetype = servletContext.getMimeType(outFile.getName())
-	    int length = 0
+        String mimetype = servletContext.getMimeType(outFileName)
+        StringBuffer sb = new StringBuffer()
+		
+	    ul.listItems.each {
+	    	sb.append(it.name);  
+	        if ( it.rank != null || it.rank != "" ) {
+	        	sb.append(" rank:" + it.rank);  
+	        }      	
+	        if ( it.notes != null || it.notes != "" ) {
+	        	sb.append(" notes:" + it.notes);  
+	        } 
+	        sb.append("\n")
+	    }
 	    
         //  Set the response and go!
         response.setContentType( (mimetype != null) ? mimetype : "application/octet-stream" );
-        response.setContentLength( (int)outFile.length() );
-        response.setHeader( "Content-Disposition", "attachment; filename=\"" + outFile.getName() + "\"" );
+        response.setContentLength( sb.length() );
+        response.setHeader( "Content-Disposition", "attachment; filename=\"" + outFileName + "\"" );
 
         //
         //  Stream to the requester.
         //
-        byte[] bbuf = new byte[1024]
-        DataInputStream inStream = new DataInputStream(new FileInputStream(outFile))
-
-        while ((inStream != null) && ((length = inStream.read(bbuf)) != -1))
-        {
-            op.write(bbuf,0,length);
+        try {
+        	op.println(sb.toString())
+        } catch (Exception e) {
         }
 
-        inStream.close();
         op.flush();
         op.close();
 			
