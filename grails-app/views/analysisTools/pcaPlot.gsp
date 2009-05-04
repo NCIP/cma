@@ -80,6 +80,9 @@
 				filter: alpha(opacity=40);
 				opacity:.4;
 			}
+			#contextDiv {
+				display:none;
+			}
 		</style>
 	</head>
 	<body>
