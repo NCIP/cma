@@ -9,6 +9,8 @@ import gov.nih.nci.caintegrator.application.lists.ListSubType;
 import gov.nih.nci.caintegrator.application.cache.PresentationCacheManager;
 import gov.nih.nci.caintegrator.application.cache.PresentationTierCache;
 
+import org.codehaus.groovy.grails.commons.*
+
 import org.springframework.web.context.request.RequestContextHolder
 
 class DefaultListLoaderService {
@@ -79,8 +81,22 @@ class DefaultListLoaderService {
 	       	  userLists.add(ul)                	                   	  
           }
           
+          def idMapping
+          
+          switch(ConfigurationHolder.config.cma.dataContext)	{
+          	case "Rembrandt":
+        	  idMapping = gov.nih.nci.cma.domain.rembrandt.PatientData.executeQuery( "select distinct sampleId from PatientData where institutionId='8'" );
+        	break;
+          	default:
+          		idMapping = CmaStudyParticipant.executeQuery( "select distinct a.participantDid from CmaStudyParticipant a" );
+        	break;
+          }
           //run the query for all-patients from study_participant table (all contexts have this)
-          def idMapping = CmaStudyParticipant.executeQuery( "select distinct a.participantDid from CmaStudyParticipant a" );
+//          def idMapping = CmaStudyParticipant.executeQuery( "select distinct a.participantDid from CmaStudyParticipant a" );
+          
+          //rbt
+//          PatientData.executeQuery( "select distinct sampleId from PatientData where institutionId='8'" );
+          
           items = new ArrayList<ListItem>();
           idMapping.each { m ->
           	  ListItem i = new ListItem(m)
