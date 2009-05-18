@@ -37,6 +37,7 @@ class BootStrap {
   		FileInputStream inputStream
   		
   		inputStream = new FileInputStream(config.cma.appPropertiesFile);
+     	
   		cmaPortalProperties.load(inputStream);
   		   
   		if (cmaPortalProperties.isEmpty()) {
@@ -50,7 +51,6 @@ class BootStrap {
   		  val = cmaPortalProperties.getProperty(key);
   		  System.setProperty(key, val);
   		}
-  		
   		
   		//Initialize the analysis server
   		AnalysisServerClientManager am = AnalysisServerClientManager.getInstance();
