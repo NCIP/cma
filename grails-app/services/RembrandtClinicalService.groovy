@@ -198,7 +198,7 @@ class RembrandtClinicalService {
          	//println("pdid=${d.getPatientDid()} timepoint=${d.getTimePoint()} agentName=${d.getAgentName()}")
          
         crb.appendPriorTherapyChemoAgentName(d.getAgentName())	 
-        crb.appendPriorTherapyChemoCourseCount(d.getCourseCount())	 
+        crb.appendPriorTherapyChemoCourseCount(d.getCourseCount().toString())	 
       }
     }
     
