@@ -17,8 +17,16 @@ class GenomeViewController {
     
     def links = {
     	def xmlLink = "${grailsApplication.config.gov.nih.nci.cma.links.heatmap_url}"	
-	    def result = heatmapLinksService.fetchParseXml(xmlLink)
-	    render result as JSON
+ 
+    	//should really control these programatically...
+    	//?xml_dump=1&project=TCGA%20GBM
+    	
+    	//just a check for backwards compatability for old props file
+    	xmlLink = xmlLink.replace("xml_dump", "json_dump");
+       	System.out.println("******************** Connecting to: " + xmlLink)
+    	def result = heatmapLinksService.fetchParseXml(xmlLink)
+	    //render result //as JSON
+	    render JSON.parse(result.toString()) as JSON
 	}  
 
 }
