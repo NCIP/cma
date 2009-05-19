@@ -3,10 +3,9 @@
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
-			
  		<script type='text/javascript' src='../dwr/engine.js'></script>
 		<script type='text/javascript' src='../dwr/interface/GenePatternHelper.js'> </script>
-		
+
 		<g:javascript src="a_genePattern.js" /> 	
 		 
 	</head>
@@ -38,8 +37,8 @@
 				<script type="text/javascript">	
 					//testMap("testingtesting");
 					var customError = function(message)	{};
-					DWREngine.setWarningHandler(customError);
-					DWREngine.setErrorHandler(customError);
+					//DWREngine.setWarningHandler(customError);
+					//DWREngine.setErrorHandler(customError);
 					
 					setTimeout("A_checkGenePatternStatus('<%= jobId %>')", 0200);
 					var vr_checker = setInterval("A_checkGenePatternStatus('<%= jobId %>')", 5000);	
