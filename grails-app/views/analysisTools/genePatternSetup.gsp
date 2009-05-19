@@ -38,6 +38,7 @@
 			  }
 			
 			  Event.observe(window, "load", function()	{
+				  new Effect.Corner($$('.sectionHeader')[0], 'top');
 				$('arrayPlatformId').update($('geneExpressionPlatforms').innerHTML);
 			  });
 			  
@@ -84,7 +85,7 @@
 			<div class="sectionBody">
 				<div id="helptag_gene_pattern_criteria" class="help"></div>
 				
-				<g:form id="gpForm" name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
+				<g:form name="gpForm" controller="analysisTools" action="genePatternSubmit" method="post">
 						
 					<table class="formTable">
 						<tr>
@@ -98,8 +99,7 @@
 							</td>
 						</tr>
 						<!-- Not used with Rembrandt data -->
-						<div id="advZ" style="display:none;">
-							<tr>
+							<tr id="advZ" style="display:none;">
 								<td class="label">Select an Chromosome</td>								
 								<td>						
 									<g:select onchange="\$('chromosomeName').value = this.options[this.selectedIndex].text;" 
@@ -110,7 +110,6 @@
 									<input type="hidden" id="chromosomeName" name="chromosomeName" value=""/>
 								</td>
 							</tr>
-						</div>
 						<tr>
 							<td class="label">Select Patient Group*
 								<span class="small">select 1 or more</span>
