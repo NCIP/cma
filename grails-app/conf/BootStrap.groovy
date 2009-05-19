@@ -39,7 +39,11 @@ class BootStrap {
   		inputStream = new FileInputStream(config.cma.appPropertiesFile);
      	
   		cmaPortalProperties.load(inputStream);
-  		   
+  		
+  		//load the new common properties
+  		inputStream = new FileInputStream(config.cma.commonAppPropertiesFile)
+  		cmaPortalProperties.load(inputStream)
+  		
   		if (cmaPortalProperties.isEmpty()) {
   		   log.error("Error: no properties found when loading properties file: " + appPropertiesFileName);
   		}
