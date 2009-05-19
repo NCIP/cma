@@ -1,7 +1,9 @@
 var Help = {
-	url : "helpDocs/cmaPortal/index.html?single=false&context=cmaPortal&topic=",
+//	url : "helpDocs/cmaPortal/index.html?single=false&context=cmaPortal&topic=",
+	url : "http://cma.nci.nih.gov/cma-help/cmaPortal/index.html?single=false&context=cmaPortal&topic=",
+	guideUrl : "http://cma.nci.nih.gov/cma-help/",
 	popGuide: function()	{
-		window.open("helpDocs/cmap_user_guide.pdf", "Help", "status,scrollbars,resizable,width=800,height=500");
+		window.open(Help.guideUrl+"/cmap_user_guide.pdf", "Help", "status,scrollbars,resizable,width=800,height=500");
 	},
 	popHelp: function(topic) {
 		window.open (Help.url+topic, "Help", "status,scrollbars,resizable,width=800,height=500");  
