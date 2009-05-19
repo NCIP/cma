@@ -11,6 +11,9 @@
         <g:javascript library="prototype" />	
         <g:javascript library="scriptaculous" />	
         <g:javascript library="corners" />
+        <script type="text/javascript">
+        	var helpUrl = "${grailsApplication.config.gov.nih.nci.cma.helpUrl}";
+        </script>
         <g:javascript library="Help" />
 		<script type="text/javascript">
 			 Event.observe(window, "load", function()	{
@@ -31,7 +34,9 @@
 				$('middle').observe('mouseover', function()	{ $('contextOptions').hide();}	);
 				
 				//insert the help, passing path to the images dir
-				Help.url = "${createLinkTo(dir:'')}/"+Help.url;
+				//Help.url = "${createLinkTo(dir:'')}/"+Help.url;
+				Help.url = helpUrl+"/cmaPortal/index.html?single=false&context=cmaPortal&topic="; //declared above
+				Help.guideUrl = helpUrl;
 				Help.parsePage({pth: "${createLinkTo(dir:'images')}" });
 			 });
 		</script> 
@@ -89,8 +94,6 @@
 					<td><a href="http://www.dhhs.gov/"><img width="39" height="31" border="0" alt="Department of Health and Human Services" src="${createLinkTo(dir:'images',file:'footer_hhs.gif')}"/></a></td>
 					<td><a href="http://www.nih.gov/"><img width="46" height="31" border="0" alt="National Institutes of Health" src="${createLinkTo(dir:'images',file:'footer_nih.gif')}"/></a></td>
 					<td><a href="http://www.firstgov.gov/"><img width="91" height="31" border="0" alt="FirstGov.gov" src="${createLinkTo(dir:'images',file:'footer_firstgov.gif')}"/></a></td>
-					<td valign="center" style="color:LightSlateGray">&nbsp;&nbsp;<b>|</b></td>
-					<td valign="center"><a style="color:DarkGray;font-size:.8em" href="${createLinkTo(dir:'helpDocs',file:'cmap_user_guide.pdf')}" target="_blank">User Guide</a></td>
 				</tr>
 			</table>
 		</div>	    	
