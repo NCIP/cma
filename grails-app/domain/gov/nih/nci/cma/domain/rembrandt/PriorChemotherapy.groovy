@@ -15,6 +15,7 @@ class PriorChemotherapy {
     static mapping = {
          table 'PRIOR_CHEMOTHERAPY'
          version false
+         
          id column:'PRIOR_CHEMOTRX_ID', cache:'read-only'
          institutionId column:'INSTITUTION_ID', cache:'read-only' 
          datasetId column:'DATASET_ID', cache:'read-only' 
@@ -26,7 +27,7 @@ class PriorChemotherapy {
          doseStopDate column:'DOSE_STOP_DATE', cache:'read-only' 
          studySource column:'STUDY_SOURCE', cache:'read-only' 
          protocolNumber column:'PROTOCOL_NUMBER' , cache:'read-only'
-         patientDid column:'PATIENT_DID', cache:'read-only', insert="false", update="false"
+         patientDid column:'PATIENT_DID', cache:'read-only' , insert:"false", update:"false"
          //patientData column:'PATIENT_DID', cache:'read-only', insert="false", update="false"
     }
     java.math.BigDecimal institutionId
