@@ -17,7 +17,7 @@
 				<a href="http://ncicb.nci.nih.gov/NCICB/support" target="_blank">Application Support</a>
 			</li>
 			<li>
-				<a href="${createLinkTo(dir:'helpDocs',file:'cmap_user_guide.pdf')}" target="_blank">User Guide</a>
+				<a href="#" onclick="Help.popGuide();return false;" target="_blank">User Guide</a>
 			</li>
 		</ul>
 		<br />
