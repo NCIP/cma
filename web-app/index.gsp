@@ -15,19 +15,17 @@
 					case "tools":
 						go = "${createLink(controller:'analysisTools')}";
 					break;
-				
+					
+
 					case "gene":
 						go = "${createLink(controller:'geneView')}";
 					break;
-					
 					case "genome":
 						go = "${createLink(controller:'genomeView')}";
 					break;
-					
 					case "clinical":
 						go = "${createLink(controller:'clinical')}";
 					break;
-					
 					default:
 					break;
 				}
@@ -197,7 +195,7 @@
 										<div class="splashBoxContent">
 										<div id="helptag_welcome" class="help"></div>
 											<a href="#" onclick="Help.popHelp('welcome');return false;">Application Help</a><br/>
-											<a href="${createLinkTo(dir:'helpDocs',file:'cmap_user_guide.pdf')}" target="_blank">User Guide</a>
+											<a href="#" onclick="Help.popGuide();return false;" target="_blank">User Guide</a>
 										</div>
 										<br/><br/>
 										<div class="splashBoxHeader">
