@@ -77,7 +77,7 @@
 			<g:uploadForm name="cmaListUploadForm" controller="manageLists" action="upload"> 
 				<a name="addList"></a>
 				<div class="sectionHeader" onclick="new Effect.toggle('UploadContainer')">
-					<h5>Upload List -or- Manually Type List</h5>
+					<h5>Upload New List</h5>
 				</div>
 				<div id="UploadContainer" class="sectionBody" style="border:1px solid #E0E0E0;">
 				    	

@@ -102,8 +102,8 @@
 	<body>
 		<h2>Gene View</h2>
 		
-		<!--<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm" onsubmit="return checkTask(this);">-->
-		<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm">
+		<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm" onsubmit="return checkTask(this);">
+		<!--<form method="post" action="${createLink(action:'geneBasedView')}" id="geneViewForm">-->
 		
 		<fieldset>
 		    	
@@ -140,7 +140,7 @@
 					  					<g:if test="${geneView == null}">				
 		                         	        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
 											&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
-											<g:contextAware mode="showOnlyTo" context="TCGA">
+											<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
 												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/>
 										    </g:contextAware>
 										</g:if>
@@ -159,7 +159,7 @@
 												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
 											</g:else>
 											
-											<g:contextAware mode="showOnlyTo" context="TCGA">
+											<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
 												<g:if test="${geneView.plot == 'genomeWorkbench'}">
 													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" checked="checked" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
 												</g:if>
@@ -186,13 +186,13 @@
 									<td class="value ${hasErrors(bean:geneView,field:'sampleGroups','errors')}">
 										<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
 						  					<g:if test="${geneView == null}">				
-												<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
 						  					</g:if>				
 						  					<g:elseif test="${geneView.sampleGroups == null}">	
-												<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
 						  					</g:elseif>	
 						  					<g:else>	
-												<select name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;">
+												<select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;">
 													<g:each in="${patLists}" var="patList">
 														<g:set var="isSelected" value="${false}"/>
 														<g:each in="${selectedSampleGrpList}" var="listItem">
@@ -218,7 +218,7 @@
 									</td>
 									<td valign="top" colspan="2" class="value ${hasErrors(bean:geneView,field:'geArrayPlatform','errors')}">
 						  				<g:if test="${geneView == null}">				
-											<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
+											<g:select name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
 						  				</g:if>				
 						  				<g:else>	
 											<g:set var="platformList" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
@@ -257,7 +257,7 @@
 						View Type:<br/>
 						<input type="radio" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio">Gene Expression plot&nbsp;<br/>
 						<input type="radio" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
-						<g:contextAware mode="showOnlyTo" context="TCGA">
+						<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
 							<input type="radio" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/>
 					    </g:contextAware>
 						<br/>
@@ -308,7 +308,7 @@
 				<!-- close mainc -->
 				</div>
 			
-				<g:contextAware mode="showOnlyTo" context="TCGA">
+				<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
 					<br/><br/>
 					<div id="pathwaySearchHeader" style="padding:5px;background-color:#2B2D51; color:#fff;">
 						<h5>Pathway Visualization</h5>

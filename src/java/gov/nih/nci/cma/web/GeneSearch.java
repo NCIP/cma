@@ -114,7 +114,8 @@ public class GeneSearch {
  					
 //				logger.debug("user has requested geneExpPlot");
  				//TODO:  validate this and set defaults
- 				String[] patientGroups = request.getParameterValues("sampleGroupNameMultiple");
+ 				//String[] patientGroups = request.getParameterValues("sampleGroupNameMultiple");
+ 				String[] patientGroups = request.getParameterValues("sampleGroups");
 				List<SampleGroup> sampleGroups = new ArrayList<SampleGroup>();
 				// ALL_PATIENTS, High_Survival, Med_Survival, Low_Survival
 				
@@ -168,7 +169,8 @@ public class GeneSearch {
 		//this is dependent on the KM code, which requires certain things to be in the request 
 		//these items are collected in kmRequestMap
 		
-		String[] sgnm = request.getParameterValues("sampleGroupNameMultiple");
+		//String[] sgnm = request.getParameterValues("sampleGroupNameMultiple");
+		String[] sgnm = request.getParameterValues("sampleGroups");
 		if(sgnm!=null && sgnm.length > 0){
 			System.out.println("got sampleGroupNameMultiple");
 			Map<String, String> m = new HashMap<String, String>();

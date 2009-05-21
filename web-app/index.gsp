@@ -129,7 +129,7 @@
 										</div>
 										<br/><br/>
 									</g:contextAware>
-									<g:contextAware mode="showOnlyTo" context="TCGA">
+									<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
 										<span style="color: DimGray; font-size: .9em">
 											* Login	is not required for public data access
 										</span>

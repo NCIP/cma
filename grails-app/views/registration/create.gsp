@@ -107,28 +107,28 @@
 								<td valign="top" class="value ${hasErrors(bean:registration,field:'contexts','errors')}">
 									<div class="value ${hasErrors(bean:registration,field:'contexts','errors')}">
 				  						<g:if test="${registration == null}" >
-											<g:each in="${grailsApplication.config.cma.availableContexts}" var="context">
-												<g:checkBox name="contexts" value="${context}" checked="false"/>${context}&nbsp;&nbsp;&nbsp;&nbsp;
+											<g:each in="${grailsApplication.config.cma.dataContexts}" var="context">
+												<g:checkBox name="contexts" value="${context.key}" checked="false"/>${context.key}&nbsp;&nbsp;&nbsp;&nbsp;
 											</g:each>
 				  						</g:if>
 				  						<g:elseif test="${registration.contexts == null}" >
-											<g:each in="${grailsApplication.config.cma.availableContexts}" var="context">
-												<g:checkBox name="contexts" value="${context}" checked="false"/>${context}&nbsp;&nbsp;&nbsp;&nbsp;
+											<g:each in="${grailsApplication.config.cma.dataContexts}" var="context">
+												<g:checkBox name="contexts" value="${context.key}" checked="false"/>${context.key}&nbsp;&nbsp;&nbsp;&nbsp;
 											</g:each>
 				  						</g:elseif>
 										<g:else>
-											<g:each in="${grailsApplication.config.cma.availableContexts}" var="context">
+											<g:each in="${grailsApplication.config.cma.dataContexts}" var="context">
 												<g:set var="isSelected" value="${false}"/>
 												<g:each in="${selectedContextList}" var="listItem">
-													<g:if test="${listItem.trim() == context.trim()}">
+													<g:if test="${listItem.trim() == context.key.trim()}">
 														<g:set var="isSelected" value="${true}"/>
 													</g:if>
 												</g:each>
 									  			<g:if test="${isSelected}">				
-													<g:checkBox name="contexts" value="${context}" checked="true"/>${context}&nbsp;&nbsp;&nbsp;&nbsp;
+													<g:checkBox name="contexts" value="${context}" checked="true"/>${context.key}&nbsp;&nbsp;&nbsp;&nbsp;
 												</g:if>
 												<g:else>
-													<g:checkBox name="contexts" value="${context}" checked="false"/>${context}&nbsp;&nbsp;&nbsp;&nbsp;
+													<g:checkBox name="contexts" value="${context}" checked="false"/>${context.key}&nbsp;&nbsp;&nbsp;&nbsp;
 												</g:else>
 											</g:each>
 										</g:else>

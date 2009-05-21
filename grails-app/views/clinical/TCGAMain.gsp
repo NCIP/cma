@@ -62,9 +62,10 @@
 			<div class="sectionBody">
 				<div id="helptag_clinical_search_criteria" class="help"></div>
 				<g:form action="clinicalReport" method="post" name="clinicalForm">
+					<g:hiddenField name="clinicalFormType" value="TCGA-GBM" />
 					<table class="formTable">
 						<tr>
-					        <td valign="top" class="label">Sample Group(s)
+					        <td valign="top" class="label">Sample Group(s)*
 					        	<span class="small">select 1 or more</span>
 					        </td>
 							<td class="value ${hasErrors(bean:clinicalView,field:'sampleGroups','errors')}">
