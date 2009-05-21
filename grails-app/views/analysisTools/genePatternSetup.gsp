@@ -99,17 +99,17 @@
 							</td>
 						</tr>
 						<!-- Not used with Rembrandt data -->
-							<tr id="advZ" style="display:none;">
-								<td class="label">Select an Chromosome</td>								
-								<td>						
-									<g:select onchange="\$('chromosomeName').value = this.options[this.selectedIndex].text;" 
-										name="chromosomeSelections" size="8" 
-										style="width: 100px; overflow: none;"
-										from="${['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','X','Y']}">
-									</g:select>
-									<input type="hidden" id="chromosomeName" name="chromosomeName" value=""/>
-								</td>
-							</tr>
+						<tr id="advZ" style="display:none;">
+							<td class="label">Select an Chromosome</td>								
+							<td>						
+								<g:select onchange="\$('chromosomeName').value = this.options[this.selectedIndex].text;" 
+									name="chromosomeSelections" size="8" 
+									style="width: 100px; overflow: none;"
+									from="${['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','X','Y']}">
+								</g:select>
+								<input type="hidden" id="chromosomeName" name="chromosomeName" value=""/>
+							</td>
+						</tr>
 						<tr>
 							<td class="label">Select Patient Group*
 								<span class="small">select 1 or more</span>
@@ -145,7 +145,7 @@
 								</div>
 							</td>
 						</tr>
-						<g:contextAware mode="showOnlyTo" context="TCGA">
+						<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
 						<tr>
 							<td class="label">Filter Genes/Reporters*
 								<span class="small">Select a gene/reporter list</span>
@@ -171,9 +171,9 @@
 										<g:select name="platformName" id="arrayPlatformId" style="width: 200px; overflow: none;" noSelection="['': 'choose platform']" from="" optionValue="platformName" optionKey="fileName"></g:select>					
 									</g:elseif>
 									<g:else>
-										<select name="platformName" id="arrayPlatformId">
+										<select name="platformName" id="arrayPlatformId" style="width: 200px; overflow: none;" >
 											<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" var="platform">
-											  	<g:if test="${platform.platformName == gpaView.platformName}">				
+											  	<g:if test="${platform.fileName == gpaView.platformName}">				
 													<option value="${platform.fileName}" selected="yes">${platform.platformName}</option>
 												</g:if>
 												<g:else>

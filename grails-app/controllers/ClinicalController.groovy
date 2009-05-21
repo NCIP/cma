@@ -13,6 +13,7 @@ class ClinicalController {
     
     // Define the ClinicalView domain class/bean  
     ClinicalView clinicalView
+    RembrandtClinicalView rembrandtClinicalView
 	
 	def defaultListLoaderService
 	def beforeInterceptor = {
@@ -20,8 +21,7 @@ class ClinicalController {
 			defaultListLoaderService.loadDefaultLists()
 		}
 	}
-	
-	
+		
 	def getClinicalService = {
 			def dc = grailsApplication.config.cma.dataContext
 			def dataServiceName = "${dc}ClinicalService"
@@ -42,73 +42,74 @@ class ClinicalController {
 
 		def tumorTissueSiteList = clinSrv.getPermissibleValues("tumorTissueSite");
 		def vitalStatusList = clinSrv.getPermissibleValues("vitalStatus");
-		
-		
-		  def eventList = clinSrv.getPermissibleValues("event");
-		  def deathList = clinSrv.getPermissibleValues("death");
-		  def congenitalAbnormalityList = clinSrv.getPermissibleValues("congenitalAbnormality");
-		  def telStatusList = clinSrv.getPermissibleValues("telStatus");
-		  def trisomiesList = clinSrv.getPermissibleValues("trisomies_4_10");
-		  def mllStatusList = clinSrv.getPermissibleValues("mllStatus");
-		  def e2aStatusList = clinSrv.getPermissibleValues("e2aStatus");
-		  def bcrStatusList = clinSrv.getPermissibleValues("bcrStatus");
-		  def cnsStatusList = clinSrv.getPermissibleValues("cns");
-		  def testicularStatusList = clinSrv.getPermissibleValues("testicular");
+			
+	    def eventList = clinSrv.getPermissibleValues("event");
+	    def deathList = clinSrv.getPermissibleValues("death");
+		def congenitalAbnormalityList = clinSrv.getPermissibleValues("congenitalAbnormality");
+		def telStatusList = clinSrv.getPermissibleValues("telStatus");
+		def trisomiesList = clinSrv.getPermissibleValues("trisomies_4_10");
+		def mllStatusList = clinSrv.getPermissibleValues("mllStatus");
+		def e2aStatusList = clinSrv.getPermissibleValues("e2aStatus");
+		def bcrStatusList = clinSrv.getPermissibleValues("bcrStatus");
+		def cnsStatusList = clinSrv.getPermissibleValues("cns");
+		def testicularStatusList = clinSrv.getPermissibleValues("testicular");
 		  
-		  def day8mrd = clinSrv.getPermissibleValues("day8mrd");
-		  def day29mrd = clinSrv.getPermissibleValues("day29mrd");
-		 
+		def day8mrd = clinSrv.getPermissibleValues("day8mrd");
+		def day29mrd = clinSrv.getPermissibleValues("day29mrd");
+		  
+		// TCGA-Ovarian
+		def yesNoList = clinSrv.getPermissibleValues("yesNo");
+		def initPathologicDxMethodList = clinSrv.getPermissibleValues("initPathologicDxMethod");
+		def ethnicityList = clinSrv.getPermissibleValues("ethnicity");
+		def anatomicOrganSubdivisionList = clinSrv.getPermissibleValues("anatomicOrganSubdivision");
+		def personNeoplasmStatusList = clinSrv.getPermissibleValues("personNeoplasmStatus");
+		def siteOfTumorFirstRecurrenceList = clinSrv.getPermissibleValues("siteOfTumorFirstRecurrence");
+		def tumorStageList = clinSrv.getPermissibleValues("tumorStage");
+		def tumorGradeList = clinSrv.getPermissibleValues("tumorGrade");
+		def tumorResidualDiseaseList = clinSrv.getPermissibleValues("tumorResidualDisease");
+		def primaryTherapyOutcomeSuccessList = clinSrv.getPermissibleValues("primaryTherapyOutcomeSuccess");
+		  		 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
 		
 		def ds = grailsApplication.config.cma.dataContext ?: ""
-		render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
-		   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
-		   vitalStatusList:vitalStatusList
-		   ,eventList:eventList, deathList:deathList, congenitalAbnormalityList:congenitalAbnormalityList,
-		   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,
-		   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
-		   testicularStatusList:testicularStatusList, day29mrd:day29mrd, day8mrd:day8mrd])
-		
+		if ( ds == "TCGAOvarian" ) {
+			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
+			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
+			   vitalStatusList:vitalStatusList, yesNoList:yesNoList, initPathologicDxMethodList:initPathologicDxMethodList,
+			   ethnicityList:ethnicityList, anatomicOrganSubdivisionList:anatomicOrganSubdivisionList, 
+			   personNeoplasmStatusList:personNeoplasmStatusList, siteOfTumorFirstRecurrenceList:siteOfTumorFirstRecurrenceList,
+			   tumorStageList:tumorStageList, tumorGradeList:tumorGradeList, tumorResidualDiseaseList:tumorResidualDiseaseList,
+			   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList])		
+		} else {
+			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
+			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
+			   vitalStatusList:vitalStatusList, eventList:eventList, deathList:deathList, congenitalAbnormalityList:congenitalAbnormalityList,
+			   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,
+			   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
+			   testicularStatusList:testicularStatusList, day29mrd:day29mrd, day8mrd:day8mrd])		
+			}
     }
     
     def clinicalSubmit = {
     	//submit the query, put in cache, forward to inbox
     }
     
-	//TEST TEST
-//    def clinicalReport = {
-//    	def cols = clinicalService.getColumnNames()
-//    	def report = clinicalService.getClinicalData(new ArrayList())
-//    	
-//    	render(view:'clinicalReport', model:[cols:cols, rows:report])	
-//    }
-    //END TEST TEST
     
     def clinicalReport = {
+        def validClinicalEnties
         	
-    	// Bind request parameters onto properties of the ClinicalView bean
-	  	clinicalView = new ClinicalView(params) 
+    	// Bind request parameters onto properties of the appropriate Clinical bean
+    	if ( params.clinicalFormType == "TCGA-GBM" || params.clinicalFormType == "TCGA-Ovarian"  ) {
+	  		clinicalView = new ClinicalView(params) 
+	  		validClinicalEnties = clinicalView.validate()
+	  	} else {
+	  		rembrandtClinicalView = new RembrandtClinicalView(params)
+	  		validClinicalEnties = rembrandtClinicalView.validate()
+	  	}
 	  		  	  	
-	  	if(clinicalView.validate()) {
+	  	if( validClinicalEnties ) {
 	  		  	  	
-		/*
-		if(params.containsKey("patientId") )	{
-			//you dont need to select either a sample group OR a patientId
-			if(params.sampleGroup == null && ((params.patientId == null)||(params.patientId.trim().length() == 0)))	{
-	    		//flash and redirect
-	    		flash.message = "Please select a Sample Group or a Patient Id"
-	            redirect(controller:"clinical")
-	            return
-	    	}
-		}
-		else if(params.sampleGroup == null)	{
-    		//flash and redirect
-    		flash.message = "Please select a Sample Group"
-            redirect(controller:"clinical")
-            return
-    	}
-    	*/
 			//TODO: we will also want a sep method for pulling completed reports from cache?
 			//this view is a JSP using the DisplayTag for report rendering
 			//check query name
@@ -120,20 +121,19 @@ class ClinicalController {
 			}
 	    	qname = gov.nih.nci.cma.util.SafeHTMLUtil.clean(qname)
 	
-	    	//	if(session.getAttribute(qname) == null)	{ //one already exists, overwrite
-	    		//List reportBeansList = clinicalService.getClinicalData(request);
-	    	    def clinSrv = getClinicalService()	
-	    	    List reportBeansList = clinSrv.getClinicalData(request);
-		    	//put the reportBeansList somewhere..session for now, cache would be better, keyed as taskid (Query name)
-		    	session.setAttribute(qname, reportBeansList);
-	   // 	}
+	    	def clinSrv = getClinicalService()	
+	        List reportBeansList = clinSrv.getClinicalData(request);
+	    	session.setAttribute(qname, reportBeansList);
 	    
-	    	//forward as to not repost on refresh
+	    	// Forward as to not repost on refresh
 	    	redirect(action:'clinicalReportDisplay', params:[taskId:qname])
 	    } else {
 	        List selectedSampleGrpList
 	        if ( request.getParameterValues("sampleGroups") != null ) {
 		        selectedSampleGrpList = Arrays.asList(request.getParameterValues("sampleGroups"))
+		    }
+	        if ( request.getParameterValues("sampleGroup") != null ) {
+		        selectedSampleGrpList = Arrays.asList(request.getParameterValues("sampleGroup"))
 		    }
 							
 		    def clinSrv = getClinicalService()	
@@ -160,16 +160,38 @@ class ClinicalController {
 		  
 		    def day8mrd = clinSrv.getPermissibleValues("day8mrd");
 		    def day29mrd = clinSrv.getPermissibleValues("day29mrd");
-		    
+		  
+			// TCGA-Ovarian
+			def yesNoList = clinSrv.getPermissibleValues("yesNo");
+			def initPathologicDxMethodList = clinSrv.getPermissibleValues("initPathologicDxMethod");
+			def ethnicityList = clinSrv.getPermissibleValues("ethnicity");
+			def anatomicOrganSubdivisionList = clinSrv.getPermissibleValues("anatomicOrganSubdivision");
+			def personNeoplasmStatusList = clinSrv.getPermissibleValues("personNeoplasmStatus");
+			def siteOfTumorFirstRecurrenceList = clinSrv.getPermissibleValues("siteOfTumorFirstRecurrence");
+			def tumorStageList = clinSrv.getPermissibleValues("tumorStage");
+			def tumorGradeList = clinSrv.getPermissibleValues("tumorGrade");
+			def tumorResidualDiseaseList = clinSrv.getPermissibleValues("tumorResidualDisease");
+			def primaryTherapyOutcomeSuccessList = clinSrv.getPermissibleValues("primaryTherapyOutcomeSuccess");
+		  		 		    
 			def dc = grailsApplication.config.cma.dataContext
-			//render(view:"${dc}Main")
-			render(view:"${dc}Main", model:[clinicalView:clinicalView, patLists:patLists, genderList:genderList, 
-			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
-			   vitalStatusList:vitalStatusList,eventList:eventList, deathList:deathList, 
-			   congenitalAbnormalityList:congenitalAbnormalityList, telStatusList:telStatusList, 
-			   trisomiesList:trisomiesList, mllStatusList:mllStatusList, e2aStatusList:e2aStatusList, 
-			   bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList, testicularStatusList:testicularStatusList, 
-			   day29mrd:day29mrd, day8mrd:day8mrd, selectedSampleGrpList:selectedSampleGrpList])
+			if ( dc == "TCGAOvarian" ) {
+				render(view:"${dc}Main", model:[clinicalView:clinicalView, rembrandtClinicalView:rembrandtClinicalView,
+				   patLists:patLists, genderList:genderList, 
+				   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
+				   vitalStatusList:vitalStatusList, yesNoList:yesNoList, initPathologicDxMethodList:initPathologicDxMethodList,
+				   ethnicityList:ethnicityList, anatomicOrganSubdivisionList:anatomicOrganSubdivisionList, 
+				   personNeoplasmStatusList:personNeoplasmStatusList, siteOfTumorFirstRecurrenceList:siteOfTumorFirstRecurrenceList,
+				   tumorStageList:tumorStageList, tumorGradeList:tumorGradeList, tumorResidualDiseaseList:tumorResidualDiseaseList,
+				   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList])		
+			} else {
+				render(view:"${dc}Main", model:[clinicalView:clinicalView, rembrandtClinicalView:rembrandtClinicalView,
+				   patLists:patLists, genderList:genderList, 
+				   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
+				   vitalStatusList:vitalStatusList, eventList:eventList, deathList:deathList, congenitalAbnormalityList:congenitalAbnormalityList,
+				   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,
+				   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
+				   testicularStatusList:testicularStatusList, day29mrd:day29mrd, day8mrd:day8mrd])		
+			}
 	    }
     }
     
@@ -203,12 +225,9 @@ class ClinicalController {
 		
 		if(params.ids != null)	{
 			List samList = Arrays.asList(params.ids.split(","));
-			//reportBeansList = clinicalService.getClinicalData(samList)
 			reportBeansList = clinSrv.getClinicalData(samList)
 		}
 		else	{
-			//reportBeansList = clinicalService.getClinicalDataForGroup(params.taskId);
-			
 			reportBeansList = clinSrv.getClinicalDataForGroup(params.taskId);
 			
 		}

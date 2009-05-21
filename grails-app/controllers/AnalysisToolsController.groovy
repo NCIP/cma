@@ -121,7 +121,7 @@ class AnalysisToolsController {
     		// Displays or hides certain GP setup page elements
     		String displayEl = ""
     		
-    		if (dataContext.equalsIgnoreCase("TCGA")) {
+    		if (dataContext.equalsIgnoreCase("TCGA") || dataContext.equalsIgnoreCase("TCGAOvarian")) {
     			// Below not used for Rembrandt data
     			def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
         	
@@ -155,7 +155,7 @@ class AnalysisToolsController {
         	
     	// Bind request parameters onto properties of the GpaView bean
 	  	gpaView = new GpaView(params) 
-	  	
+
 	    List selectedSampleGrpList
 	    if ( request.getParameterValues("selectedGroups") != null ) {
 		    selectedSampleGrpList = Arrays.asList(request.getParameterValues("selectedGroups"))
@@ -175,7 +175,8 @@ class AnalysisToolsController {
     		// Displays or hides certain GP setup page elements
     		String displayEl = ""
     		
-    		if (dataContext.equalsIgnoreCase("TCGA")) {
+    		if (dataContext.equalsIgnoreCase("TCGA") || dataContext.equalsIgnoreCase("TCGAOvarian")) 
+    		{
     			// Below not used for Rembrandt data
     			def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
         	
@@ -190,7 +191,8 @@ class AnalysisToolsController {
         				geneLists:geneLists, moduleList:moduleList, displayEl:displayEl,
         				selectedSampleGrpList:selectedSampleGrpList])
     		}
-    		else if (dataContext.equalsIgnoreCase("Rembrandt")) {
+    		else if (dataContext.equalsIgnoreCase("Rembrandt")) 
+    		{
     			// Hide some elements not visible for dataContext="Rembrandt"
     			displayEl = "display:none"
     			

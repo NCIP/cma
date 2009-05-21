@@ -6,19 +6,20 @@ class RegistrationController {
     
     // Define the Registration domain class/bean  
     Registration registration
+    StringBuffer selectedContextsStr
     
     // The register action will only accept POST requests
-    def allowedMethods = [register:'POST']
+    static allowedMethods = [register:'POST']
 
     def index = { 
     	render(view:'create') 
     }
-             
+    
     def send = {
     	
     	// Bind request parameters onto properties of the Registration bean
 	  	registration = new Registration(params) 
-		
+	  			
 		try	{
 			// Send Request to NCI CBITT App Support
 			def mp = new MailProps()
@@ -60,14 +61,11 @@ class RegistrationController {
 
             // Go back to home page
             redirect(uri: "/index.gsp")
-		    //redirect(action:'index')
-		    //redirect(uri:"cma")
 					
 		} catch (Exception e) {
 		}
     }
 
-   
 
     def register = {
 
@@ -83,11 +81,13 @@ class RegistrationController {
 		def selectedContextList = []
 	  	if (request.getParameter("contexts") != null ) {
 		    def pattern
-	    
-		    grailsApplication.config.cma.availableContexts.each { 
-		    	pattern = ~it
+		    
+			selectedContextsStr = new StringBuffer()	    
+	    	grailsApplication.config.cma.dataContexts.each {
+		    	pattern = ~(it.key)
 		    	if ( registration.contexts =~ pattern ) {
-		    		selectedContextList.add("${it}")
+		    		selectedContextList.add("${it.key}")
+		    		selectedContextsStr.append("${it.key}  ")
 		    	} 
 		    }
 	    }
@@ -110,4 +110,7 @@ class RegistrationController {
             render(view:'create',model:[registration:registration, selectedContextList:selectedContextList])
         }
     }
+    
+             
+   
 }

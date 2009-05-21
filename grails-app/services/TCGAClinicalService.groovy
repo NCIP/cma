@@ -134,7 +134,7 @@ class TCGAClinicalService extends AbstractClinicalService {
 		String tumorTissueSite = (String) clinicalForm.getParameter("tumorTissueSite")
 	    String vitalStatus = (String) clinicalForm.getParameter("vitalStatus")
 	    //String sampleGroup = (String) clinicalForm.getParameter("sampleGroup")
-	    String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroup")
+	    String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroups")
 	    String patientId = (String) clinicalForm.getParameter("patientId")
 		Integer dodMinusDopLower = clinicalForm.getParameter("dodMinusDopLower")!=null ? Integer.valueOf(clinicalForm.getParameter("dodMinusDopLower")) : null
 		Integer dodMinusDopUpper = clinicalForm.getParameter("dodMinusDopUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("dodMinusDopUpper")) : null
