@@ -11,9 +11,9 @@ class GeneView {
 	static constraints = {
 		plot(blank:false)
 		geneSymbol(blank:false)
-		sampleGroups(validator: {
-			return(it != null)
-		})
+		sampleGroups(validator: { val, obj ->
+			return( (val != null) || ((obj.plot == 'genomeWorkbench') && (val == null)) )
+		})		
 		geArrayPlatform(blank:false)
 		pathwayVisualization(blank:false)
 	}
