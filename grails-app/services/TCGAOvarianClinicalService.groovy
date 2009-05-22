@@ -1,6 +1,7 @@
   import java.util.Date;
   
   import java.text.DateFormat;
+  import java.text.SimpleDateFormat;
 
   import org.apache.log4j.Logger;
   
@@ -395,12 +396,13 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
 		String tumorTissueSite = (String) clinicalForm.getParameter("tumorTissueSite")
 		String priorGlioma = (String) clinicalForm.getParameter("priorGlioma")
 	    String vitalStatus = (String) clinicalForm.getParameter("vitalStatus")
-	    Date dobBegin = (clinicalForm.getParameter("dobBegin") != null && clinicalForm.getParameter("dobBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("dobBegin")) : null
-	    Date dobEnd = (clinicalForm.getParameter("dobBegin") != null && clinicalForm.getParameter("dobBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("dobEnd")) : null
-	    Date dodBegin = (clinicalForm.getParameter("dodBegin") != null && clinicalForm.getParameter("dodBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("dodBegin")) : null
-	    Date dodEnd = (clinicalForm.getParameter("dodEnd") != null && clinicalForm.getParameter("dodEnd") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("dodEnd")) : null
-	    Date lastFollowUpBegin = (clinicalForm.getParameter("lastFollowUpBegin") != null && clinicalForm.getParameter("lastFollowUpBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("lastFollowUpBegin")) : null
-	    Date lastFollowUpEnd = (clinicalForm.getParameter("lastFollowUpEnd") != null && clinicalForm.getParameter("lastFollowUpEnd") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("lastFollowUpEnd")) : null
+	    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")
+	    Date dobBegin = (clinicalForm.getParameter("dobBegin") != null && clinicalForm.getParameter("dobBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("dobBegin")) : null
+	    Date dobEnd = (clinicalForm.getParameter("dobBegin") != null && clinicalForm.getParameter("dobBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("dobEnd")) : null
+	    Date dodBegin = (clinicalForm.getParameter("dodBegin") != null && clinicalForm.getParameter("dodBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("dodBegin")) : null
+	    Date dodEnd = (clinicalForm.getParameter("dodEnd") != null && clinicalForm.getParameter("dodEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("dodEnd")) : null
+	    Date lastFollowUpBegin = (clinicalForm.getParameter("lastFollowUpBegin") != null && clinicalForm.getParameter("lastFollowUpBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("lastFollowUpBegin")) : null
+	    Date lastFollowUpEnd = (clinicalForm.getParameter("lastFollowUpEnd") != null && clinicalForm.getParameter("lastFollowUpEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("lastFollowUpEnd")) : null
 		String race = (String) clinicalForm.getParameter("race")
 		String smokingHistory = (String) clinicalForm.getParameter("smokingHistory")
 		String alcoholConsumption = (String) clinicalForm.getParameter("alcoholConsumption")
@@ -415,10 +417,10 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
 		String immunotherapy = (String)clinicalForm.getParameter("immunotherapy")
 		String hormonalTherapy = (String)clinicalForm.getParameter("hormonalTherapy")
 		String targetedMolecularTherapy = (String)clinicalForm.getParameter("targetedMolecularTherapy")
-	    Date tumorPrgrBegin = (clinicalForm.getParameter("tumorPrgrBegin") != null && clinicalForm.getParameter("tumorPrgrBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("tumorPrgrBegin")) : null
-	    Date tumorPrgrEnd = (clinicalForm.getParameter("tumorPrgrEnd") != null && clinicalForm.getParameter("tumorPrgrEnd") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("tumorPrgrEnd")) : null
-	    Date tumorRecurBegin = (clinicalForm.getParameter("tumorRecurBegin") != null && clinicalForm.getParameter("tumorRecurBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("tumorRecurBegin")) : null
-	    Date tumorRecurEnd = (clinicalForm.getParameter("tumorRecurEnd") != null && clinicalForm.getParameter("tumorRecurEnd") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("tumorRecurEnd")) : null
+	    Date tumorPrgrBegin = (clinicalForm.getParameter("tumorPrgrBegin") != null && clinicalForm.getParameter("tumorPrgrBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorPrgrBegin")) : null
+	    Date tumorPrgrEnd = (clinicalForm.getParameter("tumorPrgrEnd") != null && clinicalForm.getParameter("tumorPrgrEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorPrgrEnd")) : null
+	    Date tumorRecurBegin = (clinicalForm.getParameter("tumorRecurBegin") != null && clinicalForm.getParameter("tumorRecurBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorRecurBegin")) : null
+	    Date tumorRecurEnd = (clinicalForm.getParameter("tumorRecurEnd") != null && clinicalForm.getParameter("tumorRecurEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorRecurEnd")) : null
 		String ethnicity = (String)clinicalForm.getParameter("ethnicity")
 		String additionalRadiationTherapy = (String)clinicalForm.getParameter("additionalRadiationTherapy")
 		String additionalChemotherapy = (String)clinicalForm.getParameter("additionalChemotherapy")
@@ -426,8 +428,8 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
 		String additionalHormoneTherapy = (String)clinicalForm.getParameter("additionalHormoneTherapy")
 		String additionalDrugTherapy = (String)clinicalForm.getParameter("additionalDrugTherapy")
 		String anatomicOrganSubdivision = (String)clinicalForm.getParameter("anatomicOrganSubdivision")
-	    Date initPathologicDxDateBegin = (clinicalForm.getParameter("initPathologicDxDateBegin") != null && clinicalForm.getParameter("initPathologicDxDateBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("initPathologicDxDateBegin")) : null
-	    Date initPathologicDxDateEnd = (clinicalForm.getParameter("initPathologicDxDateEnd") != null && clinicalForm.getParameter("initPathologicDxDateEnd") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("initPathologicDxDateEnd")) : null
+	    Date initPathologicDxDateBegin = (clinicalForm.getParameter("initPathologicDxDateBegin") != null && clinicalForm.getParameter("initPathologicDxDateBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("initPathologicDxDateBegin")) : null
+	    Date initPathologicDxDateEnd = (clinicalForm.getParameter("initPathologicDxDateEnd") != null && clinicalForm.getParameter("initPathologicDxDateEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("initPathologicDxDateEnd")) : null
 		String initPathologicDxMethod = (String)clinicalForm.getParameter("initPathologicDxMethod")
 		String personNeoplasmStatus = (String)clinicalForm.getParameter("personNeoplasmStatus")
 		String siteOfTumorFirstRecurrence = (String)clinicalForm.getParameter("siteOfTumorFirstRecurrence")
@@ -436,8 +438,8 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
 		String tumorResidualDisease = (String)clinicalForm.getParameter("tumorResidualDisease")
 		String primaryTherapyOutcomeSuccess = (String)clinicalForm.getParameter("primaryTherapyOutcomeSuccess")
 		String jewishOrigin = (String)clinicalForm.getParameter("jewishOrigin")
-	    Date surProcPrfmBegin = (clinicalForm.getParameter("surProcPrfmBegin") != null && clinicalForm.getParameter("surProcPrfmBegin") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("surProcPrfmBegin")) : null
-	    Date surProcPrfmEnd = (clinicalForm.getParameter("surProcPrfmEnd") != null && clinicalForm.getParameter("surProcPrfmEnd") != "") ? (DateFormat.getInstance()).parse((String)clinicalForm.getParameter("surProcPrfmEnd")) : null
+	    Date surProcPrfmBegin = (clinicalForm.getParameter("surProcPrfmBegin") != null && clinicalForm.getParameter("surProcPrfmBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("surProcPrfmBegin")) : null
+	    Date surProcPrfmEnd = (clinicalForm.getParameter("surProcPrfmEnd") != null && clinicalForm.getParameter("surProcPrfmEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("surProcPrfmEnd")) : null
 		String uncOsEvent = (String)clinicalForm.getParameter("uncOsEvent")
 		String uncOsDuration = (String)clinicalForm.getParameter("uncOsDuration")
 		String informedConsentAcquired = (String)clinicalForm.getParameter("informedConsentAcquired")
