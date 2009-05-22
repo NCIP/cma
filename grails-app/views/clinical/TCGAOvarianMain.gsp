@@ -127,7 +127,7 @@
 							</tr>
 							<tr>		        
 								<td class="label">DOB
-									<span class="small">date range</span>
+									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td>
 									<input type="checkbox" name="dob" value="dob" onclick="toggleDisable('dobBegin', 'dobEnd');"/>Restrict by date
@@ -237,9 +237,10 @@
 							</tr>
 							<tr>
 								<td valign="top" class="label">Initial Pathologic Dx Date
-									<span class="small"></span>
+									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">
+									<input type="checkbox" name="initPathologicDxDate" value="initPathologicDxDate" onclick="toggleDisable('initPathologicDxDateBegin', 'initPathologicDxDateEnd');"/>Restrict by date
 									Between&nbsp;&nbsp;<input type="text" name="initPathologicDxDateBegin" id="initPathologicDxDateBegin" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'initPathologicDxDateBegin')}"/>
 									<br/>
 									and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="initPathologicDxDateEnd" id="initPathologicDxDateEnd" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'initPathologicDxDateEnd')}"/>
@@ -279,9 +280,10 @@
 							</tr>
 							<tr>
 								<td valign="top" class="label">Tumor Prgr
-									<span class="small"></span>
+									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">
+									<input type="checkbox" name="tumorPrgr" value="tumorPrgr" onclick="toggleDisable('tumorPrgrBegin', 'tumorPrgrEnd');"/>Restrict by date
 									Between&nbsp;&nbsp;<input type="text" name="tumorPrgrBegin" id="tumorPrgrBegin" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'tumorPrgrBegin')}"/>
 									<br/>
 									and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="tumorPrgrEnd" id="tumorPrgrEnd" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'tumorPrgrEnd')}"/>
@@ -289,9 +291,10 @@
 					        </tr>
 							<tr>
 								<td valign="top" class="label">Tumor Recurrence
-									<span class="small"></span>
+									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">
+									<input type="checkbox" name="tumorRecur" value="tumorRecur" onclick="toggleDisable(tumorRecurBegin', 'tumorRecurEnd');"/>Restrict by date
 									Between&nbsp;&nbsp;<input type="text" name="tumorRecurBegin" id="tumorRecurBegin" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'tumorRecurBegin')}"/>
 									<br/>
 									and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="tumorRecurEnd" id="tumorRecurEnd" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'tumorRecurEnd')}"/>
@@ -379,9 +382,10 @@
 					        </tr>
 							<tr>
 								<td valign="top" class="label">SurProcPrfm
-									<span class="small"></span>
+									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">
+									<input type="checkbox" name="surProcPrfm" value="surProcPrfm" onclick="toggleDisable(surProcPrfmBegin', 'surProcPrfmEnd');"/>Restrict by date
 									Between&nbsp;&nbsp;<input type="text" name="surProcPrfmBegin" id="surProcPrfmBegin" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'surProcPrfmBegin')}"/>
 									<br/>
 									and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="surProcPrfmEnd" id="surProcPrfmEnd" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'surProcPrfmEnd')}"/>

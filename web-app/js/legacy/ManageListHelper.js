@@ -281,10 +281,10 @@
 					wDiv.innerHTML += tmp;
 					     
 					var eid = encodeURIComponent(listName);
-					//wDiv.innerHTML += "<div onclick=\"location.href='listExport.jsp?list="+eid+"';\" style='margin:20px;cursor:pointer; width:90px;height:20px'><img src='../images/downArrow20.png'/><u>export list</u></div>";
 					wDiv.innerHTML += "<input type=\"hidden\" name=\"listName\" id=\"listName\" value=\"" + eid + "\"/>";
+					//wDiv.innerHTML += "<div onclick=\"location.href='listExport.jsp?list="+eid+"';\" style='margin:20px;cursor:pointer; width:90px;height:20px'><img src='../images/downArrow20.png'/><u>export list</u></div>";
 					//wDiv.innerHTML += "<div onclick=\"location.href='/cma/manageLists/export?list="+eid+"';\" style='margin:20px;cursor:pointer; width:90px;height:20px'><img src='../images/downArrow20.png'/><u>export list</u></div>";
-					wDiv.innerHTML += "<div onclick=\"location.href='manageLists/export?list="+eid+"';\" style='margin:20px;cursor:pointer; width:90px;height:20px'><img src='../images/downArrow20.png'/><u>export list</u></div>";
+					wDiv.innerHTML += "<div onclick=\"location.href='./export?list="+eid+"';\" style='margin:20px;cursor:pointer; width:90px;height:20px'><img src='../images/downArrow20.png'/><u>export list</u></div>";
 				}
 				else{
 			    	document.getElementById(listName + "details").appendChild(dDIV);
