@@ -47,13 +47,13 @@ class ManageListsController {
             errors = "true" 
 	    }
 	    
-	    if ( errors ) {
+	    if ( errors == "true" ) {
 			render(view:'manageLists', model:[lts:lts]) 
 		} else {
 	    	def theListFile = new File("theListFile.txt")
 	    	params["cmaListUpload"].transferTo(theListFile)
 	    	
-			process(theListFile);
+			process(theListFile);	    	
 			
 			render(view:'manageLists', model:[theList:theList, lts:lts]) 
 		} 		
@@ -65,47 +65,36 @@ class ManageListsController {
 		String sampleData
 		ListItem theListItem
 		List<ListItem> listItems = new ArrayList<ListItem>()
-		
-    	// Bind the appropriate params to the CMA List domain class so that
-    	// grails validation is possible
-		theList = new gov.nih.nci.cma.domain.CmaList()				
-		theList.name = params["listName"]
-		theList.type = params["listTypes"]
-		theList.description = params["listDesc"]
-		theList.author = session.userId
-		theList.origin = "Default"
-		theList.creationDate = Calendar.getInstance().getTime()
-		
-		if ( theList.validate() ) {
-			// Determine the type parameter
-			ListType lt;
-			if ( theList.type == "PatientDID" )				
-				lt = ListType.PatientDID
-			else if ( theList.type == "Gene" )
-				lt = ListType.Gene
-			else
-				lt = ListType.Reporter
+
+		// Determine the type parameter
+		ListType lt;
+		if ( params["listTypes"] == "PatientDID")				
+			lt = ListType.PatientDID
+		else if (params["listTypes"] == "Gene")
+			lt = ListType.Gene
+		else
+			lt = ListType.Reporter
 				
-			// Create the list items
-		    try {
-			    BufferedReader inStream = new BufferedReader(new FileReader(file))
-			    while ((sampleData = inStream.readLine()) != null) {
-					theListItem = new ListItem()
-					theListItem.name = sampleData
-					theListItem.listName = theList.name
-					listItems.add(theListItem)				  					
-			    }
-			    inStream.close()
-			} catch (IOException e) {
+		// Create the list items
+		try {
+			BufferedReader inStream = new BufferedReader(new FileReader(file))
+		    while ((sampleData = inStream.readLine()) != null) {
+				theListItem = new ListItem()
+				theListItem.name = sampleData
+				theListItem.listName = params["listName"]
+				listItems.add(theListItem)				  					
 		    }
-		    		
-			// Convert list application-commons list type
-			UserList ul = new UserList(theList.name, lt, listItems, listItems)
-		    
-		    // Save the list data to the session
-            UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session.getId())      
-		    userListBeanHelper.addList(ul)		
+		    inStream.close()
+		} catch (IOException e) {
 	    }
+		    		
+		// Convert list application-commons list type
+		UserList ul = new UserList(params["listName"], lt, listItems, listItems)
+		    
+		// Save the list data to the session
+        UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session.getId())      
+		userListBeanHelper.addList(ul)
+		    
 	}
 
      
