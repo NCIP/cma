@@ -58,33 +58,22 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="patientId" title="ID" sortable="true" headerClass="sortable" />
 	  <display:column property="tumorTissueSite" sortable="true" headerClass="sortable" />
 	  <display:column property="ptid"  sortable="true" headerClass="sortable" />
-	  <display:column property="histologicalType" sortable="true" headerClass="sortable" />
+
 <% if(isLogged)	{ %>
-	  
-	  <display:column property="priorGlioma" title="Prior Glioma" sortable="false" headerClass="sortable" />
 	  <display:column property="vitalStatus" title="Vital Status" sortable="true" headerClass="sortable" />
 	  <display:column property="dob" sortable="false" headerClass="sortable" />
 	  <display:column property="dod" sortable="false" headerClass="sortable" />
 	  <display:column property="lastFollowUp" title="Last Followup" sortable="false" headerClass="sortable" />
 	  <display:column property="race" title="Race" sortable="true" headerClass="sortable" />
-	  <display:column property="smokingHistory" title="Smoking History" sortable="false" headerClass="sortable" />
-	  <display:column property="alcoholConsumption" title="Alcohol Consumption" sortable="false" headerClass="sortable" />
-	  <display:column property="experimentalExposure" title="Experimental Exposure" sortable="false" headerClass="sortable" />
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="informedConsentAcquired" sortable="true" headerClass="sortable" />
-	  <display:column property="bcrSiteId" title="BCR Site Id" sortable="false" headerClass="sortable" />
-	  <display:column property="revision" title="Revision" sortable="false" headerClass="sortable" />
-	  <display:column property="pretreatmentTherapy" title="Pretreatment Therapy" sortable="false" headerClass="sortable" />
-	  <display:column property="radiationTherapy" title="Radiation Therapy" sortable="false" headerClass="sortable" />
 	  <display:column property="initPathologicDxDate" title="Initial Pathologic Dx Date" sortable="false" headerClass="sortable" />
 	  <display:column property="initPathologicDxMethod" title="Initial Pathologic Dx Method" sortable="false" headerClass="sortable" />
 	  <display:column property="chemotherapy" title="Chemotherapy" sortable="false" headerClass="sortable" />
 	  <display:column property="immunotherapy" title="Immunotherapy" sortable="false" headerClass="sortable" />
-	  <display:column property="hormonalTherapy" title="Hormonal Therapy" sortable="false" headerClass="sortable" />
 	  <display:column property="targetedMolecularTherapy" title="Targeted Molecular Therapy" sortable="false" headerClass="sortable" />
 	  <display:column property="tumorPrgr" title="Tumor Prgr" sortable="false" headerClass="sortable" />
 	  <display:column property="tumorRecur" title="Tumor Recur" sortable="false" headerClass="sortable" />
-	  <display:column property="ethnicity" title="Ethnicity" sortable="false" headerClass="sortable" />
 	  <display:column property="additionalRadiationTherapy" title="Additional Radiation Therapy" sortable="false" headerClass="sortable" />
 	  <display:column property="additionalChemotherapy" title="Additional Chemotherapy" sortable="false" headerClass="sortable" />
 	  <display:column property="additionalImmunotherapy" title="Additional Immunotherapy" sortable="false" headerClass="sortable" />
