@@ -276,7 +276,7 @@
 							tmp += "<li id='"+listName + itemId + "_div"+"' class='detailsList'>"+(i+1) +") "  + " " + itemId + itemRank + itemNotes;	
 						}					
 						var oc = new Function("deleteItem('"+listName+ "','" + itemId + "');return false;");
-						tmp += "<a href=\"#\" onclick=\"ManageListHelper.deleteItem('"+listName+ "','" + itemId + "');return false;\">[delete]</a></li>";
+						tmp += "<a href=\"#\" onclick=\"ManageListHelper.deleteItem('"+listName+ "','" + itemId + "');window.location.reload();return false;\">[delete]</a></li>";
 					}  
 					wDiv.innerHTML += tmp;
 					     
