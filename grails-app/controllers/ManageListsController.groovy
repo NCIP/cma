@@ -110,10 +110,10 @@ class ManageListsController {
 		
 	    ul.listItems.each {
 	    	sb.append(it.name);  
-	        if ( it.rank != null || it.rank != "" ) {
+	        if ( it.rank != null && it.rank != "" ) {
 	        	sb.append(" rank:" + it.rank);  
 	        }      	
-	        if ( it.notes != null || it.notes != "" ) {
+	        if ( it.notes != null && it.notes != "" ) {
 	        	sb.append(" notes:" + it.notes);  
 	        } 
 	        sb.append("\n")

@@ -12,7 +12,7 @@ class RegistrationController {
     static allowedMethods = [register:'POST']
 
     def index = { 
-    	render(view:'create') 
+		render(view:'create') 
     }
     
     def send = {
