@@ -85,7 +85,7 @@ class DefaultListLoaderService {
           
           switch(ConfigurationHolder.config.cma.dataContext)	{
           	case "Rembrandt":
-        	  idMapping = gov.nih.nci.cma.domain.rembrandt.PatientData.executeQuery( "select distinct sampleId from PatientData where institutionId='8'" );
+        	  idMapping = gov.nih.nci.cma.domain.rembrandt.PatientData.executeQuery( "select distinct sampleId from gov.nih.nci.cma.domain.rembrandt.PatientData where institutionId='8'" );
         	break;
           	default:
           		idMapping = CmaStudyParticipant.executeQuery( "select distinct a.participantDid from CmaStudyParticipant a" );
@@ -103,7 +103,7 @@ class DefaultListLoaderService {
           	  
           	  items.add(i)
           }
-          ul = new UserList("ALL_PATIENTS_CMA", ListType.PatientDID, items, Collections.emptyList())
+          ul = new UserList(CacheConstants.ALL_USER_LISTS, ListType.PatientDID, items, Collections.emptyList())
           userLists.add(ul)
           
           presentationCacheManager.addNonPersistableToSessionCache(session.getId(), 

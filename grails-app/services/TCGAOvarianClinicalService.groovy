@@ -37,7 +37,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     		permValues.add("OVARY")
     	}
     	else if (paramName.equals("vitalStatus")) {
-    		permValues.add("ALIVE")
+    		permValues.add("LIVING")
     		permValues.add("DECEASED")
     	}
     	else if (paramName.equals("gender")) {
@@ -89,10 +89,10 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     		permValues.add("GX")
     	}
     	else if (paramName.equals("tumorResidualDisease")) {
+    		permValues.add("> 20 mm")
     		permValues.add("11-20 mm")
     		permValues.add("No Macroscopic disease")
     		permValues.add("1-10 mm")
-    		permValues.add("&gt;20 mm")
     	}
     	else if (paramName.equals("primaryTherapyOutcomeSuccess")) {
     		permValues.add("STABLE DISEASE")
@@ -156,11 +156,13 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	return getIdList(clinList)
     }
     
+    /*
     public List<String> getIdsForPriorGlioma(String value) {
     	List clinList = ClinicalOvarian.findAllByPriorGliomaLike(value.toUpperCase())
     	println("getIdsForPriorGlioma returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
+    */
     
     public List<String> getIdsForRace(String value) {
     	List clinList = ClinicalOvarian.findAllByRaceLike(value.toUpperCase())
@@ -168,6 +170,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	return getIdList(clinList)
     }
     
+    /*
     public List<String> getIdsForSmokingHistory(String value) {
     	List clinList = ClinicalOvarian.findAllBySmokingHistoryLike(value.toUpperCase())
     	println("getIdsForSmokingHistory returned numRows=${clinList.size()} value=${value}")
@@ -185,6 +188,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	println("getIdsForExperimentalExposure returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
+    */
     
     public List<String> getIdsForGender(String value) {
     	List clinList = ClinicalOvarian.findAllByGenderLike(value.toUpperCase())
@@ -198,6 +202,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	return getIdList(clinList)
     }
     
+    /*
     public List<String> getIdsForHistologicalType(String value) {
     	List clinList = ClinicalOvarian.findAllByHistologicalTypeLike(value.toUpperCase())
     	println("getIdsForHistologicalType returned numRows=${clinList.size()} value=${value}")
@@ -227,6 +232,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	println("getIdsForRadiationTherapy returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
+    */
     
     public List<String> getIdsForInitPathologicDxMethod(String value) {
     	List clinList = ClinicalOvarian.findAllByInitPathologicDxMethodLike(value.toUpperCase())
@@ -252,11 +258,13 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	return getIdList(clinList)
     }
     
+    /*
     public List<String> getIdsForHormonalTherapy(String value) {
     	List clinList = ClinicalOvarian.findAllByHormonalTherapyLike(value.toUpperCase())
     	println("getIdsForHormonalTherapy returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
+    */
     
     public List<String> getIdsForTargetedMolecularTherapy(String value) {
     	List clinList = ClinicalOvarian.findAllByTargetedMolecularTherapyLike(value.toUpperCase())
@@ -276,11 +284,13 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	return getIdList(clinList)
     }
     
+    /*
     public List<String> getIdsForEthnicity(String value) {
     	List clinList = ClinicalOvarian.findAllByEthnicityLike(value.toUpperCase())
     	println("getIdsForEthnicity returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
+    */
     
     public List<String> getIdsForAdditionalRadiationTherapy(String value) {
     	List clinList = ClinicalOvarian.findAllByAdditionalRadiationTherapyLike(value.toUpperCase())
@@ -394,7 +404,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
 	    String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroups")	    
 	    String patientId = (String) clinicalForm.getParameter("patientId")
 		String tumorTissueSite = (String) clinicalForm.getParameter("tumorTissueSite")
-		String priorGlioma = (String) clinicalForm.getParameter("priorGlioma")
+		//String priorGlioma = (String) clinicalForm.getParameter("priorGlioma")
 	    String vitalStatus = (String) clinicalForm.getParameter("vitalStatus")
 	    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")
 	    Date dobBegin = (clinicalForm.getParameter("dobBegin") != null && clinicalForm.getParameter("dobBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("dobBegin")) : null
@@ -404,24 +414,24 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
 	    Date lastFollowUpBegin = (clinicalForm.getParameter("lastFollowUpBegin") != null && clinicalForm.getParameter("lastFollowUpBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("lastFollowUpBegin")) : null
 	    Date lastFollowUpEnd = (clinicalForm.getParameter("lastFollowUpEnd") != null && clinicalForm.getParameter("lastFollowUpEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("lastFollowUpEnd")) : null
 		String race = (String) clinicalForm.getParameter("race")
-		String smokingHistory = (String) clinicalForm.getParameter("smokingHistory")
-		String alcoholConsumption = (String) clinicalForm.getParameter("alcoholConsumption")
-		String experimentalExposure = (String) clinicalForm.getParameter("experimentalExposure")
+		//String smokingHistory = (String) clinicalForm.getParameter("smokingHistory")
+		//String alcoholConsumption = (String) clinicalForm.getParameter("alcoholConsumption")
+		//String experimentalExposure = (String) clinicalForm.getParameter("experimentalExposure")
 		String gender = (String)clinicalForm.getParameter("gender")			
-		String histologicalType = (String)clinicalForm.getParameter("histologicalType")
-		String bcrSiteId = (String)clinicalForm.getParameter("bcrSiteId")
-		String revision = (String)clinicalForm.getParameter("bcrSiteId")
-		String pretreatmentTherapy = (String)clinicalForm.getParameter("pretreatmentTherapy")
-		String radiationTherapy = (String)clinicalForm.getParameter("radiationTherapy")
+		//String histologicalType = (String)clinicalForm.getParameter("histologicalType")
+		//String bcrSiteId = (String)clinicalForm.getParameter("bcrSiteId")
+		//String revision = (String)clinicalForm.getParameter("bcrSiteId")
+		//String pretreatmentTherapy = (String)clinicalForm.getParameter("pretreatmentTherapy")
+		//String radiationTherapy = (String)clinicalForm.getParameter("radiationTherapy")
 		String chemotherapy = (String)clinicalForm.getParameter("chemotherapy")
 		String immunotherapy = (String)clinicalForm.getParameter("immunotherapy")
-		String hormonalTherapy = (String)clinicalForm.getParameter("hormonalTherapy")
+		//String hormonalTherapy = (String)clinicalForm.getParameter("hormonalTherapy")
 		String targetedMolecularTherapy = (String)clinicalForm.getParameter("targetedMolecularTherapy")
 	    Date tumorPrgrBegin = (clinicalForm.getParameter("tumorPrgrBegin") != null && clinicalForm.getParameter("tumorPrgrBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorPrgrBegin")) : null
 	    Date tumorPrgrEnd = (clinicalForm.getParameter("tumorPrgrEnd") != null && clinicalForm.getParameter("tumorPrgrEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorPrgrEnd")) : null
 	    Date tumorRecurBegin = (clinicalForm.getParameter("tumorRecurBegin") != null && clinicalForm.getParameter("tumorRecurBegin") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorRecurBegin")) : null
 	    Date tumorRecurEnd = (clinicalForm.getParameter("tumorRecurEnd") != null && clinicalForm.getParameter("tumorRecurEnd") != "") ? sdf.parse((String)clinicalForm.getParameter("tumorRecurEnd")) : null
-		String ethnicity = (String)clinicalForm.getParameter("ethnicity")
+		//String ethnicity = (String)clinicalForm.getParameter("ethnicity")
 		String additionalRadiationTherapy = (String)clinicalForm.getParameter("additionalRadiationTherapy")
 		String additionalChemotherapy = (String)clinicalForm.getParameter("additionalChemotherapy")
 		String additionalImmunotherapy = (String)clinicalForm.getParameter("additionalChemotherapy")
@@ -477,11 +487,13 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	println "\n\n AFTER adding Tumor Tissue Site::The ID SET has ${idSet.size()} elements!!! \n\n"
 		}
 		
+		/*
         if ( (priorGlioma != null) && (!priorGlioma.equals("ANY"))) {
           List pgIds = getIdsForPriorGlioma(priorGlioma)
           idSet.retainAll(pgIds)        
     	println " AFTER adding Prior Glioma::The ID SET has ${idSet.size()} elements!!! \n\n"
         }
+        */
 		
         if ((vitalStatus != null) && (!vitalStatus.equals("ANY"))) {
           List vsIds = getIdsForVitalStatus(vitalStatus)
@@ -513,6 +525,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	println "\n\n AFTER adding RACE::The ID SET has ${idSet.size()} elements!!! \n\n"
         }
 		
+		/*
         if ((smokingHistory != null) && (!smokingHistory.equals("ANY"))) {
           List smokingHistoryIds = getIdsForSmokingHistory(smokingHistory)
           idSet.retainAll(smokingHistoryIds)        
@@ -530,6 +543,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
           idSet.retainAll(experimentalExposureIds)        
     	println "\n\n AFTER adding ExperimentalExposure::The ID SET has ${idSet.size()} elements!!! \n\n"
         }
+        */
         
 		if ((gender != null) && (!gender.equals("ANY"))) {
 		  List genderIds = getIdsForGender(gender)
@@ -543,6 +557,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	println "\n\n AFTER adding InformedConsentAcquired::The ID SET has ${idSet.size()} elements!!! \n\n"
 		}
 		
+		/*
         if ((histologicalType != null) && (!histologicalType.equals("ANY")) && (histologicalType.trim().length() > 0)) {
           List histologicalTypeIds = getIdsForHistologicalType(histologicalType)
           idSet.retainAll(histologicalTypeIds)        
@@ -572,6 +587,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
           idSet.retainAll(radiationTherapyIds)        
     	println "\n\n AFTER adding RadiationTherapy::The ID SET has ${idSet.size()} elements!!! \n\n"
         }
+        */
 		
         if ((initPathologicDxMethod != null) && (!initPathologicDxMethod.equals("ANY"))) {
           List initPathologicDxMethodIds = getIdsForInitPathologicDxMethodIds(initPathologicDxMethod)
@@ -595,10 +611,12 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
           idSet.retainAll(immunotherapyIds)        
         }
 		
+		/*
         if ((hormonalTherapy != null) && (!hormonalTherapy.equals("ANY"))) {
           List hormonalTherapyIds = getIdsForHormonalTherapy(hormonalTherapy)
           idSet.retainAll(hormonalTherapyIds)        
         }
+		*/
 		
         if ((targetedMolecularTherapy != null) && (!targetedMolecularTherapy.equals("ANY"))) {
           List targetedMolecularTherapyIds = getIdsForTargetedMolecularTherapy(targetedMolecularTherapy)
@@ -615,10 +633,12 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
           idSet.retainAll(tumorRecurIds)        
         }
 		
+		/*
         if ((ethnicity != null) && (!ethnicity.equals("ANY"))) {
           List ethnicityIds = getIdsForEthnicity(ethnicity)
           idSet.retainAll(ethnicityIds)        
         }
+        */
 		
         if ((additionalRadiationTherapy != null) && (!additionalRadiationTherapy.equals("ANY"))) {
           List artTherapyIds = getIdsForAdditionalRadiationTherapy(additionalRadiationTherapy)
@@ -739,31 +759,31 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
       
       rptBean.setPatientId(co.patientId)
       rptBean.setTumorTissueSite(co.tumorTissueSite)
-      rptBean.setPriorGlioma(co.priorGlioma)
+      //rptBean.setPriorGlioma(co.priorGlioma)
       rptBean.setVitalStatus(co.vitalStatus)
       rptBean.setDob(co.dob)
       rptBean.setDod(co.dod)
       rptBean.setLastFollowUp(co.lastFollowUp)
       rptBean.setRace(co.race)
-      rptBean.setSmokingHistory(co.smokingHistory)
-      rptBean.setAlcoholConsumption(co.alcoholConsumption)
-      rptBean.setExperimentalExposure(co.experimentalExposure)
+      //rptBean.setSmokingHistory(co.smokingHistory)
+      //rptBean.setAlcoholConsumption(co.alcoholConsumption)
+      //rptBean.setExperimentalExposure(co.experimentalExposure)
       rptBean.setGender(co.gender)
       rptBean.setInformedConsentAcquired(co.informedConsentAcquired)
-      rptBean.setHistologicalType(co.histologicalType)
-      rptBean.setBcrSiteId(co.bcrSiteId)
-      rptBean.setRevision(co.revision)
-      rptBean.setPretreatmentTherapy(co.pretreatmentTherapy)
-      rptBean.setRadiationTherapy(co.radiationTherapy)
+      //rptBean.setHistologicalType(co.histologicalType)
+      //rptBean.setBcrSiteId(co.bcrSiteId)
+      //rptBean.setRevision(co.revision)
+      //rptBean.setPretreatmentTherapy(co.pretreatmentTherapy)
+      //rptBean.setRadiationTherapy(co.radiationTherapy)
       rptBean.setInitPathologicDxDate(co.initPathologicDxDate)
       rptBean.setInitPathologicDxMethod(co.initPathologicDxMethod)
       rptBean.setChemotherapy(co.chemotherapy)
       rptBean.setImmunotherapy(co.immunotherapy)
-      rptBean.setHormonalTherapy(co.hormonalTherapy)
+      //rptBean.setHormonalTherapy(co.hormonalTherapy)
       rptBean.setTargetedMolecularTherapy(co.targetedMolecularTherapy)
       rptBean.setTumorPrgr(co.tumorPrgr)
       rptBean.setTumorRecur(co.tumorRecur)
-      rptBean.setEthnicity(co.ethnicity)
+      //rptBean.setEthnicity(co.ethnicity)
       rptBean.setAdditionalChemotherapy(co.additionalChemotherapy)
       rptBean.setAdditionalImmunotherapy(co.additionalImmunotherapy)
       rptBean.setAdditionalHormoneTherapy(co.additionalHormoneTherapy)
