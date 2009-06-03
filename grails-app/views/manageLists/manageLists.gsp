@@ -39,9 +39,11 @@
 
 		<div style="text-align:center">
 			<g:each var="ltype" in="${lts}">
-				<a href="#${ltype.toString()}Lists">${ltype.toString()} Lists</a> | 
+				<a href="#${ltype.toString()}Lists">${ltype.toString()} Lists</a> |  
 			</g:each>
-			<a href="#addList">Add List</a>
+			<g:isLoggedIn>
+				<a href="#addList">Add List</a>
+			</g:isLoggedIn>
 		</div>
 		<br/><br/>
 	
