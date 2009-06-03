@@ -6,31 +6,31 @@ public class TCGAOvarianClinicalReportBean {
 	
 	private String patientId;
 	private String tumorTissueSite;
-	private String priorGlioma;
+	//private String priorGlioma;
 	private String vitalStatus;
 	private Date dob;
 	private Date dod;
 	private Date lastFollowUp;
 	private String race;
-	private String smokingHistory;
-	private String alcoholConsumption;
-	private String experimentalExposure;
+	//private String smokingHistory;
+	//private String alcoholConsumption;
+	//private String experimentalExposure;
 	private String gender;
 	private String informedConsentAcquired;
-	private String histologicalType;
-	private String bcrSiteId;
-	private String revision;
-	private String pretreatmentTherapy;
-	private String radiationTherapy;
+	//private String histologicalType;
+	//private String bcrSiteId;
+	//private String revision;
+	//private String pretreatmentTherapy;
+	//private String radiationTherapy;
 	private Date initPathologicDxDate;
 	private String initPathologicDxMethod;
 	private String chemotherapy;
 	private String immunotherapy;
-	private String hormonalTherapy;
+	//private String hormonalTherapy;
 	private String targetedMolecularTherapy;
 	private Date tumorPrgr;
 	private Date tumorRecur;
-	private String ethnicity;
+	//private String ethnicity;
 	private String additionalRadiationTherapy;
 	private String additionalChemotherapy;
 	private String additionalImmunotherapy;
@@ -76,12 +76,14 @@ public class TCGAOvarianClinicalReportBean {
 		this.tumorTissueSite = data;
 	}
 	
+	/*
 	public String getPriorGlioma() {
 		return priorGlioma;
 	}
 	public void setPriorGlioma(String data) {
 		this.priorGlioma = data;
 	}
+	*/
 	
 	public String getVitalStatus() {
 		return vitalStatus;
@@ -118,6 +120,7 @@ public class TCGAOvarianClinicalReportBean {
 		this.race = data;
 	}
 	
+	/*
 	public String getSmokingHistory() {
 		return smokingHistory;
 	}
@@ -138,6 +141,7 @@ public class TCGAOvarianClinicalReportBean {
 	public void setExperimentalExposure(String data) {
 		this.experimentalExposure = data;
 	}
+	*/
 	
 	public String getGender() {
 		return gender;
@@ -153,6 +157,7 @@ public class TCGAOvarianClinicalReportBean {
 		this.informedConsentAcquired = data;
 	}
 	
+	/*
 	public String getHistologicalType() {
 		return histologicalType;
 	}
@@ -187,6 +192,7 @@ public class TCGAOvarianClinicalReportBean {
 	public void setRadiationTherapy(String data) {
 		this.radiationTherapy = data;
 	}
+	*/
 	
 	public String getChemotherapy() {
 		return chemotherapy;
@@ -202,12 +208,14 @@ public class TCGAOvarianClinicalReportBean {
 		this.immunotherapy = data;
 	}
 	
+	/*
 	public String getHormonalTherapy() {
 		return hormonalTherapy;
 	}
 	public void setHormonalTherapy(String data) {
 		this.hormonalTherapy = data;
 	}
+	*/
 	
 	public String getTargetedMolecularTherapy() {
 		return targetedMolecularTherapy;
@@ -230,12 +238,14 @@ public class TCGAOvarianClinicalReportBean {
 		this.tumorRecur = data;
 	}
 	
+	/*
 	public String getEthnicity() {
 		return ethnicity;
 	}
 	public void setEthnicity(String data) {
 		this.ethnicity = data;
 	}
+	*/
 	
 	public String getAdditionalRadiationTherapy() {
 		return additionalRadiationTherapy;
@@ -402,28 +412,30 @@ public class TCGAOvarianClinicalReportBean {
 	  StringBuffer sb = new StringBuffer();
 	  sb.append(patientId).append(",");
 	  sb.append(tumorTissueSite).append(",");
+	  //sb.append(priorGlioma).append(",");
 	  sb.append(vitalStatus).append(",");
 	  sb.append(dob).append(",");
 	  sb.append(dod).append(",");
 	  sb.append(lastFollowUp).append(",");
 	  sb.append(race).append(",");
-	  sb.append(smokingHistory).append(",");
-	  sb.append(alcoholConsumption).append(",");
-	  sb.append(experimentalExposure).append(",");
+	  //sb.append(smokingHistory).append(",");
+	  //sb.append(alcoholConsumption).append(",");
+	  //sb.append(experimentalExposure).append(",");
 	  sb.append(gender).append(",");
 	  sb.append(informedConsentAcquired).append(",");
-	  sb.append(histologicalType).append(",");
-	  sb.append(bcrSiteId).append(",");
-	  sb.append(revision).append(",");
-	  sb.append(radiationTherapy).append(",");
+	  //sb.append(histologicalType).append(",");
+	  //sb.append(bcrSiteId).append(",");
+	  //sb.append(revision).append(",");
+	  //sb.append(radiationTherapy).append(",");
 	  sb.append(initPathologicDxDate).append(",");
 	  sb.append(initPathologicDxMethod).append(",");
 	  sb.append(chemotherapy).append(",");
 	  sb.append(immunotherapy).append(",");
-	  sb.append(hormonalTherapy).append(",");
+	  //sb.append(hormonalTherapy).append(",");
 	  sb.append(targetedMolecularTherapy).append(",");
 	  sb.append(tumorPrgr).append(",");
 	  sb.append(tumorRecur).append(",");
+	  //sb.append(ethnicity).append(",");
 	  sb.append(additionalRadiationTherapy).append(",");
 	  sb.append(additionalChemotherapy).append(",");
 	  sb.append(additionalImmunotherapy).append(",");
@@ -445,6 +457,7 @@ public class TCGAOvarianClinicalReportBean {
 	  sb.append(dodfuMinusDop).append(",");
 	  sb.append(dodMinusDop).append(",");
 	  sb.append(ptid);
+	  
 	  return sb.toString();		
 	}
 	
