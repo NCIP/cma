@@ -205,9 +205,10 @@
 											<ul>
 											<li>CMA Version <g:meta name="app.version"/></li>
 											
-											<g:contextAware mode="showOnlyTo" context="TCGA">
+											<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
 												<li>
-													<g:link controller="registration">Register</g:link>
+													<!-- <g:link controller="registration">Register</g:link> -->
+													<a href="http://cancergenome.nih.gov/dataportal/data/access" target="_blank">Register</a>
 												</li>
 											</g:contextAware>
 												<li>
