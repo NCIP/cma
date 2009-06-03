@@ -140,7 +140,8 @@
 					  					<g:if test="${geneView == null}">				
 		                         	        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
 											&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
-											<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
+											<!-- Add Ovarian back when OV links are available -->
+											<g:contextAware mode="showOnlyTo" context="TCGA">
 												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/>
 										    </g:contextAware>
 										</g:if>
@@ -159,7 +160,8 @@
 												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
 											</g:else>
 											
-											<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
+											<!-- Add Ovarian back when OV links are available -->
+											<g:contextAware mode="showOnlyTo" context="TCGA">
 												<g:if test="${geneView.plot == 'genomeWorkbench'}">
 													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" checked="checked" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
 												</g:if>
@@ -308,7 +310,8 @@
 				<!-- close mainc -->
 				</div>
 			
-				<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
+				<!-- Don't show to TCGA OV until there are validated mutations available-->
+				<g:contextAware mode="showOnlyTo" context="TCGA">
 					<br/><br/>
 					<div id="pathwaySearchHeader" style="padding:5px;background-color:#2B2D51; color:#fff;">
 						<h5>Pathway Visualization</h5>
