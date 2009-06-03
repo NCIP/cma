@@ -5,31 +5,31 @@ class ClinicalOvarian {
 		String[] sampleGroups
 		String patientId
 		String tumorTissueSite
-		String priorGlioma
+		//String priorGlioma
 		String vitalStatus
 		Date dob
 		Date dod
 		Date lastFollowUp
 		String race
-		String smokingHistory
-		String alcoholConsumption
-		String experimentalExposure
+		//String smokingHistory
+		//String alcoholConsumption
+		//String experimentalExposure
 		String gender
 		String informedConsentAcquired
-		String histologicalType
-		String bcrSiteId
-		String revision
-		String pretreatmentTherapy
-		String radiationTherapy
+		//String histologicalType
+		//String bcrSiteId
+		//String revision
+		//String pretreatmentTherapy
+		//String radiationTherapy
 		Date initPathologicDxDate
 		String initPathologicDxMethod
 		String chemotherapy
 		String immunotherapy
-		String hormonalTherapy
+		//String hormonalTherapy
 		String targetedMolecularTherapy
 		Date tumorPrgr
 		Date tumorRecur
-		String ethnicity
+		//String ethnicity
 		String additionalRadiationTherapy
 		String additionalChemotherapy
 		String additionalImmunotherapy
@@ -58,31 +58,30 @@ class ClinicalOvarian {
 		    columns {
 		        patientId 						column:'BCRPATIENTBARCODE'
 		        tumorTissueSite   				column:'TUMORTISSUESITE'
-		        priorGlioma       				column:'PRIORGLIOMA'
+		        //priorGlioma       			column:'PRIORGLIOMA'
 		        vitalStatus       				column:'VITALSTATUS'
 		        dob               				column:'DOB'
 		        dod               				column:'DOD'
 		        lastFollowUp      				column:'LAST_FLUP_DT'
 		        race              				column:'RACE'
-		        smokingHistory    				column:'SMOKINGHISTORY'
-		        alcoholConsumption 				column:'ALCOHOLCONSUMPTION'
-		        environmentalExposure 			column:'ENVIRONMENTALEXPOSURE'
+		        //smokingHistory    			column:'SMOKINGHISTORY'
+		        //alcoholConsumption 			column:'ALCOHOLCONSUMPTION'
+		        //environmentalExposure 		column:'ENVIRONMENTALEXPOSURE'
 		        gender 							column:'GENDER'
 		        informedConsentAcquired 		column:'INFORMEDCONSENTACQUIRED'
-		        histologicalType 				column:'HISTOLOGICALTYPE'
-		        bcrSiteId 						column:'BCRSITEID'
-		        revision 						column:'REVISION'
-		        pretreatmentHistory 			column:'PRETREATMENTHISTORY'
-		        radiationTherapy 				column:'RADIATIONTHERAPY'
+		        //histologicalType 				column:'HISTOLOGICALTYPE'
+		        //bcrSiteId 					column:'BCRSITEID'
+		        //revision 						column:'REVISION'
+		        //pretreatmentHistory 			column:'PRETREATMENTHISTORY'
+		        //radiationTherapy 				column:'RADIATIONTHERAPY'
 		        initPathologicDxMethod		 	column:'INIT_PATHOLOGIC_DX_METHOD'
 		        initPathologicDxDate		 	column:'INIT_PATH_DX_DT'
 		        chemotherapy 					column:'CHEMOTHERAPY'
 		        immunotherapy 					column:'IMMUNOTHERAPY'
-		        histologicalType  				column:'HORMONALTHERAPY'
 		        targetedMolecularTherapy 		column:'TARGETEDMOLECULARTHERAPY'
 		        tumorRecur 						column:'TUMOR_RECUR_DT'
 		        tumorPrgr 						column:'TUMOR_PRGR_DT'
-		        ethnicity 						column:'ETHNICITY'
+		        //ethnicity 					column:'ETHNICITY'
 		        additionalRadiationTherapy 		column:'ADDITIONALRADIATIONTHERAPY'
 		        additionalChemotherapy 			column:'ADDITIONALCHEMOTHERAPY'
 		        additionalImmunotherapy 		column:'ADDITIONALIMMUNOTHERAPY'
