@@ -31,8 +31,7 @@ class BootStrap {
   		     
   		
   		//String appPropertiesFileName = "/local/content/cma/config/cma-tcga.properties"
-  		//String appPropertiesFileName = "/local/content/cma/config/cma-rembrandt.properties"
-  		  		
+  		//String appPropertiesFileName = "/local/content/cma/config/cma-rembrandt.properties" 		  		
   		
   		FileInputStream inputStream
   		
