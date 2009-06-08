@@ -204,11 +204,14 @@
 			catch(err)	{}			
 			ManageListHelper.getAllLists()
 		},
+		'generic_cb2' : function(name)	{
+			ManageListHelper.getAllLists()
+			ManageListHelper.getDetails(name)
+		},
 		//function to make an AJAX call to the userListBean in the session
 		// and delete the list item under the list name it passes as params. Then finds
 		// the div with an id matching this item name and removes it from the DOM. -KR
 		'deleteItem' : function (name, itemId){
-			UserListHelper.removeItemFromList(name,itemId);
 			Element.remove(name + itemId + "_div");	
 			try	{
 				SidebarHelper.loadSidebar();
@@ -218,7 +221,8 @@
 					$(name+"_count").innerHTML = parseInt(tmp) - 1;
 				}
 			}
-			catch(err){} 	
+			catch(err){} 
+			UserListHelper.removeItemFromList(name,itemId, ManageListHelper.generic_cb2(name));
 		},
 		//this is the callback function from the getDetails AJAX function (above). This
 		//function recieves a Document object back from the getDetails call and parses
@@ -276,7 +280,8 @@
 							tmp += "<li id='"+listName + itemId + "_div"+"' class='detailsList'>"+(i+1) +") "  + " " + itemId + itemRank + itemNotes;	
 						}					
 						var oc = new Function("deleteItem('"+listName+ "','" + itemId + "');return false;");
-						tmp += "<a href=\"#\" onclick=\"ManageListHelper.deleteItem('"+listName+ "','" + itemId + "');window.location.reload();return false;\">[delete]</a></li>";
+						tmp += "<a href=\"#\" onclick=\"ManageListHelper.deleteItem('"+listName+ "','" + itemId + "');return false;\">[delete]</a></li>";
+
 					}  
 					wDiv.innerHTML += tmp;
 					     
