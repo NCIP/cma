@@ -68,6 +68,7 @@ class ClinicalController {
 		def tumorGradeList = clinSrv.getPermissibleValues("tumorGrade");
 		def tumorResidualDiseaseList = clinSrv.getPermissibleValues("tumorResidualDisease");
 		def primaryTherapyOutcomeSuccessList = clinSrv.getPermissibleValues("primaryTherapyOutcomeSuccess");
+		def histologicalTypeList = clinSrv.getPermissibleValues("histologicalType");
 		  		 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
@@ -80,7 +81,7 @@ class ClinicalController {
 			   ethnicityList:ethnicityList, anatomicOrganSubdivisionList:anatomicOrganSubdivisionList, 
 			   personNeoplasmStatusList:personNeoplasmStatusList, siteOfTumorFirstRecurrenceList:siteOfTumorFirstRecurrenceList,
 			   tumorStageList:tumorStageList, tumorGradeList:tumorGradeList, tumorResidualDiseaseList:tumorResidualDiseaseList,
-			   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList])		
+			   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList, histologicalTypeList:histologicalTypeList])		
 		} else {
 			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
 			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
@@ -172,6 +173,7 @@ class ClinicalController {
 			def tumorGradeList = clinSrv.getPermissibleValues("tumorGrade");
 			def tumorResidualDiseaseList = clinSrv.getPermissibleValues("tumorResidualDisease");
 			def primaryTherapyOutcomeSuccessList = clinSrv.getPermissibleValues("primaryTherapyOutcomeSuccess");
+			def histologicalTypeList = clinSrv.getPermissibleValues("histologicalType");
 		  		 		    
 			def dc = grailsApplication.config.cma.dataContext
 			if ( dc == "TCGAOvarian" ) {
@@ -182,7 +184,7 @@ class ClinicalController {
 				   ethnicityList:ethnicityList, anatomicOrganSubdivisionList:anatomicOrganSubdivisionList, 
 				   personNeoplasmStatusList:personNeoplasmStatusList, siteOfTumorFirstRecurrenceList:siteOfTumorFirstRecurrenceList,
 				   tumorStageList:tumorStageList, tumorGradeList:tumorGradeList, tumorResidualDiseaseList:tumorResidualDiseaseList,
-				   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList])		
+				   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList, histologicalTypeList:histologicalTypeList])		
 			} else {
 				render(view:"${dc}Main", model:[clinicalView:clinicalView, rembrandtClinicalView:rembrandtClinicalView,
 				   patLists:patLists, genderList:genderList, 
