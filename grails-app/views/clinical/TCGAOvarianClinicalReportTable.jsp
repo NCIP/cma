@@ -67,13 +67,18 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="race" title="Race" sortable="true" headerClass="sortable" />
 	  <display:column property="gender" sortable="true" headerClass="sortable" />
 	  <display:column property="informedConsentAcquired" sortable="true" headerClass="sortable" />
+	  <display:column property="histologicalType" sortable="true" headerClass="sortable" />
+	  <display:column property="pretreatmentTherapy" sortable="true" headerClass="sortable" />
+	  <display:column property="radiationTherapy" sortable="true" headerClass="sortable" />
 	  <display:column property="initPathologicDxDate" title="Initial Pathologic Dx Date" sortable="false" headerClass="sortable" />
 	  <display:column property="initPathologicDxMethod" title="Initial Pathologic Dx Method" sortable="false" headerClass="sortable" />
 	  <display:column property="chemotherapy" title="Chemotherapy" sortable="false" headerClass="sortable" />
 	  <display:column property="immunotherapy" title="Immunotherapy" sortable="false" headerClass="sortable" />
+	  <display:column property="hormonalTherapy" title="hormonalTherapy" sortable="false" headerClass="sortable" />
 	  <display:column property="targetedMolecularTherapy" title="Targeted Molecular Therapy" sortable="false" headerClass="sortable" />
-	  <display:column property="tumorPrgr" title="Tumor Prgr" sortable="false" headerClass="sortable" />
-	  <display:column property="tumorRecur" title="Tumor Recur" sortable="false" headerClass="sortable" />
+	  <display:column property="tumorPrgr" title="Tumor Progression Date" sortable="false" headerClass="sortable" />
+	  <display:column property="tumorRecur" title="Tumor Recurrence Date" sortable="false" headerClass="sortable" />
+	  <display:column property="ethnicity" title="Ethnicity" sortable="false" headerClass="sortable" />
 	  <display:column property="additionalRadiationTherapy" title="Additional Radiation Therapy" sortable="false" headerClass="sortable" />
 	  <display:column property="additionalChemotherapy" title="Additional Chemotherapy" sortable="false" headerClass="sortable" />
 	  <display:column property="additionalImmunotherapy" title="Additional Immunotherapy" sortable="false" headerClass="sortable" />
@@ -87,9 +92,6 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="tumorResidualDisease" title="Tumor Residual Disease" sortable="false" headerClass="sortable" />
 	  <display:column property="primaryTherapyOutcomeSuccess" title="Primary Therapy Outcome Success" sortable="false" headerClass="sortable" />
 	  <display:column property="jewishOrigin" title="jewishOrigin" sortable="false" headerClass="sortable" />
-	  <display:column property="surProcPrfm" title="surProcPrfm" sortable="false" headerClass="sortable" />
-	  <display:column property="uncOsEvent" title="uncOsEvent" sortable="false" headerClass="sortable" />
-	  <display:column property="uncOsDuration" title="uncOsDuration" sortable="false" headerClass="sortable" />
 	  <display:column property="dodMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="dodfuMinusDop" sortable="true" headerClass="sortable" />
 	  <display:column property="dodMinusDx" sortable="true" headerClass="sortable" />

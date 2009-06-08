@@ -124,11 +124,11 @@
 							<tr>
 						        <td class="label">Vital Status</td>
 						        <td>
-						        	<g:select name="vitalStatus"  from="${vitalStatusList}" noSelection="${['ANY':'Any']}" />
+									<g:select onchange="if(\$(this.options[this.selectedIndex]).value == 'LIVING'){ \$('living').toggle();}else{\$('deceased').toggle();};" name="vitalStatus"  from="${vitalStatusList}" noSelection="${['ANY':'Any']}" />
 								</td>
 							</tr>
 							<tr>		        
-								<td class="label">DOB
+								<td class="label">Date of Birth
 									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td>
@@ -140,7 +140,7 @@
 						        </td>
 					        </tr>
 							<tr>		        
-								<td class="label">DOD
+								<td class="label">Date of Death
 									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td>
@@ -152,7 +152,7 @@
 						        </td>
 					        </tr>
 							<tr>		        
-								<td class="label">Last Follow Up
+								<td class="label">Date of Last Follow Up
 									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td>
@@ -200,18 +200,18 @@
 						        	<span class="small">informed consent acquired?</span>
 						        </td>
 						        <td>
-						        	<input type="checkbox" name="informedConsentAcquired" value="yes"/>Yes
+						        	<input type="checkbox" name="informedConsentAcquired" value="Yes"/>Yes
 						        </td>
 					        </tr>
-					        <!--
 							<tr>
 								<td valign="top" class="label">Histological Type
 									<span class="small"></span>
 								</td>
 								<td valign="top">
-									<input type="text" name="histologicalType" id="histologicalType" value="${fieldValue(bean:clinicalOvarian,field:'histologicalType')}"/>
+						        	<g:select name="histologicalType"  from="${histologicalTypeList}" noSelection="${['ANY':'Any']}" />
 								</td>
 					        </tr>
+					        <!--
 							<tr>
 								<td valign="top" class="label">Revision
 									<span class="small"></span>
@@ -228,8 +228,9 @@
 									<input type="text" name="bcrSiteId" id="bcrSiteId" value="${fieldValue(bean:clinicalOvarian,field:'bcrSiteId')}"/>
 								</td>
 					        </tr>
+							-->
 					        <tr>
-						        <td class="label">Pretreatment Therapy</td>
+						        <td class="label">Pretreatment History</td>
 						        <td>
 						        	<g:select name="pretreatmentTherapy"  from="${yesNoList}" noSelection="${['ANY':'Any']}" />
 								</td>
@@ -240,10 +241,9 @@
 						        	<g:select name="radiationTherapy"  from="${yesNoList}" noSelection="${['ANY':'Any']}" />
 								</td>
 							</tr>
-							-->
 							
 							<tr>
-								<td valign="top" class="label">Initial Pathologic Dx Date
+								<td valign="top" class="label">Date of Initial Pathologic Diagnosis Date
 									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">
@@ -273,14 +273,14 @@
 						        	<g:select name="immunotherapy"  from="${yesNoList}" noSelection="${['ANY':'Any']}" />
 								</td>
 							</tr>
-							<!--
+
 					        <tr>
 						        <td class="label">Hormonal Therapy</td>
 						        <td>
 						        	<g:select name="hormonalTherapy"  from="${yesNoList}" noSelection="${['ANY':'Any']}" />
 								</td>
 							</tr>
-							-->
+
 					        <tr>
 						        <td class="label">Targeted Molecular Therapy</td>
 						        <td>
@@ -288,7 +288,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td valign="top" class="label">Tumor Prgr
+								<td valign="top" class="label">Date of Tumor Progression
 									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">
@@ -299,7 +299,7 @@
 								</td>
 					        </tr>
 							<tr>
-								<td valign="top" class="label">Tumor Recurrence
+								<td valign="top" class="label">Date of Tumor Recurrence
 									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">
@@ -309,14 +309,12 @@
 									and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="tumorRecurEnd" id="tumorRecurEnd" DISABLED value="${fieldValue(bean:clinicalOvarian,field:'tumorRecurEnd')}"/>
 								</td>
 					        </tr>
-					        <!--
 					        <tr>
 						        <td class="label">Ethnicity</td>
 						        <td>
 						        	<g:select name="ethnicity"  from="${ethnicityList}" noSelection="${['ANY':'Any']}" />
 								</td>
 							</tr>
-							-->
 					        <tr>
 						        <td class="label">Additional Radiation Therapy</td>
 						        <td>
@@ -391,6 +389,7 @@
 									<input type="text" name="jewishOrigin" id="jewishOrigin" value="${fieldValue(bean:clinicalOvarian,field:'jewishOrigin')}"/>
 								</td>
 					        </tr>
+					        <!--
 							<tr>
 								<td valign="top" class="label">SurProcPrfm
 									<span class="small">date range (mm/dd/yyyy format)</span>
@@ -418,22 +417,25 @@
 									<input type="text" name="uncOsDuration" id="uncOsDuration" value="${fieldValue(bean:clinicalOvarian,field:'uncOsDuration')}"/>
 								</td>
 					        </tr>
-					        <tr>		        
-								<td class="label">Dodfu minus Dop
-									<span class="small">date of death or last followup minus date of procedure (days)</span>
+					        -->
+					        
+					        <tr id="deceased" style="display:none; text-align:right;background-color:#E0E0E0;">		        
+								<td class="label">Dod minus Dx
+									<span class="small">date of death minus date of diagnosis (days)</span>
 								</td>
 								<td>
-									<input type="checkbox" onclick="toggleDisable('dodfuMinusDopLower', 'dodfuMinusDopUpper');"/>Restrict by Dodfu minus Dop
+									<input type="checkbox" onclick="toggleDisable('dodfuMinusDxLower', 'dodfuMinusDxUpper');"/>Restrict by Dod minus Dx
 									<br/><br/>
 									between
-									<g:select name="dodfuMinusDopLower" from="${(0..3500).step(100)}" value="0" disabled="true" /> 
+									<g:select name="dodMinusDxLower" from="${(0..3500).step(100)}" value="0" disabled="true" /> 
 									and
-									<g:select name="dodfuMinusDopUpper" from="${(100..3600).step(100)}" value="100" disabled="true" />						
+									<g:select name="dodMinusDxUpper" from="${(100..3600).step(100)}" value="100" disabled="true" />						
 						        </td>
 					        </tr>
-					        <tr>		        
+					        
+					        <tr id="living" style="display:none; text-align:right;background-color:#E0E0E0;">		        
 								<td class="label">Dodfu minus Dx
-									<span class="small">date of death or last followup minus date of procedure (days)</span>
+									<span class="small">date of last followup minus date of diagnosis (days)</span>
 								</td>
 								<td>
 									<input type="checkbox" onclick="toggleDisable('dodfuMinusDxLower', 'dodfuMinusDxUpper');"/>Restrict by Dodfu minus Dx
