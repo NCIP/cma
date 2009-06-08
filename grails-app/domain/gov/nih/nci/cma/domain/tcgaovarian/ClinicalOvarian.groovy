@@ -16,20 +16,20 @@ class ClinicalOvarian {
 		//String experimentalExposure
 		String gender
 		String informedConsentAcquired
-		//String histologicalType
+		String histologicalType
 		//String bcrSiteId
 		//String revision
-		//String pretreatmentTherapy
-		//String radiationTherapy
+		String pretreatmentTherapy
+		String radiationTherapy
 		Date initPathologicDxDate
 		String initPathologicDxMethod
 		String chemotherapy
 		String immunotherapy
-		//String hormonalTherapy
+		String hormonalTherapy
 		String targetedMolecularTherapy
 		Date tumorPrgr
 		Date tumorRecur
-		//String ethnicity
+		String ethnicity
 		String additionalRadiationTherapy
 		String additionalChemotherapy
 		String additionalImmunotherapy
@@ -43,9 +43,9 @@ class ClinicalOvarian {
 		String tumorResidualDisease
 		String primaryTherapyOutcomeSuccess
 		String jewishOrigin
-		Date surProcPrfm
-		String uncOsEvent
-		String uncOsDuration
+		//Date surProcPrfm
+		//String uncOsEvent
+		//String uncOsDuration
 		Integer dodfuMinusDx
 		Integer dodMinusDx
 		Integer dodMinusDop
@@ -69,19 +69,20 @@ class ClinicalOvarian {
 		        //environmentalExposure 		column:'ENVIRONMENTALEXPOSURE'
 		        gender 							column:'GENDER'
 		        informedConsentAcquired 		column:'INFORMEDCONSENTACQUIRED'
-		        //histologicalType 				column:'HISTOLOGICALTYPE'
+		        histologicalType 				column:'HISTOLOGICALTYPE'
 		        //bcrSiteId 					column:'BCRSITEID'
 		        //revision 						column:'REVISION'
-		        //pretreatmentHistory 			column:'PRETREATMENTHISTORY'
-		        //radiationTherapy 				column:'RADIATIONTHERAPY'
+		        pretreatmentTherapy 			column:'PRETREATMENTHISTORY'
+		        radiationTherapy 				column:'RADIATIONTHERAPY'
 		        initPathologicDxMethod		 	column:'INIT_PATHOLOGIC_DX_METHOD'
 		        initPathologicDxDate		 	column:'INIT_PATH_DX_DT'
 		        chemotherapy 					column:'CHEMOTHERAPY'
 		        immunotherapy 					column:'IMMUNOTHERAPY'
+		        hormonalTherapy 				column:'HORMONALTHERAPY'
 		        targetedMolecularTherapy 		column:'TARGETEDMOLECULARTHERAPY'
 		        tumorRecur 						column:'TUMOR_RECUR_DT'
 		        tumorPrgr 						column:'TUMOR_PRGR_DT'
-		        //ethnicity 					column:'ETHNICITY'
+		        ethnicity 						column:'ETHNICITY'
 		        additionalRadiationTherapy 		column:'ADDITIONALRADIATIONTHERAPY'
 		        additionalChemotherapy 			column:'ADDITIONALCHEMOTHERAPY'
 		        additionalImmunotherapy 		column:'ADDITIONALIMMUNOTHERAPY'
@@ -95,9 +96,9 @@ class ClinicalOvarian {
 		        tumorResidualDisease 			column:'TUMORRESIDUALDISEASE'
 		        primaryTherapyOutcomeSuccess 	column:'PRIMARYTHERAPYOUTCOMESUCCESS'
 		        jewishOrigin 					column:'JEWISHORIGIN'
-		        surProcPrfmDt 					column:'SUR_PROC_PRFM_DT'
-		        uncOsEvent 						column:'UNC_OSEVENT'
-		        uncOsDuration 					column:'UNC_OSDURATION'
+		        //surProcPrfmDt 				column:'SUR_PROC_PRFM_DT'
+		        //uncOsEvent 					column:'UNC_OSEVENT'
+		        //uncOsDuration 				column:'UNC_OSDURATION'
 		        dodMinusDx 						column:'DOD_MINUS_DX'
 		        dodfuMinusDx 					column:'DODFU_MINUS_DX'
 		        dodMinusDop 					column:'DOD_MINUS_DOP'
