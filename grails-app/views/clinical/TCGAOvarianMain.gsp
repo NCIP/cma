@@ -386,7 +386,7 @@
 									<span class="small"></span>
 								</td>
 								<td valign="top">
-									<input type="text" name="jewishOrigin" id="jewishOrigin" value="${fieldValue(bean:clinicalOvarian,field:'jewishOrigin')}"/>
+						        	<g:select name="jewishOrigin"  from="${jewishOriginList}" noSelection="${['ANY':'Any']}" />
 								</td>
 					        </tr>
 					        <!--
