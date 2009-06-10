@@ -205,13 +205,14 @@
 			ManageListHelper.getAllLists()
 		},
 		'generic_cb2' : function(name)	{
-			ManageListHelper.getAllLists()
+			//ManageListHelper.getAllLists()
 			ManageListHelper.getDetails(name)
 		},
 		//function to make an AJAX call to the userListBean in the session
 		// and delete the list item under the list name it passes as params. Then finds
 		// the div with an id matching this item name and removes it from the DOM. -KR
 		'deleteItem' : function (name, itemId){
+			UserListHelper.removeItemFromList(name,itemId, ManageListHelper.generic_cb);
 			Element.remove(name + itemId + "_div");	
 			try	{
 				SidebarHelper.loadSidebar();
@@ -222,7 +223,7 @@
 				}
 			}
 			catch(err){} 
-			UserListHelper.removeItemFromList(name,itemId, ManageListHelper.generic_cb2(name));
+			UserListHelper.getDetailsFromList(name,ManageListHelper.putDetailsIHTML);
 		},
 		//this is the callback function from the getDetails AJAX function (above). This
 		//function recieves a Document object back from the getDetails call and parses
