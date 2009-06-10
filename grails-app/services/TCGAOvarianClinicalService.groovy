@@ -107,6 +107,10 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     		permValues.add("HISPANIC OR LATINO")
     		permValues.add("NOT HISPANIC OR LATINO")
     	}
+    	else if (paramName.equals("jewishOrigin")) {
+    		permValues.add("ASHKENAZI")
+    		permValues.add("SEPHARDIC")
+    	}
     	
     	return permValues;    	
     }
@@ -705,7 +709,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
           idSet.retainAll(ptosIds)        
         }
 		
-        if ((jewishOrigin != null) && (!jewishOrigin.equals("ANY")) && (jewishOrigin.trim().length() > 0)) {
+        if ((jewishOrigin != null) && (!jewishOrigin.equals("ANY"))) {
           List joIds = getIdsForJewishOrigin(jewishOrigin)
           idSet.retainAll(joIds)        
         }
