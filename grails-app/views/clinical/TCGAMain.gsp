@@ -71,13 +71,13 @@
 							<td class="value ${hasErrors(bean:clinicalView,field:'sampleGroups','errors')}">
 								<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
 						  			<g:if test="${clinicalView == null}">				
-										<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+										<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 						  			</g:if>				
 						  			<g:elseif test="${clinicalView.sampleGroups == null}">	
-										<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+										<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 						  			</g:elseif>	
 						  			<g:else>	
-										<select name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;">
+										<select name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
 											<g:each in="${patLists}" var="patList">
 												<g:set var="isSelected" value="${false}"/>
 												<g:each in="${selectedSampleGrpList}" var="listItem">
