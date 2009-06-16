@@ -1,8 +1,10 @@
 <html>
     <head>
 		<title>CMA Box and Whisker Log2 Intensity Coin Plots</title>
+		
 		<g:javascript library="prototype" />
-        <g:javascript library="Help" />
+		<g:javascript library="Help" />
+
         <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'touch.css')}" />
         <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'bricks.css')}" />
         <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'cma.css')}" />
@@ -29,8 +31,11 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		Help.url = "../"+Help.url;
-		Help.parsePage({pth: "${createLinkTo(dir:'images')}" });
+        	var helpUrl = "${grailsApplication.config.gov.nih.nci.cma.helpUrl}";
+			//Help.url = Help.url;
+			Help.url = helpUrl+"/cmaPortal/index.html?single=false&context=cmaPortal&topic=";
+			Help.guideUrl = helpUrl;
+			Help.parsePage({pth: "${createLinkTo(dir:'images')}" });
 		</script>
 	</body>
 </html>
