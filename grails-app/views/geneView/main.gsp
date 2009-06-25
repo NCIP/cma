@@ -188,13 +188,13 @@
 									<td class="value ${hasErrors(bean:geneView,field:'sampleGroups','errors')}">
 										<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
 						  					<g:if test="${geneView == null}">				
-												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 						  					</g:if>				
 						  					<g:elseif test="${geneView.sampleGroups == null}">	
-												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 						  					</g:elseif>	
 						  					<g:else>	
-												<select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;">
+												<select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
 													<g:each in="${patLists}" var="patList">
 														<g:set var="isSelected" value="${false}"/>
 														<g:each in="${selectedSampleGrpList}" var="listItem">

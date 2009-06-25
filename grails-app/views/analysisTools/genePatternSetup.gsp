@@ -117,15 +117,15 @@
 							
 							<td>						
 								<div id="sampleGroupSelect" class="value ${hasErrors(bean:gpaView,field:'selectedGroups','errors')}" style="vertical-align: middle; display: table-cell;">
-									<!--<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" style="width: 200px; overflow: none;" from="${patLists}"></g:select>-->
+									<!--<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" style="width: 300px; overflow: none;" from="${patLists}"></g:select>-->
 									<g:if test="${gpaView == null}">				
-										<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+										<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 									</g:if>				
 									<g:elseif test="${gpaView.selectedGroups == null}">	
-										<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
+										<g:select name="selectedGroups" multiple="multiple" size="5" id="selectedGroups" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 									</g:elseif>	
 									<g:else>	
-										<select name="selectedGroups" multiple="multiple" size="5" style="width: 200px; overflow: none;">
+										<select name="selectedGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
 											<g:each in="${patLists}" var="patList">
 												<g:set var="isSelected" value="${false}"/>
 												<g:each in="${selectedSampleGrpList}" var="listItem">
