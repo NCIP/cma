@@ -18,9 +18,9 @@ abstract class AbstractClinicalService {
         if ((sampleGroups != null) && (sampleGroups.size() > 0)) {
       	  
       	  def webRequest= RequestContextHolder.currentRequestAttributes()        	  
-            def session = webRequest.session    	 
+          def session = webRequest.session    	 
 
-            UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
+          UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session);
     	      List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
             java.util.List listItems = null
     	      lists.each { ul ->

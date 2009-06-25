@@ -103,7 +103,77 @@ class ClinicalController {
         def validClinicalEnties
         	
     	// Bind request parameters onto properties of the appropriate Clinical bean
-    	if ( params.clinicalFormType == "TCGA-GBM" || params.clinicalFormType == "TCGA-Ovarian"  ) {
+    	if ( params.clinicalFormType == "TCGA-GBM" ) {
+	  		clinicalView = new ClinicalView(params) 
+	  		validClinicalEnties = clinicalView.validate()
+	  	} else if ( params.clinicalFormType == "TCGA-Ovarian"  ) {
+	  		// DOB
+	  		println "\n\n====>DOB Begin Date is " + params.dobBegin + "\n\n"
+		   	if ( params.dobBegin != null && !params.dobBegin.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		   		flash.message = "Please supply the Begin Date of Birth in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+	    	}	
+		    if ( params.dobEnd != null && !params.dobEnd.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		   		flash.message = "Please supply the End Date of Birth in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		   	}	
+		    //DOD  	    
+		  	if ( params.dodBegin != null && !params.dodBegin.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		   		flash.message = "Please supply the Begin Date of Death in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+	            return 
+		    }	  	    
+		    if ( params.dodEnd != null && !params.dodEnd.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the End Date of Death in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+	            return 
+		    	}	
+		    //Last Follow Up  	    
+		   	if ( params.lastFollowUpBegin != null && !params.lastFollowUpBegin.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		   		flash.message = "Please supply the Begin Date of Last Follow Up in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+	    	}	  	    
+	    	if ( params.lastFollowUpEnd != null && !params.lastFollowUpEnd.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the End Date of Last Follow Up in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		    }	  	    
+		    //initPathologicDxDate	    
+		    if ( params.initPathologicDxDateBegin != null && !params.initPathologicDxDateBegin.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the Begin Initial Pahologic Diagnosis Date in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		    }	  	    
+		    if ( params.initPathologicDxDateEnd != null && !params.initPathologicDxDateEnd.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the End Initial Pahologic Diagnosis Date in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		    }	  	    
+		    //Tumor Progression	    
+		    if ( params.tumorPrgrBegin != null && !params.tumorPrgrBegin.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the Begin Date of Tumor Progression in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		    }	  	    
+		    if ( params.tumorPrgrEnd != null && !params.tumorPrgrEnd.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the End Date of Tumor Progression in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		    }	  	    
+		    //Tumor Recurrence	    
+		    if ( params.tumorRecurBegin != null && !params.tumorRecurBegin.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the Begin Date of Tumor Recurrence in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		    }	  	    
+		    if ( params.tumorRecurEnd != null && !params.tumorRecurEnd.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}") ) {
+		    	flash.message = "Please supply the End Date of Tumor Recurrence in the following format: MM/yy/dddd"
+		        redirect(controller:"clinical")
+		        return 
+		    }
 	  		clinicalView = new ClinicalView(params) 
 	  		validClinicalEnties = clinicalView.validate()
 	  	} else {
@@ -111,7 +181,7 @@ class ClinicalController {
 	  		validClinicalEnties = rembrandtClinicalView.validate()
 	  	}
 	  		  	  	
-	  	if( validClinicalEnties ) {
+	  	if ( validClinicalEnties ) {
 	  		  	  	
 			//TODO: we will also want a sep method for pulling completed reports from cache?
 			//this view is a JSP using the DisplayTag for report rendering

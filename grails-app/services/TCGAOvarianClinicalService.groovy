@@ -70,7 +70,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     		permValues.add("TUMOR FREE")
     		permValues.add("WITH TUMOR")
     	}
-    	else if (paramName.equals("siteOfFirstRecurrence")) {
+    	else if (paramName.equals("siteOfTumorFirstRecurrence")) {
     		permValues.add("LOCO-REGIONAL")
     		permValues.add("METASTASIS")
     	}
@@ -213,7 +213,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     	println("getIdsForInformedConsentAcquired returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
-    
+     
     public List<String> getIdsForHistologicalType(String value) {
     	//List clinList = ClinicalOvarian.findAllByHistologicalTypeLike(value.toUpperCase())
     	List clinList = ClinicalOvarian.findAllByHistologicalTypeLike(value)
@@ -285,14 +285,14 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     }
     
     public List<String> getIdsForTumorPrgr(Date beginValue, Date endValue) {
-    	List clinList = ClinicalOvarian.findAllByTumorPrgrBetween(beginDate, endDate)
-        println("getIdsForTumorPrgr returned numRows=${clinList.size()} lowerValue=${startValue} upperValue=${endValue}")
+    	List clinList = ClinicalOvarian.findAllByTumorPrgrBetween(beginValue, endValue)
+        println("getIdsForTumorPrgr returned numRows=${clinList.size()} lowerValue=${beginValue} upperValue=${endValue}")
     	return getIdList(clinList)
     }
     
     public List<String> getIdsForTumorRecur(Date beginValue, Date endValue) {
-    	List clinList = ClinicalOvarian.findAllByTumorRecurBetween(beginDate, endDate)
-        println("getIdsForTumorRecur returned numRows=${clinList.size()} lowerValue=${startValue} upperValue=${endValue}")
+    	List clinList = ClinicalOvarian.findAllByTumorRecurBetween(beginValue, endValue)
+        println("getIdsForTumorRecur returned numRows=${clinList.size()} lowerValue=${beginValue} upperValue=${endValue}")
     	return getIdList(clinList)
     }
     
@@ -347,6 +347,30 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     public List<String> getIdsForSiteOfTumorFirstRecurrence(String value) {
     	List clinList = ClinicalOvarian.findAllBySiteOfTumorFirstRecurrenceLike(value)
     	println("getIdsForSiteOfTumorFirstRecurrence returned numRows=${clinList.size()} value=${value}")
+    	return getIdList(clinList)
+    }
+    
+    public List<String> getIdsForTumorStage(String value) {
+    	List clinList = ClinicalOvarian.findAllByTumorStageLike(value)
+    	println("getIdsForTumorStage returned numRows=${clinList.size()} value=${value}")
+    	return getIdList(clinList)
+    }
+    
+    public List<String> getIdsForTumorGrade(String value) {
+    	List clinList = ClinicalOvarian.findAllByTumorGradeLike(value)
+    	println("getIdsForTumorGrade returned numRows=${clinList.size()} value=${value}")
+    	return getIdList(clinList)
+    }
+    
+    public List<String> getIdsForTumorResidualDisease(String value) {
+    	List clinList = ClinicalOvarian.findAllByTumorResidualDiseaseLike(value)
+    	println("getIdsForTumorResidualDisease returned numRows=${clinList.size()} value=${value}")
+    	return getIdList(clinList)
+    }
+    
+    public List<String> getIdsForPrimaryTherapyOutcomeSuccess(String value) {
+    	List clinList = ClinicalOvarian.findAllByPrimaryTherapyOutcomeSuccessLike(value)
+    	println("getIdsForPrimaryTherapyOutcomeSuccess returned numRows=${clinList.size()} value=${value}")
     	return getIdList(clinList)
     }
     
@@ -794,6 +818,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
       rptBean.setTumorPrgr(co.tumorPrgr)
       rptBean.setTumorRecur(co.tumorRecur)
       rptBean.setEthnicity(co.ethnicity)
+      rptBean.setAdditionalRadiationTherapy(co.additionalRadiationTherapy)
       rptBean.setAdditionalChemotherapy(co.additionalChemotherapy)
       rptBean.setAdditionalImmunotherapy(co.additionalImmunotherapy)
       rptBean.setAdditionalHormoneTherapy(co.additionalHormoneTherapy)
