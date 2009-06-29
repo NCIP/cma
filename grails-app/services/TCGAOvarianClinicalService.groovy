@@ -80,7 +80,7 @@ class TCGAOvarianClinicalService extends AbstractClinicalService {
     		permValues.add("IIB")
     		permValues.add("IIC")
     		permValues.add("IIIB")
-    		permValues.add("IIIB")
+    		permValues.add("IIIC")
     		permValues.add("IV")
     	}
     	else if (paramName.equals("tumorGrade")) {
