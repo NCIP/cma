@@ -161,15 +161,15 @@
 	
 				<tr>		        
 					<td class="label">Age
-						<span class="small">years range</span>
+						<span class="small">days range</span>
 					</td>
 					<td>
 						<input type="checkbox" onclick="toggleDisable('ageLower', 'ageUpper');"/>Restrict by Age
 						<br/><br/>
 						between
-						<g:select name="ageLower" from="${(0..100).step(10)}" value="0" disabled="true" /> 
+						<g:select name="ageLower" from="${(0..7900).step(100)}" value="0" disabled="true" /> 
 						and
-						<g:select name="ageUpper" from="${(10..110).step(10)}" value="110" disabled="true" />						
+						<g:select name="ageUpper" from="${(100..8000).step(100)}" value="110" disabled="true" />						
 			        </td>
 		        </tr>
 		        
