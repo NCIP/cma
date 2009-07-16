@@ -129,16 +129,16 @@ class ApplicationUserController extends BaseController {
 	    			authenticationOK = authenticationManager.login(params.userId, params.password); 
 	    			
 	    			if (!authenticationOK ) {
-				    	flash['message'] = 'Please enter a valid user ID and password' 
+				    	flash['message'] = 'Please enter a valid User ID and Password' 
 	    			}
 	     		} catch (CSException cse){ 
 	    			authenticationOK = false
-				    flash['message'] = 'Exception occurred during authenication.' 
+				    flash['message'] = 'Please enter a valid User ID and Password' 
 	    			System.out.println("Caught CSException when trying to authenticate user against LDAP... ");
 	    			cse.printStackTrace(System.out);
 	    		} catch (java.lang.SecurityException ex) {
 	    			authenticationOK = false
-				    flash['message'] = 'Exception occurred during authenication.' 
+				    flash['message'] = 'Exception occurred during Authentication.  Please contact NCICB App Support.' 
 	    			System.out.println("Caught SecurityException when trying to authenticate user against LDAP...");
 	    			ex.printStackTrace(System.out);
 	    		}
@@ -150,16 +150,16 @@ class ApplicationUserController extends BaseController {
 						User cmaUser = authorizationManager.getUser(params.userId);
 						authorizationOK = (cmaUser != null);
 						if ( !authorizationOK ) {
-				    		flash['message'] = 'You are NOT authorized to used this application.  Please send a request to NCICB App Support.' 
+				    		flash['message'] = 'You are NOT authorized to use this application.  Please send a request to NCICB App Support.' 
 				    	}
 			    	} catch (CSException cse){ 
 	    				authorizationOK = false
-				    	flash['message'] = 'Exception occurred during authorization.' 
+				    	flash['message'] = 'Exception occurred during Authorization.  Please contact NCICB App Support.' 
 	    				System.out.println("Caught CSException when trying to authorize user against CSM... ");
 	    				cse.printStackTrace(System.out);
 	    			} catch (java.lang.SecurityException ex) {
 	    				authorizationOK = false
-				    	flash['message'] = 'Exception occurred during authorization.' 
+				    	flash['message'] = 'Exception occurred during Authorization.  Please contact NCICB App Support.' 
 	    				System.out.println("Caught SecurityException when trying to authorize user against CSM...");
 	    				ex.printStackTrace(System.out);
 	    			}
