@@ -177,7 +177,7 @@ public class DynamicListHelper {
 		String[] listArr = commaSepList.split(",");
 		List<String> list = Arrays.asList(listArr);
 		
-		if(dataContext.equals("TCGA"))	{
+		if(dataContext.equals("TCGA") || dataContext.equals("TCGAOvarian"))	{
 			
 			//TCGA - this case is to handle a discrepancy between patientID and Sample ID
 			//between the Analysis file and the DB
