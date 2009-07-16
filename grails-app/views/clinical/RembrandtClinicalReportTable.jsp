@@ -26,7 +26,11 @@
 	<script type="text/javascript" src="../js/saveSamplesFromClinical.js"></script>
 	<script type="text/javascript">
 		Event.observe(window, "load", function()	{
-			Help.url = "../"+Help.url;
+        	var helpUrl = "${grailsApplication.config.gov.nih.nci.cma.helpUrl}";
+ 
+ 			Help.url = helpUrl+"/cmaPortal/index.html?single=false&context=cmaPortal&topic=";
+			Help.guideUrl = helpUrl;
+			//Help.url = "../" + Help.url;
 			Help.parsePage({pth: "../images" });
 	 	});
 	</script>
