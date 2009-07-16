@@ -1,9 +1,16 @@
 package gov.nih.nci.cma.controller
 
-import gov.nih.nci.security.SecurityServiceProvider; 
-import gov.nih.nci.security.AuthenticationManager;
-import gov.nih.nci.security.exceptions.CSException;
-import gov.nih.nci.cma.domain.ApplicationUser;
+  // CSM Imports
+  import gov.nih.nci.security.SecurityServiceProvider; 
+  import gov.nih.nci.security.AuthenticationManager;
+  import gov.nih.nci.security.AuthorizationManager;
+  
+  import gov.nih.nci.security.exceptions.CSException;
+  
+  import gov.nih.nci.security.authorization.domainobjects.User;
+  
+  // CMA Imports
+  import gov.nih.nci.cma.domain.ApplicationUser;
 
 
 class ApplicationUserController extends BaseController {
@@ -95,22 +102,91 @@ class ApplicationUserController extends BaseController {
     
     //CSM based login 
     def login = {
-    	if (request.method == "GET") {
+    	if ( request.method == "GET" ) {
     	  session.userId = null
     	  def user = new ApplicationUser()
     	}
     	else {
-    		//UserCredentials credentials = new UserCredentials(); 
-    		//credentials.setPassword(params.password); 
-    		//credentials.setUsername(params.userId); 
-    		//Get the user credentials from the database and login
     		
-    		
-    		//check the local DB for the login
-    		def user = ApplicationUser.findByUserIdAndPassword(params.userId,
-    					params.password)
+    		// Is user a public/guest user
+    		def user = ApplicationUser.findByUserIdAndPassword( params.userId, params.password )
     					
-    		boolean loginOK  = (user != null)
+	    	boolean authenticationOK = false
+	    	boolean authorizationOK = false
+    		boolean publicUser  = (user != null)
+    					
+    		if (!publicUser) {
+
+	     		System.out.println("\n***************************************");
+	     		System.out.println("\nCreating New User: params.userId = " + params.userId);
+	     		System.out.println("\n***************************************");
+	    		user = new ApplicationUser()
+	    		user.userId = params.userId
+	    		user.password = params.password
+			    	
+	    		try {
+	    			AuthenticationManager authenticationManager = SecurityServiceProvider.getAuthenticationManager(grailsApplication.config.cma.authenticationManagerContext); 
+	    			authenticationOK = authenticationManager.login(params.userId, params.password); 
+	    			
+	    			if (!authenticationOK ) {
+				    	flash['message'] = 'Please enter a valid user ID and password' 
+	    			}
+	     		} catch (CSException cse){ 
+	    			authenticationOK = false
+				    flash['message'] = 'Exception occurred during authenication.' 
+	    			System.out.println("Caught CSException when trying to authenticate user against LDAP... ");
+	    			cse.printStackTrace(System.out);
+	    		} catch (java.lang.SecurityException ex) {
+	    			authenticationOK = false
+				    flash['message'] = 'Exception occurred during authenication.' 
+	    			System.out.println("Caught SecurityException when trying to authenticate user against LDAP...");
+	    			ex.printStackTrace(System.out);
+	    		}
+			    	
+		    	if ( authenticationOK ) {
+		    		try {
+			    		// Authorize via CSM
+			    		AuthorizationManager authorizationManager = SecurityServiceProvider.getAuthorizationManager(grailsApplication.config.cma.authenticationManagerContext);
+						User cmaUser = authorizationManager.getUser(params.userId);
+						authorizationOK = (cmaUser != null);
+						if ( !authorizationOK ) {
+				    		flash['message'] = 'You are NOT authorized to used this application.  Please send a request to NCICB App Support.' 
+				    	}
+			    	} catch (CSException cse){ 
+	    				authorizationOK = false
+				    	flash['message'] = 'Exception occurred during authorization.' 
+	    				System.out.println("Caught CSException when trying to authorize user against CSM... ");
+	    				cse.printStackTrace(System.out);
+	    			} catch (java.lang.SecurityException ex) {
+	    				authorizationOK = false
+				    	flash['message'] = 'Exception occurred during authorization.' 
+	    				System.out.println("Caught SecurityException when trying to authorize user against CSM...");
+	    				ex.printStackTrace(System.out);
+	    			}
+	    		}
+	    	}
+	    		
+	    	if ( publicUser || (authenticationOK && authorizationOK) ) {
+	        	System.out.println("Successfully logged in!");
+	      		session.userId = user.userId
+	            flash['message'] = 'Login Successful!'
+	                 
+	            //use the injected service to load the def lists
+	            defaultListLoaderService.loadDefaultLists()
+	                   
+	            System.out.println("Successfully stored UserListBean in the session")
+	    	}
+	
+	        //always go back to home page
+	        redirect(uri: "/index.gsp")
+    	}    		
+
+    		
+    		/*
+    		// Is user a public/guest user
+    		def user = ApplicationUser.findByUserIdAndPassword( params.userId, params.password )
+    					
+    		boolean publicUser  = (user != null)
     					
     		if (!loginOK) {
     		  //login not found in local DB now check LDAP using CSM
@@ -138,11 +214,11 @@ class ApplicationUserController extends BaseController {
       		     //successful login
       		     System.out.println("Successfully logged in!");
       			 session.userId = user.userId
-                 /*
-                 def redirectParams = session.originalRequestParams ?
-                    session.originalRequestParams : [controller:'sampleInfo', action:'search']
-      			 redirect(redirectParams)    				    		
-                 */
+
+                 //def redirectParams = session.originalRequestParams ?
+                 //   session.originalRequestParams : [controller:'sampleInfo', action:'search']
+      			 //redirect(redirectParams)    				    		
+
                  flash['message'] = 'Login Successful!'
                  
                  //use the injected service to load the def lists
@@ -154,10 +230,7 @@ class ApplicationUserController extends BaseController {
     		  //login failed
     		  flash['message'] = 'Please enter a valid user ID and password' 
     	    }
-
-            //always go back to home page
-            redirect(uri: "/index.gsp")
-    	}    		
+    	    */
     }
     
     /*
