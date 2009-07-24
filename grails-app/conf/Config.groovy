@@ -18,7 +18,7 @@ cma.dataContexts =  [
 		authenticationManagerContext:'rembrandt',
 		propertiesFile:'cma-rembrandt.properties',
 		username:'rembdev',
-		password:'dev!234',
+		password:'XXXXXXX',
 		url:"jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"
 	],
 	'TCGA' : [
@@ -26,7 +26,7 @@ cma.dataContexts =  [
 		authenticationManagerContext:'cma',
 		propertiesFile:'cma-tcga.properties',
 		username:'cmadev',
-		password:'cma1234',
+		password:'XXXXXXX',
 		url:"jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"
 	],
 	'TCGAOvarian' : [
@@ -34,7 +34,7 @@ cma.dataContexts =  [
 		authenticationManagerContext:'cma',
 		propertiesFile:'cma-tcgaovarian.properties',
 		username:'cmadev_ob',
-		password:'j3dn9!z',
+		password:'XXXXXXX',
 		url:"jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"
 	]
 	//,

@@ -16,7 +16,7 @@
         <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>        
         <property name="jdbcUrl" value="jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"/>        
         <property name="user" value="rembdev"/>
-        <property name="password" value="dev!234"/>
+        <property name="password" value="XXXXXXX"/>
         <property name="initialPoolSize" value="25"/>
         <property name="minPoolSize" value="10"/>
         <property name="maxPoolSize" value="50"/>
@@ -30,7 +30,7 @@
         <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
         <property name="jdbcUrl" value="jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"/>        
         <property name="user" value="cmadev_ob"/>
-        <property name="password" value="j3dn9!z"/>
+        <property name="password" value="XXXXXXX"/>
         <property name="initialPoolSize" value="25"/>
         <property name="minPoolSize" value="10"/>
         <property name="maxPoolSize" value="50"/>
@@ -44,7 +44,7 @@
         <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
         <property name="jdbcUrl" value="jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"/>        
         <property name="user" value="cmadev"/>
-        <property name="password" value="cma1234"/>
+        <property name="password" value="XXXXXXX"/>
         <property name="initialPoolSize" value="25"/>
         <property name="minPoolSize" value="10"/>
         <property name="maxPoolSize" value="50"/>
@@ -58,7 +58,7 @@
         <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
         <property name="jdbcUrl" value="jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"/>        
         <property name="user" value="tardev"/>
-        <property name="password" value="t@rdev!l"/>
+        <property name="password" value="XXXXXXX"/>
         <property name="initialPoolSize" value="25"/>
         <property name="minPoolSize" value="10"/>
         <property name="maxPoolSize" value="50"/>
