@@ -10,6 +10,61 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
 	   http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
 
+	<!--  Rembrandt -->
+    <!-- 
+     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>        
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="rembdev"/>
+        <property name="password" value="dev!234"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+    -->
+    
+    
+    <!--  TCGAOvarian  -->
+    <!-- 	
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="cmadev_ob"/>
+        <property name="password" value="j3dn9!z"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+	--> 
+    
+    
+    <!--  TCGA  -->
+    <!--   -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="cmadev"/>
+        <property name="password" value="cma1234"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+    
+    
+    
+    <!--  TARGET -->
+    <!--  
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="tardev"/>
+        <property name="password" value="t@rdev!l"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+ 	 -->  
+    
 	<bean id="CMAFindingsManager"
 		class="gov.nih.nci.caintegrator.studyQueryService.FindingsManagerImpl" scope="prototype">
 		<property name="strategyList">
@@ -29,14 +84,14 @@
 	
 	<!--  Beans to handle the clinical findings -->
 	<bean id="clinicalFindingStrategy"
-		class="gov.nih.nci.caintegrator.application.service.strategy.AsynchronousFindingStrategy" 			scope="prototype">
+		class="gov.nih.nci.caintegrator.application.service.strategy.AsynchronousFindingStrategy" scope="prototype">
 		<property name="queryHandler" ref="clinicalQueryHandler" />
 		<property name="businessCacheManager" ref="businessCacheManager" />
 		<property name="taskExecutor" ref="taskExecutor" />
 		<property name="taskResult" ref="taskResult" />
 	</bean>
 	<bean id="quickSearchClinicalFindingStrategy"
-		class="gov.nih.nci.caintegrator.application.service.strategy.SynchronousFindingStrategy" 			scope="prototype">
+		class="gov.nih.nci.caintegrator.application.service.strategy.SynchronousFindingStrategy" scope="prototype">
 		<property name="queryHandler" ref="clinicalQueryHandler" />
 		<property name="businessCacheManager" ref="businessCacheManager" />
 		<property name="taskExecutor" ref="taskExecutor" />
@@ -47,7 +102,7 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="pcaFindingStrategy"
-		class="gov.nih.nci.caintegrator.application.service.strategy.AsynchronousFindingStrategy" 			scope="prototype">
+		class="gov.nih.nci.caintegrator.application.service.strategy.AsynchronousFindingStrategy" scope="prototype">
 		<property name="queryHandler" ref="pcaHandler" />
 		<property name="businessCacheManager" ref="businessCacheManager" />
 		<property name="taskExecutor" ref="taskExecutor" />
