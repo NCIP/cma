@@ -16,29 +16,44 @@ cma.dataContexts =  [
 	'Rembrandt' : [
 		displayName:'Rembrandt',
 		authenticationManagerContext:'rembrandt',
-		propertiesFile:'cma-rembrandt.properties'
+		propertiesFile:'cma-rembrandt.properties',
+		username:'rembdev',
+		password:'dev!234',
+		url:"jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"
 	],
 	'TCGA' : [
 		displayName:'TCGA GBM',
 		authenticationManagerContext:'cma',
-		propertiesFile:'cma-tcga.properties'
+		propertiesFile:'cma-tcga.properties',
+		username:'cmadev',
+		password:'cma1234',
+		url:"jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"
 	],
 	'TCGAOvarian' : [
 		displayName:'TCGA Ovarian',
 		authenticationManagerContext:'cma',
-		propertiesFile:'cma-tcga.properties'
-	],
-	'TARGET' : [
-		displayName:'Target',
-		authenticationManagerContext:'target',
-		propertiesFile:'cma-target.properties'
+		propertiesFile:'cma-tcgaovarian.properties',
+		username:'cmadev_ob',
+		password:'j3dn9!z',
+		url:"jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"
 	]
+	//,
+	//'TARGET' : [
+	//	displayName:'Target ALL',
+	//	authenticationManagerContext:'target',
+	//	propertiesFile:'cma-target.properties',
+	//	username:'tardev',
+	//	password:'t@rdev!l',
+	//	url:"jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"
+	//]
 ]
 
 
 //Probably wont ever need to edit below this line ----------------------
 propertiesFilePath = cma.deployedTo=='local' ? "C:\\local\\content\\cma\\config\\"  : "/local/content/cma/config/";
 cma.appPropertiesFile = propertiesFilePath + cma.dataContexts[cma.dataContext].propertiesFile
+cma.commonAppPropertiesFile = propertiesFilePath + "cma-all.properties"
+
 //cma.appPropertiesFile= propertiesFileUrl.propertiesFilesPath + cma.dataContexts[cma.dataContext].propertiesFile
 cma.authenticationManagerContext=cma.dataContexts[cma.dataContext].authenticationManagerContext
 
@@ -50,11 +65,55 @@ cma.authenticationManagerContext=cma.dataContexts[cma.dataContext].authenticatio
 //FOR SERVER DEPLOYMENT:
 //cma.appPropertiesFile="/local/content/cma/config/cma-tcga.properties" //cma-target | cma-rembrandt | cma-tcga 
 
-grails.config.locations = ["file:${cma.appPropertiesFile}"]
+grails.config.locations = ["file:${cma.commonAppPropertiesFile}", "file:${cma.appPropertiesFile}" ]
 
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+
+//grails.views.enable.jsessionid=true
+
+dataSource {
+  configClass = GrailsAnnotationConfiguration.class
+  pooled = false
+  driverClassName = "oracle.jdbc.driver.OracleDriver"
+  username = cma.dataContexts[cma.dataContext].username
+  password = cma.dataContexts[cma.dataContext].password
+  url = cma.dataContexts[cma.dataContext].url
+  
+  pooled = true
+  dbCreate = "update"
+  
+  dialect = "org.hibernate.dialect.Oracle9Dialect"
+  logSql = false
+}
+/*
+environments {
+	development {
+		dataSource {
+			pooled = true
+			dbCreate = "update" // one of 'create', 'create-drop','update'
+			url = cma.dataContexts[cma.dataContext].url
+		}
+	}
+	test {
+		dataSource {
+			pooled = true
+			dbCreate = "update"
+			url = cma.dataContexts[cma.dataContext].url
+		}
+	}
+	production {
+		dataSource {
+			pooled = true
+			dbCreate = "update"
+			url = cma.dataContexts[cma.dataContext].url
+		}
+	}
+}
+*/
+
+
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
                       xml: ['text/xml', 'application/xml'],
@@ -76,7 +135,6 @@ grails.converters.encoding="UTF-8"
 
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
-
 
 
 // log4j configuration
