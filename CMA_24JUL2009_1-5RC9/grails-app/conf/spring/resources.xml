@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+	   http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!--  Rembrandt -->
+    <!-- 
+     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>        
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="rembdev"/>
+        <property name="password" value="dev!234"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+    -->
+    
+    
+    <!--  TCGAOvarian  -->
+    <!-- 	
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="cmadev_ob"/>
+        <property name="password" value="j3dn9!z"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+	--> 
+    
+    
+    <!--  TCGA  -->
+    <!--   -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbiodb540.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="cmadev"/>
+        <property name="password" value="cma1234"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+    
+    
+    
+    <!--  TARGET -->
+    <!--  
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>     
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1550:INTM1DEV"/>        
+        <property name="user" value="tardev"/>
+        <property name="password" value="t@rdev!l"/>
+        <property name="initialPoolSize" value="25"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+ 	 -->  
+    
+	<bean id="CMAFindingsManager"
+		class="gov.nih.nci.caintegrator.studyQueryService.FindingsManagerImpl" scope="prototype">
+		<property name="strategyList">
+		    <list>
+		        <ref bean="clinicalFindingStrategy" />
+		        <ref bean="pcaFindingStrategy" />	        
+		    </list>
+  		</property>			
+	</bean>
+
+	<!-- list validator-->
+	<bean id="listValidationService"
+		class="gov.nih.nci.cma.list.validation.ValidationServiceImpl">
+		<property name="sessionFactory" ref="sessionFactory" />	
+		
+	</bean>
+	
+	<!--  Beans to handle the clinical findings -->
+	<bean id="clinicalFindingStrategy"
+		class="gov.nih.nci.caintegrator.application.service.strategy.AsynchronousFindingStrategy" scope="prototype">
+		<property name="queryHandler" ref="clinicalQueryHandler" />
+		<property name="businessCacheManager" ref="businessCacheManager" />
+		<property name="taskExecutor" ref="taskExecutor" />
+		<property name="taskResult" ref="taskResult" />
+	</bean>
+	<bean id="quickSearchClinicalFindingStrategy"
+		class="gov.nih.nci.caintegrator.application.service.strategy.SynchronousFindingStrategy" scope="prototype">
+		<property name="queryHandler" ref="clinicalQueryHandler" />
+		<property name="businessCacheManager" ref="businessCacheManager" />
+		<property name="taskExecutor" ref="taskExecutor" />
+		<property name="taskResult" ref="taskResult" />
+	</bean>
+	<bean id="clinicalQueryHandler"
+		class="gov.nih.nci.cma.service.findings.handlers.ClinicalQueryHandler">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="pcaFindingStrategy"
+		class="gov.nih.nci.caintegrator.application.service.strategy.AsynchronousFindingStrategy" scope="prototype">
+		<property name="queryHandler" ref="pcaHandler" />
+		<property name="businessCacheManager" ref="businessCacheManager" />
+		<property name="taskExecutor" ref="taskExecutor" />
+		<property name="taskResult" ref="taskResult" />
+	</bean>
+	<bean id="pcaHandler"
+		class="gov.nih.nci.cma.service.findings.handlers.PCAHandler">
+		<property name="businessCacheManager" ref="businessCacheManager" />
+	</bean>
+	
+	<!--  Bean for cache managers -->
+	<bean id="businessCacheManager" class="gov.nih.nci.caintegrator.application.cache.BusinessCacheManager" factory-method="getInstance">
+	</bean>
+	<bean id="presentationCacheManager" class="gov.nih.nci.caintegrator.application.cache.PresentationCacheManager" factory-method="getInstance">
+	</bean>
+	
+	<!-- beans for the finding containers: taskResult is preferred as 
+		applicationFinding will soon be deprecated-->
+	
+	<bean id="taskResult" class="gov.nih.nci.caintegrator.service.task.TaskResultImpl" scope="prototype">
+	</bean>
+	
+	<bean id="idMappingManager"
+		class="gov.nih.nci.caintegrator.util.idmapping.IdMappingManager">
+		<property name="sessionFactory" ref="sessionFactory" />		
+	</bean>
+	
+	<bean id="tcgaTxManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:advice id="tcgaTxAdvice" transaction-manager="tcgaTxManager">
+		<tx:attributes>
+			<tx:method name="*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="idMappingMethods"
+			expression="execution(* gov.nih.nci.caintegrator.util.idmapping.IdMappingManager.*(..))" />
+		<aop:advisor advice-ref="tcgaTxAdvice"
+			pointcut-ref="idMappingMethods" />
+	</aop:config>
+	
+		<!--  Bean for thread pool -->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+  		<property name="corePoolSize" value="5" />
+  		<property name="maxPoolSize" value="100" />
+  		<property name="queueCapacity" value="400" />
+	</bean>
+	
+	<!--  DWR legacy -->
+	<bean id="inbox" class="gov.nih.nci.caintegrator.application.inbox.QueryInbox">
+      <dwr:remote javascript="Inbox"/>
+      <property name="findingsManager">
+			<ref bean="CMAFindingsManager" />
+	  </property>
+	  <property name="businessTierCache" ref="businessCacheManager" />
+	  <property name="presentationTierCache" ref="presentationCacheManager" />
+    </bean>
+    
+	<import resource="classpath*:applicationContext-services.xml"/>
+	
+
+</beans>
