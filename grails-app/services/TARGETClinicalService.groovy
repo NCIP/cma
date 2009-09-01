@@ -11,7 +11,7 @@ class TARGETClinicalService extends AbstractClinicalService {
 		 
     
     /**
-     * Extracts a list of unique ids from a list of domin objects
+     * Extracts a list of unique ids from a list of domain objects
      */
     private List getIdList(List clinObjs) {
       if (clinObjs == null) {
@@ -307,7 +307,7 @@ class TARGETClinicalService extends AbstractClinicalService {
 	   }
 	   	  	   
 	   //Get the parameter values
-	   String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroup")
+	   String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroups")
 	   String gender = (String)clinicalForm.getParameter("gender")	
 	   Integer ageLower = clinicalForm.getParameter("ageLower")!=null ? Integer.valueOf(clinicalForm.getParameter("ageLower")) : null
 	   Integer ageUpper = clinicalForm.getParameter("ageUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("ageUpper")) : null 
