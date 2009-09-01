@@ -178,7 +178,11 @@ function writePendings()	{
 	if(pendingSamples.length>0)	{
 		for(var j=0; j<pendingSamples.length; j++)	{
 			html += "<span style=\"margin-left:5px;\">\n";
-			html += "<a href=\"#\" onmouseover=\"mapshow('"+pendingSamples[j]+"');return overlib('Sample:<br>\\n "+pendingSamples[j]+"');\" onmouseout=\"maphide();return nd();\">"+ pendingSamples[j] + "</a><br/>\n";
+			if ( pendingSamples[j].substring(0,4) == "TCGA") {
+				html += "<a href=\"#\" onmouseover=\"mapshow('"+pendingSamples[j]+"');return overlib('Sample:<br>\\n "+pendingSamples[j].substring(0,12)+"');\" onmouseout=\"maphide();return nd();\">"+ pendingSamples[j].substring(0,12) + "</a><br/>\n";
+			} else {
+				html += "<a href=\"#\" onmouseover=\"mapshow('"+pendingSamples[j]+"');return overlib('Sample:<br>\\n "+pendingSamples[j]+"');\" onmouseout=\"maphide();return nd();\">"+ pendingSamples[j] + "</a><br/>\n";
+			}
 			html += "</span>";
 			if (sampleList == "")
 				sampleList = pendingSamples[j];
