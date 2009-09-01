@@ -29,7 +29,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 
-
 public class GeneSearch {
 
 	private AnnotationManager annotationManager;// = new AnnotationManagerImpl();
