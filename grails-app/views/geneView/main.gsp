@@ -124,7 +124,7 @@
 				</div>
 		
 				<div id="mainc" style="border:1px solid #E0E0E0; padding:5px;">
-					<g:contextAware mode="hideFromOnly" context="TARGET">
+					<g:contextAware mode="hideFromOnly" context="NONE">
 						<div id="helptag_gene_view" class="help"></div> 
 
 						<div style="display: table;">
@@ -302,11 +302,13 @@
 						-->
 						
 				    </g:contextAware>
+				    <!--
 				    <g:contextAware mode="showOnlyTo" context="TARGET">
 					    <div align="center">
 					    	<br/><br/>These features are not available in this context.<br/>  Gene Expression Data is required.<br/><br/><br/>
 					    </div>
 				    </g:contextAware>
+				    -->
 				<!-- close mainc -->
 				</div>
 			

@@ -46,13 +46,55 @@
 		<g:if test="${flash.message}">
         	<div class="message">${flash.message}</div><br/>
         </g:if>
+		        
+		<g:hasErrors bean="${clinicalView}">
+		    <div class="errors">
+		        <g:renderErrors bean="${clinicalView}" as="list" />
+		    </div>
+		</g:hasErrors>
+         
 		<div id="clinicalHeader" class="sectionHeader">
 			<h5>Clinical Search</h5>
 		</div>
 		<div class="sectionBody">
 			<div id="helptag_clinical_search_criteria" class="help"></div>
 			<g:form action="clinicalReport" method="post" name="clinicalForm">
+			<g:hiddenField name="clinicalFormType" value="TARGET" />
 			<table class="formTable">
+				<tr>
+					<td valign="top" class="label">Sample Group(s)*
+					    <span class="small">select 1 or more</span>
+					</td>
+					<td class="value ${hasErrors(bean:clinicalView,field:'sampleGroups','errors')}">
+						<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
+						  	<g:if test="${clinicalView == null}">				
+								<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
+						  	</g:if>				
+						  	<g:elseif test="${clinicalView.sampleGroups == null}">	
+								<g:select name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
+						  	</g:elseif>	
+						  	<g:else>	
+							<select name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
+								<g:each in="${patLists}" var="patList">
+									<g:set var="isSelected" value="${false}"/>
+									<g:each in="${selectedSampleGrpList}" var="listItem">
+										<g:if test="${listItem.trim() == patList.trim()}">
+											<g:set var="isSelected" value="${true}"/>
+										</g:if>
+									</g:each>
+									<g:if test="${isSelected}">				
+										<option value="${patList}" selected="yes">${patList}</option>
+									</g:if>
+									<g:else>
+										<option value="${patList}">${patList}</option>
+									</g:else>
+								</g:each>
+							</select>
+						  	</g:else>				
+						</div>			
+					</td>
+				</tr>
+				<!--
 				<tr>
 			        <td class="label">Sample Group(s)
 			        	<span class="small">select 1 or more</span>
@@ -63,6 +105,7 @@
 						from="${patLists}"></g:select>
 					</td>
 				</tr>
+				-->
 				<tr>
 					<td class="label">WBC
 						<span class="small">peripheral blood</span>
