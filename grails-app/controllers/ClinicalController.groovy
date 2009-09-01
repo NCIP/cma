@@ -70,7 +70,7 @@ class ClinicalController {
 		def primaryTherapyOutcomeSuccessList = clinSrv.getPermissibleValues("primaryTherapyOutcomeSuccess");
 		def histologicalTypeList = clinSrv.getPermissibleValues("histologicalType");
 		def jewishOriginList = clinSrv.getPermissibleValues("jewishOrigin");
-		  		 
+		  		  		 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
 		
@@ -103,7 +103,7 @@ class ClinicalController {
         def validClinicalEnties
         	
     	// Bind request parameters onto properties of the appropriate Clinical bean
-    	if ( params.clinicalFormType == "TCGA-GBM" ) {
+    	if ( params.clinicalFormType == "TCGA-GBM" || params.clinicalFormType == "TARGET" ) {
 	  		clinicalView = new ClinicalView(params) 
 	  		validClinicalEnties = clinicalView.validate()
 	  	} else if ( params.clinicalFormType == "TCGA-Ovarian"  ) {

@@ -121,7 +121,8 @@ class AnalysisToolsController {
     		// Displays or hides certain GP setup page elements
     		String displayEl = ""
     		
-    		if (dataContext.equalsIgnoreCase("TCGA") || dataContext.equalsIgnoreCase("TCGAOvarian")) {
+    		if (dataContext.equalsIgnoreCase("TCGA") || dataContext.equalsIgnoreCase("TCGAOvarian") ||
+    			dataContext.equalsIgnoreCase("TARGET") ) {
     			// Below not used for Rembrandt data
     			def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
         	
