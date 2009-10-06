@@ -225,7 +225,11 @@ class GeneViewController {
 							"Mean Expression Intensity", request.getSession(), new PrintWriter(sw));
 					
 				defaultFilename = gmfilename; //log2filename; //bwFilename;
-				legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
+				
+				String geArrayPlatform = (String)request.getSession().getAttribute("geArrayPlatform");
+				println "\n\nThe geArrayPlatform = " + geArrayPlatform + "\n\n";
+				//legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
+				legendHtml = LegendCreator.buildLegend(geArrayPlatform, gePlot.getLegendItemCollection(), "Probesets");
 					
 				//String size = (String) charts.get("size");
 					
