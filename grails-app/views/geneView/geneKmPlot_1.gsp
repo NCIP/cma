@@ -73,11 +73,27 @@
 				<input type="hidden" name="taskId" id="taskId" value="${cc_NOT_INCLUDED}">
 		    </td></tr>
 			
-			<tr><td colspan="3">
-			Select Array Platform:<br />	
-		    <select name="geArrayPlatform" id="geArrayPlatformId" onclick="enableLookupButton();">
-				<option value="${cc_NOT_INCLUDED}">${cc_NOT_INCLUDED}<option>
-			</select></td></tr>
+			<tr>
+				<td valign="top" colspan="3" class="value ${hasErrors(bean:geneView,field:'geArrayPlatform','errors')}">
+					<g:set var="platformList" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
+					<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
+
+					<input type="hidden" id="platformName" name="platformName" value=""/>
+					<span id="currentPlatform"></span>
+					<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
+						<span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
+					</g:each>
+				</td>
+				<!--			
+				<td colspan="3">
+					Select Array Platform:<br/>	
+		    		<select name="geArrayPlatform" id="geArrayPlatformId" onclick="enableLookupButton();">
+						<option value="${cc_NOT_INCLUDED}">${cc_NOT_INCLUDED}<option>
+					</select>
+				</td>
+				-->
+			</tr>
+			
 			<tr><td width="50%">
 			Select a List:<br />
 			<select name="groupNameGE" id="groupNameGE" onclick="enableLookupButton();">

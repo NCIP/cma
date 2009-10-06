@@ -111,12 +111,7 @@
 						<span class="small">peripheral blood</span>
 					</td>
 					<td>
-						<input type="checkbox" onclick="toggleDisable('wbcLower', 'wbcUpper');"/>Restrict by WBC
-						<br/><br/>					
-						between
-						<g:select name="wbcLower" from="${(0..100).step(10)}" value="0" id="wbcLower" disabled="true"/> 
-						and
-						<g:select name="wbcUpper" from="${(10..110).step(10)}" value="110" id="wbcUpper" disabled="true"/>
+						<g:select name="wbc"  from="${wbcList}" noSelection="${['ANY':'Any']}" />
 			        </td>
 		        </tr>
 		        <tr>
@@ -124,7 +119,7 @@
 						<span class="small">bone marrow blast %</span>
 					</td>
 					<td>
-						<g:select name="day8mrd"  from="${day8mrd}" noSelection="${['ANY':'Any']}" />
+						<g:select name="day8mrd" from="${day8mrd}" noSelection="${['ANY':'Any']}" />
 			        </td>
 		        </tr>
 		        <tr>
@@ -136,27 +131,15 @@
 			        </td>
 		        </tr>
 		         <tr>
-			        <td class="label">Event</td>
+			        <td class="label">First Event</td>
 			        <td>
 			        	<g:select name="event"  from="${eventList}" noSelection="${['ANY':'Any']}" />
 					</td>
 				</tr>
 				 <tr>
-			        <td class="label">Death</td>
+			        <td class="label">Vital Status</td>
 			        <td>
-			        	<g:select name="death"  from="${deathList}" noSelection="${['ANY':'Any']}" />
-					</td>
-				</tr>
-		        <tr>
-			        <td class="label">Congenital Abnormality</td>
-			        <td>
-			        	<g:select name="congenitalAbnormality"  from="${congenitalAbnormalityList}" noSelection="${['ANY':'Any']}" />
-					</td>
-				</tr>
-				 <tr>
-			        <td class="label">TEL Status</td>
-			        <td>
-			        	<g:select name="telStatus"  from="${telStatusList}" noSelection="${['ANY':'Any']}" />
+			        	<g:select name="vitalStatus"  from="${vitalStatusList}" noSelection="${['ANY':'Any']}" />
 					</td>
 				</tr>
 				 <tr>
@@ -192,7 +175,7 @@
 				<tr>
 			        <td class="label">Testicular Status</td>
 			        <td>
-			        	<g:select name="testicularStatus"  from="${testicularStatusList}" noSelection="${['ANY':'Any']}" />
+			        	<g:select name="testicular"  from="${testicularStatusList}" noSelection="${['ANY':'Any']}" />
 					</td>
 				</tr>
 				 <tr>
@@ -202,17 +185,57 @@
 					</td>
 				</tr>
 	
+				 <tr>
+			        <td class="label">Race</td>
+			        <td>
+			        	<g:select name="race"  from="${raceList}" noSelection="${['ANY':'Any']}" />
+					</td>
+				</tr>
+	
+				 <tr>
+			        <td class="label">Ethnicity</td>
+			        <td>
+			        	<g:select style="width:200px;" name="ethnicity"  from="${ethnicityList}" noSelection="${['ANY':'Any']}" />
+					</td>
+				</tr>
+	
 				<tr>		        
-					<td class="label">Age
-						<span class="small">days range</span>
+					<td class="label">Age at Diagnosis
+						<span class="small">in years</span>
 					</td>
 					<td>
 						<input type="checkbox" onclick="toggleDisable('ageLower', 'ageUpper');"/>Restrict by Age
 						<br/><br/>
 						between
-						<g:select name="ageLower" from="${(0..7900).step(100)}" value="0" disabled="true" /> 
+						<g:select name="ageLower" from="${(0..30).step(2)}" value="0" disabled="true" /> 
 						and
-						<g:select name="ageUpper" from="${(100..8000).step(100)}" value="110" disabled="true" />						
+						<g:select name="ageUpper" from="${(2..30).step(2)}" value="20" disabled="true" />						
+			        </td>
+		        </tr>
+	
+				<tr>		        
+					<td class="label">Years to Event
+					</td>
+					<td>
+						<input type="checkbox" onclick="toggleDisable('yteLower', 'yteUpper');"/>Restrict by Number of Years
+						<br/><br/>
+						between
+						<g:select name="yteLower" from="${(0..10).step(1)}" value="0" disabled="true" /> 
+						and
+						<g:select name="yteUpper" from="${(1..10).step(1)}" value="10" disabled="true" />						
+			        </td>
+		        </tr>
+	
+				<tr>		        
+					<td class="label">Years to Death
+					</td>
+					<td>
+						<input type="checkbox" onclick="toggleDisable('ytdLower', 'ytdUpper');"/>Restrict by Number of Years
+						<br/><br/>
+						between
+						<g:select name="ytdLower" from="${(0..10).step(1)}" value="0" disabled="true" /> 
+						and
+						<g:select name="ytdUpper" from="${(1..10).step(1)}" value="10" disabled="true" />						
 			        </td>
 		        </tr>
 		        

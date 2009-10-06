@@ -173,6 +173,7 @@
 	                                </td>
 	                            </tr> 
 	                            <tr>
+	                            	<br/>
 	                                <td valign="top">
 	                                    <label for="geneSymbol">Gene Symbol (HUGO)*:</label>
 	                                </td>

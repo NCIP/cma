@@ -1,7 +1,9 @@
-import java.util.Collections;
-import gov.nih.nci.cma.domain.target.TargetClinicalStg;
-import gov.nih.nci.cma.clinical.TARGETClinicalReportBean;
-import org.apache.log4j.Logger;
+  import java.util.Collections;
+
+  import gov.nih.nci.cma.domain.target.TargetClinical;
+  import gov.nih.nci.cma.clinical.TARGETClinicalReportBean;
+  
+  import org.apache.log4j.Logger;
 
 class TARGETClinicalService extends AbstractClinicalService {
 	
@@ -30,127 +32,143 @@ class TARGETClinicalService extends AbstractClinicalService {
       return new ArrayList(retSet)
     }
     
+	 
+	 /**
+	  * Get ids for gender
+	  */
+	  public List<String> getIdsForGender(String value) {
+		  println("getIdsForGender searching gender=" + value)
+	      List clinList = TargetClinical.findAllByGenderLike(value)
+		  return getIdList(clinList)		    	
+	  }
+    
+	 /**
+	  * Get Ids for race
+	  */
+	  public List<String> getIdsForRace(String value) {
+		List clinList = TargetClinical.findAllByRaceLike(value)
+		return getIdList(clinList)	 		 
+	  }
+    
+	 /**
+	  * Get Ids for ethnicity
+	  */
+	  public List<String> getIdsForEthnicity(String value) {
+		List clinList = TargetClinical.findAllByEthnicityLike(value)
+		return getIdList(clinList)	 		 
+	  }
     
 	 /**
 	  * Get Ids for age
 	  */
 	  public List<String> getIdsForAge(Integer ageLower, Integer ageUpper) {
-		List clinList = TargetClinicalStg.findAllByAgeBetween(ageLower, ageUpper)
+		List clinList = TargetClinical.findAllByAgeBetween(ageLower, ageUpper)
 		return getIdList(clinList)	 		 
 	  }
 	   	 
 	 /**
 	  * Get Ids for WBC
 	  */
-	 public List<String> getIdsForWBC(Integer wbcLower, Integer wbcUpper) {
-	   List clinList = TargetClinicalStg.findAllByPbWbcBetween(wbcLower, wbcUpper)
+	 public List<String> getIdsForWbc(String value) {
+	   List clinList = TargetClinical.findAllByWbcLike(value)
 	   return getIdList(clinList)	 		 
 	 }
+	   	 
+	 /**
+	  * Get Ids for CNS
+	  */
+	 public List<String> getIdsForCns(String value) {
+	   List clinList = TargetClinical.findAllByCnsLike(value)
+	   return getIdList(clinList)	 		 
+	 }
+	 
+	 /**
+	  * Get ids for Testicular Involvement
+	  */
+	  public List<String> getIdsForTesticular(String value) {
+		 List clinList = TargetClinical.findAllByTesticularLike(value)
+		 return getIdList(clinList)		  		  
+	  }
 	
 	 /**
 	  * Get Ids for minimal residual disease day 8
 	  */
-	 public List<String> getIdsForMrdDay8(String day8mrdValue) {
-	   List clinList = TargetClinicalStg.findAllByMrdDay8Like(day8mrdValue)
+	 public List<String> getIdsForMrdDay8(String value) {
+	   List clinList = TargetClinical.findAllByMrdDay8Like(value)
 	   return getIdList(clinList)	 		 
 	 }
 	 
 	 /**
 	  * Get Ids for minimal residual disease day 29
 	  */
-	 public List<String> getIdsForMrdDay29(String day29mrdValue) {
-	   List clinList = TargetClinicalStg.findAllByMrdDay29Like(day29mrdValue)
+	 public List<String> getIdsForMrdDay29(String value) {
+	   List clinList = TargetClinical.findAllByMrdDay29Like(value)
 	   return getIdList(clinList)	 		 
 	 }
 	 
 	 /**
 	  * Get ids for event
 	  */
-	 public List<String> getIdsForEvent(String eventValue) {
-	   List clinList = TargetClinicalStg.findAllByEventLike(eventValue)
+	 public List<String> getIdsForEvent(String value) {
+	   List clinList = TargetClinical.findAllByEventLike(value)
 	   return getIdList(clinList)		 
 	 }
 	 
 	 /**
-	  * Get ids for death event
+	  * Get ids for years to event
 	  */
-	 public List<String> getIdsForDeath(String eventValue) {
-	   List clinList = TargetClinicalStg.findAllByDeathLike(eventValue)
+	 public List<String> getIdsForYearsToEvent(Integer lowerValue, Integer upperValue) {
+	   List clinList = TargetClinical.findAllByYearsToEventBetween(lowerValue, upperValue)
 	   return getIdList(clinList)		 
 	 }
 	 
 	 /**
-	  * Get ids for congenitalAbnormality
+	  * Get ids for vital status
 	  */
-	 public List<String> getIdsForCongenitalAbnormality(String congenitalAbnormalityValue) {
-	   List clinList = TargetClinicalStg.findAllByCongenitalAbnormalityLike(congenitalAbnormalityValue)
-	   return getIdList(clinList)			
+	 public List<String> getIdsForVitalStatus(String value) {
+	   List clinList = TargetClinical.findAllByVitalStatusLike(value)
+	   return getIdList(clinList)		 
 	 }
 	 
 	 /**
-	  * Get ids for telStatus
+	  * Get ids for years to death
 	  */
-	 public List<String> getIdsForTelStatus(String telStatus) {
-	   List clinList = TargetClinicalStg.findAllByTelStatusLike(telStatus)
-	   return getIdList(clinList)			
+	 public List<String> getIdsForYearsToDeath(Integer lowerValue, Integer upperValue) {
+	   List clinList = TargetClinical.findAllByYearsToDeathBetween(lowerValue, upperValue)
+	   return getIdList(clinList)		 
 	 }
-	 
+
 	 /**
 	  * Get ids for trisomies
 	  */
-	 public List<String> getIdsForTrisomies(String trisomiesStatus) {
-	   List clinList = TargetClinicalStg.findAllByTrisomies_4_10Like(trisomiesStatus)
+	 public List<String> getIdsForTrisomies(String value) {
+	   List clinList = TargetClinical.findAllByTrisomiesLike(value)
 	   return getIdList(clinList)			
 	 }
 	 
 	 /**
 	  * Get ids for mll status
 	  */
-	 public List<String> getIdsForMllStatus(String mllStatus) {
-	   List clinList = TargetClinicalStg.findAllByMllStatusLike(mllStatus)
+	 public List<String> getIdsForMllStatus(String value) {
+	   List clinList = TargetClinical.findAllByMllStatusLike(value)
 	   return getIdList(clinList)			
 	 }
 	 
 	 /**
 	  * Get ids for e2aStatus
 	  */
-	 public List<String> getIdsForE2aStatus(String e2aStatus) {
-	   List clinList = TargetClinicalStg.findAllByE2aStatusLike(e2aStatus)
+	 public List<String> getIdsForE2aStatus(String value) {
+	   List clinList = TargetClinical.findAllByE2aStatusLike(value)
 	   return getIdList(clinList)			
 	 }
 	 
 	 /**
 	  * Get ids for bcrStatus
 	  */
-	  public List<String> getIdsForBcrStatus(String bcrStatus) {
-		List clinList = TargetClinicalStg.findAllByBcrStatusLike(bcrStatus)
+	  public List<String> getIdsForBcrStatus(String value) {
+		List clinList = TargetClinical.findAllByBcrStatusLike(value)
 		return getIdList(clinList)		  		  
 	  }
-	 
-	  /**
-	   * Get ids for bcrStatus
-	   */
-	   public List<String> getIdsForCns(String cns) {
-	     List clinList = TargetClinicalStg.findAllByCnsLike(cns)
-		 return getIdList(clinList)		  		  
-	   }
-	 
-	  /**
-	   * Get ids for Testicular Status
-	   */
-	   public List<String> getIdsForTesticularStatus(String testicularStatus) {
-		 List clinList = TargetClinicalStg.findAllByTesticularLike(testicularStatus)
-		 return getIdList(clinList)		  		  
-	   }
-	 
-	  /**
-	   * Get ids for gender
-	   */
-	   public List<String> getIdsForGender(String gender) {
-		  println("getIdsForGender serching gender=" + gender)
-	      List clinList = TargetClinicalStg.findAllByGenderLike(gender)
-		  return getIdList(clinList)		    	
-	   }
  	 
 	 	 		
 	/**
@@ -161,71 +179,83 @@ class TARGETClinicalService extends AbstractClinicalService {
           List<String> permValues = new ArrayList();
           
           if (paramName.equals("gender")) {
-            permValues.add("Male (1)");
-            permValues.add("Female (2)");        	  
+            permValues.add("MALE");
+            permValues.add("FEMALE");        	  
           }
           else if (paramName.equals("event")) {
-            permValues.add("Censored (0)");
-            permValues.add("Relapse (1)");
-            permValues.add("Second malignant neoplasm (2)");
-            permValues.add("Death (3)");                    	  
+            permValues.add("Censored");
+            permValues.add("Relapse");
+            permValues.add("Death");                    	  
           }
-          else if (paramName.equals("death")) {
-        	permValues.add("Censored (0)");
-        	permValues.add("Death (1)");        	  
+          else if (paramName.equals("race")) {
+            permValues.add("CHINESE");
+            permValues.add("GUAMANIAN, NOS");
+            permValues.add("AMERICAN INDIAN, ALEUTIAN, ESKIMO");                    	  
+            permValues.add("WHITE");
+            permValues.add("ASIAN INDIAN, PAKISTANI");
+            permValues.add("OTHER ASIAN, INCL ASIAN NOS AND ORIENTAL NOS");                    	  
+            permValues.add("UNKNOWN");                    	  
           }
-		  else if (paramName.equals("congenitalAbnormality")) {
-			permValues.add("None (0)");
-			permValues.add("Down Syndrome (1)")
-			permValues.add("Other (9)")					
-	      }
-		  else if (paramName.equals("telStatus")) {
-		    permValues.add("Negative (0)");
-		    permValues.add("Positive (1)");
-		  }
+          else if (paramName.equals("ethnicity")) {
+            permValues.add("NON-SPANISH, NON-HISPANIC");
+            permValues.add("MEXICAN (INCL CHICANO)");
+            permValues.add("OTHER SPECIFIED SPANISH/HISPANIC ORIGIN (INLCUDES EUROPEAN)");                    	  
+            permValues.add("SPANISH SURNAME ONLY-NO CONTRARY EVIDENCE THAT THE PT IS NOT HISPANIC");
+            permValues.add("SPANISH NOS, HISPANIC NOS, LATINO NOS (BASED ON MORE THAN JUST SURNAME");
+            permValues.add("UNKNOWN WHETHER SPANISH ONLY");                    	  
+            permValues.add("PUERTO RICAN");                    	  
+            permValues.add("SOUTH OR CENTRAL AMERICAN (EXCEPT BRAZIL)");                    	  
+          }
+          else if (paramName.equals("vitalStatus")) {
+            permValues.add("Censored");
+            permValues.add("Death");                    	  
+          }
+          else if (paramName.equals("event")) {
+            permValues.add("Censored");
+            permValues.add("Relapse");
+            permValues.add("Death");                    	  
+          }
 		  else if (paramName.equals("trisomies_4_10")) {
-			permValues.add("Negative (0)");
-			permValues.add("Positive (1)");			
+			permValues.add("Negative");
+			permValues.add("Positive");			
 	      }
 		  else if (paramName.equals("mllStatus")) {
-		    permValues.add("Negative (0)");
-		    permValues.add("Positive (1)");
+		    permValues.add("Negative");
+		    permValues.add("Positive");
 	      }
 		  else if (paramName.equals("e2aStatus")) {
-			permValues.add("Negative (0)");
-			permValues.add("Positive (1)");
+			permValues.add("Negative");
+			permValues.add("Positive");
 		  }
 		  else if (paramName.equals("bcrStatus")) {
-			permValues.add("Negative (0)");
-			permValues.add("Positive (1)");
+			permValues.add("Negative");
+			permValues.add("Positive");
 		  }
 		  else if (paramName.equals("cns")) {
-			permValues.add("No CNS disease (1)"); 
-			permValues.add("<5 CSF WBC/ul with blasts on cytospin (2)"); 
-			permValues.add(">=5 CSF WBC/ul with blasts on cytospin and/or other involvement (3)"); 
+			permValues.add("No CNS disease"); 
+			permValues.add("<5 CSF WBC/ul with blasts on cytospin"); 
+			permValues.add(">5 CSF WBC/ul with blasts on cytospin and/or eye involvement, cranial nerve involvement, parenchymal brain involvement"); 
 		  }
 		  else if (paramName.equals("testicular")) {
-			permValues.add("No (0)");
-			permValues.add("Yes (1)");
-			permValues.add("NA / Unknown (2)");
+			permValues.add("No");
+			permValues.add("Yes");
+			permValues.add("NA / Unknown");
 		  }
 		  else if (paramName.equals("day8mrd")) {			 
-			  permValues.add("MRD Negative (sensitivity = 0.01%) (1)");
-			  permValues.add("0.01% < MRD <= 0.1% (2)");
-			  permValues.add("0.1% < MRD <= 1.0% ) (3)");
-			  permValues.add("1.0% < MRD <= 10.0% (4)");
-			  permValues.add("MRD > 10% (5)");
-			  permValues.add("MRD Negative (sensitivity = 0.1%) (100)");
-			  permValues.add("Indeterminate (999)");			  
+			  permValues.add("Positive");
+			  permValues.add("Negative");
+			  permValues.add("Unknown");
 		  }
 		  else if (paramName.equals("day29mrd")) {
-			  permValues.add("MRD Negative (sensitivity = 0.01%) (1)");
-			  permValues.add("0.01% < MRD <= 0.1% (2)");
-			  permValues.add("0.1% < MRD <= 1.0% ) (3)");
-			  permValues.add("1.0% < MRD <= 10.0% (4)");
-			  permValues.add("MRD > 10% (5)");
-			  permValues.add("MRD Negative (sensitivity = 0.1%) (100)");
-			  permValues.add("Indeterminate (999)");
+			  permValues.add("Positive");
+			  permValues.add("Negative");
+			  permValues.add("Unknown");
+		  }
+		  else if (paramName.equals("wbc")) {
+			  permValues.add("10,000-49,999");
+			  permValues.add(">= 100,000");
+			  permValues.add("< 10,000");
+			  permValues.add("50,000-99,999");
 		  }
                                                   		  		 			
           return permValues;
@@ -244,52 +274,30 @@ class TARGETClinicalService extends AbstractClinicalService {
 	  return paramValue;
 	}
 	
-	public TARGETClinicalReportBean getRptBean(TargetClinicalStg cs) { 
+	public TARGETClinicalReportBean getRptBean(TargetClinical cs) { 
+	
 	  TARGETClinicalReportBean rb = new TARGETClinicalReportBean()
-	  rb.setPtId(cs.ptId);
+	  
+	  rb.setPatientId(cs.patientId);
 	  rb.setTargetId(cs.targetId);
 	  rb.setGender(cs.gender);
-	  rb.setGenderStr(cs.genderStr);
-	  rb.setNaaccrRace(cs.naaccrRace);
-	  rb.setRaceStr(cs.raceStr);
-	  rb.setNaaccrEthnicity(cs.naaccrEthnicity);
-	  rb.setEthnicityStr(cs.ethnicityStr);
-	  rb.setCongenitalAbnormality(cs.congenitalAbnormality);
-	  rb.setCongenitalAbStr(cs.congenitalAbStr);
-	  
-	  //println("getRptBean gorm id=${cs.id} ptId=${cs.ptId} gender=${cs.gender} abnorm=${cs.congenitalAbnormality}")
-		 
+	  rb.setRace(cs.race);
+	  rb.setEthnicity(cs.ethnicity);
 	  rb.setAge(cs.age);
-	  rb.setPbWbc(cs.pbWbc);
+	  rb.setWbc(cs.wbc);
 	  rb.setCns(cs.cns);
-	  rb.setCnsStr(cs.cnsStr);
 	  rb.setTesticular(cs.testicular);
-	  rb.setTesticularStr(cs.testicularStr);
-	  rb.setKaryotype(cs.karyotype);
 	  rb.setMrdDay8(cs.mrdDay8);
-	  rb.setMrdDay8Str(cs.mrdDay8Str);
 	  rb.setMrdDay29(cs.mrdDay29);
-	  rb.setMrdDay29Str(cs.mrdDay29Str);
-	  rb.setBmaBlastsDay8(cs.bmaBlastsDay8);
-	  rb.setBmaBlastsDay29(cs.bmaBlastsDay29);
 	  rb.setEvent(cs.event);
-	  rb.setEventStr(cs.eventStr);
-	  rb.setTimeToEvent(cs.timeToEvent);
-	  rb.setDeath(cs.death);
-	  rb.setDeathStr(cs.deathStr);
-	  rb.setTimeToDeath(cs.timeToDeath);
-	  rb.setSiteOfRelapse(cs.siteOfRelapse);
-	  rb.setTelStatus(cs.telStatus);
-	  rb.setTelStatusStr(cs.telStatusStr);
-	  rb.setTrisomies_4_10(cs.trisomies_4_10);
-	  rb.setTrisomies_4_10Str(cs.trisomies_4_10Str);
+	  rb.setTimeToEvent(cs.yearsToEvent);
+	  rb.setVitalStatus(cs.vitalStatus);
+	  rb.setTimeToDeath(cs.yearsToDeath);
+	  rb.setTrisomies_4_10(cs.trisomies);
 	  rb.setMllStatus(cs.mllStatus);
-	  rb.setMllStatusStr(cs.mllStatusStr);
 	  rb.setE2aStatus(cs.e2aStatus);
-	  rb.setE2aStatusStr(cs.e2aStatusStr);
 	  rb.setBcrStatus(cs.bcrStatus);
-	  rb.setBcrStatusStr(cs.bcrStatusStr);
-	  rb.setDnaIndex(cs.dnaIndex);
+	  
 	  return rb;
 	  	  	  	  	  	  
 	}
@@ -309,22 +317,25 @@ class TARGETClinicalService extends AbstractClinicalService {
 	   //Get the parameter values
 	   String[] sampleGroups = (String[])clinicalForm.getParameterValues("sampleGroups")
 	   String gender = (String)clinicalForm.getParameter("gender")	
+	   String race = (String)clinicalForm.getParameter("race")	
+	   String ethnicity = (String)clinicalForm.getParameter("ethnicity")	
 	   Integer ageLower = clinicalForm.getParameter("ageLower")!=null ? Integer.valueOf(clinicalForm.getParameter("ageLower")) : null
 	   Integer ageUpper = clinicalForm.getParameter("ageUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("ageUpper")) : null 
-	   Integer wbcLower = clinicalForm.getParameter("wbcLower")!=null ? Integer.valueOf(clinicalForm.getParameter("wbcLower")) : null
-	   Integer wbcUpper = clinicalForm.getParameter("wbcUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("wbcUpper")) : null 
+	   Integer yteLower = clinicalForm.getParameter("yteLower")!=null ? Integer.valueOf(clinicalForm.getParameter("yteLower")) : null
+	   Integer yteUpper = clinicalForm.getParameter("yteUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("yteUpper")) : null 
+	   Integer ytdLower = clinicalForm.getParameter("ytdLower")!=null ? Integer.valueOf(clinicalForm.getParameter("ytdLower")) : null
+	   Integer ytdUpper = clinicalForm.getParameter("ytdUpper")!=null ? Integer.valueOf(clinicalForm.getParameter("ytdUpper")) : null 
 	   String day8mrd  = clinicalForm.getParameter("day8mrd")	   
 	   String day29mrd = clinicalForm.getParameter("day29mrd")	    					  
 	   String  event = (String)clinicalForm.getParameter("event")
-	   String  death = (String)clinicalForm.getParameter("death")	
-	   String  congenitalAbnormality = (String)clinicalForm.getParameter("congenitalAbnormality")
-	   String  telStatus = (String)clinicalForm.getParameter("telStatus")	   
+	   String  vitalStatus = (String)clinicalForm.getParameter("vitalStatus")	
+	   String  wbc = (String)clinicalForm.getParameter("wbc")	   	   
 	   String  trisomies = (String)clinicalForm.getParameter("trisomies")	   	   
 	   String  mllStatus = (String)clinicalForm.getParameter("mllStatus")	   	   		   
 	   String  e2aStatus = (String)clinicalForm.getParameter("e2aStatus")	   	   		   
 	   String  bcrStatus = (String)clinicalForm.getParameter("bcrStatus")	
-	   String  cnsStatus  = (String)clinicalForm.getParameter("cnsStatus")
-	   String  testicularStatus  = (String)clinicalForm.getParameter("testicularStatus")
+	   String  cns  = (String)clinicalForm.getParameter("cnsStatus")
+	   String  testicular  = (String)clinicalForm.getParameter("testicular")
 	   
 	   Set idSet = new HashSet()
 	   	   	   
@@ -344,28 +355,34 @@ class TARGETClinicalService extends AbstractClinicalService {
 	        idSet.retainAll(genderIds)
 	   }
 	   
+	   if ((race != null) && (!race.equals("ANY"))) {
+		    String raceCode = getParamCode(race)
+			List raceIds = getIdsForRace(raceCode)
+	        idSet.retainAll(raceIds)
+	   }
+	   
+	   if ((ethnicity != null) && (!ethnicity.equals("ANY"))) {
+		    String ethnicityCode = getParamCode(ethnicity)
+			List ethnicityIds = getIdsForEthnicity(ethnicityCode)
+	        idSet.retainAll(ethnicityIds)
+	   }
+	   
+	   if ((wbc != null) && (!wbc.equals("ANY"))) {
+		    String wbcCode = getParamCode(wbc)
+			List wbcIds = getIdsForWbc(wbcCode)
+	        idSet.retainAll(wbcIds)
+	   }
+	   
 	   if ((event != null) && (!event.equals("ANY"))) {
 		    String eventCode = getParamCode(event)
 			List eventIds = getIdsForEvent(eventCode)
 	        idSet.retainAll(eventIds)
 	   }
 	   
-	   if ((death != null) && (!death.equals("ANY"))) {
-		    String deathCode = getParamCode(death)
-			List deathIds = getIdsForDeath(deathCode)
-	        idSet.retainAll(deathIds)
-	   }
-	   
-	   if ((congenitalAbnormality != null) && (!congenitalAbnormality.equals("ANY"))) {
-		    String caCode = getParamCode(congenitalAbnormality)
-			List caIds = getIdsForCongenitalAbnormality(caCode)
-	        idSet.retainAll(caIds)
-	   }
-	   
-	   if ((telStatus != null) && (!telStatus.equals("ANY"))) {
-		    String tsCode = getParamCode(telStatus)
-			List tsIds = getIdsForTelStatus(tsCode)
-	        idSet.retainAll(tsIds)
+	   if ((vitalStatus != null) && (!vitalStatus.equals("ANY"))) {
+		    String vitalStatusCode = getParamCode(vitalStatus)
+			List vitalStatusIds = getIdsForVitalStatus(vitalStatusCode)
+	        idSet.retainAll(vitalStatusIds)
 	   }
 	   
 	   if ((trisomies != null) && (!trisomies.equals("ANY"))) {
@@ -392,16 +409,16 @@ class TARGETClinicalService extends AbstractClinicalService {
 	        idSet.retainAll(bcrIds)
 	   }
 	   
-	   if ((cnsStatus != null) && (!cnsStatus.equals("ANY"))) {
-		    String cnsCode = getParamCode(cnsStatus)
+	   if ((cns != null) && (!cns.equals("ANY"))) {
+		    String cnsCode = getParamCode(cns)
 			List cnsIds = getIdsForCns(cnsCode)
 	        idSet.retainAll(cnsIds)
 	   }
 	   
-	   if ((testicularStatus != null) && (!testicularStatus.equals("ANY"))) {
-		    String tsCode = getParamCode(testicularStatus)
-			List tsIds = getIdsForTesticularStatus(tsCode)
-	        idSet.retainAll(tsIds)
+	   if ((testicular != null) && (!testicular.equals("ANY"))) {
+		    String tCode = getParamCode(testicular)
+			List tIds = getIdsForTesticular(tCode)
+	        idSet.retainAll(tIds)
 	   }
 	   
 	   if ((ageLower != null) && (ageUpper != null)) {
@@ -411,9 +428,14 @@ class TARGETClinicalService extends AbstractClinicalService {
 	        idSet.retainAll(ageIds)
 	   }
 	   
-	   if ((wbcLower != null) && (wbcUpper != null)) {
-	        List wbcIds = getIdsForWBC(wbcLower, wbcUpper)
-	        idSet.retainAll(wbcIds)
+	   if ((yteLower != null) && (yteUpper != null)) {
+	        List yteIds = getIdsForYearsToEvent(yteLower, yteUpper)
+	        idSet.retainAll(yteIds)
+	   }
+	   
+	   if ((ytdLower != null) && (ytdUpper != null)) {
+	        List ytdIds = getIdsForYearsToDeath(ytdLower, ytdUpper)
+	        idSet.retainAll(ytdIds)
 	   }
 	   
 	   if ((day8mrd != null) && (!day8mrd.equals("ANY"))) {
@@ -461,11 +483,15 @@ class TARGETClinicalService extends AbstractClinicalService {
     	
     	Set idSet = new HashSet(patientIds)
     	String idStr = getIdString(idSet)
-    	String clinQS = "From gov.nih.nci.cma.domain.target.TargetClinicalStg tc where tc.targetId in ${idStr}"
+    	String clinQS = "From gov.nih.nci.cma.domain.target.TargetClinical tc where tc.targetId in ${idStr}"
     	println("getClinicalData clinQS=${clinQS}")
-    	List cl = TargetClinicalStg.findAll(clinQS)
+    	List cl = TargetClinical.findAll(clinQS)
+
     	List rptBeanList = new ArrayList()
     	cl.each { c ->
+    	  println("\n\n>>>>>>>>>")
+    	  println("\n\nTargetClinical=${c}")
+     	  println("\n\n<<<<<<<<<")
     	  rptBeanList.add(getRptBean(c))    		
     	}
     	

@@ -70,6 +70,10 @@ class ClinicalController {
 		def primaryTherapyOutcomeSuccessList = clinSrv.getPermissibleValues("primaryTherapyOutcomeSuccess");
 		def histologicalTypeList = clinSrv.getPermissibleValues("histologicalType");
 		def jewishOriginList = clinSrv.getPermissibleValues("jewishOrigin");
+		  
+		// TARGET
+		def wbcList = clinSrv.getPermissibleValues("wbc");
+		
 		  		  		 
 		//TESTing - clear tmp report
 		session.setAttribute("reportBeansList", null)
@@ -84,6 +88,12 @@ class ClinicalController {
 			   tumorStageList:tumorStageList, tumorGradeList:tumorGradeList, tumorResidualDiseaseList:tumorResidualDiseaseList,
 			   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList, histologicalTypeList:histologicalTypeList,
 			   jewishOriginList:jewishOriginList])		
+		} else if ( ds == "TARGET" ) {
+			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, raceList:raceList, 
+			   ethnicityList:ethnicityList, wbcList:wbcList, vitalStatusList:vitalStatusList, eventList:eventList,
+			   trisomiesList:trisomiesList, mllStatusList:mllStatusList,
+			   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
+			   testicularStatusList:testicularStatusList, day29mrd:day29mrd, day8mrd:day8mrd])		
 		} else {
 			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
 			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
@@ -91,7 +101,7 @@ class ClinicalController {
 			   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,
 			   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
 			   testicularStatusList:testicularStatusList, day29mrd:day29mrd, day8mrd:day8mrd])		
-			}
+		}
     }
     
     def clinicalSubmit = {
@@ -186,6 +196,7 @@ class ClinicalController {
 			//TODO: we will also want a sep method for pulling completed reports from cache?
 			//this view is a JSP using the DisplayTag for report rendering
 			//check query name
+			println "\n\n The data is VALID!!!!\n\n"
 			def qname = params.queryName //this will be the key to accessing the report in cache/session
 			if(params.queryName == null || params.queryName == "")	{
 				SimpleDateFormat dateformatMMDDYYYY = new SimpleDateFormat("MMddyyyy");
@@ -201,6 +212,7 @@ class ClinicalController {
 	    	// Forward as to not repost on refresh
 	    	redirect(action:'clinicalReportDisplay', params:[taskId:qname])
 	    } else {
+			println "\n\n The data is INVALID!!!!\n\n"
 	        List selectedSampleGrpList
 	        if ( request.getParameterValues("sampleGroups") != null ) {
 		        selectedSampleGrpList = Arrays.asList(request.getParameterValues("sampleGroups"))
@@ -247,6 +259,9 @@ class ClinicalController {
 			def primaryTherapyOutcomeSuccessList = clinSrv.getPermissibleValues("primaryTherapyOutcomeSuccess");
 			def histologicalTypeList = clinSrv.getPermissibleValues("histologicalType");
 			def jewishOriginList = clinSrv.getPermissibleValues("jewishOrigin");
+		  
+			// TARGET
+			def wbcList = clinSrv.getPermissibleValues("wbc");
 		  		 		    
 			def dc = grailsApplication.config.cma.dataContext
 			if ( dc == "TCGAOvarian" ) {
@@ -259,6 +274,12 @@ class ClinicalController {
 				   tumorStageList:tumorStageList, tumorGradeList:tumorGradeList, tumorResidualDiseaseList:tumorResidualDiseaseList,
 				   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList, histologicalTypeList:histologicalTypeList,
 			   	   jewishOriginList:jewishOriginList])		
+			} else if ( dc == "TARGET" ) {
+				render(view:"${dc}Main", model:[patLists:patLists, genderList:genderList, raceList:raceList, 
+			   	   ethnicityList:ethnicityList, wbcList:wbcList, vitalStatusList:vitalStatusList, eventList:eventList, 
+			 	   trisomiesList:trisomiesList, mllStatusList:mllStatusList, e2aStatusList:e2aStatusList, 
+			 	   bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList, testicularStatusList:testicularStatusList, 
+			 	   day29mrd:day29mrd, day8mrd:day8mrd])		
 			} else {
 				render(view:"${dc}Main", model:[clinicalView:clinicalView, rembrandtClinicalView:rembrandtClinicalView,
 				   patLists:patLists, genderList:genderList, 
