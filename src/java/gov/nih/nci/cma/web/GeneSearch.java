@@ -1,5 +1,6 @@
 package gov.nih.nci.cma.web;
 
+import gov.nih.nci.caintegrator.analysis.messaging.DataPointVector;
 import gov.nih.nci.caintegrator.analysis.messaging.ReporterGroup;
 import gov.nih.nci.caintegrator.analysis.messaging.SampleGroup;
 import gov.nih.nci.caintegrator.application.lists.ListItem;
@@ -181,7 +182,8 @@ public class GeneSearch {
 			System.out.println("got finding");
 
 			if(finding!=null && finding.getDataVectors()!=null){
-			    m.put("reporter",finding.getDataVectors().get(0).getName());
+			    //m.put("reporter",finding.getDataVectors().get(0).getName());
+			    m.put("reporter", "Median_of_All_Reporters");
 			    m.put("taskId",finding.getTaskId());
 			    kmRequestMap = m;
 			}

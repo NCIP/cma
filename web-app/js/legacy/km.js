@@ -34,7 +34,7 @@ JFree Servlet and requesting the desired filename. Also
 included are the sample Groups used and the p-value rank -KR
 */
 function kmPlotCallback(data) {
-	
+	 
 	try {
 		//is this a gene or clinical based KM?
 		var kmtype = "gene";
@@ -50,6 +50,8 @@ function kmPlotCallback(data) {
 		}, 1000);
 		var sampleGroupNames = plotInfo.sampleGroupNames;
 		var logRank = plotInfo.logRankPValue;
+		var logRank2 = plotInfo.logRankPValue2;
+		var logRank3 = plotInfo.logRankPValue3;
 		var logHTML = "";
 		if (sampleGroupNames.length > 0) {
 			var reportHTML = "";
@@ -67,6 +69,12 @@ function kmPlotCallback(data) {
 			}
 			if (logRank != null) {
 				logHTML = sampleGroupNames[0].name + "&nbsp;vs.&nbsp;" + sampleGroupNames[1].name + "&nbsp;=" + logRank;
+			}
+			if (logRank2 != null) {
+				logHTML += "<br/>" + sampleGroupNames[0].name + "&nbsp;vs.&nbsp;" + sampleGroupNames[2].name + "&nbsp;=" + logRank2;
+			}
+			if (logRank3 != null) {
+				logHTML += "<br/>" + sampleGroupNames[1].name + "&nbsp;vs.&nbsp;" + sampleGroupNames[2].name + "&nbsp;=" + logRank3;
 			}
 			$("reportHTML").innerHTML = reportHTML;
 			$("statisticsHTML").innerHTML = statisticsHTML;
@@ -109,8 +117,12 @@ function setPatientLists(data) {
 function setPlatforms(txt) {
 	var res = eval("(" + txt + ")");
 	DWRUtil.removeAllOptions("geArrayPlatformId");
+	var oOption = document.createElement("OPTION");
+	oOption.text = "choose platform";
+	oOption.value = "";
+	$("geArrayPlatformId").options.add(oOption);
 	for (var i = 0; i < res.length; i++) {
-		var oOption = document.createElement("OPTION");
+		oOption = document.createElement("OPTION");
 		oOption.text = res[i].label;
 		oOption.value = res[i].value;
 		$("geArrayPlatformId").options.add(oOption);
