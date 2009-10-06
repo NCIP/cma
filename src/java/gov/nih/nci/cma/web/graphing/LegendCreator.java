@@ -96,6 +96,43 @@ public class LegendCreator {
 		//js = "<script language=\"javascript\">document.getElementById('legend').innerHTML = \""+ html +" \"; </script>";
 		return html;
 	}
+
+	/**
+	 * creates and HTML legend and returns a string of HTML
+	 * @param lic - a jFreechart LegendItemCollection
+	 * @return
+	 */
+	public static String buildLegend(String chipType, LegendItemCollection lic, String legendTitle)	{
+		
+		//TODO: take annotation link as a string param
+		
+		String html = new String();
+		Color p = null;
+		//html = "<fieldset style='display:table;width:600; border:1px solid gray; text-align:left; padding:5px;'>";
+		//html += "<legend>Legend: "+ legendTitle+"</legend>";
+		
+		for(int i=0; i<lic.getItemCount(); i++)	{
+			p = (Color) lic.get(i).getFillPaint();
+			//html += "<div style='margin:10px; padding:10px;border:1px solid red;'><label style='width:30px; height:10px; background-color: "+ c2hex(p)+"; border:1px solid black;'>&nbsp;&nbsp;&nbsp;</label><b style='color: "+ c2hex(p)+"'>"+lic.get(i).getLabel()+"</b></div>\n";	
+
+			if ( chipType.equals("AFFY_HT_HG-U133A") || chipType.equals("AFFY_HGU133P2") ) {
+				html += "<table style=\"display:inline;\"><tr><td style=\"width:10px; height:10px; background-color: " 
+					+ c2hex(p)+"; border:1px solid black;\">&nbsp;&nbsp;&nbsp;</td><td><a style=\"text-decoration:none\" " +
+							"href=\"javascript:spawnAnnot('"+lic.get(i).getLabel()+"\');\"><b style=\"color: " 
+							+ c2hex(p)+"\">"+lic.get(i).getLabel()+"</b></a></td></tr></table>";
+			} else {
+				html += "<table style=\"display:inline;\"><tr><td style=\"width:10px; height:10px; background-color: " 
+					+ c2hex(p)+"; border:1px solid black;\">&nbsp;&nbsp;&nbsp;</td><td><b style=\"color: " 
+							+ c2hex(p)+"\">"+lic.get(i).getLabel()+"</b></td></tr></table>";
+			}
+			//html += "<table style=\"display:inline;\"><tr><td style=\"width:10px; height:10px; background-color: "+ c2hex(p)+"; border:1px solid black;\">&nbsp;&nbsp;&nbsp;</td><td><a style=\"text-decoration:none\" href=\"javascript:alert(\'some annotation for:"+lic.get(i).getLabel()+"\');\"><b style=\"color: "+ c2hex(p)+"\">"+lic.get(i).getLabel()+"</b></a></td></tr></table>";
+		}
+		//html += "</fieldset>";
+		//System.out.println(html);
+		String js="";
+		//js = "<script language=\"javascript\">document.getElementById('legend').innerHTML = \""+ html +" \"; </script>";
+		return html;
+	}
 	
 	/**
 	 * converts an awt.Color to a hex color string

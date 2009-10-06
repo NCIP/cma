@@ -153,6 +153,7 @@ public class GeneSearch {
 						request.getSession().setAttribute("gePlot", plot);
 						System.out.println("plot in session");
 					}
+					request.getSession().setAttribute("geArrayPlatform", arrayPlatformName);
 				}
 //				return mapping.findForward("histogram");
 			} catch (Exception e) {
