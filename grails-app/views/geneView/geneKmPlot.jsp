@@ -56,7 +56,10 @@
      	    }
      	    if(request.getAttribute("reporter")!=null && request.getAttribute("taskId")!=null){
      	       listItems.put("reporter",request.getAttribute("reporter"));
-     	      	listItems.put("taskId",request.getAttribute("taskId"));
+     	       listItems.put("taskId",request.getAttribute("taskId"));
+     	    }
+     	    if(request.getAttribute("control_taskId")!=null){
+     	       listItems.put("control_taskId",request.getAttribute("control_taskId"));
      	    }
      		%>       				     		
 			KMPlotService.createKMPlot(<%=listItems%>,kmPlotCallback);			
@@ -270,6 +273,7 @@ function createReporterList(txt){
 				<input type="button" onclick="getReporterList($('geneSymbol').value ,$('geArrayPlatformId').options[$('geArrayPlatformId').selectedIndex].value, $('groupNameGE').options[$('groupNameGE').selectedIndex].value, $('reporter').name);" id="lookupButton" value="lookup reporters" />
 				<span id="reporterStatus"></span>
 				<input type="hidden" name="taskId" id="taskId" value="<%=CaIntegratorConstants.NOT_INCLUDED%>">
+				<input type="hidden" name="control_taskId" id="control_taskId" value="<%=CaIntegratorConstants.NOT_INCLUDED%>">
 		    </td></tr>
 			
 			<tr><td colspan="3">

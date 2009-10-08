@@ -71,6 +71,7 @@
 				<input type="button" onclick="getReporterList($('geneSymbol').value ,$('geArrayPlatformId').options[$('geArrayPlatformId').selectedIndex].value, $('groupNameGE').options[$('groupNameGE').selectedIndex].value, $('reporter').name);" id="lookupButton" value="lookup reporters" />
 				<span id="reporterStatus"></span>
 				<input type="hidden" name="taskId" id="taskId" value="${cc_NOT_INCLUDED}">
+				<input type="hidden" name="control_taskId" id="control_taskId" value="${cc_NOT_INCLUDED}">
 		    </td></tr>
 			
 			<tr>

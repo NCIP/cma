@@ -82,6 +82,7 @@ class GeneViewController {
 		    	}
 		    	else	{
 		    		params.taskId = kmRequestMap.get("taskId")
+		    		params.control_taskId = kmRequestMap.get("control_taskId")
 		    		params.plot = kmRequestMap.get("plotType")
 		    		params.plotType = kmRequestMap.get("plotType")
 		    		params.reporter = kmRequestMap.get("reporter")
@@ -176,10 +177,11 @@ class GeneViewController {
 	    		//render view w/ plotType, reporter, taskId
 	    		// "taskId":"1222897098350","geArrayPlatform":"TCGA.affyhg-u133a_4_3_08.Rda","pathwayName":"h_RELAPathway","quickSearchType":"Gene Keyword HUGO","reporter":"211551_at","geneSymbol":"EGFR","plot":"GE_KM_PLOT","method":"quickSearch","sampleGroupNameMultiple":"Med_Survival"
 //	    		redirect(action:"kmPlot", params:[plot:kmRequestMap.get("plotType"), plotType:kmRequestMap.get("plotType"), 
-//	    		        reporter:kmRequestMap.get("reporter"), taskId:kmRequestMap.get("taskId"), geArrayPlatform:'',
+//	    		        reporter:kmRequestMap.get("reporter"), taskId:kmRequestMap.get("taskId"), control_taskId:kmRequestMap.get("control_taskId"), geArrayPlatform:'',
 //	    		        pathwayName:'', quickSearchType:'', geneSymbol:'', sampleGroupNameMultiple:''])
 	    		
 	    		params.taskId = kmRequestMap.get("taskId")
+			params.control_taskId = kmRequestMap.get("control_taskId")
 	    		params.plot = kmRequestMap.get("plotType")
 	    		params.plotType = kmRequestMap.get("plotType")
 	    		params.reporter = kmRequestMap.get("reporter")
@@ -225,11 +227,7 @@ class GeneViewController {
 							"Mean Expression Intensity", request.getSession(), new PrintWriter(sw));
 					
 				defaultFilename = gmfilename; //log2filename; //bwFilename;
-				
-				String geArrayPlatform = (String)request.getSession().getAttribute("geArrayPlatform");
-				println "\n\nThe geArrayPlatform = " + geArrayPlatform + "\n\n";
-				//legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
-				legendHtml = LegendCreator.buildLegend(geArrayPlatform, gePlot.getLegendItemCollection(), "Probesets");
+				legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
 					
 				//String size = (String) charts.get("size");
 					
