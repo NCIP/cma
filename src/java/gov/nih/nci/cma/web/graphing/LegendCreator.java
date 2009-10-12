@@ -102,7 +102,7 @@ public class LegendCreator {
 	 * @param lic - a jFreechart LegendItemCollection
 	 * @return
 	 */
-	public static String buildLegend(String chipType, LegendItemCollection lic, String legendTitle)	{
+	public static String buildSmartLegend(String chipType, LegendItemCollection lic, String legendTitle)	{
 		
 		//TODO: take annotation link as a string param
 		
@@ -115,6 +115,10 @@ public class LegendCreator {
 			p = (Color) lic.get(i).getFillPaint();
 			//html += "<div style='margin:10px; padding:10px;border:1px solid red;'><label style='width:30px; height:10px; background-color: "+ c2hex(p)+"; border:1px solid black;'>&nbsp;&nbsp;&nbsp;</label><b style='color: "+ c2hex(p)+"'>"+lic.get(i).getLabel()+"</b></div>\n";	
 
+			// JB: GF [#21548] Issue for annotation query in GeneView
+			// The LPG application that these probeset links redirect the user to, only support the HG-133 Chip.
+			// So, when non-HG133 chips were selected for the GeneView search, those links probeset 
+			// links are NOT hyperlinked to the LPG site.
 			if ( chipType.equals("AFFY_HT_HG-U133A") || chipType.equals("AFFY_HGU133P2") ) {
 				html += "<table style=\"display:inline;\"><tr><td style=\"width:10px; height:10px; background-color: " 
 					+ c2hex(p)+"; border:1px solid black;\">&nbsp;&nbsp;&nbsp;</td><td><a style=\"text-decoration:none\" " +
