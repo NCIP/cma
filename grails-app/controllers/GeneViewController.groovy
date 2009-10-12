@@ -227,7 +227,15 @@ class GeneViewController {
 							"Mean Expression Intensity", request.getSession(), new PrintWriter(sw));
 					
 				defaultFilename = gmfilename; //log2filename; //bwFilename;
-				legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
+				
+				// JB: legendHtml = LegendCreator.buildLegend(gePlot.getLegendItemCollection(), "Probesets");
+				// JB: GF [#21548] Issue for annotation query in GeneView
+				// The LPG application that these probeset links redirect the user to, only support the HG-133 Chip.
+				// So, when non-HG133 chips were selected for the GeneView search, those links probeset 
+				// links are NOT hyperlinked to the LPG site.
+				String geArrayPlatform = (String)request.getSession().getAttribute("geArrayPlatform");
+				println "\n\nThe geArrayPlatform = " + geArrayPlatform + "\n\n";
+				legendHtml = LegendCreator.buildSmartLegend(geArrayPlatform, gePlot.getLegendItemCollection(), "Probesets");
 					
 				//String size = (String) charts.get("size");
 					

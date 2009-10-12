@@ -220,28 +220,38 @@
 										Select Array Platform: 
 									</td>
 									<td valign="top" colspan="2" class="value ${hasErrors(bean:geneView,field:'geArrayPlatform','errors')}">
-						  				<g:if test="${geneView == null}">				
+						  				<g:if test="${geneView == null}">	
 											<g:select name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
 						  				</g:if>				
+						  				<g:elseif test="${geneView.geArrayPlatform == null}">	
+											<g:select name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
+						  				</g:elseif>	
 						  				<g:else>	
 											<g:set var="platformList" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
-											<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
-						  				</g:else>				
+											<select id="geArrayPlatformId" name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}">
+												<g:each in="${platformList}" var="platform">
+													<g:set var="isSelected" value="${false}"/>
+													<g:if test="${platform.fileName.trim() == geneView.geArrayPlatform.trim()}">
+														<g:set var="isSelected" value="${true}"/>
+													</g:if>
+											  		<g:if test="${isSelected}">				
+														<option value="${platform.fileName}" selected="yes">${platform.platformName}</option>
+														<g:set var="selectedPlatform" value="${platform}" scope="page" />
+													</g:if>
+													<g:else>
+														<option value="${platform.fileName}">${platform.platformName}</option>
+													</g:else>
+												</g:each>
+											</select>
+											<span class="platformDesc" id="platformDesc">${selectedPlatform.displayString}</span>
+						  				</g:else>	
+						  							
 										<input type="hidden" id="platformName" name="platformName" value=""/>
 										<span id="currentPlatform"></span>
 										<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
-										     <span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
+											<span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
 										</g:each>
 									</td>
-									<!--
-									<td>
-										<input type="hidden" id="platformName" name="platformName" value=""/>
-										<span id="currentPlatform"></span>
-										<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
-										     <span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
-										</g:each>
-									</td>
-									-->
 								</tr>	
 								<tr>
 									<td colspan=3>
@@ -255,61 +265,7 @@
 	                    </table>
 						</div>
 						<br />
-
-						<!--
-						View Type:<br/>
-						<input type="radio" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio">Gene Expression plot&nbsp;<br/>
-						<input type="radio" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
-						<g:contextAware mode="showOnlyTo" context="TCGA, TCGAOvarian">
-							<input type="radio" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/>
-					    </g:contextAware>
-						<br/>
-			
-						Gene Symbol (HUGO):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="text" name="geneSymbol" size="20" value="" id="geneSymbol" style="vertical-align:middle">&nbsp;
-						<a href="#" onclick="showGeneInfo(); return false;" id="geneInfoLink">[show gene info]</a>
-						
-						<div style="display: table;">
-							<table>
-								<tr>
-									<td style="vertical-align: middle">
-										Restrict to sample group:
-									</td>
-									<td>
-										<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
-											<g:select name="sampleGroupNameMultiple" multiple="multiple" size="5" id="sampleGroupNameId" style="width: 200px; overflow: none;" from="${patLists}"></g:select>
-										</div>
-			
-									</td>
-								</tr>
-							</table>
-						</div>
-						<br />
-						
-						Select Array Platform: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						-->
-			            <!-- sets the hidden field to the platformName - do not change -->
-			            <!--
-						<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>
-						<input type="hidden" id="platformName" name="platformName" value=""/>
-						<span id="currentPlatform"></span>
-						<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
-						     <span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
-						</g:each>
-						<div style="text-align:center; padding-top:10px;">
-				        	<input type="reset" value="clear" id="clearButton" class="">&nbsp;&nbsp;
-					        <input type="submit" name="method" value="Go" id="submittalButton" class="subButton">
-				        </div>
-						-->
-						
 				    </g:contextAware>
-				    <!--
-				    <g:contextAware mode="showOnlyTo" context="TARGET">
-					    <div align="center">
-					    	<br/><br/>These features are not available in this context.<br/>  Gene Expression Data is required.<br/><br/><br/>
-					    </div>
-				    </g:contextAware>
-				    -->
 				<!-- close mainc -->
 				</div>
 			
