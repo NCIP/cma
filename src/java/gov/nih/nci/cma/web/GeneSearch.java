@@ -182,9 +182,16 @@ public class GeneSearch {
 					sgnm[0], request.getSession().getId());
 			System.out.println("got finding");
 
+			ExpressionLookupFinding controlFinding = kmReporterService.getExpressionFinding(geneName,binaryFileName, 
+						CaIntegratorConstants.CONTROL, request.getSession().getId());
+			System.out.println("control finding id"+controlFinding.getTaskId());
+			if(controlFinding!=null && controlFinding.getDataVectors()!=null){
+			    m.put("control_taskId",controlFinding.getTaskId());
+			    System.out.println("got control finding");
+			}
 			if(finding!=null && finding.getDataVectors()!=null){
 			    //m.put("reporter",finding.getDataVectors().get(0).getName());
-			    m.put("reporter", "Median_of_All_Reporters");
+			    m.put("reporter", CaIntegratorConstants.MEDIAN_OF_ALL_REPORTERS);
 			    m.put("taskId",finding.getTaskId());
 			    kmRequestMap = m;
 			}
