@@ -97,6 +97,9 @@ class BootStrap {
 		create(creator:'new', javascript:'GenePatternHelper')	{
 			param (name:'class') { 'gov.nih.nci.cma.web.ajax.GenePatternHelper' }
 		}
+		create(creator:'new', javascript:'PatientIdHelper')	{
+			param (name:'class') { 'gov.nih.nci.cma.web.ajax.PatientIdHelper' }
+		}
 				
 	 }
 
