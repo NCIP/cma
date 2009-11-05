@@ -7,9 +7,17 @@ import gov.nih.nci.caintegrator.application.lists.UserList;
 import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
 import gov.nih.nci.caintegrator.application.lists.ajax.CommonListFunctions;
 
+import gov.nih.nci.caintegrator.util.idmapping.IdMappingManager;
+
 import gov.nih.nci.cma.list.ProjectListFilter;
 import gov.nih.nci.cma.list.ProjectListValidator;
+import gov.nih.nci.cma.list.validation.ValidationService;
 
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.context.ApplicationContext; 
+
+import org.codehaus.groovy.grails.web.context.ServletContextHolder;
+import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +36,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import org.codehaus.groovy.grails.commons.ConfigurationHolder;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 
 public class DynamicListHelper {
@@ -168,6 +180,8 @@ public class DynamicListHelper {
 	public static String uniteLists(String[] sLists, String groupName, String groupType, String action)	{	
 		return CommonListFunctions.uniteLists(sLists, groupName, groupType, action);
 	}
+	
+	
 	public String saveSamples(String commaSepList, String name)	{
 		//which context, and handle context specific pre-processing
 		Map propsMap = (Map) ConfigurationHolder.getFlatConfig();
