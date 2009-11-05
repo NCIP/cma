@@ -19,17 +19,11 @@ class DefaultListLoaderService {
 
     static scope = 'prototype'
     
-    def serviceMethod() {
-
-    }
+    def serviceMethod() {}
+       
+    def loadDefaultLists() 	{ 
     
-    
-    def loadDefaultLists() 	{ //session ->
- 
-    //could also get session by:?
-    	// import org.springframework.beans.factory.InitializingBean  
-    	// import org.springframework.web.context.request.RequestContextHolder
-    	def webRequest= RequestContextHolder.currentRequestAttributes()  
+        def webRequest= RequestContextHolder.currentRequestAttributes()  
     	def session = webRequest.session
     	PresentationTierCache presentationCacheManager = PresentationCacheManager.getInstance();
 
@@ -37,84 +31,78 @@ class DefaultListLoaderService {
         if (userListBean == null) {
    	  		userListBean = new UserListBean();
  
-  	   // load user lists 
-   	   // we are loading using grails and then converting to 
-   	   // list objects in application-commons so that we can reuse the list management 
-   	   // functionality w/o rewriting it in grail (for now).                   
-          def listObjs = gov.nih.nci.cma.domain.CmaList.list()
+  	   	// Load user lists 
+   	   	// We are loading using grails and then converting to list objects in application-commons 
+   	   	// so that we can reuse the list management functionality w/o rewriting it in grail (for now).                   
+        def listObjs = gov.nih.nci.cma.domain.CmaList.list()
           
-          java.util.List<UserList> userLists = new ArrayList<UserList>();
-          UserList ul;
-          List<ListItem> items;
+        java.util.List<UserList> userLists = new ArrayList<UserList>();
+                
+        def idMapping
           
-          listObjs.each{ gl ->
-          
-             def gItems = gl.listItems
-             items = new ArrayList<ListItem>();
-             gItems.each{ gi ->      
-             ListItem i = new ListItem(gi.itemName, gi.listName)
-           	  i.setId(gi.id);
-           	  i.setRank(gi.rank)
-           	  i.setNotes(gi.itemDescription)                    	                      	 
-           	  items.add(i)
-             }
-                                   
-             ListType lt = ListType.valueOf(gl.type)
-	       	 ul = new UserList(gl.name, lt, items, Collections.emptyList())
-	       	 ul.setAuthor(gl.author)
-	       	 ul.setCategory(gl.category)
-	       	 ul.setInstitute(gl.institution)
-	       	 ul.setDateCreated(gl.creationDate)
-	       	  
-	       	 if (gl.subtype != null) {
-	       	   ListSubType lst = ListSubType.valueOf(gl.subtype)
-	       	   ul.setListSubType(lst)
-	       	 }
-	       	  
-	       	 ul.setId(gl.id)
-	       	  
-	       	 if (gl.origin != null) {
-	       	   ListOrigin lo = ListOrigin.valueOf(gl.origin)
-	       	   ul.setListOrigin(lo)
-	       	 }
-	       	  
-	       	  userLists.add(ul)                	                   	  
-          }
-          
-          def idMapping
-          
-          switch(ConfigurationHolder.config.cma.dataContext)	{
-          	case "Rembrandt":
-        	  idMapping = gov.nih.nci.cma.domain.rembrandt.PatientData.executeQuery( "select distinct sampleId from gov.nih.nci.cma.domain.rembrandt.PatientData where institutionId='8'" );
-        	break;
+        switch(ConfigurationHolder.config.cma.dataContext)	{
+        	case "Rembrandt":
+        	  	idMapping = gov.nih.nci.cma.domain.rembrandt.PatientData.executeQuery( "select distinct sampleId from gov.nih.nci.cma.domain.rembrandt.PatientData where institutionId='8'" );
+        		break;
           	default:
           		idMapping = CmaStudyParticipant.executeQuery( "select distinct a.participantDid from CmaStudyParticipant a" );
         	break;
-          }
-          //run the query for all-patients from study_participant table (all contexts have this)
-//          def idMapping = CmaStudyParticipant.executeQuery( "select distinct a.participantDid from CmaStudyParticipant a" );
-          
-          //rbt
-//          PatientData.executeQuery( "select distinct sampleId from PatientData where institutionId='8'" );
-          
-          items = new ArrayList<ListItem>();
-          idMapping.each { m ->
-          	  ListItem i = new ListItem(m)
-          	  
-          	  items.add(i)
-          }
-          ul = new UserList(CacheConstants.ALL_USER_LISTS, ListType.PatientDID, items, Collections.emptyList())
-          userLists.add(ul)
-          
-          presentationCacheManager.addNonPersistableToSessionCache(session.getId(), 
-       		   CacheConstants.USER_LISTS, userListBean);
-           
-          UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session.getId());
-          userListBeanHelper.addBean(session.getId(),CacheConstants.USER_LISTS,userListBean);            
-          for(UserList legacyul: userLists){
-              userListBeanHelper.addList(legacyul);
-          }
         }
+        
+        UserList ul;
+        List<ListItem> items;
+          
+        items = new ArrayList<ListItem>();
+        idMapping.each { m ->
+        	ListItem i = new ListItem(m) 
+          	items.add(i)
+        }
+        ul = new UserList(CacheConstants.ALL_USER_LISTS, ListType.PatientDID, items, Collections.emptyList())
+        userLists.add(ul)
+
+          
+        listObjs.each{ gl ->
+          
+        	def gItems = gl.listItems
+            items = new ArrayList<ListItem>();
+            gItems.each{ gi ->      
+            	ListItem i = new ListItem(gi.itemName, gi.listName)
+           	  	i.setId(gi.id);
+           	  	i.setRank(gi.rank)
+           	  	i.setNotes(gi.itemDescription)                    	                      	 
+           	  	items.add(i)
+            }
+                                   
+            ListType lt = ListType.valueOf(gl.type)
+	       	ul = new UserList(gl.name, lt, items, Collections.emptyList())
+	       	ul.setAuthor(gl.author)
+	       	ul.setCategory(gl.category)
+	       	ul.setInstitute(gl.institution)
+	       	ul.setDateCreated(gl.creationDate)
+	       	  
+	       	if (gl.subtype != null) {
+	       		ListSubType lst = ListSubType.valueOf(gl.subtype)
+	       		ul.setListSubType(lst)
+	       	}
+	       	  
+	       	ul.setId(gl.id)
+	       	  
+	       	if (gl.origin != null) {
+	       		ListOrigin lo = ListOrigin.valueOf(gl.origin)
+	       		ul.setListOrigin(lo)
+	       	}
+	       	  
+	       	userLists.add(ul)                	                   	  
+        }
+          
+        presentationCacheManager.addNonPersistableToSessionCache(session.getId(), CacheConstants.USER_LISTS, userListBean);
+           
+        UserListBeanHelper userListBeanHelper = new UserListBeanHelper(session.getId());
+        userListBeanHelper.addBean(session.getId(),CacheConstants.USER_LISTS,userListBean);            
+        for(UserList legacyul: userLists){
+            userListBeanHelper.addList(legacyul);
+        }
+      }
     }
     
     def areListsLoaded()	{
@@ -141,6 +129,7 @@ class DefaultListLoaderService {
 	    }
 	    return patientCollection;
     }
+    
     def getGeneLists = { sid, sortList ->
 		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);
 	    List<UserList> lists = userListBeanHelper.getLists(ListType.Gene);

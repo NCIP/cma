@@ -56,7 +56,7 @@
 				  //create html containers
 				  	dataTypeHeaders.each(function(e)	{
 				  		var sect = {sectionId: e, 
-				  		sectionTitle: e.replace(":", " based view of") + " data", 
+				  		sectionTitle: e.replace(":", "-based view of") + " data", 
 				  		sectionContainerId: e+"Container" };
 				  		var htm = sectionTemplate.evaluate(sect);
 				  		$('sectionContainer').insert(htm);

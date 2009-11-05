@@ -97,6 +97,7 @@
 								</div>			
 							</td>
 						</tr>
+						<!--
 						<tr>
 							<td valign="top" class="label">Patient ID
 								<span class="small"></span>
@@ -105,6 +106,7 @@
 								<input type="text" name="patientId" id="patientId" value="${fieldValue(bean:clinicalView,field:'patientId')}"/>
 							</td>
 				        </tr>
+				        -->
 				        <tr>
 					        <td valign="top" class="label">Tumor Tissue Site</td>
 					        <td valign="top" class="value ${hasErrors(bean:clinicalView,field:'tumorTissueSite','errors')}">
@@ -243,7 +245,7 @@
 							</tr>
 							
 							<tr>
-								<td valign="top" class="label">Date of Initial Pathologic Diagnosis Date
+								<td valign="top" class="label">Date of Initial Pathologic Diagnosis
 									<span class="small">date range (mm/dd/yyyy format)</span>
 								</td>
 								<td valign="top">

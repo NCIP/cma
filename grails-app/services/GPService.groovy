@@ -127,7 +127,8 @@ class GPService {
 			geneReporterName = "none";
 		}
 		String gpModule = request.getParameter("analysisModuleName");			// Required
-		String binaryFileName = request.getParameter("platformName");			// Required
+		//String binaryFileName = request.getParameter("platformName");			// Required
+		String binaryFileName = request.getParameter("arrayPlatform");			// Required
 		String chromosome = request.getParameter("chromosomeName");				// Conditional on analysisModuleName (= 'Copy Number') 
 		String analysisResultName = request.getParameter("analysisResultName");	// Required
 		if (analysisResultName == null || analysisResultName.equals("")) {

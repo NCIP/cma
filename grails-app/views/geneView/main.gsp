@@ -10,6 +10,8 @@
 					new Effect.Corner($('geneSearchHeader'), 'top');
 					new Effect.Corner($('pathwaySearchHeader'), 'top');
 				} catch(e){ }
+				document.getElementById("platformName").value = document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].text;
+				//alert("The geArrayPlatform value is => " + document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].value);
 			});
 		
 			var showGeneInfo = function()	{
@@ -95,6 +97,16 @@
 					return false;
 				}
 				return true;
+			}
+			
+			function updatePlatform() {	  
+			    var platformList = document.getElementById("geArrayPlatformId");
+			    var selectedPlatform = document.getElementById("platformName");
+			    selectedPlatform.value = platformList.options[platformList.selectedIndex].text + "PlatformDesc";
+			    var displayStr = document.getElementById(selectedPlatform.value).innerHTML;
+				//alert("Platform Changed !!!!  " + selectedPlatform.value + "   Display Str ==> " + displayStr);
+				document.getElementById("currentPlatform").innerHTML = displayStr;
+				document.getElementById("platformName").value = platformList.options[platformList.selectedIndex].text;
 			}
 			
 		</script>
@@ -215,20 +227,20 @@
 										</div>			
 									</td>
 								</tr>	
-								<tr>
+								<tr> 
 									<td style="vertical-align: middle">
 										Select Array Platform: 
 									</td>
 									<td valign="top" colspan="2" class="value ${hasErrors(bean:geneView,field:'geArrayPlatform','errors')}">
 						  				<g:if test="${geneView == null}">	
-											<g:select name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
+											<g:select name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
 						  				</g:if>				
 						  				<g:elseif test="${geneView.geArrayPlatform == null}">	
-											<g:select name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
+											<g:select name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
 						  				</g:elseif>	
 						  				<g:else>	
 											<g:set var="platformList" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
-											<select id="geArrayPlatformId" name="geArrayPlatform" onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}">
+											<select id="geArrayPlatformId" name="geArrayPlatform" onchange="updatePlatform();">
 												<g:each in="${platformList}" var="platform">
 													<g:set var="isSelected" value="${false}"/>
 													<g:if test="${platform.fileName.trim() == geneView.geArrayPlatform.trim()}">
@@ -243,11 +255,15 @@
 													</g:else>
 												</g:each>
 											</select>
-											<span class="platformDesc" id="platformDesc">${selectedPlatform.displayString}</span>
 						  				</g:else>	
 						  							
 										<input type="hidden" id="platformName" name="platformName" value=""/>
-										<span id="currentPlatform"></span>
+										<g:if test="${selectedPlatform == null}">
+											<span id="currentPlatform"></span>
+										</g:if>
+										<g:else>
+											<span id="currentPlatform">${selectedPlatform.displayString}</span>
+										</g:else>
 										<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
 											<span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
 										</g:each>

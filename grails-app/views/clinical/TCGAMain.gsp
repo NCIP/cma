@@ -104,6 +104,7 @@
 							</td>
 							-->
 						</tr>
+						<!--
 						<tr>
 							<td valign="top" class="label">Patient ID
 								<span class="small"></span>
@@ -112,6 +113,7 @@
 								<input type="text" name="patientId" id="patientId" value="${fieldValue(bean:clinicalView,field:'patientId')}"/>
 							</td>
 				        </tr>
+				        -->
 				        <tr>
 					        <td valign="top" class="label">Tumor Tissue Site</td>
 					        <td valign="top" class="value ${hasErrors(bean:clinicalView,field:'tumorTissueSite','errors')}">

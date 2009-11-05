@@ -5,6 +5,7 @@
     <head>
 		<meta name="layout" content="splashLayout" />
 		<script type='text/javascript' src='../dwr/interface/DynamicListHelper.js'></script>
+		<script type='text/javascript' src='../dwr/interface/PatientIdHelper.js'></script>
 		<script type='text/javascript' src='../dwr/engine.js'></script>
 		<script type='text/javascript' src='../dwr/util.js'></script>
 		<g:javascript library="overlib_mini" />

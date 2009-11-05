@@ -210,11 +210,6 @@ class TARGETClinicalService extends AbstractClinicalService {
             permValues.add("Censored");
             permValues.add("Death");                    	  
           }
-          else if (paramName.equals("event")) {
-            permValues.add("Censored");
-            permValues.add("Relapse");
-            permValues.add("Death");                    	  
-          }
 		  else if (paramName.equals("trisomies_4_10")) {
 			permValues.add("Negative");
 			permValues.add("Positive");			

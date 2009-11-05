@@ -2,18 +2,8 @@ package gov.nih.nci.cma.domain
 
 class IdMapping {
 	
-	/*
-	 * PDID              VARCHAR2(30 BYTE),
-	 SAMPLE_ID         VARCHAR2(30 BYTE),
-	 TISSUE            VARCHAR2(30 BYTE),
-	 FILENAME          VARCHAR2(100 BYTE),
-	 PLATFORM          VARCHAR2(100 BYTE),
-	 ANALYSIS_FILE_ID  VARCHAR2(100 BYTE),
-	 ALIQUOTBARCODE    VARCHAR2(100 BYTE),
-	 MAPPING_ID        NUMBER,
-	 */
-	
 	 String ptid
+	 String pdid
 	 String sampleId
 	 String tissue
 	 String filename
@@ -21,12 +11,18 @@ class IdMapping {
 	 String analysisFileId
 	 String aliquotbarcode
 	 Integer mappingId
+	  
+	 static constraints = {
+	  	ptid(blank:false)
+	  	pdid(blank:false)
+		sampleId(blank:false)
+		tissue(nullable:true)
+		filename(blank:false)
+		platform(blank:false)
+		analysisFileId(blank:false)
+		aliquotbarcode(nullable:true)
+		mappingId(blank:false)
+	 }
 	 
-	 public Set getRbinaryIdsForPatientDIDs(Set patientDIDs) {
-		
-		
-		
-	}
-	 
-
+	 String toString() {"${this.pdid}, ${this.analysisFileId}"}
 }

@@ -7,6 +7,15 @@
 		  <g:javascript src="project.js" />
 		
 		  <script type="text/javascript">
+			
+			  function updatePlatform() {
+			      var platformList = document.getElementById("arrayPlatformId");
+			      var selectedPlatform = document.getElementById("platformName");
+			      selectedPlatform.value = platformList.options[platformList.selectedIndex].text + "PlatformDesc";
+			      var displayStr = document.getElementById(selectedPlatform.value).innerHTML;
+				  document.getElementById("currentPlatform").innerHTML = displayStr;
+				  document.getElementById("platformName").value = platformList.options[platformList.selectedIndex].text;
+			  }
 		  
 			  function dropdownChromo(el, div, resetParamId) {     
 			    var el = el.value; //the element value to check	  			   				
@@ -39,9 +48,9 @@
 			
 			  Event.observe(window, "load", function()	{
 				  new Effect.Corner($$('.sectionHeader')[0], 'top');
-				$('arrayPlatformId').update($('geneExpressionPlatforms').innerHTML);
+				  document.getElementById("platformName").value = document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].text;
+				  
 			  });
-			  
 		  </script>
 		  <style>
 			/* experimenting with some CSS here */
@@ -163,18 +172,19 @@
 						<tr>
 							<td class="label">Select Array Platform*</td>							
 							<td>						
-								<div class="value ${hasErrors(bean:gpaView,field:'platformName','errors')}">
+								<div class="value ${hasErrors(bean:gpaView,field:'arrayPlatform','errors')}">
 									<g:if test="${gpaView == null}">
-										<g:select name="platformName" id="arrayPlatformId" style="width: 200px; overflow: none;" noSelection="['': 'choose platform']" from="" optionValue="platformName" optionKey="fileName"></g:select>					
+										<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
 									</g:if>
-									<g:elseif test="${gpaView.platformName == ''}">
-										<g:select name="platformName" id="arrayPlatformId" style="width: 200px; overflow: none;" noSelection="['': 'choose platform']" from="" optionValue="platformName" optionKey="fileName"></g:select>					
+									<g:elseif test="${gpaView.arrayPlatform == null}">
+										<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
 									</g:elseif>
 									<g:else>
-										<select name="platformName" id="arrayPlatformId" style="width: 200px; overflow: none;" >
+										<select name="arrayPlatform" id="arrayPlatformId" onchange="updatePlatform();" style="width: 200px; overflow: none;" >
 											<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" var="platform">
-											  	<g:if test="${platform.fileName == gpaView.platformName}">				
+											  	<g:if test="${gpaView.arrayPlatform == platform.fileName}">				
 													<option value="${platform.fileName}" selected="yes">${platform.platformName}</option>
+													<g:set var="selectedPlatform" value="${platform}" scope="page" />
 												</g:if>
 												<g:else>
 													<option value="${platform.fileName}">${platform.platformName}</option>
@@ -182,6 +192,17 @@
 											</g:each>
 										</select>
 									</g:else>
+									
+									<input type="hidden" id="platformName" name="platformName"/>			
+									<g:if test="${selectedPlatform == null}">
+										<span id="currentPlatform"></span>
+									</g:if>
+									<g:else>
+										<span id="currentPlatform">${selectedPlatform.displayString}</span>
+									</g:else>
+									<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
+										<span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
+									</g:each>
 								</div>
 							</td>
 						</tr>

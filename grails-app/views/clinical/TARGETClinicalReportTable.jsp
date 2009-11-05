@@ -72,9 +72,11 @@ if(userContextService!=null && userContextService.isLoggedIn()!=null && userCont
 	  <display:column property="mrdDay8"  sortable="true" headerClass="sortable" />
 	  <display:column property="mrdDay29"  sortable="true" headerClass="sortable" />
 	  <display:column property="event"  sortable="true" headerClass="sortable" />
-	  <display:column property="timeToEvent"  sortable="true" headerClass="sortable" />
+	  <!--
+	  <display:column property="timeToEvent" title="Years to Event" sortable="true" headerClass="sortable" />
+	  -->
 	  <display:column property="vitalStatus"  sortable="true" headerClass="sortable" />
-	  <display:column property="timeToDeath"  sortable="true" headerClass="sortable" />
+	  <display:column property="timeToDeath" title="Years to Death" sortable="true" headerClass="sortable" />
 	  <display:column property="trisomies_4_10"  sortable="true" headerClass="sortable" />
 	  <display:column property="mllStatus"  sortable="true" headerClass="sortable" />
 	  <display:column property="e2aStatus"  sortable="true" headerClass="sortable" />
