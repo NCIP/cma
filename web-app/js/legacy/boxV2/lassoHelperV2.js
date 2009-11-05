@@ -137,12 +137,17 @@ function init(imgId) {
 			if(startX<=pStartX && startY<=pStartY && endX >= pEndX && endY>=pEndY)	{
 				//hit
 				lassoed.push(rects[i].title);
+				// JB: Edit the displayed Patient ID
+				//TestHelper.translateId(rects[i].id, addToPending);				
+				//addToPending(TestHelper.translateId(rects[i].id));
 				addToPending(rects[i].id);
 			}
 		}
 		if(lassoed.length>0)	{
 			//alert("You selected: " + lassoed);
-			writePendings();
+			//alert("Sending: " + pendingSamples);
+			PatientIdHelper.translateIds(pendingSamples, updatePending);
+			//writePendings();
 		}
 		else	{
 		
@@ -162,6 +167,11 @@ function addToPending(sample)	{
 		pendingSamples[pendingSamples.length] = sample;
 		//add to array list
 		pendingSamples = pendingSamples.uniq();
+}				
+function updatePending(translatedSamples)	{
+		//alert("Received back: " + translatedSamples);
+		pendingSamples = translatedSamples;
+		writePendings();
 }		
 function clearPending()	{
 	//clear the JS array
@@ -178,11 +188,7 @@ function writePendings()	{
 	if(pendingSamples.length>0)	{
 		for(var j=0; j<pendingSamples.length; j++)	{
 			html += "<span style=\"margin-left:5px;\">\n";
-			if ( pendingSamples[j].substring(0,4) == "TCGA") {
-				html += "<a href=\"#\" onmouseover=\"mapshow('"+pendingSamples[j]+"');return overlib('Sample:<br>\\n "+pendingSamples[j].substring(0,12)+"');\" onmouseout=\"maphide();return nd();\">"+ pendingSamples[j].substring(0,12) + "</a><br/>\n";
-			} else {
-				html += "<a href=\"#\" onmouseover=\"mapshow('"+pendingSamples[j]+"');return overlib('Sample:<br>\\n "+pendingSamples[j]+"');\" onmouseout=\"maphide();return nd();\">"+ pendingSamples[j] + "</a><br/>\n";
-			}
+			html += "<a href=\"#\" onmouseover=\"mapshow('"+pendingSamples[j]+"');return overlib('Sample:<br>\\n "+pendingSamples[j]+"');\" onmouseout=\"maphide();return nd();\">"+ pendingSamples[j] + "</a><br/>\n";
 			html += "</span>";
 			if (sampleList == "")
 				sampleList = pendingSamples[j];
