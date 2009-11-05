@@ -1,10 +1,11 @@
+
 //requires: global vars basePath and sessionId to have been set already
 
 /* loads parameters needed from the request into native js local
 	  variables */
 function initializeLookups() {
 	getUserLists(sessionId);
-	getArrayPlatforms(sessionId);
+	//getArrayPlatforms(sessionId);
 }
 
 /* This method formats a paramMap from a form and sends it
