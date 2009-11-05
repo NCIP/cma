@@ -3,10 +3,11 @@ class GpaView {
 	String analysisModuleName
 	String geneReporterName 
 	String[] selectedGroups
-	String platformName
+	//String platformName
+	String arrayPlatform
 	String analysisResultName
 		
-    static transients = ["analysisModuleName","geneReporterName","selectedGroups","platformName","analysisResultName"]
+    static transients = ["analysisModuleName","geneReporterName","selectedGroups","arrayPlatform","analysisResultName"]
 
 	static constraints = {
 		//analysisModuleName(blank:false)
@@ -14,10 +15,10 @@ class GpaView {
 		selectedGroups(validator: {
 			return(it != null)
 		})
-		platformName(blank:false)
+		arrayPlatform(blank:false)
 		analysisResultName(blank:false)
 	}
 	
-	String toString() {"${this.analysisModuleName}, ${this.geneReporterName}, ${this.selectedGroups}, ${this.platformName}, ${this.analysisResultName} " }
+	String toString() {"${this.analysisModuleName}, ${this.geneReporterName}, ${this.selectedGroups}, ${this.arrayPlatform}, ${this.analysisResultName} " }
 
 }
