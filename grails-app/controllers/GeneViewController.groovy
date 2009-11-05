@@ -42,8 +42,13 @@ class GeneViewController {
     def geneBasedView = {        	
     	// Bind request parameters onto properties of the GeneView bean
 	  	geneView = new GeneView(params) 
+	    	
+	    	println "**********************************************************"
+	    	println "\n\ngeArrayPlatform => " + params["geArrayPlatform"] + "\n\n"
+	    	println "**********************************************************"
 	  	  		  		  	  	
 	  	if(geneView.validate()) {
+	  	
 	    	def geneExpPlot = params["plot"]
 	    	
 	    	// Get the beans from spring, injection wont work here

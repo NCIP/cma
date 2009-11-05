@@ -145,14 +145,6 @@ class AnalysisToolsController {
     }
     
     def genePatternSubmit = {
-    		/*
-        	println(params['analysisModuleName'])
-        	println(params['selectedGroups'])
-        	println(params['geneReporterName'])
-        	println(params['platformName'])
-        	println(params['chromosomeName'])
-        	println(params['analysisResultName'])
-        	*/
         	
     	// Bind request parameters onto properties of the GpaView bean
 	  	gpaView = new GpaView(params) 
@@ -176,7 +168,8 @@ class AnalysisToolsController {
     		// Displays or hides certain GP setup page elements
     		String displayEl = ""
     		
-    		if (dataContext.equalsIgnoreCase("TCGA") || dataContext.equalsIgnoreCase("TCGAOvarian")) 
+    		if (dataContext.equalsIgnoreCase("TCGA") || dataContext.equalsIgnoreCase("TCGAOvarian") ||
+    			dataContext.equalsIgnoreCase("TARGET") ) 
     		{
     			// Below not used for Rembrandt data
     			def geneLists = defaultListLoaderService.getGeneLists(session.id, false);
@@ -188,8 +181,12 @@ class AnalysisToolsController {
         		// Display some elements not visible for dataContext="Rembrandt"
         		displayEl = "display:inline"
         	
+        		//render(view:'genePatternSetup', model:[gpaView:gpaView, patLists:patLists, 
+        		//		geneLists:geneLists, moduleList:moduleList, displayEl:displayEl,
+        		//		selectedSampleGrpList:selectedSampleGrpList])
+        	
         		render(view:'genePatternSetup', model:[gpaView:gpaView, patLists:patLists, 
-        				geneLists:geneLists, moduleList:moduleList, displayEl:displayEl,
+        				geneLists:geneLists, moduleList:moduleList,
         				selectedSampleGrpList:selectedSampleGrpList])
     		}
     		else if (dataContext.equalsIgnoreCase("Rembrandt")) 
