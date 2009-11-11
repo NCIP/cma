@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************************* -->
+<!--                               CMA ANT Build Script	                               -->
+<!-- ********************************************************************************* -->
+
+<project name="cma" default="generateArchives" basedir=".">
+
+    <!-- ============================================================================= -->
+    <!--                             Global Settings                                   -->
+    <!-- ============================================================================= -->
+    <property name="base.dir" value="."/>
+	<property name="jboss.win.deploy.dir" value="c:/devtools/jboss-4.0.5.GA/server/default/deploy"/>
+	<property name="jboss.unix.deploy.dir" value="/usr/local/jboss405/server/ncicb-19380/deploy"/>
+
+	<!-- Establish the properties file to be used with this build script. -->
+    <property name="props.file" value="${base.dir}/${server.name}build.properties"/>
+    <property file="${props.file}"/>
+   	
+    <!-- Set print macro. -->
+    <macrodef name="CMAEcho">
+		<attribute name="message" default="..." />
+		<sequential>
+		    <echo> </echo>
+		    <echo>*****************************************************************</echo>
+		    <echo>***  @{message}</echo>
+		    <echo>*****************************************************************</echo>
+		    <echo> </echo>
+		</sequential>
+	</macrodef>
+
+	<CMAEcho message="server.name = ${server.name}" />
+	<CMAEcho message="props.file = ${props.file}" />
+
+	<condition property="grails" value="grails.bat">
+		<os family="windows"/>
+	</condition>
+	<property name="grails" value="grails" />
+
+	<!-- Determine the deployment environment (UNIX or WIN32) -->
+   	<!-- and set the file extension                           
+   	<condition property="environment" value="win">
+        <and>
+        	<equals arg1="${server.name}" arg2="localhost"/>
+        </and>
+   	</condition>
+   	<condition property="environment" value="unix">
+        <not>
+        	<equals arg1="${server.name}" arg2="localhost"/>
+        </not>
+   	</condition>
+	<CMAEcho message="environment = ${environment}" />
+	-->
+	 
+	<!-- Determine the deployment environment (UNIX or WIN32) -->
+   	<!-- and set the location of the JBoss installation for   -->
+	<!-- access to their libraries.                           -->	
+   	<condition property="jboss.deploy.dir" value="${jboss.win.deploy.dir}">
+   		<os family="windows"/>   	
+   	</condition>
+   	<property name="jboss.deploy.dir" value="${jboss.unix.deploy.dir}"/>
+ 	<CMAEcho message="jboss.deploy.dir = ${jboss.deploy.dir}" />
+
+
+	<!-- =========================================================== -->
+	<!--                           CONFIG                            -->
+	<!-- =========================================================== -->
+	<target name="config" depends="clean"
+	    	description="This target modifies the config properties 
+	    				 templates with actual property values.">
+	    
+		<CMAEcho message="${ant.project.name}: Generating property files..."/>
+	    	
+	    <!-- Copy device properties template to a new file and replace constants. -->
+	    <copy tofile="${base.dir}/Config.groovy" 
+	    	  file="${base.dir}/Config.groovy.template" overwrite="true"/>
+		
+	    <copy tofile="${base.dir}/application.properties" 
+	    	  file="${base.dir}/application.properties.template" overwrite="true"/>
+		
+	    <copy tofile="${base.dir}/rembrandt.resources.xml" 
+	    	  file="${base.dir}/rembrandt.resources.xml.template" overwrite="true"/>
+	    <copy tofile="${base.dir}/tcga.resources.xml" 
+	    	  file="${base.dir}/tcga.resources.xml.template" overwrite="true"/>
+	    <copy tofile="${base.dir}/tcgaovarian.resources.xml" 
+	    	  file="${base.dir}/tcgaovarian.resources.xml.template" overwrite="true"/>
+	    <copy tofile="${base.dir}/target.resources.xml" 
+	    	  file="${base.dir}/target.resources.xml.template" overwrite="true"/>
+	    	 
+    	<replace dir="${base.dir}" propertyFile="${props.file}" includes="*.resources.xml, *.groovy, *.properties">
+    		
+    	    <replacefilter token="__TIER__" value="${server.name}"/>
+    		
+    	    <replacefilter token="__GRAILS_VERSION__" property="gov.nih.nci.cma.grails.version"/>
+	
+			<replacefilter token="__APP_VERSION__" property="gov.nih.nci.cma.app.version"/>	    	 
+	
+		    <replacefilter token="__TCGA_DB_URL__" property="gov.nih.nci.cma.tcga.db.url"/>
+			<replacefilter token="__TCGA_DB_USERNAME__" property="gov.nih.nci.cma.tcga.db.username"/>	    	 
+			<replacefilter token="__TCGA_DB_PASSWORD__" property="gov.nih.nci.cma.tcga.db.password"/>	    	 
+	
+		    <replacefilter token="__TCGAOV_DB_URL__" property="gov.nih.nci.cma.tcgaovarian.db.url"/>
+			<replacefilter token="__TCGAOV_DB_USERNAME__" property="gov.nih.nci.cma.tcgaovarian.db.username"/>	    	 
+			<replacefilter token="__TCGAOV_DB_PASSWORD__" property="gov.nih.nci.cma.tcgaovarian.db.password"/>	    	 
+	
+		    <replacefilter token="__TARGET_DB_URL__" property="gov.nih.nci.cma.target.db.url"/>
+			<replacefilter token="__TARGET_DB_USERNAME__" property="gov.nih.nci.cma.target.db.username"/>	    	 
+			<replacefilter token="__TARGET_DB_PASSWORD__" property="gov.nih.nci.cma.target.db.password"/>	    	 
+	
+		    <replacefilter token="__REMBRANDT_DB_URL__" property="gov.nih.nci.cma.rembrandt.db.url"/>
+			<replacefilter token="__REMBRANDT_DB_USERNAME__" property="gov.nih.nci.cma.rembrandt.db.username"/>	    	 
+			<replacefilter token="__REMBRANDT_DB_PASSWORD__" property="gov.nih.nci.cma.rembrandt.db.password"/>	    	 
+	    		  
+    	</replace>
+    		
+	</target>
+	    
+		
+	    
+	<!-- ==================================================================== -->
+	<!--                          GENERATE TCGA ARCHIVE                       -->
+	<!-- ==================================================================== -->  
+	<target name="generateTcgaArchive"
+			description="Updates the context specific properties and generates the associated war.">
+	        
+	    <CMAEcho message="${ant.project.name}: Generating the TCGA Archive."/>
+		 
+		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
+		
+		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.tcga.context"/>
+		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.tcga.webapp.context"/>
+	   		  
+		</replace>
+		
+	    <copy tofile="${config.dir}/Config.groovy" 
+	    	  file="${base.dir}/Config.groovy" overwrite="true"/>
+		
+	    <copy tofile="${base.dir}/application.properties" 
+	    	  file="${base.dir}/application.properties" overwrite="true"/>
+		
+	    <copy tofile="${spring.dir}/resources.xml" 
+	    	  file="${base.dir}/tcga.resources.xml" overwrite="true"/>
+		
+		<exec executable="${grails}" failonerror="true">
+			<arg line="war ${gov.nih.nci.cma.tcga.webapp.context}.war"/>
+		</exec>                               
+		
+	</target> 
+	
+	    
+	<!-- ==================================================================== -->
+	<!--                         GENERATE TCGAOV ARCHIVE                      -->
+	<!-- ==================================================================== -->  
+	<target name="generateTcgaOvArchive"
+			description="Updates the context specific properties and generates the associated war.">
+	        
+	    <CMAEcho message="${ant.project.name}: Generating the TCGAOV Archive."/>
+		 
+		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
+		
+		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.tcgaovarian.context"/>
+		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.tcgaovarian.webapp.context"/>
+	   		  
+		</replace>
+		
+	    <copy tofile="${config.dir}/Config.groovy" 
+	    	  file="${base.dir}/Config.groovy" overwrite="true"/>
+		
+	    <copy tofile="${base.dir}/application.properties" 
+	    	  file="${base.dir}/application.properties" overwrite="true"/>
+		
+	    <copy tofile="${spring.dir}/resources.xml" 
+	    	  file="${base.dir}/tcgaovarian.resources.xml" overwrite="true"/>
+		
+		<exec executable="${grails}" failonerror="true">
+			<arg line="war ${gov.nih.nci.cma.tcgaovarian.webapp.context}.war"/>
+		</exec>                               
+		
+	</target> 
+	
+	    
+	<!-- ==================================================================== -->
+	<!--                         GENERATE TARGET ARCHIVE                      -->
+	<!-- ==================================================================== -->  
+	<target name="generateTargetArchive"
+			description="Updates the context specific properties and generates the associated war.">
+	        
+	    <CMAEcho message="${ant.project.name}: Generating the TARGET Archive."/>
+		 
+		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
+		
+		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.target.context"/>
+		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.target.webapp.context"/>
+	   		  
+		</replace>
+		
+	    <copy tofile="${config.dir}/Config.groovy" 
+	    	  file="${base.dir}/Config.groovy" overwrite="true"/>
+		
+	    <copy tofile="${base.dir}/application.properties" 
+	    	  file="${base.dir}/application.properties" overwrite="true"/>
+		
+	    <copy tofile="${spring.dir}/resources.xml" 
+	    	  file="${base.dir}/target.resources.xml" overwrite="true"/>
+		
+		<exec executable="${grails}" failonerror="true">
+			<arg line="war ${gov.nih.nci.cma.target.webapp.context}.war"/>
+		</exec>                               
+		
+	</target> 
+	
+	    
+	<!-- ==================================================================== -->
+	<!--                      GENERATE REMBRANDT ARCHIVE                      -->
+	<!-- ==================================================================== -->  
+	<target name="generateRembrandtArchive"
+			description="Updates the context specific properties and generates the associated war.">
+	        
+	    <CMAEcho message="${ant.project.name}: Generating the REMBRANDT Archive."/>
+		 
+		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
+		
+		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.rembrandt.context"/>
+		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.rembrandt.webapp.context"/>
+	   		  
+		</replace>
+		
+	    <copy tofile="${config.dir}/Config.groovy" 
+	    	  file="${base.dir}/Config.groovy" overwrite="true"/>
+		
+	    <copy tofile="${base.dir}/application.properties" 
+	    	  file="${base.dir}/application.properties" overwrite="true"/>
+		
+	    <copy tofile="${spring.dir}/resources.xml" 
+	    	  file="${base.dir}/rembrandt.resources.xml" overwrite="true"/>
+		
+		<exec executable="${grails}" failonerror="true">
+			<arg line="war ${gov.nih.nci.cma.rembrandt.webapp.context}.war"/>
+		</exec>                               
+		
+	</target> 
+	
+		
+	    
+	<!-- =========================================================== -->
+	<!--                     GENERATE ARCHIVES                       -->
+	<!-- =========================================================== -->  
+
+	<target name="generateArchives" depends="config, generateTcgaArchive, generateTcgaOvArchive, generateTargetArchive, generateRembrandtArchive"
+			description="Generated CMA context war files.">
+        
+    	<CMAEcho message="${ant.project.name}: CMA Archives have been successfully generated."/>
+	        
+	</target>
+	
+		
+	    
+	<!-- =========================================================== -->
+	<!--                       DEPLOY ARCHIVES                       -->
+	<!-- =========================================================== -->  
+
+	<target name="deploy" depends="generateArchives"
+			description="Deploys the generated CMA context war files
+						 to the designated JBoss instance.">
+	        
+	    <CMAEcho message="${ant.project.name}: Deploying the ALL CMA Context war files"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.tcga.webapp.context}.war" overwrite="true"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.tcgaovarian.webapp.context}.war" overwrite="true"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.target.webapp.context}.war" overwrite="true"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.rembrandt.webapp.context}.war" overwrite="true"/>
+		
+	</target>
+	
+		
+	    
+	<!-- =========================================================== -->
+	<!--                          DEPLOY TCGA                        -->
+	<!-- =========================================================== -->  
+
+	<target name="deploy-tcga" depends="config, generateTcgaArchive"
+			description="Deploys the TCGA war file to the designated JBoss instance.">
+	        
+	    <CMAEcho message="${ant.project.name}: Deploying the TCGA war file"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.tcga.webapp.context}.war" overwrite="true"/>
+		
+	</target>
+	
+		
+	    
+	<!-- =========================================================== -->
+	<!--                     DEPLOY TCGA OVARIAN                     -->
+	<!-- =========================================================== -->  
+
+	<target name="deploy-tcgaovarian" depends="config, generateTcgaOvArchive"
+			description="Deploys the TCGA war file to the designated JBoss instance.">
+	        
+	    <CMAEcho message="${ant.project.name}: Deploying the TCGAOvarian war file"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.tcgaovarian.webapp.context}.war" overwrite="true"/>
+		
+	</target>
+	
+		
+	    
+	<!-- =========================================================== -->
+	<!--                        DEPLOY TARGET                        -->
+	<!-- =========================================================== -->  
+
+	<target name="deploy-target" depends="config, generateTargetArchive"
+			description="Deploys the TARGET war file to the designated JBoss instance.">
+	        
+	    <CMAEcho message="${ant.project.name}: Deploying the TARGET war file"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.target.webapp.context}.war" overwrite="true"/>
+		
+	</target>
+	
+		
+	    
+	<!-- =========================================================== -->
+	<!--                         DEPLOY REMBRANDT                    -->
+	<!-- =========================================================== -->  
+
+	<target name="deploy-rembrandt" depends="config, generateRembrandtArchive"
+			description="Deploys the Rembrandt war file to the designated JBoss instance.">
+	        
+	    <CMAEcho message="${ant.project.name}: Deploying the Rembrandt war file"/>
+		
+	    <copy todir="${jboss.deploy.dir}" 
+	    	  file="${base.dir}/${gov.nih.nci.cma.rembrandt.webapp.context}.war" overwrite="true"/>
+		
+	</target>
+
+		
+		
+	<!-- =========================================================== -->
+	<!--                              CLEAN                          -->
+	<!-- =========================================================== -->  
+	<target name="clean" description="Cleans a Grails application">
+		
+		<delete>
+		    <fileset dir="${base.dir}" includes="*.groovy, *.xml, *.war" excludes="build.xml"/>
+		</delete>
+		
+		<exec executable="${grails}" failonerror="true">
+			<arg value="clean"/>
+		</exec>                               
+	</target>
+
+		
+</project>
