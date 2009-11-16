@@ -69,10 +69,6 @@
 	    				 templates with actual property values.">
 	    
 		<CMAEcho message="${ant.project.name}: Generating property files..."/>
-	    	
-	    <!-- Copy device properties template to a new file and replace constants. -->
-	    <copy tofile="${base.dir}/Config.groovy" 
-	    	  file="${base.dir}/Config.groovy.template" overwrite="true"/>
 		
 	    <copy tofile="${base.dir}/rembrandt.resources.xml" 
 	    	  file="${base.dir}/rembrandt.resources.xml.template" overwrite="true"/>
@@ -83,9 +79,7 @@
 	    <copy tofile="${base.dir}/target.resources.xml" 
 	    	  file="${base.dir}/target.resources.xml.template" overwrite="true"/>
 	    	 
-    	<replace dir="${base.dir}" propertyFile="${props.file}" includes="*.resources.xml, *.groovy">
-    		
-    	    <replacefilter token="__TIER__" value="${server.name}"/>
+    	<replace dir="${base.dir}" propertyFile="${props.file}" includes="*.resources.xml">
 	
 		    <replacefilter token="__TCGA_DB_URL__" property="gov.nih.nci.cma.tcga.db.url"/>
 			<replacefilter token="__TCGA_DB_USERNAME__" property="gov.nih.nci.cma.tcga.db.username"/>	    	 
@@ -116,16 +110,36 @@
 			description="Updates the context specific properties and generates the associated war.">
 	        
 	    <CMAEcho message="${ant.project.name}: Generating the TCGA Archive."/>
+    	
+    	<copy tofile="${base.dir}/Config.groovy" 
+    	  	  file="${base.dir}/Config.groovy.template" overwrite="true"/>
 		
 	    <copy tofile="${base.dir}/application.properties" 
 	    	  file="${base.dir}/application.properties.template" overwrite="true"/>
 		 
 		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
-		   		
+		   		 		
+    	    <replacefilter token="__TIER__" value="${server.name}"/>
     	    <replacefilter token="__GRAILS_VERSION__" property="gov.nih.nci.cma.grails.version"/>
 			<replacefilter token="__APP_VERSION__" property="gov.nih.nci.cma.app.version"/>	    	 
 		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.tcga.context"/>
 		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.tcga.webapp.context"/>
+			
+			<replacefilter token="__TCGA_DB_URL__" property="gov.nih.nci.cma.tcga.db.url"/>
+			<replacefilter token="__TCGA_DB_USERNAME__" property="gov.nih.nci.cma.tcga.db.username"/>	    	 
+			<replacefilter token="__TCGA_DB_PASSWORD__" property="gov.nih.nci.cma.tcga.db.password"/>	    	 
+			
+			<replacefilter token="__TCGAOV_DB_URL__" property="gov.nih.nci.cma.tcgaovarian.db.url"/>
+			<replacefilter token="__TCGAOV_DB_USERNAME__" property="gov.nih.nci.cma.tcgaovarian.db.username"/>	    	 
+			<replacefilter token="__TCGAOV_DB_PASSWORD__" property="gov.nih.nci.cma.tcgaovarian.db.password"/>	    	 
+			
+			<replacefilter token="__TARGET_DB_URL__" property="gov.nih.nci.cma.target.db.url"/>
+			<replacefilter token="__TARGET_DB_USERNAME__" property="gov.nih.nci.cma.target.db.username"/>	    	 
+			<replacefilter token="__TARGET_DB_PASSWORD__" property="gov.nih.nci.cma.target.db.password"/>	    	 
+			
+			<replacefilter token="__REMBRANDT_DB_URL__" property="gov.nih.nci.cma.rembrandt.db.url"/>
+			<replacefilter token="__REMBRANDT_DB_USERNAME__" property="gov.nih.nci.cma.rembrandt.db.username"/>	    	 
+			<replacefilter token="__REMBRANDT_DB_PASSWORD__" property="gov.nih.nci.cma.rembrandt.db.password"/>	    	 
 	   		  
 		</replace>
 		
@@ -152,16 +166,36 @@
 			description="Updates the context specific properties and generates the associated war.">
 	        
 	    <CMAEcho message="${ant.project.name}: Generating the TCGAOV Archive."/>
+    	
+    	<copy tofile="${base.dir}/Config.groovy" 
+    	  	  file="${base.dir}/Config.groovy.template" overwrite="true"/>
 		
 	    <copy tofile="${base.dir}/application.properties" 
 	    	  file="${base.dir}/application.properties.template" overwrite="true"/>
 		 
 		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
-		   		
+		   		 		
+    	    <replacefilter token="__TIER__" value="${server.name}"/>
     	    <replacefilter token="__GRAILS_VERSION__" property="gov.nih.nci.cma.grails.version"/>
 			<replacefilter token="__APP_VERSION__" property="gov.nih.nci.cma.app.version"/>	    	 
 		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.tcgaovarian.context"/>
 		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.tcgaovarian.webapp.context"/>
+			
+			<replacefilter token="__TCGA_DB_URL__" property="gov.nih.nci.cma.tcga.db.url"/>
+			<replacefilter token="__TCGA_DB_USERNAME__" property="gov.nih.nci.cma.tcga.db.username"/>	    	 
+			<replacefilter token="__TCGA_DB_PASSWORD__" property="gov.nih.nci.cma.tcga.db.password"/>	    	 
+			
+			<replacefilter token="__TCGAOV_DB_URL__" property="gov.nih.nci.cma.tcgaovarian.db.url"/>
+			<replacefilter token="__TCGAOV_DB_USERNAME__" property="gov.nih.nci.cma.tcgaovarian.db.username"/>	    	 
+			<replacefilter token="__TCGAOV_DB_PASSWORD__" property="gov.nih.nci.cma.tcgaovarian.db.password"/>	    	 
+			
+			<replacefilter token="__TARGET_DB_URL__" property="gov.nih.nci.cma.target.db.url"/>
+			<replacefilter token="__TARGET_DB_USERNAME__" property="gov.nih.nci.cma.target.db.username"/>	    	 
+			<replacefilter token="__TARGET_DB_PASSWORD__" property="gov.nih.nci.cma.target.db.password"/>	    	 
+			
+			<replacefilter token="__REMBRANDT_DB_URL__" property="gov.nih.nci.cma.rembrandt.db.url"/>
+			<replacefilter token="__REMBRANDT_DB_USERNAME__" property="gov.nih.nci.cma.rembrandt.db.username"/>	    	 
+			<replacefilter token="__REMBRANDT_DB_PASSWORD__" property="gov.nih.nci.cma.rembrandt.db.password"/>	    	 
 	   		  
 		</replace>
 		
@@ -188,16 +222,36 @@
 			description="Updates the context specific properties and generates the associated war.">
 	        
 	    <CMAEcho message="${ant.project.name}: Generating the TARGET Archive."/>
+    	
+    	<copy tofile="${base.dir}/Config.groovy" 
+    	  	  file="${base.dir}/Config.groovy.template" overwrite="true"/>
 		
 	    <copy tofile="${base.dir}/application.properties" 
 	    	  file="${base.dir}/application.properties.template" overwrite="true"/>
 		 
 		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
-		   		
+		   		 		
+    	    <replacefilter token="__TIER__" value="${server.name}"/>
     	    <replacefilter token="__GRAILS_VERSION__" property="gov.nih.nci.cma.grails.version"/>
 			<replacefilter token="__APP_VERSION__" property="gov.nih.nci.cma.app.version"/>	    	 
 		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.target.context"/>
 		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.target.webapp.context"/>
+			
+			<replacefilter token="__TCGA_DB_URL__" property="gov.nih.nci.cma.tcga.db.url"/>
+			<replacefilter token="__TCGA_DB_USERNAME__" property="gov.nih.nci.cma.tcga.db.username"/>	    	 
+			<replacefilter token="__TCGA_DB_PASSWORD__" property="gov.nih.nci.cma.tcga.db.password"/>	    	 
+			
+			<replacefilter token="__TCGAOV_DB_URL__" property="gov.nih.nci.cma.tcgaovarian.db.url"/>
+			<replacefilter token="__TCGAOV_DB_USERNAME__" property="gov.nih.nci.cma.tcgaovarian.db.username"/>	    	 
+			<replacefilter token="__TCGAOV_DB_PASSWORD__" property="gov.nih.nci.cma.tcgaovarian.db.password"/>	    	 
+			
+			<replacefilter token="__TARGET_DB_URL__" property="gov.nih.nci.cma.target.db.url"/>
+			<replacefilter token="__TARGET_DB_USERNAME__" property="gov.nih.nci.cma.target.db.username"/>	    	 
+			<replacefilter token="__TARGET_DB_PASSWORD__" property="gov.nih.nci.cma.target.db.password"/>	    	 
+			
+			<replacefilter token="__REMBRANDT_DB_URL__" property="gov.nih.nci.cma.rembrandt.db.url"/>
+			<replacefilter token="__REMBRANDT_DB_USERNAME__" property="gov.nih.nci.cma.rembrandt.db.username"/>	    	 
+			<replacefilter token="__REMBRANDT_DB_PASSWORD__" property="gov.nih.nci.cma.rembrandt.db.password"/>	    	 
 	   		  
 		</replace>
 		
@@ -224,16 +278,36 @@
 			description="Updates the context specific properties and generates the associated war.">
 	        
 	    <CMAEcho message="${ant.project.name}: Generating the REMBRANDT Archive."/>
+    	
+    	<copy tofile="${base.dir}/Config.groovy" 
+    	  	  file="${base.dir}/Config.groovy.template" overwrite="true"/>
 		
 	    <copy tofile="${base.dir}/application.properties" 
 	    	  file="${base.dir}/application.properties.template" overwrite="true"/>
 		 
 		<replace dir="${base.dir}" propertyFile="${props.file}" includes="Config.groovy, application.properties">
-		   		
+		   		 		
+    	    <replacefilter token="__TIER__" value="${server.name}"/>
     	    <replacefilter token="__GRAILS_VERSION__" property="gov.nih.nci.cma.grails.version"/>
 			<replacefilter token="__APP_VERSION__" property="gov.nih.nci.cma.app.version"/>	    	 
 		    <replacefilter token="__CMA_CONTEXT__" property="gov.nih.nci.cma.rembrandt.context"/>
 		    <replacefilter token="__WEBAPP_CONTEXT__" property="gov.nih.nci.cma.rembrandt.webapp.context"/>
+			
+			<replacefilter token="__TCGA_DB_URL__" property="gov.nih.nci.cma.tcga.db.url"/>
+			<replacefilter token="__TCGA_DB_USERNAME__" property="gov.nih.nci.cma.tcga.db.username"/>	    	 
+			<replacefilter token="__TCGA_DB_PASSWORD__" property="gov.nih.nci.cma.tcga.db.password"/>	    	 
+			
+			<replacefilter token="__TCGAOV_DB_URL__" property="gov.nih.nci.cma.tcgaovarian.db.url"/>
+			<replacefilter token="__TCGAOV_DB_USERNAME__" property="gov.nih.nci.cma.tcgaovarian.db.username"/>	    	 
+			<replacefilter token="__TCGAOV_DB_PASSWORD__" property="gov.nih.nci.cma.tcgaovarian.db.password"/>	    	 
+			
+			<replacefilter token="__TARGET_DB_URL__" property="gov.nih.nci.cma.target.db.url"/>
+			<replacefilter token="__TARGET_DB_USERNAME__" property="gov.nih.nci.cma.target.db.username"/>	    	 
+			<replacefilter token="__TARGET_DB_PASSWORD__" property="gov.nih.nci.cma.target.db.password"/>	    	 
+			
+			<replacefilter token="__REMBRANDT_DB_URL__" property="gov.nih.nci.cma.rembrandt.db.url"/>
+			<replacefilter token="__REMBRANDT_DB_USERNAME__" property="gov.nih.nci.cma.rembrandt.db.username"/>	    	 
+			<replacefilter token="__REMBRANDT_DB_PASSWORD__" property="gov.nih.nci.cma.rembrandt.db.password"/>	    	 
 	   		  
 		</replace>
 		
