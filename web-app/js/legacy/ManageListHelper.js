@@ -240,6 +240,7 @@
 			// Array invalidItems
 		 	try	{
 				var list = eval('(' + userList + ')');
+				alert(list);
 				listName = list.listName;
 				listType = list.listType;
 				
