@@ -118,10 +118,20 @@
 				
 				<td valign="top" colspan="3">
 					<g:set var="platformList" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
-					<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
-
+					<g:if test="${platformList.size() == 1}">
+						<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
+						<g:set var="selectedPlatform" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
+					</g:if>
+					<g:else>
+						<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');}" name="geArrayPlatform" id="geArrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" optionValue="platformName" optionKey="fileName"></g:select>&nbsp;&nbsp;
+					</g:else>
 					<input type="hidden" id="platformName" name="platformName" value=""/>
-					<span id="currentPlatform"></span>
+					<g:if test="${platformList.size() == 1}">
+						<span id="currentPlatform">${platformList.displayString}</span>
+					</g:if>
+					<g:else>
+						<span id="currentPlatform"></span>
+					</g:else>
 					<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}">
 						<span class="platformDesc" style="display:none;" id="${it.platformName}PlatformDesc">${it.displayString}</span>
 					</g:each>
@@ -140,7 +150,10 @@
 			<tr>
 				<td width="50%">
 					Select a List:<br />
+					<!--				
 					<select name="groupNameGE" id="groupNameGE" onclick="enableLookupButton();">
+					-->
+					<select name="groupNameGE" id="groupNameGE">
 						<option value="${cc_NOT_INCLUDED}">${cc_NOT_INCLUDED}<option>
 					</select>
 				</td>

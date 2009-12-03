@@ -118,12 +118,15 @@ class RembrandtClinicalService {
       	      List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
               java.util.List listItems = null
       	      lists.each { ul ->
+      	         println "\n\nChecking listName=${ul.getName()}"
       	         logger.debug("Checking listName=${ul.getName()}")
       	         if (groupNames.contains(ul.getName())) {
+      	         	println "Getting list items for parent list => ${ul.getName()}"
       	           listItems = ul.getListItems()
       	           listItems.each { li -> 
       	        	  idSet.add(li.getName())
       	           }
+      	           println "There were ${idSet.size()} in the ${ul.getName()} list!\n\n"
       	         }
       	      }    	      	  
           }
@@ -533,8 +536,7 @@ class RembrandtClinicalService {
 			     String groupName = (String) sampleGroups[i]
 				 logger.debug("sampleGroup=${groupName}")    		  
 		  }      
-		}
-		  
+		}		  
 		logger.debug("ageAtDxLower=${ageAtDxLower}")
 		logger.debug("ageAtDxUpper=${ageAtDxUpper}")
 	    logger.debug("gender=${gender}")
@@ -550,39 +552,66 @@ class RembrandtClinicalService {
     	  }
       }
       else {
-    	  groupNames.add("ALL_PATIENTS")
+    	  groupNames.add("All_Patients")
       }
       
       Set sampleIds = new HashSet(getIdsForSampleGroups(groupNames))
       
       //translate to patient ids
       Set idSet = getPatientDIDsForSampleIds(sampleIds)
+      
+	  println "\n\n*********************************************\n\n"
 
-      if ((gender != null) && (!gender.equals("ANY"))) {
-        List genderIds = getIdsForGender(gender)
-        idSet.retainAll(genderIds)
-      }
+	  println "There are ${idSet.size()} items in the idset!"
+  	      	    	  
+      String standrdSampleGroups = "GBM, NON_TUMOR, UNKNOWN, ASTROCYTOMA, OLIGODENDROGLIOMA, MIXED, All_Patients"; 
+	  boolean customGrp = false;
+	  
+	  if (sampleGroups != null) {
+		  for (int i=0; i < sampleGroups.length; i++) {    		  
+			  String groupName = (String) sampleGroups[i]
+			  logger.debug("sampleGroup=${groupName}")  
+			  println "Sample Group is ${groupName}"
+			  if ( !standrdSampleGroups.contains(groupName) ) {
+			  	  customGrp = true;
+			  	  break;
+			  }		  
+		  }      
+	  }
+	  println "Custom Group is ${customGrp}"
+	  println "\n\n*********************************************\n\n"
+	  
+	  if ( customGrp ) {
+ 	  		println "***** ===> Filtering by Disease Type ${disease}"
       
-      if ((race != null) && (!race.equals("ANY"))) {
-        List raceIds = getIdsForRace(race)
-        idSet.retainAll(raceIds)    	      	  
+	      if ((disease != null) && (!disease.equals("ANY"))) {
+	    	   	    	
+	    	if (disease.equals("ALL_GLIOMA") ) {   	         
+	    	  Set diseaseIdSet = new HashSet();
+	    	  List gbmIds = getIdsForDiseaseType("GBM");
+	    	  diseaseIdSet.addAll(gbmIds);
+	    	  List astroIds = getIdsForDiseaseType("ASTROCYTOMA");
+	    	  diseaseIdSet.addAll(astroIds);
+	    	  List oligoIds = getIdsForDiseaseType("OLIGODENDROGLIOMA");
+	    	  diseaseIdSet.addAll(oligoIds);
+	    	  List mixedIds = getIdsForDiseaseType("MIXED")
+	    	  diseaseIdSet.addAll(mixedIds);	
+	    	  idSet.retainAll(diseaseIdSet);    		
+	    	}
+	    	else {
+	    	  List diseaseIds = getIdsForDiseaseType(disease)
+	          idSet.retainAll(diseaseIds)    		
+	    	}
+	    	
+	      }
+	      
       }
-      
-      if ((ageAtDxLower != null) && (ageAtDxUpper != null)) {
-        List ageIds = getIdsForAgeAtDx(ageAtDxLower, ageAtDxUpper)
-        idSet.retainAll(ageIds)
-      }
-      
-      if ((survivalLower != null) && (survivalUpper != null)) {
-    	  Integer survivalLower_days = survivalLower * 30;
-    	  Integer survivalUpper_days = survivalUpper * 30;
-          List survivalIds = getIdsForSurvival(survivalLower_days,survivalUpper_days)
-          idSet.retainAll(survivalIds)
-      }
-      
+	  println "After the disease filter there are ${idSet.size()} items in the idset!"
+     
+      /* 
       if ((disease != null) && (!disease.equals("ANY"))) {
-    	      	    	  
-    	if (disease.equals("ALL_GLIOMA")) {
+    	   	    	
+    	if (disease.equals("ALL_GLIOMA") ) {   	         
     	  Set diseaseIdSet = new HashSet();
     	  List gbmIds = getIdsForDiseaseType("GBM");
     	  diseaseIdSet.addAll(gbmIds);
@@ -599,6 +628,34 @@ class RembrandtClinicalService {
           idSet.retainAll(diseaseIds)    		
     	}
       }
+      */
+
+      if ((gender != null) && (!gender.equals("ANY"))) {
+        List genderIds = getIdsForGender(gender)
+        idSet.retainAll(genderIds)
+      }
+	  println "After the gender filter there are ${idSet.size()} items in the idset!"
+  	      	    	  
+      
+      if ((race != null) && (!race.equals("ANY"))) {
+        List raceIds = getIdsForRace(race)
+        idSet.retainAll(raceIds)    	      	  
+      }
+	  println "After the race filter there are ${idSet.size()} items in the idset!"
+      
+      if ((ageAtDxLower != null) && (ageAtDxUpper != null)) {
+        List ageIds = getIdsForAgeAtDx(ageAtDxLower, ageAtDxUpper)
+        idSet.retainAll(ageIds)
+      }
+	  println "After the age filter there are ${idSet.size()} items in the idset!"
+      
+      if ((survivalLower != null) && (survivalUpper != null)) {
+    	  Integer survivalLower_days = survivalLower * 30;
+    	  Integer survivalUpper_days = survivalUpper * 30;
+          List survivalIds = getIdsForSurvival(survivalLower_days,survivalUpper_days)
+          idSet.retainAll(survivalIds)
+      }
+	  println "After the survival filter there are ${idSet.size()} items in the idset!"
       
       List lookupIds = getSampleIdsForPatientDIDs(idSet)
             
@@ -662,7 +719,7 @@ class RembrandtClinicalService {
     	if (paramName.equals(RembrandtClinicalKeys.disease)) {
     		values.add("ALL_GLIOMA");
     		values.add("ASTROCYTOMA");
-    		values.add("CELL_LINE");
+    		//values.add("CELL_LINE");
     		values.add("GBM");
     		values.add("MIXED");
     		values.add("NON_TUMOR");

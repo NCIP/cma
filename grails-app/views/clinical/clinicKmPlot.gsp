@@ -46,30 +46,6 @@
     	});
     </script>
 	
-	<div style="border:0px solid #000;margin:5px;text-align:center;width:650px">
-	<div id="helptag_km_plots_overview" class="help"></div>		
-		<fieldset class="gray">
-			<legend class="red" style="font-size:1.2em">
-				Sample-based Filter
-			</legend>
-			<form id="sampleKMForm">
-			<table border="0" width="650px" cellspacing="10" cellpadding="5">
-				<tr>
-					<td style="text-align:center">
-						<select name="groupNameOne" id="groupNameOne">
-							<option value ="lists">lists</option>
-						</select> vs.
-						<select name="groupNameCompare" id="groupNameCompare">
-							<option value ="lists">lists</option>
-						</select>	<br /><br />
-						<input type="button" value="submit" onclick="kmPlotFormAdapter('sampleKMForm');" />
-						<input type="hidden" name="plot" value="SAMPLE_KM_PLOT" />
-					</td>
-				</tr>
-			</table>
-			</form>
-		</fieldset>
-	</div>
 	<table height="400px" border="0">
 		<tr>
 			<td>
@@ -94,6 +70,32 @@
 					<span id="logHTML"></span><br />
 				</div>
 	</fieldset>
+	
+	<div style="border:0px solid #000;margin:5px;text-align:center;width:650px">
+	<div id="helptag_km_plots_overview" class="help"></div>		
+		<fieldset class="gray">
+			<legend class="red" style="font-size:1.2em">
+				Sample-based Filter
+			</legend>
+			<form id="sampleKMForm">
+			<table border="0" width="650px" cellspacing="10" cellpadding="5">
+				<tr>
+					<td style="text-align:center">
+						<select name="groupNameOne" id="groupNameOne">
+							<option value ="lists">lists</option>
+						</select> vs.
+						<select name="groupNameCompare" id="groupNameCompare">
+							<option value ="lists">lists</option>
+						</select>	<br /><br />
+						<input type="button" value="submit" onclick="kmPlotFormAdapter('sampleKMForm');" />
+						<input type="hidden" name="plot" value="SAMPLE_KM_PLOT" />
+					</td>
+				</tr>
+			</table>
+			</form>
+		</fieldset>
+	</div>
+
 </body>
 </html>
 	

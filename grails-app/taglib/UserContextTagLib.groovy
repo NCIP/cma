@@ -8,6 +8,20 @@ class UserContextTagLib {
 	    }
 	}
 	
+	def isUploadAvailable = { attrs, body ->
+	
+		def dc = grailsApplication.config.cma.dataContext ?: ""
+    	//println "\n\n======> The app context is ${dc} <=========\n\n"
+	    
+	    if ( dc == "TCGA" || dc == "TCGAOvarian" ) {
+	    	if ( userContextService.isLoggedIn() ) {
+	    		out << body()
+	    	}
+	    } else {
+	    	out << body()
+	    }
+	}
+	
 	def contextAware = { attrs, body ->
 		//params show and hide take a string, TODO: make it a list
 		def ds = grailsApplication.config.cma.dataContext ?: ""

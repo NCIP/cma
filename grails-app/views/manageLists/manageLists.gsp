@@ -113,14 +113,13 @@
 							</td>
 						</tr>
 					</table>
+				</div>		
+				<div style="text-align:right; margin:10px;">
+					<a href="#" onclick="javascript:scroll(0,0);return false;">[top]</a>
 				</div>
+				<br clear="all"/>
 			</g:uploadForm>		
 		</g:isLoggedIn>
 		<!--  -------------- -->
-		
-		<div style="text-align:right; margin:10px;">
-			<a href="#" onclick="javascript:scroll(0,0);return false;">[top]</a>
-		</div>
-		<br clear="all"/>
 	</body>
 </html>

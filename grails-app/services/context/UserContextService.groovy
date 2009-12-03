@@ -8,9 +8,8 @@ package context;
 class UserContextService {
 
     boolean transactional = true
-
+    
     def serviceMethod() {
-
     }
     
     def isLoggedIn()	{

@@ -116,7 +116,7 @@ class ManageListsController {
 	        if ( it.notes != null && it.notes != "" ) {
 	        	sb.append(" notes:" + it.notes);  
 	        } 
-	        sb.append("\n")
+	        sb.append("\r\n")
 	    }
 	    
         //  Set the response and go!

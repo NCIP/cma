@@ -255,5 +255,42 @@
 			</g:form>
 		</div>
 		</fieldset>
+		
+		<br clear="all"/>
+		<!--  start km -->
+		<div>
+			<div id="sampleKMHeader" class="sectionHeader">
+				<h5>Sample-based Kaplan-Meier Graph</h5>
+			</div>
+			<div class="sectionBody">
+				<div id="helptag_km_plots_overview" class="help"></div>
+				<g:form action="clinicalKM" method="post" name="clinicKMPlotForm">
+				<input type="hidden" name="plot" value="SAMPLE_KM_PLOT"/>
+				<table align="center" border="0">
+		    		<tr style="vertical-align:top">
+		    			<td>
+			       			Kaplan-Meier survival plot for Sample Data&nbsp;
+			        		<br/><br/>
+			        		<g:select name="groupNameOne" style="margin-left:20px;width:200px;" id="groupNameOne"
+			        			from="${patLists}"></g:select>
+			         		vs. 
+							<g:select name="groupNameCompare" style="margin-left:20px;width:200px;" id="groupNameCompare"
+			        			from="${patLists}"></g:select>
+			        		<br/><br/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+		        			<div style="text-align:center">
+			        			<input type="submit" id="submittalButton" class="subButton" value="Go" />
+		        			</div>
+		        		</td>
+		        	</tr>
+				</table>
+				</g:form>
+			</div>
+		</div>
+		<!--  end km -->
+		
 	</body>
 </html>

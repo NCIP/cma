@@ -39,6 +39,8 @@ class PatientIdHelper {
 			        }
 		        }
 	        }
+		} else {
+			translatedIds = ids;
 		}
 
 		System.out.println("\nLeaving PatientIdHelper::translateId....");

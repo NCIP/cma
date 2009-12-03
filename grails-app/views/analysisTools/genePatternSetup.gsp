@@ -48,7 +48,7 @@
 			
 			  Event.observe(window, "load", function()	{
 				  new Effect.Corner($$('.sectionHeader')[0], 'top');
-				  document.getElementById("platformName").value = document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].text;
+				  document.getElementById("platformName").value = document.getElementById("arrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].text;
 				  
 			  });
 		  </script>
@@ -174,10 +174,24 @@
 							<td>						
 								<div class="value ${hasErrors(bean:gpaView,field:'arrayPlatform','errors')}">
 									<g:if test="${gpaView == null}">
-										<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
+										<!-- <g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select> -->		
+							  			<g:if test="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6').size() == 1}">
+											<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
+											<g:set var="selectedPlatform" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
+							  			</g:if>				
+							  			<g:else>
+											<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
+							  			</g:else>	
 									</g:if>
 									<g:elseif test="${gpaView.arrayPlatform == null}">
-										<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
+										<!-- <g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select> -->		
+							  			<g:if test="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6').size() == 1}">
+											<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
+											<g:set var="selectedPlatform" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
+							  			</g:if>				
+							  			<g:else>
+											<g:select onchange="\$('platformName').value = this.options[this.selectedIndex].text;if(!\$(this.options[this.selectedIndex]).value.empty()){ \$('currentPlatform').update(\$((\$('platformName').value)+'PlatformDesc').innerHTML);}else{\$('currentPlatform').update('');};" name="arrayPlatform" id="arrayPlatformId" noSelection="['': 'choose platform']" from="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" optionValue="platformName" optionKey="fileName"></g:select>			
+							  			</g:else>	
 									</g:elseif>
 									<g:else>
 										<select name="arrayPlatform" id="arrayPlatformId" onchange="updatePlatform();" style="width: 200px; overflow: none;" >
