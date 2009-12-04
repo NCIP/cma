@@ -321,6 +321,7 @@ class ClinicalController {
 		def clinSrv = getClinicalService()	
 		
 		if(params.ids != null)	{
+    	    println "The ids are NOT null...${params.ids}"
 			List samList = Arrays.asList(params.ids.split(","));
 			reportBeansList = clinSrv.getClinicalData(samList)
 		}
@@ -328,6 +329,7 @@ class ClinicalController {
 			reportBeansList = clinSrv.getClinicalDataForGroup(params.taskId);
 			
 		}
+    	
 		session.setAttribute(qname, reportBeansList);
    		redirect(action:'clinicalReportDisplay', params:[taskId:qname, noBack:'true'])
     }
