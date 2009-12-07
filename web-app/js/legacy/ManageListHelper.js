@@ -240,7 +240,6 @@
 			// Array invalidItems
 		 	try	{
 				var list = eval('(' + userList + ')');
-				alert(list);
 				listName = list.listName;
 				listType = list.listType;
 				
@@ -299,7 +298,8 @@
 				}
 			     
 			    if(!invalidItems.length < 1)	{
-					var intmp = "<div style='margin-left:20px;'><span id='invalid_span' style='color:gray; padding:3px;'><br/>Invalid or does not exist in the database:<br/> ";
+					var intmp = "<div style='margin-left:20px;'><span id='invalid_span' style='color:gray; padding:3px;'><br/><b>WARNING!!</b> The following list items have not been validated by the system and may impact other system features when this list is used:<br/> ";
+					//var intmp = "<div style='margin-left:20px;'><span id='invalid_span' style='color:gray; padding:3px;'><br/>Invalid or does not exist in the database:<br/> ";
 					//wDiv.innerHTML += "<span id='invalid_span' style='color:gray; padding:3px'><br/>Invalid or does not exist in the database:<br/> ";
 					for(var i=0; i<invalidItems.length; i++){
 						invalidItemId = invalidItems[i];
