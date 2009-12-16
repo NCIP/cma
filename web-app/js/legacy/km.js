@@ -147,10 +147,12 @@ function createReporterList(txt) {
 		var elementToUpdate = res[0].elementId;
 		var reporters = res[0].reporters;
 		var taskId = res[0].taskId;
+		var control_taskId = res[0].control_taskId;
 		if (result == "found") {
 			DWRUtil.removeAllOptions(elementToUpdate);
 			DWRUtil.addOptions(elementToUpdate, reporters);
 			$("taskId").value = taskId;
+			$("control_taskId").value = control_taskId;
 		} else {
 			DWRUtil.removeAllOptions(elementToUpdate);
 			DWRUtil.addOptions(elementToUpdate, ["NONE"]);

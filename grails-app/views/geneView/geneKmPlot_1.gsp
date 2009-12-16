@@ -149,11 +149,8 @@
 			
 			<tr>
 				<td width="50%">
-					Select a List:<br />
-					<!--				
-					<select name="groupNameGE" id="groupNameGE" onclick="enableLookupButton();">
-					-->
-					<select name="groupNameGE" id="groupNameGE">
+					Select a List:<br />									
+					<select name="groupNameGE" id="groupNameGE" onclick="enableLookupButton();">					
 						<option value="${cc_NOT_INCLUDED}">${cc_NOT_INCLUDED}<option>
 					</select>
 				</td>
