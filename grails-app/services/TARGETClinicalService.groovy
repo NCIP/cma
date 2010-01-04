@@ -461,9 +461,11 @@ class TARGETClinicalService extends AbstractClinicalService {
 	 /**
 	  * Get the clinical data for a sample group
 	  */
-	 public List getClinicalDataForGroup(String groupName) {
-		 
-		 return Collections.emptyList();
+	 public List getClinicalDataForGroup(String groupName) {		 
+         List idList = getIdsForSampleGroup(groupName)
+         println("getClinicalDataForGroup groupName=${groupName} returned numIds=${idList.size()}")
+         return getClinicalData(idList)
+		 //return Collections.emptyList();
 	 }
 	
 	 /**
