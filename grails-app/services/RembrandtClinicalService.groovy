@@ -560,6 +560,7 @@ class RembrandtClinicalService {
       //translate to patient ids
       Set idSet = getPatientDIDsForSampleIds(sampleIds)
       
+      /*
 	  println "\n\n*********************************************\n\n"
 
 	  println "There are ${idSet.size()} items in the idset!"
@@ -606,6 +607,13 @@ class RembrandtClinicalService {
 	      }
 	      
       }
+      */
+       
+	  if ((disease != null) && (!disease.equals("ANY"))) {
+		List diseaseIds = getIdsForDiseaseType(disease)
+        idSet.retainAll(diseaseIds)    		
+      }
+      
 	  println "After the disease filter there are ${idSet.size()} items in the idset!"
      
       /* 

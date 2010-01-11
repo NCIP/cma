@@ -253,6 +253,9 @@
 						  				<g:else>	
 											<g:set var="platformList" value="${gov.nih.nci.cma.domain.Platform.findAllByPlatformNameNotEqual('AFFY_SNP6')}" scope="page" />
 											<select id="geArrayPlatformId" name="geArrayPlatform" onchange="updatePlatform();">
+												<g:if test="${geneView.geArrayPlatform == ''}">
+													<option value="" selected="yes">choose platform</option>
+												</g:if>
 												<g:each in="${platformList}" var="platform">
 													<g:set var="isSelected" value="${false}"/>
 													<g:if test="${platform.fileName.trim() == geneView.geArrayPlatform.trim()}">

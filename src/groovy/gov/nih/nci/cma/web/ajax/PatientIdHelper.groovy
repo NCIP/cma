@@ -28,7 +28,7 @@ class PatientIdHelper {
 			    translatedIds.add(id.substring(0,12))  
 	        }
 		
-		} else if ( dataContext.equals("TARGET") ) {
+		} else if ( dataContext.equals("TARGET")  || dataContext.equals("Rembrandt") ) {
 		
 			List idMappingObjs = gov.nih.nci.cma.domain.IdMapping.list()			
 	      	ids.each { id ->

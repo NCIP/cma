@@ -195,6 +195,9 @@
 									</g:elseif>
 									<g:else>
 										<select name="arrayPlatform" id="arrayPlatformId" onchange="updatePlatform();" style="width: 200px; overflow: none;" >
+											<g:if test="${gpaView.arrayPlatform == ''}">
+												<option value="" selected="yes">choose platform</option>
+											</g:if>
 											<g:each in="${gov.nih.nci.cma.domain.Platform.findAllByDataTypeLike('Expression%')}" var="platform">
 											  	<g:if test="${gpaView.arrayPlatform == platform.fileName}">				
 													<option value="${platform.fileName}" selected="yes">${platform.platformName}</option>
