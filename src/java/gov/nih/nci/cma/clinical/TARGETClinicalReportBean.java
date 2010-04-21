@@ -22,6 +22,10 @@ public class TARGETClinicalReportBean {
   private String e2aStatus; 
   private String bcrStatus; 
   
+	public String getId() {
+		return patientId;
+	}
+  
 	public String getPatientId() {
 		return patientId;
 	}
