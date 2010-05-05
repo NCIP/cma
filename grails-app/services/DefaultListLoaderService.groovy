@@ -117,18 +117,55 @@ class DefaultListLoaderService {
     	}
     }
     
+    def nsListCollection
+    
     def getPatientLists = { sid, sortList ->
 		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);
 	    List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
 	    ArrayList patientCollection = new ArrayList();
+	    nsListCollection = new ArrayList();
 	    for(UserList l: lists){
+	    	println "Evaluating list: " + l.getName();
 	        patientCollection.add(l.getName());
+	        
+	    	if ( l.getName().equals(CacheConstants.ALL_USER_LISTS) || 
+	    		!l.getName().toLowerCase().contains(CacheConstants.SURVIVAL) ) {
+	        	nsListCollection.add(l.getName());
+	    		println "Added list: " + l.getName();
+	        }
 	    }
 	    if(sortList)	{
 	    	Collections.sort(patientCollection);
+	    	Collections.sort(nsListCollection);
 	    }
+	    
 	    return patientCollection;
     }
+    
+    /*
+    def nsListCollection
+    def getNonSurvivalLists = { sid, sortList ->
+		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);
+	    List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
+	    nsListCollection = new ArrayList();
+	    for(UserList l: lists){
+	    	println "Evaluating list: " + l.getName();
+	    	if ( l.getName().toLowerCase().contains("survival") ) {
+	        	nsListCollection.add(l.getName());
+	    		println "Added list: " + l.getName();
+	        }
+	    }
+	    if ( sortList ) {
+	    	Collections.sort(nsListCollection);
+	    }
+	    
+		for (nsList in this.nsListCollection ) {
+		  println "List:" + nsList;
+		}
+	    
+	    return nonSurvivalLists;
+    }
+    */
     
     def getGeneLists = { sid, sortList ->
 		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);

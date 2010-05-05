@@ -202,6 +202,7 @@
 		
 		<br clear="all"/>
 		<!--  start km -->
+		<g:if test="${nsLists.size() >= 2}">
 		<div>
 			<div id="sampleKMHeader" class="sectionHeader">
 				<h5>Sample-based Kaplan-Meier Graph</h5>
@@ -216,10 +217,12 @@
 			       			Kaplan-Meier survival plot for Sample Data&nbsp;
 			        		<br/><br/>
 			        		<g:select name="groupNameOne" style="margin-left:20px;width:200px;" id="groupNameOne"
-			        			from="${patLists}"></g:select>
+			        			from="${nsLists}">
+			        		</g:select>
 			         		vs. 
 							<g:select name="groupNameCompare" style="margin-left:20px;width:200px;" id="groupNameCompare"
-			        			from="${patLists}"></g:select>
+			        			from="${nsLists}">
+			        		</g:select>
 			        		<br/><br/>
 						</td>
 					</tr>
@@ -234,6 +237,7 @@
 				</g:form>
 			</div>
 		</div>
+		</g:if>
 		<!--  end km -->
 		
 	</body>

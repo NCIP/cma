@@ -36,6 +36,7 @@ class ClinicalController {
 		def clinSrv = getClinicalService()	
 						
 		def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+    	def nsLists = defaultListLoaderService.getNsListCollection();
 		def genderList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.gender)
 		def diseaseList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.disease)
 		def raceList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.race)
@@ -80,7 +81,7 @@ class ClinicalController {
 		
 		def ds = grailsApplication.config.cma.dataContext ?: ""
 		if ( ds == "TCGAOvarian" ) {
-			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
+			render(view:"${ds}Main", model:[patLists:patLists, nsLists:nsLists, genderList:genderList, 
 			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
 			   vitalStatusList:vitalStatusList, yesNoList:yesNoList, initPathologicDxMethodList:initPathologicDxMethodList,
 			   ethnicityList:ethnicityList, anatomicOrganSubdivisionList:anatomicOrganSubdivisionList, 
@@ -89,13 +90,13 @@ class ClinicalController {
 			   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList, histologicalTypeList:histologicalTypeList,
 			   jewishOriginList:jewishOriginList])		
 		} else if ( ds == "TARGET" ) {
-			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, raceList:raceList, 
+			render(view:"${ds}Main", model:[patLists:patLists,  nsLists:nsLists, genderList:genderList, raceList:raceList, 
 			   ethnicityList:ethnicityList, wbcList:wbcList, vitalStatusList:vitalStatusList, eventList:eventList,
 			   trisomiesList:trisomiesList, mllStatusList:mllStatusList,
 			   e2aStatusList:e2aStatusList, bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList,
 			   testicularStatusList:testicularStatusList, day29mrd:day29mrd, day8mrd:day8mrd])		
 		} else {
-			render(view:"${ds}Main", model:[patLists:patLists, genderList:genderList, 
+			render(view:"${ds}Main", model:[patLists:patLists,  nsLists:nsLists, genderList:genderList, 
 			   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
 			   vitalStatusList:vitalStatusList, eventList:eventList, deathList:deathList, congenitalAbnormalityList:congenitalAbnormalityList,
 			   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,
@@ -225,6 +226,7 @@ class ClinicalController {
 			defaultListLoaderService.loadDefaultLists()
 						
 			def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+    		def nsLists = defaultListLoaderService.getNsListCollection();
 			def genderList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.gender)
 			def diseaseList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.disease)
 			def raceList = clinSrv.getPermissibleValues(RembrandtClinicalKeys.race)
@@ -266,7 +268,7 @@ class ClinicalController {
 			def dc = grailsApplication.config.cma.dataContext
 			if ( dc == "TCGAOvarian" ) {
 				render(view:"${dc}Main", model:[clinicalView:clinicalView, rembrandtClinicalView:rembrandtClinicalView,
-				   patLists:patLists, genderList:genderList, 
+				   patLists:patLists, nsLists:nsLists, genderList:genderList, 
 				   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
 				   vitalStatusList:vitalStatusList, yesNoList:yesNoList, initPathologicDxMethodList:initPathologicDxMethodList,
 				   ethnicityList:ethnicityList, anatomicOrganSubdivisionList:anatomicOrganSubdivisionList, 
@@ -275,14 +277,14 @@ class ClinicalController {
 				   primaryTherapyOutcomeSuccessList:primaryTherapyOutcomeSuccessList, histologicalTypeList:histologicalTypeList,
 			   	   jewishOriginList:jewishOriginList])		
 			} else if ( dc == "TARGET" ) {
-				render(view:"${dc}Main", model:[patLists:patLists, genderList:genderList, raceList:raceList, 
+				render(view:"${dc}Main", model:[patLists:patLists, nsLists:nsLists, genderList:genderList, raceList:raceList, 
 			   	   ethnicityList:ethnicityList, wbcList:wbcList, vitalStatusList:vitalStatusList, eventList:eventList, 
 			 	   trisomiesList:trisomiesList, mllStatusList:mllStatusList, e2aStatusList:e2aStatusList, 
 			 	   bcrStatusList:bcrStatusList, cnsStatusList:cnsStatusList, testicularStatusList:testicularStatusList, 
 			 	   day29mrd:day29mrd, day8mrd:day8mrd])		
 			} else {
 				render(view:"${dc}Main", model:[clinicalView:clinicalView, rembrandtClinicalView:rembrandtClinicalView,
-				   patLists:patLists, genderList:genderList, 
+				   patLists:patLists, nsLists:nsLists, genderList:genderList, 
 				   diseaseList:diseaseList, raceList:raceList, tumorTissueSiteList:tumorTissueSiteList,
 				   vitalStatusList:vitalStatusList, eventList:eventList, deathList:deathList, congenitalAbnormalityList:congenitalAbnormalityList,
 				   telStatusList:telStatusList, trisomiesList:trisomiesList, mllStatusList:mllStatusList,

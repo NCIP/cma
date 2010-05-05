@@ -115,6 +115,7 @@ function setPatientLists(data) {
 	DWRUtil.addOptions("groupNameGE", data);
 	DWRUtil.addOptions("groupNameCompare", data);
 }
+
 function setPlatforms(txt) {
 	var res = eval("(" + txt + ")");
 	DWRUtil.removeAllOptions("geArrayPlatformId");

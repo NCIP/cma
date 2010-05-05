@@ -176,6 +176,7 @@ public class GeneSearch {
 			System.out.println("got sampleGroupNameMultiple");
 			Map<String, String> m = new HashMap<String, String>();
 			m.put("plotType", CaIntegratorConstants.GENE_EXP_KMPLOT);
+			m.put("sampleGroups", sgnm[0]);
 			//ExpressionLookupFinding finding = kmReporterService.getExpressionFinding(geneName,gsForm.getGeArrayPlatform(), gsForm.getSampleGroupNameMultiple()[0], request.getSession().getId());
 
 			ExpressionLookupFinding finding = kmReporterService.getExpressionFinding(geneName,binaryFileName, 
@@ -198,6 +199,7 @@ public class GeneSearch {
 			else	{
 				System.out.println("******************* Finding Null ********************");
 			}
+			System.out.println("\n======> Request Map .....  " + m.toString());
 		}
 		else	{
 			System.out.println("******************* sampleGroupNameMultiple Null ********************");

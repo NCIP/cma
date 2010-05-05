@@ -12,6 +12,7 @@
 				} catch(e){ }
 				document.getElementById("platformName").value = document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].text;
 				//alert("The geArrayPlatform value is => " + document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].value);
+				$('nsSampleGroupSelect').hide();
 			});
 		
 			var showGeneInfo = function()	{
@@ -29,6 +30,8 @@
 			  		//document.getElementById("sampleGroupSelect").innerHTML = multiple;
 			  		$('sampleGroupNameId').multiple = "multiple";
 			  		$('sampleGroupNameId').size = 5;
+					$('nsSampleGroupSelect').hide();
+					$('sampleGroupSelect').show();
 			  		resetFields(false, 0);
 			  	}
 			  	else if (i == 1 || i == 2 ){
@@ -36,6 +39,8 @@
 			  		$('sampleGroupNameId').multiple = false;
 			  		$('sampleGroupNameId').size = 1;
 					$('sampleGroupNameId').selectedIndex = 0;
+					$('nsSampleGroupSelect').show();
+					$('sampleGroupSelect').hide();
 			  		resetFields(false, 2);
 			  	}
 			  	else if (i == 3){
@@ -43,6 +48,8 @@
 			  		$('sampleGroupNameId').multiple = false;
 			  		$('sampleGroupNameId').size = 1;
 			  		$('sampleGroupNameId').selectedIndex = 0;
+					$('nsSampleGroupSelect').hide();
+					$('sampleGroupSelect').show();
 			  		resetFields(true, 3);
 			  	}
 			  	else if (i == 4){
@@ -51,6 +58,7 @@
 			}
 			
 			function resetFields(ok, i){
+
 				if ( i == 4){
 		  			document.getElementById("geneSymbol").disabled = true;
 		  		}
@@ -59,6 +67,19 @@
 		  		}
 		  		document.getElementById("sampleGroupNameId").disabled = ok;
 		  		document.getElementById("geArrayPlatformId").disabled = ok;
+		  		
+		  		/*
+		  		if ( i == 2 ) {
+			  		$('sampleGroupNameId').multiple = false;
+			  		$('sampleGroupNameId').size = 1;
+					$('sampleGroupNameId').selectedIndex = 0;
+					$('nsSampleGroupSelect').show();
+					$('sampleGroupSelect').hide();
+		  		} else {
+					$('nsSampleGroupSelect').hide();
+					$('sampleGroupSelect').show();
+		  		}
+		  		*/
 			}
 
 			//not in use
@@ -141,7 +162,7 @@
 
 						<div style="display: table;">
 						<table>
-							<tbody>
+							<tbody>		
 	                            <tr>
 	                                <td valign="top" colspan="2">
 	                                    <label for="plot">View Type*:</label>
@@ -178,7 +199,7 @@
 													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" checked="checked" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
 												</g:if>
 												<g:else>
-													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,1);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
+													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
 												</g:else>
 											</g:contextAware>
 										</g:else>
@@ -193,10 +214,10 @@
 										<input type="text" name="geneSymbol" size="20" id="geneSymbol" style="vertical-align:middle" value="${fieldValue(bean:geneView,field:'geneSymbol')}">&nbsp;
 										<a href="#" onclick="showGeneInfo(); return false;" id="geneInfoLink">[show gene info]</a>
 	                                </td>
-	                            </tr> 						
+	                            </tr> 	
 								<tr>
 									<td style="vertical-align: middle">
-										Restrict to sample group:
+										Restrict to sample group: 
 									</td>
 									<td class="value ${hasErrors(bean:geneView,field:'sampleGroups','errors')}">
 										<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
@@ -224,9 +245,36 @@
 													</g:each>
 												</select>
 						  					</g:else>				
-										</div>			
+										</div>	
+										
+										<div id="nsSampleGroupSelect" style="vertical-align: middle; display: table-cell;">
+						  					<g:if test="${geneView == null}">				
+												<g:select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;" from="${nsLists}"></g:select>
+						  					</g:if>				
+						  					<g:elseif test="${geneView.sampleGroups == null}">	
+												<g:select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;" from="${nsLists}"></g:select>
+						  					</g:elseif>	
+						  					<g:else>	
+												<select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;">
+													<g:each in="${nsLists}" var="patList">
+														<g:set var="isSelected" value="${false}"/>
+														<g:each in="${selectedSampleGrpList}" var="listItem">
+															<g:if test="${listItem.trim() == patList.trim()}">
+																<g:set var="isSelected" value="${true}"/>
+															</g:if>
+														</g:each>
+											  			<g:if test="${isSelected}">				
+															<option value="${patList}" selected="yes">${patList}</option>
+														</g:if>
+														<g:else>
+															<option value="${patList}">${patList}</option>
+														</g:else>
+													</g:each>
+												</select>
+						  					</g:else>	
+										</div>		
 									</td>
-								</tr>	
+	                            </tr> 
 								<tr> 
 									<td style="vertical-align: middle">
 										Select Array Platform: 
