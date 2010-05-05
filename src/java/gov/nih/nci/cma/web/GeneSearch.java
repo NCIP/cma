@@ -172,8 +172,12 @@ public class GeneSearch {
 		
 		//String[] sgnm = request.getParameterValues("sampleGroupNameMultiple");
 		String[] sgnm = request.getParameterValues("sampleGroups");
+		System.out.println("\n\n======> There are " + sgnm.length + " selected groups.  They are .....  ");
 		if(sgnm!=null && sgnm.length > 0){
 			System.out.println("got sampleGroupNameMultiple");
+			for (int i=0; i < sgnm.length; i++){
+				System.out.println("\n\tSelected Group is .....  " + sgnm[i]);
+			}
 			Map<String, String> m = new HashMap<String, String>();
 			m.put("plotType", CaIntegratorConstants.GENE_EXP_KMPLOT);
 			m.put("sampleGroups", sgnm[0]);
@@ -199,7 +203,7 @@ public class GeneSearch {
 			else	{
 				System.out.println("******************* Finding Null ********************");
 			}
-			System.out.println("\n======> Request Map .....  " + m.toString());
+			System.out.println("\n\n======> Request Map .....  " + m.toString());
 		}
 		else	{
 			System.out.println("******************* sampleGroupNameMultiple Null ********************");

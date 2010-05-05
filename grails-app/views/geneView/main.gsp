@@ -38,7 +38,7 @@
 			  		//document.getElementById("sampleGroupSelect").innerHTML = single;
 			  		$('sampleGroupNameId').multiple = false;
 			  		$('sampleGroupNameId').size = 1;
-					$('sampleGroupNameId').selectedIndex = 0;
+					//$('sampleGroupNameId').selectedIndex = 0;
 					$('nsSampleGroupSelect').show();
 					$('sampleGroupSelect').hide();
 			  		resetFields(false, 2);
