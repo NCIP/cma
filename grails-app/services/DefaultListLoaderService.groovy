@@ -125,14 +125,15 @@ class DefaultListLoaderService {
 	    ArrayList patientCollection = new ArrayList();
 	    nsListCollection = new ArrayList();
 	    for(UserList l: lists){
-	    	println "Evaluating list: " + l.getName();
+	    	print "Evaluating list: " + l.getName();
 	        patientCollection.add(l.getName());
 	        
-	    	if ( l.getName().equals(CacheConstants.ALL_USER_LISTS) || 
-	    		!l.getName().toLowerCase().contains(CacheConstants.SURVIVAL) ) {
+	        if ( l.getName().equals(CacheConstants.ALL_USER_LISTS) || 
+	        	 l.getListSubType() != ListSubType.GENE_PLOT ) {
 	        	nsListCollection.add(l.getName());
 	    		println "Added list: " + l.getName();
 	        }
+
 	    }
 	    if(sortList)	{
 	    	Collections.sort(patientCollection);
@@ -141,31 +142,6 @@ class DefaultListLoaderService {
 	    
 	    return patientCollection;
     }
-    
-    /*
-    def nsListCollection
-    def getNonSurvivalLists = { sid, sortList ->
-		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);
-	    List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
-	    nsListCollection = new ArrayList();
-	    for(UserList l: lists){
-	    	println "Evaluating list: " + l.getName();
-	    	if ( l.getName().toLowerCase().contains("survival") ) {
-	        	nsListCollection.add(l.getName());
-	    		println "Added list: " + l.getName();
-	        }
-	    }
-	    if ( sortList ) {
-	    	Collections.sort(nsListCollection);
-	    }
-	    
-		for (nsList in this.nsListCollection ) {
-		  println "List:" + nsList;
-		}
-	    
-	    return nonSurvivalLists;
-    }
-    */
     
     def getGeneLists = { sid, sortList ->
 		UserListBeanHelper userListBeanHelper = new UserListBeanHelper(sid);
