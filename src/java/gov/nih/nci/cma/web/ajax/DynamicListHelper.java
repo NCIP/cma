@@ -7,6 +7,7 @@ import gov.nih.nci.caintegrator.application.lists.UserList;
 import gov.nih.nci.caintegrator.application.lists.UserListBeanHelper;
 import gov.nih.nci.caintegrator.application.lists.ajax.CommonListFunctions;
 
+import gov.nih.nci.caintegrator.util.CaIntegratorConstants;
 import gov.nih.nci.caintegrator.util.idmapping.IdMappingManager;
 
 import gov.nih.nci.cma.list.ProjectListFilter;
@@ -79,6 +80,29 @@ public class DynamicListHelper {
             //try as a patient list as default, will fail validation if its not accepted
             return CommonListFunctions.createGenericList(ListType.PatientDID, list, name, new ProjectListValidator(ListType.PatientDID, list));
         }
+    }
+    
+    public List<String> getPatientLists(String cacheId, String plotType){
+    	
+    	System.out.println("\n\nDynamicListHelper::getPatientLists()  The session id is " + cacheId);
+    	System.out.println("\n\nDynamicListHelper::getPatientLists()  The plot type is " + plotType);
+        UserListBeanHelper userListBeanHelper = new UserListBeanHelper(cacheId);
+        List<UserList> lists = userListBeanHelper.getLists(ListType.PatientDID);
+        ArrayList<String> patientCollection = new ArrayList<String>();
+        //patientCollection.add(CaIntegratorConstants.NOT_INCLUDED);
+    	System.out.println("\n\nDynamicListHelper::getPatientLists() " + lists.size() + " lists were retrieved!!");
+        for(UserList l: lists){
+	        if ( plotType.equals("GE_KM_PLOT") ) {
+		        if ( l.getName().equals(CaIntegratorConstants.ALL_USER_LISTS) || 
+		        	 l.getListSubType() != ListSubType.GENE_PLOT ) {
+		        	patientCollection.add(l.getName());
+		        }
+	        } else {
+	        	patientCollection.add(l.getName());
+	        }
+
+        }
+        return patientCollection;
     }
 	
 	public static String getAllLists()	{

@@ -3,16 +3,21 @@
 <html>
     <head>
 		<meta name="layout" content="splashLayout" />
+		
+         <script type='text/javascript' src='../dwr/engine.js'> </script>
+         <script type='text/javascript' src='../dwr/util.js'> </script>
+         <script type='text/javascript' src='../dwr/interface/DynamicListHelper.js'> </script>
 				
 		<script type="text/javascript">
+	  		var sessionId = "${sessionId}";
+	  		
 			Event.observe(window, "load", function()	{
 				try	{
 					new Effect.Corner($('geneSearchHeader'), 'top');
 					new Effect.Corner($('pathwaySearchHeader'), 'top');
 				} catch(e){ }
 				document.getElementById("platformName").value = document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].text;
-				//alert("The geArrayPlatform value is => " + document.getElementById("geArrayPlatformId").options[document.getElementById("geArrayPlatformId").selectedIndex].value);
-				$('nsSampleGroupSelect').hide();
+				//onRadio(document.getElementById("plot"), 0);
 			});
 		
 			var showGeneInfo = function()	{
@@ -22,35 +27,37 @@
 				return false;
 			}
 			
+			/* retrieves user-defined lists */
+			function getUserLists(sessionId, plotType) {
+				DynamicListHelper.getPatientLists(sessionId, plotType, setPatientLists);
+			}
+			
+			function setPatientLists(data) {
+				DWRUtil.removeAllOptions("sampleGroupNameId");
+				DWRUtil.addOptions("sampleGroupNameId", data);
+			}
+			
 			//handles the clicking of a radio	
-			function onRadio(formElement, i){
+			function onRadio(sid, formElement, i){
 				var element = formElement.name;
-		
+				
 			  	if(i==0)	{
-			  		//document.getElementById("sampleGroupSelect").innerHTML = multiple;
 			  		$('sampleGroupNameId').multiple = "multiple";
 			  		$('sampleGroupNameId').size = 5;
-					$('nsSampleGroupSelect').hide();
-					$('sampleGroupSelect').show();
 			  		resetFields(false, 0);
+			  		getUserLists(sid, "geneExpPlot");
 			  	}
 			  	else if (i == 1 || i == 2 ){
-			  		//document.getElementById("sampleGroupSelect").innerHTML = single;
 			  		$('sampleGroupNameId').multiple = false;
 			  		$('sampleGroupNameId').size = 1;
-					//$('sampleGroupNameId').selectedIndex = 0;
-					$('nsSampleGroupSelect').show();
-					$('sampleGroupSelect').hide();
 			  		resetFields(false, 2);
+			  		getUserLists(sid, "GE_KM_PLOT");
 			  	}
 			  	else if (i == 3){
-			  		//document.getElementById("sampleGroupSelect").innerHTML = single;
 			  		$('sampleGroupNameId').multiple = false;
 			  		$('sampleGroupNameId').size = 1;
-			  		$('sampleGroupNameId').selectedIndex = 0;
-					$('nsSampleGroupSelect').hide();
-					$('sampleGroupSelect').show();
 			  		resetFields(true, 3);
+			  		getUserLists(sid, "genomeWorkbench");
 			  	}
 			  	else if (i == 4){
 			  		resetFields(true, 4);
@@ -67,19 +74,6 @@
 		  		}
 		  		document.getElementById("sampleGroupNameId").disabled = ok;
 		  		document.getElementById("geArrayPlatformId").disabled = ok;
-		  		
-		  		/*
-		  		if ( i == 2 ) {
-			  		$('sampleGroupNameId').multiple = false;
-			  		$('sampleGroupNameId').size = 1;
-					$('sampleGroupNameId').selectedIndex = 0;
-					$('nsSampleGroupSelect').show();
-					$('sampleGroupSelect').hide();
-		  		} else {
-					$('nsSampleGroupSelect').hide();
-					$('sampleGroupSelect').show();
-		  		}
-		  		*/
 			}
 
 			//not in use
@@ -171,35 +165,35 @@
 	                            <tr>
 	                                <td valign="top" colspan="2" class="value ${hasErrors(bean:geneView,field:'plot','errors')}">
 					  					<g:if test="${geneView == null}">				
-		                         	        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
-											&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
+		                         	        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio('${sessionId}',this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
+											&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio('${sessionId}',this,2);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
 											<!-- Add Ovarian back when OV links are available -->
 											<g:contextAware mode="showOnlyTo" context="TCGA">
-												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/>
+												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio('${sessionId}',this,3);" class="radio">View mutations and copy number changes&nbsp;<br/>
 										    </g:contextAware>
 										</g:if>
 										<g:else>
 							  				<g:if test="${geneView.plot == 'geneExpPlot'}">				
-			                         	    	&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio(this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
+			                         	    	&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" checked="checked" onclick="javascript:onRadio('${sessionId}',this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
 											</g:if>
 											<g:else>
-			                         	    	&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" onclick="javascript:onRadio(this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
+			                         	    	&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="geneExpPlot" onclick="javascript:onRadio('${sessionId}',this,0);" class="radio"/>Gene Expression plot&nbsp;<br/>
 											</g:else>
 											
 											<g:if test="${geneView.plot == 'GE_KM_PLOT'}">
-												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" checked="checked" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
+												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" checked="checked" onclick="javascript:onRadio('${sessionId}',this,2);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
 											</g:if>
 											<g:else>
-												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio(this,1);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
+												&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="GE_KM_PLOT" onclick="javascript:onRadio('${sessionId}',this,2);" class="radio">Kaplan-Meier survival plot for Gene Expression Data&nbsp;<br/>
 											</g:else>
 											
 											<!-- Add Ovarian back when OV links are available -->
 											<g:contextAware mode="showOnlyTo" context="TCGA">
 												<g:if test="${geneView.plot == 'genomeWorkbench'}">
-													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" checked="checked" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
+													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" checked="checked" onclick="javascript:onRadio('${sessionId}',this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
 												</g:if>
 												<g:else>
-													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio(this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
+													&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="plot" name="plot" value="genomeWorkbench" onclick="javascript:onRadio('${sessionId}',this,3);" class="radio">View mutations and copy number changes&nbsp;<br/><br/>
 												</g:else>
 											</g:contextAware>
 										</g:else>
@@ -220,59 +214,30 @@
 										Restrict to sample group: 
 									</td>
 									<td class="value ${hasErrors(bean:geneView,field:'sampleGroups','errors')}">
-										<div id="sampleGroupSelect" style="vertical-align: middle; display: table-cell;">
-						  					<g:if test="${geneView == null}">				
-												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
-						  					</g:if>				
-						  					<g:elseif test="${geneView.sampleGroups == null}">	
-												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
-						  					</g:elseif>	
-						  					<g:else>	
-												<select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
-													<g:each in="${patLists}" var="patList">
-														<g:set var="isSelected" value="${false}"/>
-														<g:each in="${selectedSampleGrpList}" var="listItem">
-															<g:if test="${listItem.trim() == patList.trim()}">
-																<g:set var="isSelected" value="${true}"/>
-															</g:if>
-														</g:each>
-											  			<g:if test="${isSelected}">				
-															<option value="${patList}" selected="yes">${patList}</option>
+						  				<g:if test="${geneView == null}">				
+											<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
+						  				</g:if>				
+						  				<g:elseif test="${geneView.sampleGroups == null}">	
+											<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
+						  				</g:elseif>	
+						  				<g:else>	
+											<select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
+												<g:each in="${patLists}" var="patList">
+													<g:set var="isSelected" value="${false}"/>
+													<g:each in="${selectedSampleGrpList}" var="listItem">
+														<g:if test="${listItem.trim() == patList.trim()}">
+															<g:set var="isSelected" value="${true}"/>
 														</g:if>
-														<g:else>
-															<option value="${patList}">${patList}</option>
-														</g:else>
 													</g:each>
-												</select>
-						  					</g:else>				
-										</div>	
-										
-										<div id="nsSampleGroupSelect" style="vertical-align: middle; display: table-cell;">
-						  					<g:if test="${geneView == null}">				
-												<g:select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;" from="${nsLists}"></g:select>
-						  					</g:if>				
-						  					<g:elseif test="${geneView.sampleGroups == null}">	
-												<g:select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;" from="${nsLists}"></g:select>
-						  					</g:elseif>	
-						  					<g:else>	
-												<select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;">
-													<g:each in="${nsLists}" var="patList">
-														<g:set var="isSelected" value="${false}"/>
-														<g:each in="${selectedSampleGrpList}" var="listItem">
-															<g:if test="${listItem.trim() == patList.trim()}">
-																<g:set var="isSelected" value="${true}"/>
-															</g:if>
-														</g:each>
-											  			<g:if test="${isSelected}">				
-															<option value="${patList}" selected="yes">${patList}</option>
-														</g:if>
-														<g:else>
-															<option value="${patList}">${patList}</option>
-														</g:else>
-													</g:each>
-												</select>
-						  					</g:else>	
-										</div>		
+										 			<g:if test="${isSelected}">				
+														<option value="${patList}" selected="yes">${patList}</option>
+													</g:if>
+													<g:else>
+														<option value="${patList}">${patList}</option>
+													</g:else>
+												</g:each>
+											</select>
+						  				</g:else>				
 									</td>
 	                            </tr> 
 								<tr> 

@@ -1,5 +1,6 @@
   import grails.converters.*
   
+  import org.springframework.web.context.request.RequestContextHolder
   import org.springframework.web.context.support.WebApplicationContextUtils;
   import org.springframework.context.ApplicationContext 
   
@@ -18,10 +19,13 @@
   import gov.nih.nci.cma.web.graphing.LegendCreator
 
 
+
 class GeneViewController {
     
     // Define the GeneView domain class/bean  
     GeneView geneView
+    
+    def sessionId 
 
 	def defaultListLoaderService
 	def beforeInterceptor = {
@@ -33,20 +37,27 @@ class GeneViewController {
     def index = {     	
     	// Fetch the patient lists to populate the form
     	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
-    	def nsLists = defaultListLoaderService.getNsListCollection();
+        def webRequest= RequestContextHolder.currentRequestAttributes()  
+    	sessionId = webRequest.session.getId()
+	  	  		  		  	  	
     	String pwLink = System.getProperty("gov.nih.nci.cma.links.pathway_url");
     	String gwbLink = System.getProperty("gov.nih.nci.cma.links.genomeworkbench_url");
     	
-    	render(view:'main', model:[patLists:patLists, nsLists:nsLists, pwLink:pwLink, gwbLink:gwbLink])
+    	render(view:'main', model:[patLists:patLists, sessionId:sessionId, pwLink:pwLink, gwbLink:gwbLink])
     }
     
-    def geneBasedView = {        	
+    def geneBasedView = {     
+    
+        def webRequest= RequestContextHolder.currentRequestAttributes()  
+    	sessionId = webRequest.session.getId()
+ 	    	
+	    	println "\n\n**********************************************************"
+	    	println "\nsessionId (geneBasedView) => " + sessionId + "\n\n"
+	    	println "**********************************************************\n\n"
+	  	  		  		  	  	
+       	
     	// Bind request parameters onto properties of the GeneView bean
 	  	geneView = new GeneView(params) 
-	    	
-	    	println "**********************************************************"
-	    	println "\n\ngeArrayPlatform => " + params["geArrayPlatform"] + "\n\n"
-	    	println "**********************************************************"
 	  	  		  		  	  	
 	  	if(geneView.validate()) {
 	  	
@@ -85,8 +96,7 @@ class GeneViewController {
 		    		flash.message = "Error performing KM Plot.  Please select different parameters and retry."
 		            redirect(action:index)
 		            return
-		    	}
-		    	else	{
+		    	} else {
 		    		params.taskId = kmRequestMap.get("taskId")
 		    		params.control_taskId = kmRequestMap.get("control_taskId")
 		    		params.plot = kmRequestMap.get("plotType")
@@ -103,16 +113,16 @@ class GeneViewController {
 	            return
 	    	}
         } else {
+	  	  		  		  	  	
 	        List selectedSampleGrpList
 	        if ( request.getParameterValues("sampleGroups") != null ) {
 		        selectedSampleGrpList = Arrays.asList(request.getParameterValues("sampleGroups"))
 		    }
 
 	    	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
-    		def nsLists = defaultListLoaderService.getNsListCollection();
 	    	String pwLink = System.getProperty("gov.nih.nci.cma.links.pathway_url");
 	    	String gwbLink = System.getProperty("gov.nih.nci.cma.links.genomeworkbench_url");
-	        render(view:'main',model:[geneView:geneView, patLists:patLists, nsLists:nsLists, pwLink:pwLink, gwbLink:gwbLink, selectedSampleGrpList:selectedSampleGrpList])
+	        render(view:'main',model:[geneView:geneView, patLists:patLists, sessionId:sessionId, pwLink:pwLink, gwbLink:gwbLink, selectedSampleGrpList:selectedSampleGrpList])
         }
         
     
