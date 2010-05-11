@@ -1,5 +1,7 @@
   import grails.converters.*
   
+  import org.springframework.web.context.request.RequestContextHolder
+  
   import gov.nih.nci.cma.clinical.*;
   
   import java.text.SimpleDateFormat;
@@ -14,6 +16,8 @@ class ClinicalController {
     // Define the ClinicalView domain class/bean  
     ClinicalView clinicalView
     RembrandtClinicalView rembrandtClinicalView
+    
+    def sessionId 
 	
 	def defaultListLoaderService
 	def beforeInterceptor = {
@@ -34,6 +38,9 @@ class ClinicalController {
     def index = { 
 			
 		def clinSrv = getClinicalService()	
+		
+        def webRequest= RequestContextHolder.currentRequestAttributes()  
+    	sessionId = webRequest.session.getId()
 						
 		def patLists = defaultListLoaderService.getPatientLists(session.id, false);
     	def nsLists = defaultListLoaderService.getNsListCollection();
@@ -300,6 +307,8 @@ class ClinicalController {
     }
     
     def clinicalKM = {
+        def webRequest= RequestContextHolder.currentRequestAttributes()  
+    	sessionId = webRequest.session.getId()
     	if(params.groupNameOne == params.groupNameCompare)	{
     		//flash and redirect
     		flash.message = "Groups can not be the same"
@@ -311,7 +320,7 @@ class ClinicalController {
     	def path = request.getContextPath()
     	def sessionId = session.getId()
     	
-    	render(view:"clinicKmPlot", model:[plot:params.plot,listItems:sreq, sessionId:sessionId])
+    	render(view:"clinicKmPlot", model:[plot:params.plot, sessionId:sessionId, listItems:sreq, sessionId:sessionId])
     }
     
     def clinicalSampleGroup =	{

@@ -14,16 +14,33 @@
 
 	<script type='text/javascript'>
 
-	  var sessionId = "${sessionId}";
-	   /*This method formats a paramMap from the request and sends it
-     	  to the KMPlotService to create a chart. Future impl may not
-     	  necesitate JSON object
-     	  -KR
-     	*/
+	   var sessionId = "${sessionId}";
+	  
+	    /* This method formats a paramMap from the request and sends it
+     	   to the KMPlotService to create a chart. Future impl may not
+     	   necesitate JSON object
+     	   -KR
+     	 */
      	function kmPlotRequestAdapter(){			
 			KMPlotService.createKMPlot(${listItems},kmPlotCallback);
 		}
-	
+			
+		function updateListView() {
+			var listCount = document.getElementById('groupNameCompare').options.length;
+
+			if ( listCount >= 2 ) {
+				$('dualGroupNameOne').disabled = false;
+				$('groupNameCompare').disabled = false;
+				$('single_patient_list').hide();
+				$('dual_patient_lists').show();
+			} else {
+				$('dualGroupNameOne').disabled = true;
+				$('groupNameCompare').disabled = true;
+				$('dual_patient_lists').hide();
+				$('single_patient_list').show();
+			}
+		}
+
 	</script>
 	
 	<g:javascript library="legacy/km"/>
@@ -43,6 +60,7 @@
 		Event.observe(window, "load", function()	{
      		//initializeLookups();
      		getUserLists(sessionId);
+     		updateListView();
     	});
     </script>
 	
@@ -78,19 +96,42 @@
 				Sample-based Filter
 			</legend>
 			<form id="sampleKMForm">
+			<div id="dual_patient_lists">
 			<table border="0" width="650px" cellspacing="10" cellpadding="5">
 				<tr>
 					<td style="text-align:center">
-						<select name="groupNameOne" id="groupNameOne">
+						<select name="groupNameOne" id="dualGroupNameOne">
 							<option value ="lists">lists</option>
-						</select> vs.
+						</select> 
+						vs.
 						<select name="groupNameCompare" id="groupNameCompare">
 							<option value ="lists">lists</option>
-						</select>	<br /><br />
+						</select>	
+						<br /><br />
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div id="single_patient_list">
+			<table border="0" width="650px" cellspacing="10" cellpadding="5">
+				<tr>
+					<td style="text-align:center">
+						<select name="groupNameOne" id="singleGroupNameOne">
+							<option value ="lists">lists</option>
+						</select> 
+						<br /><br />
+					</td>
+				</tr>
+			</table>
+			</div>
+			<table border="0" width="650px" cellspacing="10" cellpadding="5">
+				<tr>
+					<td style="text-align:center">
 						<input type="button" value="submit" onclick="kmPlotFormAdapter('sampleKMForm');" />
 						<input type="hidden" name="plot" value="SAMPLE_KM_PLOT" />
 					</td>
 				</tr>
+				</div>
 			</table>
 			</form>
 		</fieldset>

@@ -92,7 +92,7 @@ public class DynamicListHelper {
         //patientCollection.add(CaIntegratorConstants.NOT_INCLUDED);
     	System.out.println("\n\nDynamicListHelper::getPatientLists() " + lists.size() + " lists were retrieved!!");
         for(UserList l: lists){
-	        if ( plotType.equals("GE_KM_PLOT") ) {
+	        if ( plotType.equals("GE_KM_PLOT") || plotType.equals("SAMPLE_KM_PLOT") ) {
 		        if ( l.getName().equals(CaIntegratorConstants.ALL_USER_LISTS) || 
 		        	 l.getListSubType() != ListSubType.GENE_PLOT ) {
 		        	patientCollection.add(l.getName());
@@ -103,6 +103,21 @@ public class DynamicListHelper {
 
         }
         return patientCollection;
+    }
+    
+    public String getPatientListStr(String cacheId, String plotType){
+    	
+    	String patListStr = null;
+    	StringBuffer patListStrBuff = new StringBuffer();
+        List<String> patLists = getPatientLists(cacheId, plotType);
+        for(String pl: patLists){
+        	patListStrBuff.append(pl + ",");
+        }
+        patListStr = patListStrBuff.toString();
+        patListStr = patListStr.substring(0, patListStr.lastIndexOf(",")-1);
+    	System.out.println("\n\nDynamicListHelper::getPatientListStr()  The patient list string is " + patListStr);
+       
+        return patListStr;
     }
 	
 	public static String getAllLists()	{

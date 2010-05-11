@@ -469,7 +469,7 @@
 		
 		<br clear="all"/>
 		<!--  start km -->
-		<g:if test="${nsLists.size() >= 2}">
+
 		<div>
 			<div id="sampleKMHeader" class="sectionHeader">
 				<h5>Sample-based Kaplan-Meier Graph</h5>
@@ -485,9 +485,11 @@
 			        		<br/><br/>
 			        		<g:select name="groupNameOne" style="margin-left:20px;width:200px;" id="groupNameOne"
 			        			from="${nsLists}"></g:select>
-			         		vs. 
-							<g:select name="groupNameCompare" style="margin-left:20px;width:200px;" id="groupNameCompare"
-			        			from="${nsLists}"></g:select>
+							<g:if test="${nsLists.size() >= 2}">
+				         		vs. 
+								<g:select name="groupNameCompare" style="margin-left:20px;width:200px;" id="groupNameCompare"
+				        			from="${nsLists}"></g:select>
+							</g:if>
 			        		<br/><br/>
 						</td>
 					</tr>
@@ -502,7 +504,6 @@
 				</g:form>
 			</div>
 		</div>
-		</g:if>
 		
 		<!--  end km -->
 		

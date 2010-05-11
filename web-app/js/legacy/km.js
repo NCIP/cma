@@ -109,9 +109,13 @@ function getArrayPlatforms() {
 }
 function setPatientLists(data) {
 	DWRUtil.removeAllOptions("groupNameOne");
+	DWRUtil.removeAllOptions("dualGroupNameOne");
+	DWRUtil.removeAllOptions("singleGroupNameOne");
 	DWRUtil.removeAllOptions("groupNameCompare");
 	DWRUtil.removeAllOptions("groupNameGE");
 	DWRUtil.addOptions("groupNameOne", data);
+	DWRUtil.addOptions("dualGroupNameOne", data);
+	DWRUtil.addOptions("singleGroupNameOne", data);
 	DWRUtil.addOptions("groupNameGE", data);
 	DWRUtil.addOptions("groupNameCompare", data);
 }
