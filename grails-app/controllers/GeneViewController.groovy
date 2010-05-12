@@ -37,13 +37,14 @@ class GeneViewController {
     def index = {     	
     	// Fetch the patient lists to populate the form
     	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+    	def nsLists = defaultListLoaderService.getNsListCollection();
         def webRequest= RequestContextHolder.currentRequestAttributes()  
     	sessionId = webRequest.session.getId()
 	  	  		  		  	  	
     	String pwLink = System.getProperty("gov.nih.nci.cma.links.pathway_url");
     	String gwbLink = System.getProperty("gov.nih.nci.cma.links.genomeworkbench_url");
     	
-    	render(view:'main', model:[patLists:patLists, sessionId:sessionId, pwLink:pwLink, gwbLink:gwbLink])
+    	render(view:'main', model:[patLists:patLists, nsLists:nsLists, sessionId:sessionId, pwLink:pwLink, gwbLink:gwbLink])
     }
     
     def geneBasedView = {     
@@ -120,9 +121,10 @@ class GeneViewController {
 		    }
 
 	    	def patLists = defaultListLoaderService.getPatientLists(session.id, false);
+    		def nsLists = defaultListLoaderService.getNsListCollection();
 	    	String pwLink = System.getProperty("gov.nih.nci.cma.links.pathway_url");
 	    	String gwbLink = System.getProperty("gov.nih.nci.cma.links.genomeworkbench_url");
-	        render(view:'main',model:[geneView:geneView, patLists:patLists, sessionId:sessionId, pwLink:pwLink, gwbLink:gwbLink, selectedSampleGrpList:selectedSampleGrpList])
+	        render(view:'main',model:[geneView:geneView, patLists:patLists, nsLists:nsLists, sessionId:sessionId, pwLink:pwLink, gwbLink:gwbLink, selectedSampleGrpList:selectedSampleGrpList])
         }
         
     

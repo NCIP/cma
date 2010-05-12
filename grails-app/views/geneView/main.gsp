@@ -218,25 +218,51 @@
 											<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 						  				</g:if>				
 						  				<g:elseif test="${geneView.sampleGroups == null}">	
+							  				<g:if test="${geneView.plot == 'GE_KM_PLOT'}">				
+												<g:select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;" from="${nsLists}"></g:select>
+							  				</g:if>				
+							  				<g:else>				
+												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
+							  				</g:else>				
 											<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 						  				</g:elseif>	
 						  				<g:else>	
-											<select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
-												<g:each in="${patLists}" var="patList">
-													<g:set var="isSelected" value="${false}"/>
-													<g:each in="${selectedSampleGrpList}" var="listItem">
-														<g:if test="${listItem.trim() == patList.trim()}">
-															<g:set var="isSelected" value="${true}"/>
+							  				<g:if test="${geneView.plot == 'GE_KM_PLOT'}">				
+												<select id="sampleGroupNameId" name="sampleGroups" style="width: 300px; overflow: none;">
+													<g:each in="${nsLists}" var="patList">
+														<g:set var="isSelected" value="${false}"/>
+														<g:each in="${selectedSampleGrpList}" var="listItem">
+															<g:if test="${listItem.trim() == patList.trim()}">
+																<g:set var="isSelected" value="${true}"/>
+															</g:if>
+														</g:each>
+											 			<g:if test="${isSelected}">				
+															<option value="${patList}" selected="yes">${patList}</option>
 														</g:if>
+														<g:else>
+															<option value="${patList}">${patList}</option>
+														</g:else>
 													</g:each>
-										 			<g:if test="${isSelected}">				
-														<option value="${patList}" selected="yes">${patList}</option>
-													</g:if>
-													<g:else>
-														<option value="${patList}">${patList}</option>
-													</g:else>
-												</g:each>
-											</select>
+												</select>
+											</g:if>
+											<g:else>	
+												<select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;">
+													<g:each in="${patLists}" var="patList">
+														<g:set var="isSelected" value="${false}"/>
+														<g:each in="${selectedSampleGrpList}" var="listItem">
+															<g:if test="${listItem.trim() == patList.trim()}">
+																<g:set var="isSelected" value="${true}"/>
+															</g:if>
+														</g:each>
+											 			<g:if test="${isSelected}">				
+															<option value="${patList}" selected="yes">${patList}</option>
+														</g:if>
+														<g:else>
+															<option value="${patList}">${patList}</option>
+														</g:else>
+													</g:each>
+												</select>
+											</g:else>
 						  				</g:else>				
 									</td>
 	                            </tr> 
