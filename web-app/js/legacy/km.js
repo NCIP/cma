@@ -68,8 +68,11 @@ function kmPlotCallback(data) {
 
 				statisticsHTML += "&nbsp;&nbsp;" + groupName + ":&nbsp;&nbsp;" + groupCount + "&nbsp;samples<br />";
 			}
+			if (sampleGroupNames.length >= 2) {
+				logHTML = "<b class=\"otherBold\">Log-rank p-value(for significance of difference of survival between group of samples)</b><br/>";
+			}
 			if (logRank != null) {
-				logHTML = sampleGroupNames[0].name + "&nbsp;vs.&nbsp;" + sampleGroupNames[1].name + "&nbsp;=" + logRank;
+				logHTML += sampleGroupNames[0].name + "&nbsp;vs.&nbsp;" + sampleGroupNames[1].name + "&nbsp;=" + logRank;
 			}
 			if (logRank2 != null) {
 				logHTML += "<br/>" + sampleGroupNames[0].name + "&nbsp;vs.&nbsp;" + sampleGroupNames[2].name + "&nbsp;=" + logRank2;

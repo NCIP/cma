@@ -84,7 +84,6 @@
 				<div>
 					<b class="otherBold">Number of Samples in group</b><br />
 					<span id="statisticsHTML"></span><br />
-					<b class="otherBold">Log-rank p-value(for significance of difference of survival between group of samples)</b><br />
 					<span id="logHTML"></span><br />
 				</div>
 	</fieldset>

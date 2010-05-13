@@ -224,7 +224,6 @@
 							  				<g:else>				
 												<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 							  				</g:else>				
-											<g:select id="sampleGroupNameId" name="sampleGroups" multiple="multiple" size="5" style="width: 300px; overflow: none;" from="${patLists}"></g:select>
 						  				</g:elseif>	
 						  				<g:else>	
 							  				<g:if test="${geneView.plot == 'GE_KM_PLOT'}">				
