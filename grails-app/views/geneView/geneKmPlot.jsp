@@ -1,3 +1,10 @@
+<%--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cma/LICENSE.txt for details.
+L--%>
+
 <%@ page language="java"
 	import="java.util.*,org.json.simple.JSONObject, gov.nih.nci.caintegrator.util.CaIntegratorConstants, gov.nih.nci.cma.util.SafeHTMLUtil, org.directwebremoting.WebContextFactory"
 	pageEncoding="ISO-8859-1"%>
