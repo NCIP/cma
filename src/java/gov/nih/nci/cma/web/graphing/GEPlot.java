@@ -1,3 +1,10 @@
+/*L
+ *  Copyright SAIC
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/cma/LICENSE.txt for details.
+ */
+
 package gov.nih.nci.cma.web.graphing;
 
 
@@ -24,7 +31,7 @@ import java.util.ArrayList;
 import flanagan.math.Fmath;
 import javax.servlet.http.HttpSession;
 import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.LegendItemSource; 
+import org.jfree.chart.LegendItemSource;
 import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
@@ -49,64 +56,6 @@ import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 
 
-
-/**
-* caIntegrator License
-* 
-* Copyright 2001-2005 Science Applications International Corporation ("SAIC"). 
-* The software subject to this notice and license includes both human readable source code form and machine readable, 
-* binary, object code form ("the caIntegrator Software"). The caIntegrator Software was developed in conjunction with 
-* the National Cancer Institute ("NCI") by NCI employees and employees of SAIC. 
-* To the extent government employees are authors, any rights in such works shall be subject to Title 17 of the United States
-* Code, section 105. 
-* This caIntegrator Software License (the "License") is between NCI and You. "You (or "Your") shall mean a person or an 
-* entity, and all other entities that control, are controlled by, or are under common control with the entity. "Control" 
-* for purposes of this definition means (i) the direct or indirect power to cause the direction or management of such entity,
-*  whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) 
-* beneficial ownership of such entity. 
-* This License is granted provided that You agree to the conditions described below. NCI grants You a non-exclusive, 
-* worldwide, perpetual, fully-paid-up, no-charge, irrevocable, transferable and royalty-free right and license in its rights 
-* in the caIntegrator Software to (i) use, install, access, operate, execute, copy, modify, translate, market, publicly 
-* display, publicly perform, and prepare derivative works of the caIntegrator Software; (ii) distribute and have distributed 
-* to and by third parties the caIntegrator Software and any modifications and derivative works thereof; 
-* and (iii) sublicense the foregoing rights set out in (i) and (ii) to third parties, including the right to license such 
-* rights to further third parties. For sake of clarity, and not by way of limitation, NCI shall have no right of accounting
-* or right of payment from You or Your sublicensees for the rights granted under this License. This License is granted at no
-* charge to You. 
-* 1. Your redistributions of the source code for the Software must retain the above copyright notice, this list of conditions
-*    and the disclaimer and limitation of liability of Article 6, below. Your redistributions in object code form must reproduce 
-*    the above copyright notice, this list of conditions and the disclaimer of Article 6 in the documentation and/or other materials
-*    provided with the distribution, if any. 
-* 2. Your end-user documentation included with the redistribution, if any, must include the following acknowledgment: "This 
-*    product includes software developed by SAIC and the National Cancer Institute." If You do not include such end-user 
-*    documentation, You shall include this acknowledgment in the Software itself, wherever such third-party acknowledgments 
-*    normally appear.
-* 3. You may not use the names "The National Cancer Institute", "NCI" "Science Applications International Corporation" and 
-*    "SAIC" to endorse or promote products derived from this Software. This License does not authorize You to use any 
-*    trademarks, service marks, trade names, logos or product names of either NCI or SAIC, except as required to comply with
-*    the terms of this License. 
-* 4. For sake of clarity, and not by way of limitation, You may incorporate this Software into Your proprietary programs and 
-*    into any third party proprietary programs. However, if You incorporate the Software into third party proprietary 
-*    programs, You agree that You are solely responsible for obtaining any permission from such third parties required to 
-*    incorporate the Software into such third party proprietary programs and for informing Your sublicensees, including 
-*    without limitation Your end-users, of their obligation to secure any required permissions from such third parties 
-*    before incorporating the Software into such third party proprietary software programs. In the event that You fail 
-*    to obtain such permissions, You agree to indemnify NCI for any claims against NCI by such third parties, except to 
-*    the extent prohibited by law, resulting from Your failure to obtain such permissions. 
-* 5. For sake of clarity, and not by way of limitation, You may add Your own copyright statement to Your modifications and 
-*    to the derivative works, and You may provide additional or different license terms and conditions in Your sublicenses 
-*    of modifications of the Software, or any derivative works of the Software as a whole, provided Your use, reproduction, 
-*    and distribution of the Work otherwise complies with the conditions stated in this License.
-* 6. THIS SOFTWARE IS PROVIDED "AS IS," AND ANY EXPRESSED OR IMPLIED WARRANTIES, (INCLUDING, BUT NOT LIMITED TO, 
-*    THE IMPLIED WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE) ARE DISCLAIMED. 
-*    IN NO EVENT SHALL THE NATIONAL CANCER INSTITUTE, SAIC, OR THEIR AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT, 
-*    INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
-*    GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-*    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
-*    OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-* 
-*/
-
 public class GEPlot {
 	public enum PlotSize { SMALL, MEDIUM, LARGE };
 
@@ -115,16 +64,16 @@ public class GEPlot {
 
 	//Hold raw data in a format of Map<reporterName, Map<groupname, List<value>>>
 	private Map<String, Map<String, List<Double>>> rawDataMap = new HashMap<String, Map<String, List<Double>>>();
-	
+
 	//groupList is holding sample group name to be used for coin BW plot
 	private List<String> groupList = new ArrayList<String>();
-	
+
 	//log2Dataset holds the data for the LOG2 plot, w/std deviation error bars
 	private DefaultStatisticalCategoryDataset log2Dataset = new DefaultStatisticalCategoryDataset();
 
 	//gmDataset holds the data for the Geometric Mean plot
 	private DefaultCategoryDataset gmDataset = new DefaultCategoryDataset();
-	
+
 	private static Logger logger = Logger.getLogger(GEPlot.class);
 
 	//stdDevMap holds the standard deviation data
@@ -135,13 +84,13 @@ public class GEPlot {
 	LegendItemCollection legendItemCollection = null;
 	final DecimalFormat decimalFormat = new DecimalFormat("0.0000");
 	public GEPlot(){}
-	
+
 	public GEPlot(String geneSymbol){
 		this.geneSymbol = geneSymbol;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param rbinaryFileName
 	 * @param samples
 	 * @param reporters
@@ -149,10 +98,10 @@ public class GEPlot {
 	 * 		  -1 if there was a problem preparing the data set
 	 */
 	public int prepareGeneGraphDataSet(String rbinaryFileName, List<SampleGroup> samples,
-			ReporterGroup reporters){ 
+			ReporterGroup reporters){
 		for (SampleGroup sample : samples)
 			groupList.add(sample.getGroupName());
-			
+
 		List<ExpressionLookupFinding> findings = null;
 		try{
 			findings = AnalysisHelper.getExpressionValuesForReporters(reporters,
@@ -175,13 +124,13 @@ public class GEPlot {
 							tempMap = new HashMap<String, List<Double>>();
 							rawDataMap.put(reporter.getName(), tempMap);
 						}
-					
+
 						List<DataPoint> dataPoints = reporter.getDataPoints();
 
 						for (DataPoint dataPoint : dataPoints ){
 							datalist.add(dataPoint.getX());
 						}
-					
+
 						bwdataset.add(datalist, reporter.getName(), groupList.get(count));
 
 						tempMap.put(groupList.get(count), datalist);
@@ -190,15 +139,15 @@ public class GEPlot {
 						Double log2 = reporter.getMeanX();
 						Double stdDouble = reporter.getStdDeviationX();
 						//Generate log2 values for log2Dataset
-						log2Dataset.add(log2, stdDouble, //new Double(stdd), 
+						log2Dataset.add(log2, stdDouble, //new Double(stdd),
 							reporter.getName(), groupList.get(count));
-					
-						//The geometric mean is the anti-log2 mean value for the probeset. 
+
+						//The geometric mean is the anti-log2 mean value for the probeset.
 						double log2Value = log2.doubleValue();
 						double stdd = stdDouble.doubleValue();
 						double mean = Fmath.antilog2(log2Value);
 						gmDataset.addValue(new Double(mean), reporter.getName(), groupList.get(count));
-					
+
 						//stddev for the probeset and sample group pair.
 						stdDevMap.put(reporter.getName()+"::"+ groupList.get(count), decimalFormat.format(stdd));
 					}
@@ -209,12 +158,12 @@ public class GEPlot {
 		}
 		return 1;
 	}
-	public String generateBWLog2IntensityChart(String xAxisLabel, String yAxisLabel, 
+	public String generateBWLog2IntensityChart(String xAxisLabel, String yAxisLabel,
 			HttpSession session, PrintWriter pw, boolean isCoinPlot) {
 		String bwFilename = "";
 
 		//PlotSize ps = PlotSize.MEDIUM;
-		
+
 		JFreeChart bwChart = null;
 		try {
 			//IMAGE Size Control
@@ -225,11 +174,11 @@ public class GEPlot {
 			yAxis.setAutoRangeIncludesZero(true);
 			BoxAndWhiskerCoinPlotRenderer bwRenderer = null;
 			CategoryPlot bwPlot = null;
-			
+
 			if (isCoinPlot){
 				Map<String, List<Double>> groupMap = rawDataMap.get(reporterName);
 				DefaultBoxAndWhiskerCategoryDataset smallBwdataset = new DefaultBoxAndWhiskerCategoryDataset();
-				int row = 0; 
+				int row = 0;
 				int column = 0;
 				HashMap<String, List> caIntegatorCoinList = new HashMap<String, List>();
 				for (String group : groupList){
@@ -243,10 +192,10 @@ public class GEPlot {
 	        	bwRenderer.setFillBox(false);
 	        	bwRenderer.setPlotColor(null);
 	        	bwPlot = new CategoryPlot(smallBwdataset, xAxis, yAxis, bwRenderer);
-	        	
+
 	        	if (groupList.size() < 6 )
 	        		imgW = 200;
-	        	
+
 			}
 			else {
 				bwRenderer = new BoxAndWhiskerCoinPlotRenderer();
@@ -282,19 +231,19 @@ public class GEPlot {
 				bwRenderer.setFillBox(false);
 				bwPlot = new CategoryPlot(bwdataset, xAxis, yAxis, bwRenderer);
 			}
-			
+
 			bwChart = new JFreeChart(bwPlot);
 
 			bwChart.setBackgroundPaint(java.awt.Color.white);
 			LegendTitle title = bwChart.getLegend();
 			LegendItemSource[] sources = title.getSources();
-			
+
 			legendItemCollection = sources[0].getLegendItems();
 			bwChart.removeLegend();
 
 			// Write the chart image to the temporary directory
 			ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());
-			
+
 			// BW
 			if(bwChart != null){
 				//int bwwidth = new BigDecimal(1.5).multiply(new BigDecimal(imgW)).intValue();
@@ -324,8 +273,8 @@ public class GEPlot {
 
 		return bwFilename;
 	}
-	
-	public String generateLog2Chart(String xAxisLabel, String yAxisLabel, 
+
+	public String generateLog2Chart(String xAxisLabel, String yAxisLabel,
 			HttpSession session, PrintWriter pw) {
 		String log2Filename = "";
 
@@ -363,7 +312,7 @@ public class GEPlot {
 					String stdDev = (String) stdDevMap.get(dataset
 							.getRowKey(series)
 							+ "::" + dataset.getColumnKey(item));
-					
+
 					return "Probeset : " + dataset.getRowKey(series)
 							+ "<br/>Intensity : "
 							+ new DecimalFormat("0.0000").format(dataset.getValue(series, item)) + "<br/>"
@@ -371,7 +320,7 @@ public class GEPlot {
 				}
 
 			});
-			
+
 			// LegendTitle lg = chart.getLegend();
 			plot.setRenderer(renderer);
 
@@ -384,15 +333,15 @@ public class GEPlot {
 			ChartUtilities.writeImageMap(pw, log2Filename, info,
 					new CustomOverlibToolTipTagFragmentGenerator(),
 					new StandardURLTagFragmentGenerator());
-			
+
 		}catch (Exception e) {
 			System.out.println("Exception - " + e.toString());
 			e.printStackTrace(System.out);
 		}
 		return log2Filename;
 	}
-	
-	public String generateGeometricMeanIntensityChart(String xAxisLabel, String yAxisLabel, 
+
+	public String generateGeometricMeanIntensityChart(String xAxisLabel, String yAxisLabel,
 			HttpSession session, PrintWriter pw) {
 		String gmfilename = "";
 
@@ -430,7 +379,7 @@ public class GEPlot {
 					String stdDev = (String) stdDevMap.get(dataset
 							.getRowKey(series)
 							+ "::" + dataset.getColumnKey(item));
-					
+
 					return "Probeset : " + dataset.getRowKey(series)
 							+ "<br/>Intensity : "
 							+ new DecimalFormat("0.0000").format(dataset.getValue(series, item)) + "<br/>"
@@ -448,22 +397,22 @@ public class GEPlot {
 			ChartUtilities.writeImageMap(pw, gmfilename, info,
 					new CustomOverlibToolTipTagFragmentGenerator(),
 					new StandardURLTagFragmentGenerator());
-			
+
 		}catch (Exception e) {
 			System.out.println("Exception - " + e.toString());
 			e.printStackTrace(System.out);
 		}
 		return gmfilename;
 	}
-	
-	public static JFreeChart generateLog2IntensityChart(AbstractDataset dataSet, 
+
+	public static JFreeChart generateLog2IntensityChart(AbstractDataset dataSet,
 			String xAxisLabel, String yAxisLabel) {
 		return null;
 	}
-	public static JFreeChart generateGeometricMeanChart(AbstractDataset dataSet, 
+	public static JFreeChart generateGeometricMeanChart(AbstractDataset dataSet,
 			String xAxisLabel, String yAxisLabel) {
 		return null;
-		
+
 	}
 	public LegendItemCollection getLegendItemCollection() {
 		return legendItemCollection;
