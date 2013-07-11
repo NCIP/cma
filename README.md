@@ -13,7 +13,8 @@ The CMA is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
 You will find more details about the CMA in the following links:
- * [Distribution Files] (http://gforge.nci.nih.gov/frs/?group_id=488)
- * [Code Repository] (https://github.com/NCIP/i-spy)
+* [Code Repository] (https://github.com/NCIP/cma) 
+* [Binary Files] (http://gforge.nci.nih.gov/frs/?group_id=488)
+ 
 
 Please join us in further developing and improving CMA.
